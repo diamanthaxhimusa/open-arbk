@@ -17,7 +17,6 @@ def index():
 	# doc = mongo.db.businesses.aggregate([{ '$match': { "formatted.registrationNum": 70002534 }}])
 	# return Response(response=json_util.dumps(docs[0]['formatted']), status=200, mimetype='application/json')
 
-
 # Script for slugifying owners
 @mod_main.route('/slugify_owners')
 def slugify_owners():
@@ -30,16 +29,16 @@ def slugify_owners():
 		# Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			# Slugifying each owner string and then updating new array in 'formatted' docs with slugified strings
-			if "ë" in owner:
+			slugified_owner_string = owner.lower()
+			if "ë" in owner or "Ë" in owner:
 				slugified_owner_string = owner.lower().replace("ë", "e")
-			elif "Ë" in owner:
-				slugified_owner_string = owner.lower().replace("ë", "e")
-			elif "ç" in owner:
-				slugified_owner_string = owner.lower().replace("ç", "c")
-			elif "Ç" in owner:
+			elif "ç" in owner or "Ç" in owner:
 				slugified_owner_string = owner.lower().replace("ç", "c")
 			else:
-				slugified_owner_string = owner.lower()
+				chars = ['?', '/', '\\', "*"]
+				for ch in chars:
+					if ch in owner:
+						slugified_owner_string = owner.lower().replace(ch, "")
 
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string }})
 	return render_template('script_result.html')
