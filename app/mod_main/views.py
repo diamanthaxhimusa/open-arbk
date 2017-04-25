@@ -28,6 +28,20 @@ def slug_data(slug_string):
 		slugified_string = slugified_string.lower().replace("ç", "c")
 	slugified_string = re.sub(r'[?|$|/|\|"]',r'',slugified_string)
 	return slugified_string.lower()
+def gender_person(persons):
+    females = 0
+    males = 0
+    for person in persons:
+        divide_name = person.split(" ")
+        char_array = []
+        for char in divide_name[0]:
+            char_array.append(char)
+        if char_array[-1] == "a" or char_array[-1] == "e":
+            females += 1
+        else:
+            males += 1
+    return {"females": females, "males":males}
+
 
 # Script for slugifying owners
 @mod_main.route('/slugify_owners')
@@ -40,7 +54,11 @@ def slugify_owners():
 		# Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			slugified_owner_string = slug_data(owner)
-			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string }})
+			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string}})
+
+		gender_owner = gender_person(doc['formatted']['owners'])
+		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.gender": gender_owner}})
+
 		for authorized in doc['formatted']['authorized']:
 			slugified_authorized_string = slug_data(authorized)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_authorized": slugified_authorized_string }})
