@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, json, jsonify, Response
 from bson import json_util, ObjectId
-from slugify import slugify
 
 import sys
 reload(sys)
@@ -31,6 +30,16 @@ def slugify_owners():
 		# Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			# Slugifying each owner string and then updating new array in 'formatted' docs with slugified strings
-			slugified_owner_string = slugify(owner).replace("-", " ")
+			if "ë" in owner:
+				slugified_owner_string = owner.lower().replace("ë", "e")
+			elif "Ë" in owner:
+				slugified_owner_string = owner.lower().replace("ë", "e")
+			elif "ç" in owner:
+				slugified_owner_string = owner.lower().replace("ç", "c")
+			elif "Ç" in owner:
+				slugified_owner_string = owner.lower().replace("ç", "c")
+			else:
+				slugified_owner_string = owner.lower()
+
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string }})
 	return render_template('script_result.html')
