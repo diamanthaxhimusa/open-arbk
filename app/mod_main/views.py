@@ -26,7 +26,7 @@ def slug_data(slug_string):
 		slugified_string = slugified_string.lower().replace("ë", "e")
 	elif "ç" in slug_string or "Ç" in slug_string:
 		slugified_string = slugified_string.lower().replace("ç", "c")
-	slugified_string = re.sub(r'[,|?|$|/|\|"]',r'',slugified_string)
+	slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
 	return slugified_string.lower()
 def gender_person(persons):
     females = 0
@@ -58,16 +58,13 @@ def slugify_owners():
 		gender_owner = gender_person(doc['formatted']['owners'])
 		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.gender": gender_owner}})
 
+		slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
+		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.name": slugified_company_string }})
+
 		for authorized in doc['formatted']['authorized']:
 			slugified_authorized_string = slug_data(authorized)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_authorized": slugified_authorized_string }})
-		for company in doc['formatted']:
-			slugified_company_string = slug_data(company)
-			print company['name']
-			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.slugified_name": slugified_company_string }})
 		try:
-			slugified_company_string = slug_data(doc['formatted']['name'])
-			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.slugified_name": slugified_company_string }})
 			slugified_municipality_string = slug_data(doc['formatted']['municipality'])
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_municipality": slugified_municipality_string }})
 		except Exception as e:
