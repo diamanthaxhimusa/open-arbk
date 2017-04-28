@@ -62,7 +62,7 @@ def slugify_owners():
 	# Looping through each doc
 	for doc in docs:
 		print doc['_id']
-		Looping in owner array of 'formatted' JSON in docs
+		# Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			slugified_owner_string = slug_data(owner)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string}})
