@@ -66,7 +66,8 @@ def slugify_owners():
 		for owner in doc['formatted']['owners']:
 			slugified_owner_string = slug_data(owner)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string}})
-
+			gender_owner = gender_person(owner)
+			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.gendered_owners": gender_owner}})
 
 		slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
 		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.name": slugified_company_string }})
