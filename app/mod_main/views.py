@@ -53,6 +53,18 @@ def set_muni(given_city_bus):
 		}
 		return cities
 
+def gender_person(person):
+	names = mongo.db.names.find()
+	owner = {}
+	divide = person.split(" ")
+	for gender in names:
+		if divide[0].title() in gender['females']:
+			owner = {"name":person, "gender" : "female"}
+		elif divide[0].title() in gender['males']:
+			owner = {"name":person, "gender" : "male"}
+		else:
+			owner = {"name":person, "gender" : "unknown"}
+	return owner
 
 # Script for slugifying owners
 @mod_main.route('/slugify_owners')
@@ -61,8 +73,7 @@ def slugify_owners():
 	docs = mongo.db.businesses.find()
 	# Looping through each doc
 	for doc in docs:
-		print doc['_id']
-		Looping in owner array of 'formatted' JSON in docs
+		# Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			slugified_owner_string = slug_data(owner)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string}})
