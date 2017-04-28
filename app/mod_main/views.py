@@ -28,19 +28,30 @@ def slug_data(slug_string):
 		slugified_string = slugified_string.lower().replace("ç", "c")
 	slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
 	return slugified_string.lower()
-def gender_person(persons):
-    females = 0
-    males = 0
-    for person in persons:
-        divide_name = person.split(" ")
-        char_array = []
-        for char in divide_name[0]:
-            char_array.append(char)
-        if char_array[-1] == "a" or char_array[-1] == "e":
-            females += 1
-        else:
-            males += 1
-    return {"females": females, "males":males}
+
+
+def set_muni(given_city_bus):
+	municipalities = mongo.db.municipalities.find()
+	cities = {}
+	found = False
+	for place in municipalities:
+		for city in place:
+			if city != '_id':
+				for village in place[city]:
+					if village == given_city_bus:
+						found = True
+						cities = {
+							"municipality": city,
+							"place": given_city_bus
+						}
+	if found:
+		return cities
+	else:
+		cities = {
+			"municipality": "Unknown",
+			"place": given_city_bus
+		}
+		return cities
 
 
 # Script for slugifying owners
@@ -50,13 +61,12 @@ def slugify_owners():
 	docs = mongo.db.businesses.find()
 	# Looping through each doc
 	for doc in docs:
-		# Looping in owner array of 'formatted' JSON in docs
+		print doc['_id']
+		Looping in owner array of 'formatted' JSON in docs
 		for owner in doc['formatted']['owners']:
 			slugified_owner_string = slug_data(owner)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_owners": slugified_owner_string}})
 
-		gender_owner = gender_person(doc['formatted']['owners'])
-		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.gender": gender_owner}})
 
 		slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
 		mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.name": slugified_company_string }})
@@ -64,9 +74,10 @@ def slugify_owners():
 		for authorized in doc['formatted']['authorized']:
 			slugified_authorized_string = slug_data(authorized)
 			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_authorized": slugified_authorized_string }})
+
 		try:
-			slugified_municipality_string = slug_data(doc['formatted']['municipality'])
-			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$push': {"formatted.slugified_municipality": slugified_municipality_string }})
+			city = set_muni(doc['formatted']['municipality'])
+			mongo.db.businesses.update({"_id": ObjectId(doc['_id'])}, { '$set': {"formatted.municipality": city }})
 		except Exception as e:
 			continue
 	return render_template('script_result.html')
