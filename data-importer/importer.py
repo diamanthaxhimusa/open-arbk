@@ -9,6 +9,10 @@ sys.setdefaultencoding('utf-8')
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
 
+with open("data-importer/activities.json","r") as data:
+    activities = json.load(data)
+    for activity in activities['activities']:
+        db.activities.insert(activity)
 def slug_data(slug_string):
 	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
@@ -58,72 +62,74 @@ def gender_person(person):
     		owner = {"name":person, "gender" : "unknown"}
         return owner
 
-docs = db.businesses.find().limit(1000)
-# Looping through each doc
-for doc in docs:
-    sluged_owners = []
-    gender_owners = []
-    slug_auth = []
-    gen_auth = []
-    city = {}
-    # Looping in owner array of 'formatted' JSON in docs
-    for owner in doc['formatted']['owners']:
-        slugified_owner_string = slug_data(owner)
-        sluged_owners.append(slugified_owner_string)
-        gender_owner = gender_person(owner)
-        gender_owners.append(gender_owner)
-    slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
-    for authorized in doc['formatted']['authorized']:
-        slugified_authorized_string = slug_data(authorized)
-        gender_authorized = gender_person(authorized)
-        slug_auth.append(slugified_authorized_string)
-        gen_auth.append(gender_authorized)
+def main():
+    docs = db.businesses.find().limit(1000)
+    # Looping through each doc
+    for doc in docs:
+        sluged_owners = []
+        gender_owners = []
+        slug_auth = []
+        gen_auth = []
+        city = {}
+        epl_nr = 0
+        capi = 0
+        # Looping in owner array of 'formatted' JSON in docs
+        for owner in doc['formatted']['owners']:
+            slugified_owner_string = slug_data(owner)
+            sluged_owners.append(slugified_owner_string)
+            gender_owner = gender_person(owner)
+            gender_owners.append(gender_owner)
+            slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
+        for authorized in doc['formatted']['authorized']:
+            slugified_authorized_string = slug_data(authorized)
+            gender_authorized = gender_person(authorized)
+            slug_auth.append(slugified_authorized_string)
+            gen_auth.append(gender_authorized)
 
-    try:
-        city = set_muni(doc['formatted']['municipality'])
-    except Exception as e:
-        print str(e)
-    try:
-        reg_num = doc['formatted']['registrationNum']
-    except Exception as e:
-        continue
-    try:
-        atkStatus = doc['formatted']['atkStatus']
-    except Exception as e:
-        atkStatus = '//'
-    try:
-        buss_type = doc['formatted']['type']
-    except Exception as e:
-        buss_type = ''
-    try:
-        applicationDate = doc['formatted']['applicationDate']
-    except Exception as e:
-        applicationDate = None
-    try:
-        arbkUrl = doc['formatted']['arbkUrl']
-    except Exception as e:
-        arbkUrl = None
-    try:
-        status = doc['formatted']['status']
-    except Exception as e:
-        status = ''
-    capi = 0
-    try:
-        if doc['formatted']['capital'] is None:
-            capi = 0
-        else:
-            capi = int(doc['formatted']['capital'])
-    except Exception as e:
-        pass
-    epl_nr = 0
-    try:
-        if doc['formatted']['employeeCount'] is None:
-            epl_nr = 0
-        else:
-            epl_nr = doc['formatted']['employeeCount']
-    except Exception as e:
-        pass
-    db.reg_businesses.insert({
+        try:
+            city = set_muni(doc['formatted']['municipality'])
+        except Exception as e:
+            print str(e)
+        try:
+            reg_num = doc['formatted']['registrationNum']
+        except Exception as e:
+            continue
+        try:
+            atkStatus = doc['formatted']['atkStatus']
+        except Exception as e:
+            atkStatus = '//'
+        try:
+            buss_type = doc['formatted']['type']
+        except Exception as e:
+            buss_type = ''
+        try:
+            applicationDate = doc['formatted']['applicationDate']
+        except Exception as e:
+            applicationDate = None
+        try:
+            arbkUrl = doc['formatted']['arbkUrl']
+        except Exception as e:
+            arbkUrl = None
+        try:
+            status = doc['formatted']['status']
+        except Exception as e:
+            status = ''
+        try:
+            if doc['formatted']['capital'] is None:
+                capi = 0
+            else:
+                capi = int(doc['formatted']['capital'])
+        except Exception as e:
+            pass
+
+        try:
+            if doc['formatted']['employeeCount'] is None:
+                epl_nr = 0
+            else:
+                epl_nr = doc['formatted']['employeeCount']
+        except Exception as e:
+            pass
+        db.reg_businesses.insert({
         "registrationNum": reg_num,
         "type": buss_type,
         "employeeCount": epl_nr,
@@ -140,4 +146,6 @@ for doc in docs:
         "authorized": gen_auth,
         "municipality": city,
         "timestamp": datetime.datetime.now()
-    })
+        })
+
+main()
