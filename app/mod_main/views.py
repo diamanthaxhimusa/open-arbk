@@ -15,3 +15,7 @@ from app import mongo
 @mod_main.route('/')
 def index():
 	return render_template('index.html')
+
+@mod_main.route('/visualization')
+def visualization():
+	return render_template('visualizations.html')
