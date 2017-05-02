@@ -63,7 +63,7 @@ def gender_person(person):
         return owner
 
 def main():
-    docs = db.businesses.find().limit(1000)
+    docs = db.businesses.find()
     # Looping through each doc
     for doc in docs:
         sluged_owners = []
@@ -89,7 +89,11 @@ def main():
         try:
             city = set_muni(doc['formatted']['municipality'])
         except Exception as e:
-            print str(e)
+            pass
+        try:
+            establishmentDate = doc['formatted']['establishmentDate']
+        except Exception as e:
+            pass
         try:
             reg_num = doc['formatted']['registrationNum']
         except Exception as e:
@@ -140,6 +144,7 @@ def main():
         "arbkUrl": arbkUrl,
         "activities": doc['formatted']['activities'],
         "slugifiedOwners": sluged_owners,
+        "establishmentDate": establishmentDate,
         "owners": gender_owners,
         "name": slugified_company_string,
         "slugifiedAuthorized": slug_auth,
