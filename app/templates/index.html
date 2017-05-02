@@ -1,4 +1,40 @@
 {% extends 'layout.html' %}
 {% block body %}
-  Search page
+<form class="form" method="POST">
+    <div class="form-group">
+        <label for="email">Search for people:</label>
+        <input type="text" class="form-control" id="search" name="search">
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <th>Emri i Biznesit</th>
+        <th>Statusi i Biznesit</th>
+        <th>Linku per ne ARBK</th>
+        <th>Pronaret</th>
+    </thead>
+    <tbody>
+        {% for i in result %}
+        <tr>
+            <td>
+                {{i['name']}}
+            </td>
+            <td>
+                {{i['status']}}
+            </td>
+            <td>
+                <a href="{{i['arbkUrl']}}">linku</a>
+            </td>
+            <td>
+                <ul>
+                    {% for owner in i['owners'] %}
+                        <li>{{owner['name']}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
