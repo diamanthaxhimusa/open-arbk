@@ -13,6 +13,14 @@ with open("data-importer/activities.json","r") as data:
     activities = json.load(data)
     for activity in activities['activities']:
         db.activities.insert(activity)
+
+with open("data-importer/komunat.json","r") as data:
+    municipalities = json.load(data)
+    for municipality in municipalities:
+        place = []
+        for muni_place in municipalities[municipality]:
+            place.append(muni_place)
+        db.municipalities.insert({"municipality":municipality, "districts":place})
 def slug_data(slug_string):
 	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
@@ -22,7 +30,6 @@ def slug_data(slug_string):
     	slugified_string = slugified_string.lower().replace("ç", "c").decode('utf-8')
     slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
     return slugified_string.lower()
-
 
 def set_muni(given_city_bus):
     with open("data-importer/komunat.json","r") as data:
@@ -63,7 +70,7 @@ def gender_person(person):
         return owner
 
 def main():
-    docs = db.businesses.find()
+    docs = db.businesses.find().limit(10000)
     # Looping through each doc
     for doc in docs:
         sluged_owners = []
