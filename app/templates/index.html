@@ -29,7 +29,7 @@
             <td>
                 <ul>
                     {% for owner in i['owners'] %}
-                        <li>{{owner['name']}}</li>
+                        <li><a href="{{url_for('.profile', person=owner['name'])}}">{{owner['name']}}</a></li>
                     {% endfor %}
                 </ul>
             </td>

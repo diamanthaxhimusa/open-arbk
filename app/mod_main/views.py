@@ -22,7 +22,36 @@ def index():
 		return render_template('index.html', result=result)
 	return render_template('index.html')
 
+@mod_main.route('/profile/<string:person>')
+def profile(person):
+	db = mongo.db.reg_businesses
+	person_data = db.find({'owners.name' : person})
+	return render_template('profile.html', profile_data=person_data)
 
-@mod_main.route('/visualization')
+@mod_main.route('/visualization', methods=['GET','POST'])
 def visualization():
-	return render_template('visualizations.html')
+	db = mongo.db.reg_businesses
+	dbm = mongo.db.municipalities
+	if request.method == 'GET':
+		top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
+		komunat = dbm.find()
+		return render_template('visualizations.html', top=top, komunat=komunat)
+	if request.method == 'POST':
+		city = request.form['city_id']
+		status = request.form['status']
+		if status == 'any' and city == 'any':
+			top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
+			komunat = dbm.find()
+			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+		elif status is not 'any' and city == 'any':
+			top = db.aggregate([{'$match': {"status": status}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
+			komunat = dbm.find()
+			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+		elif status == 'any' and city is not 'any':
+			top = db.aggregate([{'$match': {"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
+			komunat = dbm.find()
+			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+		else:
+			top = db.aggregate([{'$match': {"status":status ,"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
+			komunat = dbm.find()
+			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
