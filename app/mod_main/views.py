@@ -26,3 +26,11 @@ def index():
 @mod_main.route('/visualization')
 def visualization():
 	return render_template('visualizations.html')
+
+
+@mod_main.route('/businesses-type')
+def businesses_type():
+	db = mongo.db.reg_businesses
+	doc = db.aggregate([{'$group': {"_id" : "$type", "total": {"$sum": 1}}},{'$sort': {'total': -1}}])
+	api = { 'total': mongo.db.reg_businesses.count(), 'doc': doc }
+   	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
