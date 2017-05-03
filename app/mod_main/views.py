@@ -11,7 +11,6 @@ sys.setdefaultencoding('utf-8')
 
 mod_main = Blueprint('main', __name__)
 
-
 @mod_main.route('/', methods=['GET','POST'])
 def index():
 	db = mongo.db.reg_businesses
@@ -62,4 +61,12 @@ def businesses_type():
 	db = mongo.db.reg_businesses
 	doc = db.aggregate([{'$group': {"_id" : "$type", "total": {"$sum": 1}}},{'$sort': {'total': -1}}])
 	api = { 'total': mongo.db.reg_businesses.count(), 'doc': doc }
+   	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
+
+@mod_main.route('/active_inactive', methods=['GET', 'POST'])
+def active_inactive():
+	db = mongo.db.reg_businesses
+	docs = db.aggregate([{'$group': {"_id" : "$status","total": {"$sum": 1}}},{'$sort': {'total': -1}}])
+	api = {'total': mongo.db.reg_businesses.count(), 'docs': docs}
    	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')

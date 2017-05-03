@@ -70,7 +70,7 @@ def gender_person(person):
         return owner
 
 def main():
-    docs = db.businesses.find().limit(10000)
+    docs = db.businesses.find()
     # Looping through each doc
     for doc in docs:
         sluged_owners = []

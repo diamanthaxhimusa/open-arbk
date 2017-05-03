@@ -39,12 +39,10 @@ $(document).ready(function(){
                 }
             }
         },
-
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
         },
-
         series: [{
             name: 'Brands',
             colorByPoint: true,
@@ -83,64 +81,51 @@ $(document).ready(function(){
     });
   }
 
+    $.ajax({
+        url: "/active_inactive",
+        type: 'GET',
+        success: function(data){
+          // $('#name').text(data.result[0]['_id']);
+          active_inactive_chart(data)
+        }
+    })
 
-  Highcharts.chart('container2', {
-    chart: {
-        type: 'areaspline'
-    },
-    title: {
-        text: 'Average fruit consumption during one week'
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        verticalAlign: 'top',
-        x: 150,
-        y: 100,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    xAxis: {
-        categories: [
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-            'Sunday'
-        ],
-        plotBands: [{ // visualize the weekend
-            from: 4.5,
-            to: 6.5,
-            color: 'rgba(68, 170, 213, .2)'
-        }]
-    },
-    yAxis: {
-        title: {
-            text: 'Fruit units'
-        }
-    },
-    tooltip: {
-        shared: true,
-        valueSuffix: ' units'
-    },
-    credits: {
-        enabled: false
-    },
-    plotOptions: {
-        areaspline: {
-            fillOpacity: 0.5
-        }
-    },
-    series: [{
-        name: 'John',
-        data: [3, 4, 3, 5, 4, 10, 12]
-    }, {
-        name: 'Jane',
-        data: [1, 3, 4, 3, 3, 5, 4]
-    }]
-});
+    function active_inactive_chart(data){
+      Highcharts.chart('container3', {
+              chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false,
+                  type: 'pie'
+              },
+              title: {
+                  text: 'Numri i kompanive aktive dhe te shuara mes viteve 2000 - 2018'
+              },
+              tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              },
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: false
+                      },
+                      showInLegend: true
+                  }
+              },
+              series: [{
+                  name: 'Numri i kompanive',
+                  colorByPoint: true,
+                  data: [{
+                      name: 'Aktive',
+                      y: (data.docs.result[0]['total'] / data.total) * 100
+                  }, {
+                      name: 'Shuar',
+                      y: (data.docs.result[1]['total'] / data.total) * 100
+                  }]
+              }]
+          });
+    }
 
 })
