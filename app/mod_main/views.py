@@ -81,11 +81,36 @@ def businesses_type():
 	db = mongo.db.reg_businesses
 	doc = db.aggregate([{'$group': {"_id" : "$type", "total": {"$sum": 1}}},{'$sort': {'total': -1}}])
 	api = { 'total': mongo.db.reg_businesses.count(), 'doc': doc }
-   	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
+def set_activity(given_code):
+	activityDb = mongo.db.activities.find()
+	docs = {}
+	for activity in activityDb:
+		if str(given_code) == activity['code']:
+			docs = {
+				"code": given_code,
+				"activity": activity['activity']
+			}
+	return docs
+
+@mod_main.route('/top_activities')
+def activities():
+	api1 = []
+	db = mongo.db.reg_businesses
+	data = db.aggregate([{'$unwind': "$activities"},{'$group': {"_id": "$activities",'totali': {'$sum': 1}}},{'$sort': {"totali": -1}},{'$limit': 10}])
+	for each_act in data['result']:
+		doc = set_activity(each_act['_id'])
+		api1.append({
+			"total_businesses": each_act['totali'],
+			"details": doc
+		})
+	finalAPI = {'activities': api1}
+	return Response(response=json_util.dumps(finalAPI), status=200, mimetype='application/json')
 
 @mod_main.route('/active_inactive', methods=['GET', 'POST'])
 def active_inactive():
 	db = mongo.db.reg_businesses
 	docs = db.aggregate([{'$group': {"_id" : "$status","total": {"$sum": 1}}},{'$sort': {'total': -1}}])
 	api = {'total': mongo.db.reg_businesses.count(), 'docs': docs}
-   	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
