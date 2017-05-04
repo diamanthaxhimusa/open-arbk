@@ -57,7 +57,7 @@ def visualization():
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
 
-@mod_main.route('/born')
+@mod_main.route('/through-years')
 def start_date():
 	db = mongo.db.reg_businesses
 	api = {}
