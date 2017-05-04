@@ -24,7 +24,9 @@ $(document).ready(function(){
         yAxis: {
             title: {
                 text: 'Numri total i bizneseve'
-            }
+            },
+            min: 0,
+            max: 12
 
         },
         legend: {

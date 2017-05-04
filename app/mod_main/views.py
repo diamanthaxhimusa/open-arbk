@@ -90,7 +90,6 @@ def businesses_type():
 	api = { 'total': mongo.db.reg_businesses.count(), 'doc': doc }
    	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
-
 @mod_main.route('/active_inactive', methods=['GET', 'POST'])
 def active_inactive():
 	db = mongo.db.reg_businesses
