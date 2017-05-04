@@ -72,8 +72,7 @@ def start_date():
 				data['result'].append({"_id":"Shuar","count":0})
 			else:
 				data['result'].append({"_id":"Aktiv","count":0})
-		else:
-			res = {data['result'][0]['_id']:data['result'][0]['count'], data['result'][1]['_id']:data['result'][1]['count']}
+		res = {data['result'][0]['_id']:data['result'][0]['count'], data['result'][1]['_id']:data['result'][1]['count']}
 		api.update({year:res})
 	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 

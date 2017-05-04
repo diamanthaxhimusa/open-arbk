@@ -1,7 +1,19 @@
 {% extends 'layout.html' %}
 {% block body %}
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div class="con1 viz" style="margin-top:30px">
+    <h3 class="headers">-Llojet e bizneseve-</h3>
+    <div id="container" style="min-width: 310px; margin-top:30px !important; height: 400px; margin: 0 auto"></div>
+</div>
+<div class="con2 viz" style="margin-top:30px">
+    <h3 class="headers">-Bizneset sipas viteve-</h3>
+    <div id="container2" style="margin-top:30px !important; min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<div class="con3 viz" style="margin-top:30px">
+    <h3 class="headers">-Top 10 bizneset sipas kapitalit-</h3>
     {% include 'visualizations/top10.html' %}
-    <div id="container3" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+</div>
+<div class="con4 viz" style="margin-top:30px">
+    <h3 class="headers">-Bizneset e shuara dhe aktive-</h3>
+    <div id="container3" style="min-width: 310px; margin-top:30px !important; height: 400px; max-width: 600px; margin: 0 auto">
+</div>
 {% endblock %}

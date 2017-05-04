@@ -1,58 +1,56 @@
 <script type="text/javascript" src="{{url_for('static', filename="js/top10.js")}}">
 </script>
-<form id="form-donors-filter" class="form-inline" method="POST">
-    <div class="form-group">
-        <label>
-            Statusi
-            <select class="form-control" name="status" id="biz_status">
-                <option value="any" selected="selected">All</option>
-                <option>Aktiv</option>
-                <option>Shuar</option>
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Komuna
-            <select class="form-control" name="city_id" id="city_id">
-                <option value="any">All</option>
-                {% for i in komunat %}
-                <option value="{{i['municipality']}}">{{i['municipality']}}</option>
-                {% endfor %}
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
-        <button type="button" onclick="selectDist()" class="btn btn-default">Search</button>
-    </div>
-</form>
-<table id="topTable" class="table table-entities table-bordered table-striped table-hover">
-    <thead>
-        <th>Emri i Biznesit</th>
-        <th>Komuna</th>
-        <th>Statusi i Biznesit</th>
-        <th>Linku per ne ARBK</th>
-        <th>Kapitali</th>
-    </thead>
-    <tbody>
-        {% for i in top['result'] %}
-        <tr>
-            <td>
-                {{i['name']}}
-            </td>
-            <td>
-                {{i['municipality']['municipality']}}
-            </td>
-            <td>
-                {{i['status']}}
-            </td>
-            <td>
-                <a href="{{i['arbkUrl']}}">linku</a>
-            </td>
-            <td>
-                {{i['capital']}}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="" style="margin-top:30px">
+    <form id="form-donors-filter" class="form-inline" method="POST">
+        <div class="form-group">
+            <label>
+                Statusi
+                <select class="form-control" name="status" id="biz_status">
+                    <option value="any" selected="selected">All</option>
+                    <option>Aktiv</option>
+                    <option>Shuar</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                Komuna
+                <select class="form-control" name="city_id" id="city_id">
+                    <option value="any">All</option>
+                    {% for i in komunat %}
+                    <option value="{{i['municipality']}}">{{i['municipality']}}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="selectDist()" class="btn btn-default">Search</button>
+        </div>
+    </form>
+    <table id="topTable" class="table table-entities table-bordered table-striped table-hover">
+        <thead>
+            <th>Emri i Biznesit</th>
+            <th>Komuna</th>
+            <th>Statusi i Biznesit</th>
+            <th>Kapitali</th>
+        </thead>
+        <tbody>
+            {% for i in top['result'] %}
+            <tr>
+                <td id="topname">
+                    <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
+                </td>
+                <td class="ksbk">
+                    {{i['municipality']['municipality']}}
+                </td>
+                <td class="ksbk">
+                    {{i['status']}}
+                </td>
+                <td class="ksbk">
+                    {{i['capital']}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

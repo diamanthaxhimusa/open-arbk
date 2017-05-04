@@ -13,22 +13,18 @@ function selectDist() {
             '<th>Emri i Biznesit</th>'+
             '<th>Komuna</th>'+
             '<th>Statusi i Biznesit</th>'+
-            '<th>Linku per ne ARBK</th>'+
             '<th>Kapitali</th>'+
             '</thead>'+
             '<tbody>';
             $.each(response.result, function(key, val) {
                 data +='<tr>'+
-                '<td>'+val.name+
+                '<td id="topname"><a href='+val.arbkUrl+'>'+val.name+'</a>'+
                 '</td>'+
-                '<td>'+val.municipality.municipality+
+                '<td class="ksbk">'+val.municipality.municipality+
                 '</td>'+
-                '<td>'+val.status+
+                '<td class="ksbk">'+val.status+
                 '</td>'+
-                '<td>'+
-                '<a href="'+val.arbkUrl+'">linku</a>'+
-                '</td>'+
-                '<td>'+val.capital+
+                '<td class="ksbk">'+val.capital+
                 '</td>'+
                 '</tr>';
             });

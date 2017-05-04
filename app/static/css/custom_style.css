@@ -7,3 +7,19 @@
 	z-index: 9999;
 	background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
+
+.viz{
+	border-bottom: 3px solid black;
+}
+
+.headers{
+	text-align: center;
+	font-weight: 500;
+}
+
+/*#topname{
+	max-width: 250px;
+}*/
+.ksbk{
+	max-width: 100px
+}

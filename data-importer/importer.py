@@ -122,12 +122,11 @@ def main():
         except Exception as e:
             arbkUrl = None
         try:
-            if doc['formatted']['status'] is None:
-                status = 'Aktiv'
-            else:
-                status = doc['formatted']['status']
+            status = doc['formatted']['status']
+            if status == '':
+                continue
         except Exception as e:
-            status = 'Aktiv'
+            continue
         try:
             if doc['formatted']['capital'] is None:
                 capi = 0
