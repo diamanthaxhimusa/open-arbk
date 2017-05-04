@@ -30,9 +30,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li {% if request.path == "/" %} class="active" {% endif %}><a href="{{ url_for('main.index') }}">Home<span class="sr-only">(current)</span></a></li>
-                <li{% if request.path == "/visualization" %} class="active" {% endif %}><a href="{{ url_for('main.visualization') }}">Visualizations</a></li>
-                <li><a href="{{ url_for('main.index') }}">About Us</a></li>
+                <li {% if request.path == "/" %} class="active" {% endif %}><a href="{{ url_for('main.index') }}">Kerkimi<span class="sr-only">(current)</span></a></li>
+                <li{% if request.path == "/visualization" %} class="active" {% endif %}><a href="{{ url_for('main.visualization') }}">Vizualizimet</a></li>
               </ul>
             </div>
           </div>

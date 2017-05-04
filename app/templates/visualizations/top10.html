@@ -6,7 +6,7 @@
             <label>
                 Statusi
                 <select class="form-control" name="status" id="biz_status">
-                    <option value="any" selected="selected">All</option>
+                    <option value="any" selected="selected">T&euml; gjitha</option>
                     <option>Aktiv</option>
                     <option>Shuar</option>
                 </select>
@@ -16,7 +16,7 @@
             <label>
                 Komuna
                 <select class="form-control" name="city_id" id="city_id">
-                    <option value="any">All</option>
+                    <option value="any">T&euml; gjitha</option>
                     {% for i in komunat %}
                     <option value="{{i['municipality']}}">{{i['municipality']}}</option>
                     {% endfor %}
@@ -24,11 +24,12 @@
             </label>
         </div>
         <div class="form-group">
-            <button type="button" onclick="selectDist()" class="btn btn-default">Search</button>
+            <button type="button" onclick="selectDist()" class="btn btn-default">Listo</button>
         </div>
     </form>
     <table id="topTable" class="table table-entities table-bordered table-striped table-hover">
         <thead>
+            <th>#</th>
             <th>Emri i Biznesit</th>
             <th>Komuna</th>
             <th>Statusi i Biznesit</th>
@@ -37,6 +38,9 @@
         <tbody>
             {% for i in top['result'] %}
             <tr>
+                <td>
+                    {{loop.index}}
+                </td>
                 <td id="topname">
                     <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
                 </td>
