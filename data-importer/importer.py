@@ -70,7 +70,7 @@ def gender_person(person):
         return owner
 
 def main():
-    docs = db.businesses.find().limit(10000)
+    docs = db.businesses.find()
     # Looping through each doc
     for doc in docs:
         sluged_owners = []
@@ -122,9 +122,12 @@ def main():
         except Exception as e:
             arbkUrl = None
         try:
-            status = doc['formatted']['status']
+            if doc['formatted']['status'] is None:
+                status = 'Aktiv'
+            else:
+                status = doc['formatted']['status']
         except Exception as e:
-            status = ''
+            status = 'Aktiv'
         try:
             if doc['formatted']['capital'] is None:
                 capi = 0

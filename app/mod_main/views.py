@@ -3,6 +3,7 @@
 from flask import Blueprint, render_template, json, jsonify, Response, request, redirect
 from bson import json_util, ObjectId
 import re
+import datetime
 from app import mongo
 
 import sys
@@ -56,6 +57,26 @@ def visualization():
 			komunat = dbm.find()
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
+
+@mod_main.route('/born')
+def start_date():
+	db = mongo.db.reg_businesses
+	api = {}
+	y = 1
+	for i in range(2002,2018):
+		y+=1
+		year = "d"+str(y)
+		data = db.aggregate([{'$match': {"establishmentDate":{"$gt":datetime.datetime(i,1,1), "$lte":datetime.datetime(i+1,1,1)}}},{'$group': {"_id":"$status", "count":{"$sum":1}}}])
+		rr = {}
+		if len(data['result']) == 1:
+			if data['result'][0]['_id'] == "Aktiv":
+				data['result'].append({"_id":"Shuar","count":0})
+			else:
+				data['result'].append({"_id":"Aktiv","count":0})
+		else:
+			res = {data['result'][0]['_id']:data['result'][0]['count'], data['result'][1]['_id']:data['result'][1]['count']}
+		api.update({year:res})
+	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
 @mod_main.route('/businesses-type')
 def businesses_type():
