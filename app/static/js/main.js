@@ -39,12 +39,10 @@ $(document).ready(function(){
                 }
             }
         },
-
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
         },
-
         series: [{
             name: 'Brands',
             colorByPoint: true,
@@ -82,4 +80,50 @@ $(document).ready(function(){
         }]
     });
   }
+$.ajax({
+    url: "/active_inactive",
+    type: 'GET',
+    success: function(data){
+      // $('#name').text(data.result[0]['_id']);
+      active_inactive_chart(data)
+    }
+})
+
+function active_inactive_chart(data){
+  Highcharts.chart('container3', {
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {
+              text: 'Numri i kompanive aktive dhe te shuara mes viteve 2000 - 2018'
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: false
+                  },
+                  showInLegend: true
+              }
+          },
+          series: [{
+              name: 'Numri i kompanive',
+              colorByPoint: true,
+              data: [{
+                  name: 'Aktive',
+                  y: (data.docs.result[0]['total'] / data.total) * 100
+              }, {
+                  name: 'Shuar',
+                  y: (data.docs.result[1]['total'] / data.total) * 100
+              }]
+          }]
+      });
+}
 })
