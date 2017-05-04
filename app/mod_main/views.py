@@ -18,7 +18,14 @@ def index():
 	db.create_index("formatted.slugifiedOwners",1)
 	if request.method == 'POST':
 		keyword = request.form['search']
-		result = db.find({"slugifiedOwners": {"$regex": keyword}}, {'owners':1,'name': 1, 'status': 1, 'arbkUrl': 1})
+		search_person = request.form['person']
+		print search_person
+		if search_person == 'owner':
+			result = db.find({"slugifiedOwners": {"$regex": keyword}})
+		elif search_person == 'auth':
+			result = db.find({"slugifiedAuthorized": {"$regex": keyword}})
+		else:
+			result = db.find({'$or':[{"slugifiedOwners": {"$regex": keyword}},{"slugifiedAuthorized": {"$regex": keyword}}]})
 		return render_template('index.html', result=result)
 	return render_template('index.html')
 
