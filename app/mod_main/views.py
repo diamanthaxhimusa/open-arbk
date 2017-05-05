@@ -50,28 +50,24 @@ def profile(person):
 def visualization():
 	db = mongo.db.reg_businesses
 	dbm = mongo.db.municipalities
+	komunat = dbm.find().sort("municipality", 1)
 	if request.method == 'GET':
 		top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-		komunat = dbm.find()
 		return render_template('visualizations.html', top=top, komunat=komunat)
 	if request.method == 'POST':
 		city = request.form['city_id']
 		status = request.form['status']
 		if status == 'any' and city == 'any':
 			top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			komunat = dbm.find()
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 		elif status is not 'any' and city == 'any':
 			top = db.aggregate([{'$match': {"status": status}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			komunat = dbm.find()
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 		elif status == 'any' and city is not 'any':
 			top = db.aggregate([{'$match': {"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			komunat = dbm.find()
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 		else:
 			top = db.aggregate([{'$match': {"status":status ,"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			komunat = dbm.find()
 			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
 

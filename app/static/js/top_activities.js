@@ -1,14 +1,47 @@
 $(document).ready(function(){
+    var maxCount = 10;
+    var data = {};
+    getAPI(0);
+    function getAPI(selected) {
+        $.getJSON('/top_activities', function (dataAPI) {
+        }).done(function (dataAPI) {
+            data = dataAPI;
+            buildDropDown(dataAPI.activities.length);
+            proccesAPI(data, 0, maxCount);
+        });
+    }
+    $('.topAct').on('change', function() {
+        var maxVal = $(this).children(":selected").attr("id");
+        proccesAPI(data, parseInt($(this).val()), parseInt(maxVal));
+    });
+    function buildDropDown(actLength, data) {
+        var list = actLength / maxCount;
+        var plot = Math.floor(list);
+        var pak = actLength % maxCount;
+        min = 0;
+        max = 0;
+        for (var i = 0; i < plot; i++) {
+            min = i * maxCount;
+            max = min + maxCount;
+            $('.topAct').append('<option value='+min+' id='+max+'>'+min+'-'+max+'</option>');
+        }
+        if (pak != 0) {
+            $('.topAct').append('<option value='+max+' id='+((max+pak)-1)+'>'+max+'-'+(max+pak)+'</option>');
+        }
+    }
+    function proccesAPI(data, min, max) {
+        var start = min;
+        var end = max;
+        emri = [];
+        vals = [];
+        for(var i=start; i<=end;i++){
+            emri.push(data.activities[i].details.activity);
+            vals.push(data.activities[i].total_businesses);
+        }
+        top_activities(emri, vals);
+    }
 
-  $.ajax({
-      url: "/top_activities",
-      type: 'GET',
-      success: function(data){
-        top_activities(data)
-      }
-  })
-
-  function top_activities(data){
+    function top_activities(emri, data){
     var chart = Highcharts.chart('container4', {
 
         title: {
@@ -28,17 +61,16 @@ $(document).ready(function(){
         },
 
         xAxis: {
-            categories: [data.activities[0].details.activity, data.activities[1].details.activity, data.activities[2].details.activity, data.activities[3].details.activity, data.activities[4].details.activity, data.activities[5].details.activity, data.activities[6].details.activity, data.activities[7].details.activity, data.activities[8].details.activity, data.activities[9].details.activity]
+            categories: emri
         },
 
         series: [{
             type: 'column',
             colorByPoint: true,
-            data: [data.activities[0].total_businesses, data.activities[1].total_businesses, data.activities[2].total_businesses, data.activities[3].total_businesses, data.activities[4].total_businesses, data.activities[5].total_businesses, data.activities[6].total_businesses, data.activities[7].total_businesses, data.activities[8].total_businesses, data.activities[9].total_businesses],
+            data: data,
             showInLegend: false
         }]
 
     });
-  }
-
+    }
 })
