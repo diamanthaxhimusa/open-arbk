@@ -9,7 +9,7 @@ $(document).ready(function(){
     function dates(data) {
         Highcharts.chart('container2', {
             chart: {
-                type: 'column'
+                type: 'line'
             },
             title: {
                 text: 'Krijimi/Mbyllja e bizneseve sipas viteve 2002-2018'

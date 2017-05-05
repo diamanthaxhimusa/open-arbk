@@ -14,6 +14,16 @@
                 </select>
             </label>
         </div>
+        <div class="form-group">
+            <label>
+                <select class="form-control" name="municipality" id="poz">
+                    <option value="any" selected="selected">T&euml; gjitha</option>
+                    {% for municipality in municipalities%}
+                    <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
         <div class="form-group col-xs-5">
             <button type="submit" class="btn btn-default">Kerko</button>
         </div>
@@ -24,6 +34,7 @@
     <thead>
         <th>Emri i Biznesit</th>
         <th>Statusi i Biznesit</th>
+        <th>Komuna</th>
         <th>Pronaret</th>
         <th>Te autorizuaret</th>
     </thead>
@@ -35,6 +46,9 @@
             </td>
             <td>
                 {{i['status']}}
+            </td>
+            <td>
+                {{i['municipality']['municipality']}}
             </td>
             <td>
                 <ul>

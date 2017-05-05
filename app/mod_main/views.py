@@ -16,18 +16,29 @@ mod_main = Blueprint('main', __name__)
 def index():
 	db = mongo.db.reg_businesses
 	db.create_index("formatted.slugifiedOwners",1)
+	dbm = mongo.db.municipalities
+	municipalities = dbm.find().sort("municipality", 1)
+	result = db.find().limit(100)
 	if request.method == 'POST':
 		keyword = request.form['search']
 		search_person = request.form['person']
+		municipality = request.form['municipality']
 		print search_person
-		if search_person == 'owner':
-			result = db.find({"slugifiedOwners": {"$regex": keyword}})
+		if keyword == '':
+			result = db.find().limit(100)
+		elif search_person == 'owner':
+			if municipality == 'any':
+				result = db.find({"slugifiedOwners": {"$regex": keyword}})
+			else:
+				result = db.find({"slugifiedOwners": {"$regex": keyword}, "municipality.municipality":municipality})
 		elif search_person == 'auth':
-			result = db.find({"slugifiedAuthorized": {"$regex": keyword}})
+			if municipality == 'any':
+				result = db.find({"slugifiedAuthorized": {"$regex": keyword}})
+			else:
+				result = db.find({"slugifiedAuthorized": {"$regex": keyword}, "municipality.municipality":municipality})
 		else:
 			result = db.find({'$or':[{"slugifiedOwners": {"$regex": keyword}},{"slugifiedAuthorized": {"$regex": keyword}}]})
-		return render_template('index.html', result=result)
-	return render_template('index.html')
+	return render_template('index.html', result=result, municipalities=municipalities)
 
 @mod_main.route('/profile/<string:person>')
 def profile(person):
