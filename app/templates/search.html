@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<table class="table table-striped" id="searchTable">
+    <thead>
+        <th>Emri i Biznesit</th>
+        <th>Statusi i Biznesit</th>
+        <th>Komuna</th>
+        <th>Pronaret</th>
+        <th>Te autorizuaret</th>
+    </thead>
+    <tbody>
+        {% for i in profile_data %}
+        <tr>
+            <td>
+                <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              {% if status == 'owner' %}
+                  {{person}}
+              {% else %}
+                <ul>
+                  {% for owner in i['owners'] %}
+                      <li><a>{{owner['name']}}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </td>
+            <td>
+              {% if status == 'authorized' %}
+                  {{person}}
+              {% else %}
+                <ul>
+                  {% for auth in i['authorized'] %}
+                      <li><a>{{auth['name']}}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready( function () {
+$('#searchTable').DataTable();
+} );
+</script>
+{% endblock %}

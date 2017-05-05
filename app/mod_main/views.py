@@ -41,11 +41,13 @@ def index():
 			result = db.find({'$or':[{"slugifiedOwners": {"$regex": keyword}},{"slugifiedAuthorized": {"$regex": keyword}}]})
 	return render_template('index.html', result=result, municipalities=municipalities)
 
-@mod_main.route('/profile/<string:person>')
-def profile(person):
-	db = mongo.db.reg_businesses
-	person_data = db.find({'owners.name' : person})
-	return render_template('profile.html', profile_data=person_data)
+@mod_main.route('/search/<string:status>/<string:person>')
+def profile(status, person):
+	if status == 'owner':
+		person_data = mongo.db.reg_businesses.find({"slugifiedOwners": {'$in': [person.lower()]}})
+	else:
+		person_data = mongo.db.reg_businesses.find({"slugifiedAuthorized": {'$in': [person.lower()]}})
+	return render_template('search.html', profile_data=person_data, status=status ,person=person)
 
 @mod_main.route('/visualization', methods=['GET','POST'])
 def visualization():
