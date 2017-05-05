@@ -116,7 +116,7 @@ def set_activity(given_code):
 def activities():
 	api1 = []
 	db = mongo.db.reg_businesses
-	data = db.aggregate([{'$unwind': "$activities"},{'$group': {"_id": "$activities",'totali': {'$sum': 1}}},{'$sort': {"totali": -1}},{'$limit': 10}])
+	data = db.aggregate([{'$unwind': "$activities"},{'$group': {"_id": "$activities",'totali': {'$sum': 1}}},{'$sort': {"totali": -1}}])
 	for each_act in data['result']:
 		doc = set_activity(each_act['_id'])
 		api1.append({

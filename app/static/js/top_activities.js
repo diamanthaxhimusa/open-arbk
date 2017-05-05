@@ -4,7 +4,6 @@ $(document).ready(function(){
       url: "/top_activities",
       type: 'GET',
       success: function(data){
-        // $('#name').text(data.result[0]['_id']);
         top_activities(data)
       }
   })
