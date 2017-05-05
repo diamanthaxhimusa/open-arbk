@@ -20,7 +20,8 @@ def index():
 	municipalities = dbm.find().sort("municipality", 1)
 	result = db.find().limit(100)
 	if request.method == 'POST':
-		keyword = request.form['search']
+		search_keyword = request.form['search']
+		keyword = search_keyword.lower()
 		search_person = request.form['person']
 		municipality = request.form['municipality']
 		print search_person
