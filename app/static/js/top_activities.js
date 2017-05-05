@@ -15,6 +15,9 @@ $(document).ready(function(){
         title: {
             text: ''
         },
+        legend: {
+            enabled: false
+        },
         yAxis: {
           title: {
             text: 'Numri total i bizneseve'
