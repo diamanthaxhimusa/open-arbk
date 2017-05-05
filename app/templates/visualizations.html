@@ -1,5 +1,9 @@
 {% extends 'layout.html' %}
 {% block body %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
+<script src="{{ url_for('static', filename='js/top_activities.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename="js/top10.js")}}"></script>
 <div class="con1" style="margin-top:30px">
     <h3 class="headers">Llojet e bizneseve</h3>
     <div id="container" style="min-width: 310px; margin-top:30px !important; height: 400px; margin: 0 auto"></div>
