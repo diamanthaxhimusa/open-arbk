@@ -107,6 +107,8 @@ def set_activity(given_code):
 				"code": given_code,
 				"activity": activity['activity']
 			}
+		else:
+			continue
 	return docs
 
 @mod_main.route('/top_activities')
@@ -116,10 +118,11 @@ def activities():
 	data = db.aggregate([{'$unwind': "$activities"},{'$group': {"_id": "$activities",'totali': {'$sum': 1}}},{'$sort': {"totali": -1}}])
 	for each_act in data['result']:
 		doc = set_activity(each_act['_id'])
-		api1.append({
-			"total_businesses": each_act['totali'],
-			"details": doc
-		})
+		if len(doc) != 0:
+			api1.append({
+				"total_businesses": each_act['totali'],
+				"details": doc
+			})
 	finalAPI = {'activities': api1}
 	return Response(response=json_util.dumps(finalAPI), status=200, mimetype='application/json')
 
