@@ -36,14 +36,16 @@ def index():
     return render_template('index.html', result=result, municipalities=municipalities)
 
 
-@mod_main.route('/search/<string:status>/<string:person>')
+@mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])
 def profile(status, person):
     person_to_lower = person.lower()
+    municipalities = mongo_utils.get_municipalities()
     if status == 'owner':
         person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower)
     else:
         person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower)
-    return render_template('search.html', profile_data=person_data, status=status, person=person)
+    return render_template('search.html', profile_data=person_data,
+                           municipalities=municipalities, status=status, person=person)
 
 
 @mod_main.route('/visualization', methods=['GET', 'POST'])
@@ -69,7 +71,7 @@ def visualization():
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
 
-@mod_main.route('/through-years')
+@mod_main.route('/through-years', methods=['GET', 'POST'])
 def start_date():
     api = {}
     y = 1
@@ -90,7 +92,7 @@ def start_date():
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
 
-@mod_main.route('/businesses-type')
+@mod_main.route('/businesses-type', methods=['GET', 'POST'])
 def businesses_type():
     doc = mongo_utils.business_type_count()
     docs_count = mongo_utils.docs_count()
@@ -112,7 +114,7 @@ def set_activity(given_code):
     return docs
 
 
-@mod_main.route('/top_activities')
+@mod_main.route('/top_activities', methods=['GET', 'POST'])
 def activities():
     activity_items = []
     businesses_activities = mongo_utils.get_most_used_activities()

@@ -1,5 +1,34 @@
 {% extends 'layout.html' %}
 {% block body %}
+<form class="form" method="POST" action="{{ url_for('main.index') }}">
+    <div class="row">
+        <div class="form-group col-xs-6">
+            <input type="text" class="form-control" id="search" name="search" placeholder="emri i zyrtarit/pronarit">
+        </div>
+        <div class="form-group col-xs-2">
+            <label>
+                <select class="form-control" name="person">
+                    <option value="any" selected="selected">T&euml; gjitha</option>
+                    <option value="owner">Pronar&euml;</option>
+                    <option value="auth">Zyrtar&euml;</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group col-xs-3">
+            <label>
+                <select class="form-control" name="municipality">
+                    <option value="any" selected="selected">T&euml; gjitha</option>
+                    {% for municipality in municipalities%}
+                    <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <div class="form-group col-xs-1">
+            <button type="submit" class="btn btn-default">Kerko</button>
+        </div>
+    </div>
+</form>
 
 <table class="table table-striped" id="searchTable">
     <thead>
