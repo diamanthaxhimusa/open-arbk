@@ -1,136 +1,137 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, json, jsonify, Response, request, redirect
-from bson import json_util, ObjectId
-import re
-import datetime
-from app import mongo
-
+from flask import Blueprint, render_template, Response, request
+from app import mongo_utils
+from bson import json_util
 import sys
 reload(sys)
-sys.setdefaultencoding('utf-8')
 
 mod_main = Blueprint('main', __name__)
 
-@mod_main.route('/', methods=['GET','POST'])
+
+@mod_main.route('/', methods=['GET', 'POST'])
 def index():
-	db = mongo.db.reg_businesses
-	db.create_index("formatted.slugifiedOwners",1)
-	dbm = mongo.db.municipalities
-	municipalities = dbm.find().sort("municipality", 1)
-	result = db.find().limit(100)
-	if request.method == 'POST':
-		search_keyword = request.form['search']
-		keyword = search_keyword.lower()
-		search_person = request.form['person']
-		municipality = request.form['municipality']
-		print search_person
-		if keyword == '':
-			result = db.find().limit(100)
-		elif search_person == 'owner':
-			if municipality == 'any':
-				result = db.find({"slugifiedOwners": {"$regex": keyword}})
-			else:
-				result = db.find({"slugifiedOwners": {"$regex": keyword}, "municipality.municipality":municipality})
-		elif search_person == 'auth':
-			if municipality == 'any':
-				result = db.find({"slugifiedAuthorized": {"$regex": keyword}})
-			else:
-				result = db.find({"slugifiedAuthorized": {"$regex": keyword}, "municipality.municipality":municipality})
-		else:
-			result = db.find({'$or':[{"slugifiedOwners": {"$regex": keyword}},{"slugifiedAuthorized": {"$regex": keyword}}]})
-	return render_template('index.html', result=result, municipalities=municipalities)
+    mongo_utils.index_create()
+    municipalities = mongo_utils.get_municipalities()
+    result = mongo_utils.get_limit_businesses(100)
+    if request.method == 'POST':
+        search_keyword = request.form['search']
+        keyword = search_keyword.lower()
+        search_person = request.form['person']
+        municipality = request.form['municipality']
+        if keyword == '':
+            result = mongo_utils.get_limit_businesses(100)
+        elif search_person == 'owner':
+            if municipality == 'any':
+                result = mongo_utils.get_people("slugifiedOwners", keyword)
+            else:
+                result = mongo_utils.get_people_by_municipality("slugifiedOwners", keyword, municipality)
+        elif search_person == 'auth':
+            if municipality == 'any':
+                result = mongo_utils.get_people("slugifiedAuthorized", keyword)
+            else:
+                result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", keyword, municipality)
+        else:
+            result = mongo_utils.get_by_owners_authorized(keyword)
+    return render_template('index.html', result=result, municipalities=municipalities)
+
 
 @mod_main.route('/search/<string:status>/<string:person>')
 def profile(status, person):
-	if status == 'owner':
-		person_data = mongo.db.reg_businesses.find({"slugifiedOwners": {'$in': [person.lower()]}})
-	else:
-		person_data = mongo.db.reg_businesses.find({"slugifiedAuthorized": {'$in': [person.lower()]}})
-	return render_template('search.html', profile_data=person_data, status=status ,person=person)
+    person_to_lower = person.lower()
+    if status == 'owner':
+        person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower)
+    else:
+        person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower)
+    return render_template('search.html', profile_data=person_data, status=status, person=person)
 
-@mod_main.route('/visualization', methods=['GET','POST'])
+
+@mod_main.route('/visualization', methods=['GET', 'POST'])
 def visualization():
-	db = mongo.db.reg_businesses
-	dbm = mongo.db.municipalities
-	komunat = dbm.find().sort("municipality", 1)
-	if request.method == 'GET':
-		top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-		return render_template('visualizations.html', top=top, komunat=komunat)
-	if request.method == 'POST':
-		city = request.form['city_id']
-		status = request.form['status']
-		if status == 'any' and city == 'any':
-			top = db.aggregate([{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-		elif status is not 'any' and city == 'any':
-			top = db.aggregate([{'$match': {"status": status}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-		elif status == 'any' and city is not 'any':
-			top = db.aggregate([{'$match': {"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-		else:
-			top = db.aggregate([{'$match': {"status":status ,"municipality.municipality": city}},{'$sort': {"capital":-1}},{ '$limit' : 10 }])
-			return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+    komunat = mongo_utils.get_municipalities()
+    if request.method == 'GET':
+        top = mongo_utils.get_top_ten_by_capital()
+        return render_template('visualizations.html', top=top, komunat=komunat)
+    if request.method == 'POST':
+        city = request.form['city_id']
+        status = request.form['status']
+        if status == 'any' and city == 'any':
+            top = mongo_utils.get_top_ten_by_capital()
+            return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+        elif status is not 'any' and city == 'any':
+            top = mongo_utils.get_top_ten_capital_by_status(status)
+            return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+        elif status == 'any' and city is not 'any':
+            top = mongo_utils.get_top_ten_capital_by_city(city)
+            return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
+        else:
+            top = mongo_utils.get_top_ten_capital_by_city_status(status, city)
+            return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
 
 @mod_main.route('/through-years')
 def start_date():
-	db = mongo.db.reg_businesses
-	api = {}
-	y = 1
-	for i in range(2002,2018):
-		y+=1
-		year = "d"+str(y)
-		data = db.aggregate([{'$match': {"establishmentDate":{"$gt":datetime.datetime(i,1,1), "$lte":datetime.datetime(i+1,1,1)}}},{'$group': {"_id":"$status", "count":{"$sum":1}}}])
-		rr = {}
-		if len(data['result']) == 1:
-			if data['result'][0]['_id'] == "Aktiv":
-				data['result'].append({"_id":"Shuar","count":0})
-			else:
-				data['result'].append({"_id":"Aktiv","count":0})
-		res = {data['result'][0]['_id']:data['result'][0]['count'], data['result'][1]['_id']:data['result'][1]['count']}
-		api.update({year:res})
-	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    api = {}
+    y = 1
+    for i in range(2002, 2018):
+        y += 1
+        year = "d" + str(y)
+        data = mongo_utils.businesses_through_years(i)
+        if len(data['result']) == 1:
+            if data['result'][0]['_id'] == "Aktiv":
+                data['result'].append({"_id": "Shuar", "count": 0})
+            else:
+                data['result'].append({"_id": "Aktiv", "count": 0})
+        res = {
+                data['result'][0]['_id']: data['result'][0]['count'],
+                data['result'][1]['_id']: data['result'][1]['count']
+        }
+        api.update({year: res})
+    return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
 
 @mod_main.route('/businesses-type')
 def businesses_type():
-	db = mongo.db.reg_businesses
-	doc = db.aggregate([{'$group': {"_id" : "$type", "total": {"$sum": 1}}},{'$sort': {'total': -1}}])
-	api = { 'total': mongo.db.reg_businesses.count(), 'doc': doc }
-	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    doc = mongo_utils.business_type_count()
+    docs_count = mongo_utils.docs_count()
+    api = {'total': docs_count, 'doc': doc}
+    return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
 
 def set_activity(given_code):
-	activityDb = mongo.db.activities.find()
-	docs = {}
-	for activity in activityDb:
-		if str(given_code) == activity['code']:
-			docs = {
-				"code": given_code,
-				"activity": activity['activity']
-			}
-		else:
-			continue
-	return docs
+    activities_collection = mongo_utils.get_all_activities()
+    docs = {}
+    for activity in activities_collection:
+        if str(given_code) == activity['code']:
+            docs = {
+                "code": given_code,
+                "activity": activity['activity']
+            }
+        else:
+            continue
+    return docs
+
 
 @mod_main.route('/top_activities')
 def activities():
-	api1 = []
-	db = mongo.db.reg_businesses
-	data = db.aggregate([{'$unwind': "$activities"},{'$group': {"_id": "$activities",'totali': {'$sum': 1}}},{'$sort': {"totali": -1}}])
-	for each_act in data['result']:
-		doc = set_activity(each_act['_id'])
-		if len(doc) != 0:
-			api1.append({
-				"total_businesses": each_act['totali'],
-				"details": doc
-			})
-	finalAPI = {'activities': api1}
-	return Response(response=json_util.dumps(finalAPI), status=200, mimetype='application/json')
+    activity_items = []
+    businesses_activities = mongo_utils.get_most_used_activities()
+    for activity in businesses_activities['result']:
+        activity_set = set_activity(activity['_id'])
+        if len(activity_set) != 0:
+            activity_items.append({
+                "total_businesses": activity['totali'],
+                "details": activity_set
+            })
+    activities_api = {'activities': activity_items}
+    return Response(response=json_util.dumps(activities_api), status=200, mimetype='application/json')
+
 
 @mod_main.route('/active_inactive', methods=['GET', 'POST'])
 def active_inactive():
-	db = mongo.db.reg_businesses
-	docs = db.aggregate([{'$group': {"_id" : "$status","total": {"$sum": 1}}},{'$sort': {'total': -1}}])
-	api = {'total': mongo.db.reg_businesses.count(), 'docs': docs}
-	return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    docs = mongo_utils.get_total_by_status()
+    api = {
+            'total': mongo_utils.docs_count(),
+            'docs': docs
+    }
+    return Response(response=json_util.dumps(api), status=200, mimetype='application/json')

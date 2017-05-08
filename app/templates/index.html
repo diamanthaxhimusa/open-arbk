@@ -53,14 +53,14 @@
             <td>
                 <ul>
                     {% for owner in i['owners'] %}
-                        <li><a href="{{url_for('.profile', person=owner['name'], status='owner')}}">{{owner['name']}}</a></li>
+                        <li><a href="{{url_for('main.profile', person=owner['name'], status='owner')}}">{{owner['name']}}</a></li>
                     {% endfor %}
                 </ul>
             </td>
             <td>
                 <ul>
                     {% for authorized in i['authorized'] %}
-                        <li><a href="{{url_for('.profile', person=authorized['name'], status='authorized')}}">{{authorized['name']}}</a></li>
+                        <li><a href="{{url_for('main.profile', person=authorized['name'], status='authorized')}}">{{authorized['name']}}</a></li>
                     {% endfor %}
                 </ul>
             </td>
