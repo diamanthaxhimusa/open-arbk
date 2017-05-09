@@ -23,3 +23,45 @@
 .ksbk{
 	max-width: 100px
 }
+
+#header {
+    height: 400px;
+    background-color: #000;
+}
+
+.search-people-input {
+    margin-top: 30px;
+}
+
+#kind, #municipalities {
+  color: #fff!important;
+}
+
+#kind option, #municipalities option {
+  color: #000!important;
+}
+
+.custom-form-item {
+    height: 39px!important;
+    padding: 9px 18px!important;
+}
+.select-kind {
+    padding-left: 0px!important;
+}
+
+.filter-people-btn {
+    width: 100%;
+    background: transparent!important;
+    color: #fff!important;
+    height: 39px;
+    border-radius: 0px!important;
+    margin-top: 26px;
+}
+.filter-people-btn:hover {
+    background: #fff!important;
+    color: #000!important;
+}
+.search-people-input-btn {
+    margin-top: 30px;
+    padding-right: 0px!important;
+}

@@ -44,7 +44,7 @@ def profile(status, person):
         person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower)
     else:
         person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower)
-    return render_template('search.html', profile_data=person_data,
+    return render_template('profile.html', profile_data=person_data,
                            municipalities=municipalities, status=status, person=person)
 
 

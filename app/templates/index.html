@@ -1,34 +1,6 @@
 {% extends 'layout.html' %}
-{% block body %}
-<form class="form" method="POST">
-    <div class="row">
-        <div class="form-group col-xs-6">
-            <input type="text" class="form-control" id="search" name="search" placeholder="emri i zyrtarit/pronarit">
-        </div>
-        <div class="form-group col-xs-2">
-            <label>
-                <select class="form-control" name="person" id="poz">
-                    <option value="any" selected="selected">T&euml; gjitha</option>
-                    <option value="owner">Pronar&euml;</option>
-                    <option value="auth">Zyrtar&euml;</option>
-                </select>
-            </label>
-        </div>
-        <div class="form-group col-xs-3">
-            <label>
-                <select class="form-control" name="municipality" id="poz">
-                    <option value="any" selected="selected">T&euml; gjitha</option>
-                    {% for municipality in municipalities%}
-                    <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
-                    {% endfor %}
-                </select>
-            </label>
-        </div>
-        <div class="form-group col-xs-1">
-            <button type="submit" class="btn btn-default">Kerko</button>
-        </div>
-    </div>
-</form>
+{% block content %}
+
 
 <table class="table table-striped" id="searchTable">
     <thead>
@@ -70,8 +42,20 @@
 </table>
 
 <script type="text/javascript">
-$(document).ready( function () {
-$('#searchTable').DataTable();
-} );
+    $(document).ready( function () {
+        $('#searchTable').DataTable({
+        searching: false,
+        "language": {
+            "lengthMenu": "Të shfaqur  _MENU_  persona",
+            "zeroRecords": "Asgjë nuk u gjet!",
+            "info": "Faqja _PAGE_ nga _PAGES_",
+            "infoEmpty": "Nuk ka rezultate!",
+            "infoFiltered": "(filtruar nga _MAX_ totali i rezultateve)",
+            "paginate": {
+                "previous": "Prapa",
+                "next": "Para"
+            }
+        }});
+    });
 </script>
 {% endblock %}

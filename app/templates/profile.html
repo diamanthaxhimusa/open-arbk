@@ -44,13 +44,11 @@
     </header>
 
     <!-- Header -->
-    <div {% if request.path == url_for('main.index') %}class="header"{% endif %}
-         {% if request.path == url_for('main.visualization') %}class="visualization_header"{% endif %}>
+    <div class="header">
       <div class="bg-color">
         <div class="wrapper">
         <div class="container">
           <div class="row">
-            {% if request.path == url_for('main.index') %}
             <div class="banner-info text-center">
               <h2 class="bnr-sub-title">Kërko pronarë ose zyrtar në gjithë bizneset të Kosovës</h2>
               <div class="col-sm-10 col-sm-offset-1">
@@ -88,13 +86,6 @@
                 </form>
               </div>
             </div>
-            {% endif %}
-            {% if request.path == url_for('main.visualization') %}
-              <div class="banner-info text-center">
-                <h2 class="bnr-sub-title">Zbuloni gjendjen e bizneseve të Kosovës ndërvite</h2>
-                <p class="lead">Këtu mund të gjeni forma të ndryshme të visualizimeve ku tregojnë gjendjen e saktë të bizneseve të Kosovës, zbuloni se cilët jane top dhjetë bizneset me kapital më të madh, zbuloni aktivitetet të cilat shërbehen më së shumti nga bizneset, mundësi filtrimi për të marr informata më konkrete rreth bizneseve.</p>
-              </div>
-            {% endif %}
           </div>
         </div>
         </div>
@@ -104,11 +95,53 @@
     <!--Content -->
     <section id="service" class="section-padding wow fadeIn delay-05s">
       <div class="container">
-        <div class="row">
-            <h3 style="text-align:center;">Rezultatet:</h3>
-            {% block content %}
 
-            {% endblock %}
+        <div class="row">
+          <h3 style="text-align:center;">Rezultatet rreth {{person}}</h3>
+            <table class="table table-striped" id="searchTable">
+              <thead>
+                  <th>Emri i Biznesit</th>
+                  <th>Statusi i Biznesit</th>
+                  <th>Komuna</th>
+                  <th>Pronaret</th>
+                  <th>Te autorizuaret</th>
+              </thead>
+              <tbody>
+                  {% for i in profile_data %}
+                  <tr>
+                      <td>
+                          <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
+                      </td>
+                      <td>
+                      </td>
+                      <td>
+                      </td>
+                      <td>
+                        {% if status == 'owner' %}
+                            {{person}}
+                        {% else %}
+                          <ul>
+                            {% for owner in i['owners'] %}
+                                <li><a>{{owner['name']}}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if status == 'authorized' %}
+                            {{person}}
+                        {% else %}
+                          <ul>
+                            {% for auth in i['authorized'] %}
+                                <li><a>{{auth['name']}}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
           </div>
         </div>
       </div>
@@ -125,6 +158,24 @@
         </div>
       </div>
     </footer>
+
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('#searchTable').DataTable({
+        searching: false,
+        "language": {
+            "lengthMenu": "Të shfaqur  _MENU_  persona",
+            "zeroRecords": "Asgjë nuk u gjet!",
+            "info": "Faqja _PAGE_ nga _PAGES_",
+            "infoEmpty": "Nuk ka rezultate!",
+            "infoFiltered": "(filtruar nga _MAX_ totali i rezultateve)",
+            "paginate": {
+                "previous": "Prapa",
+                "next": "Para"
+            }
+        }});
+    });
+</script>
 
     <script src="{{ url_for('static', filename='js/jquery.easing.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
