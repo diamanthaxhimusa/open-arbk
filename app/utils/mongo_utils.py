@@ -77,6 +77,7 @@ class MongoUtils(object):
             {'$limit': 10}])
         return result
 
+
     # Businesses through years queries
     def businesses_through_years(self, iteration):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
@@ -86,12 +87,53 @@ class MongoUtils(object):
         return result
 
     # Businesses type
-    def business_type_count(self):
+    def get_biz_types_by_status(self, business_status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"status":business_status}},
+            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
+            {'$sort': {'total': -1}}
+        ])
+        return result
+
+    def get_biz_types_by_city(self, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city}},
+            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
+            {'$sort': {'total': -1}}
+        ])
+        return result
+    def get_biz_types_by_city_status(self, city, status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city, "status":status}},
+            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
+            {'$sort': {'total': -1}}
+        ])
+        return result
+    def get_biz_types_all(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
             {'$group': {"_id": "$type", "total": {"$sum": 1}}},
             {'$sort': {'total': -1}}
         ])
         return result
+    def get_count_biz_types_city(self, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+        {'$match': {"municipality.municipality":city}},
+        {'$count':"all"}
+        ])
+        return result
+    def get_count_biz_types_status(self, status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+        {'$match': {"status":status}},
+        {'$count':"all"}
+        ])
+        return result
+    def get_count_biz_types_city_status(self, status, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+        {'$match': {"municipality.municipality":city, "status":status}},
+        {'$count':"all"}
+        ])
+        return result
+
 
     # Top activities
     def get_most_used_activities(self):

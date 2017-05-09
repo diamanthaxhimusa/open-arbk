@@ -60,10 +60,10 @@ def visualization():
         if status == 'any' and city == 'any':
             top = mongo_utils.get_top_ten_by_capital()
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-        elif status is not 'any' and city == 'any':
+        elif status != 'any' and city == 'any':
             top = mongo_utils.get_top_ten_capital_by_status(status)
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-        elif status == 'any' and city is not 'any':
+        elif status == 'any' and city != 'any':
             top = mongo_utils.get_top_ten_capital_by_city(city)
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
         else:
@@ -94,11 +94,35 @@ def start_date():
 
 @mod_main.route('/businesses-type', methods=['GET', 'POST'])
 def businesses_type():
-    doc = mongo_utils.business_type_count()
-    docs_count = mongo_utils.docs_count()
-    api = {'total': docs_count, 'doc': doc}
-    return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-
+    if request.method == 'GET':
+        doc = mongo_utils.get_biz_types_all()
+        docs_count = mongo_utils.docs_count()
+        api = {'total': docs_count, 'doc': doc}
+        return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    if request.method == 'POST':
+        city = request.form['biz_city_id']
+        status = request.form['biz_status']
+        if status != 'any' and city == 'any':
+            docs_count = mongo_utils.get_count_biz_types_status(status)
+            doc = mongo_utils.get_biz_types_by_status(status)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        elif status == 'any' and city != 'any':
+            docs_count = mongo_utils.get_count_biz_types_city(city)
+            doc = mongo_utils.get_biz_types_by_city(city)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        elif status == 'any' and city == 'any':
+            docs_count = mongo_utils.docs_count()
+            doc = mongo_utils.get_biz_types_all()
+            api = {'total': docs_count, 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        else:
+            docs_count = mongo_utils.get_count_biz_types_city_status(status, city)
+            doc = mongo_utils.get_biz_types_by_city_status(city, status)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    return 'error'
 
 def set_activity(given_code):
     activities_collection = mongo_utils.get_all_activities()

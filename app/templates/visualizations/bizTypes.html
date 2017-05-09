@@ -1,0 +1,27 @@
+<form id="form-biz2" class="form-inline" method="POST">
+    <div class="form-group">
+        <label>
+            Statusi
+            <select class="form-control" name="biz_status" id="biz_status">
+                <option value="any" selected="selected">T&euml; gjitha</option>
+                <option>Aktiv</option>
+                <option>Shuar</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Komuna
+            <select class="form-control" name="biz_city_id" id="biz_city_id">
+                <option value="any">T&euml; gjitha</option>
+                {% for i in komunat %}
+                <option value="{{i['municipality']}}">{{i['municipality']}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <button type="button" id="getBizTypes" class="btn btn-default">Listo</button>
+    </div>
+</form>
+<div id="container" style="min-width: 310px; margin-top:30px !important; height: 400px; margin: 0 auto"></div>

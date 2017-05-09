@@ -1,16 +1,37 @@
 $(document).ready(function(){
-
   $.ajax({
       url: "/businesses-type",
       type: 'GET',
       success: function(data){
-        // $('#name').text(data.result[0]['_id']);
-        business_type(data)
+        proccesAPI(data);
       }
-  })
+  });
+  $('#getBizTypes').on('click', function() {
+      $.ajax({
+          data : {
+              biz_city_id : $('#biz_city_id').val(),
+              biz_status : $('#biz_status').val()
+          },
+          url: "/businesses-type",
+          type: 'POST',
+          success: function(data){
+              proccesAPI(data);
+          },
+          error: function(error) {
+          }
 
-
-  function business_type(data) {
+      });
+  });
+  function proccesAPI(data) {
+      emri = [];
+      vals = [];
+      for(var i=0; i<data.doc.result.length;i++){
+          emri.push(data.doc.result[i]['_id']);
+          vals.push(data.doc.result[i]['total'] / data.total * 100);
+      }
+      business_type(emri, vals);
+  }
+  function business_type(emri, vals) {
     Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -19,7 +40,7 @@ $(document).ready(function(){
             text: 'Numri total i bizneseve në bazë të llojeve të biznesit'
         },
         xAxis: {
-            type: 'category'
+            categories: emri
         },
         yAxis: {
             title: {
@@ -48,37 +69,7 @@ $(document).ready(function(){
         series: [{
             name: 'Brands',
             colorByPoint: true,
-            data: [{
-                name: data.doc.result[0]['_id'],
-                y: (data.doc.result[0]['total'] / data.total) * 100
-            }, {
-                name: data.doc.result[1]['_id'],
-                y: (data.doc.result[1]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[2]['_id'],
-              y: (data.doc.result[2]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[3]['_id'],
-              y: (data.doc.result[3]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[4]['_id'],
-              y: (data.doc.result[4]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[5]['_id'],
-              y: (data.doc.result[5]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[6]['_id'],
-              y: (data.doc.result[6]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[7]['_id'],
-              y: (data.doc.result[7]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[8]['_id'],
-              y: (data.doc.result[8]['total'] / data.total) * 100
-            }, {
-              name: data.doc.result[9]['_id'],
-              y: (data.doc.result[9]['total'] / data.total) * 100
-            }]
+            data: vals
         }]
     });
   }

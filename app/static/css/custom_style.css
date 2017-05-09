@@ -34,11 +34,11 @@
 }
 
 #kind, #municipalities {
-  color: #fff!important;
+  color:#67696c!important;
 }
 
 #kind option, #municipalities option {
-  color: #000!important;
+  color: #67696c!important;
 }
 
 .custom-form-item {

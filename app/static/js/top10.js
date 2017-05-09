@@ -2,8 +2,8 @@ function selectDist() {
     $('.test').html('')
     $.ajax({
         data : {
-            city_id : $('#city_id').val(),
-            status : $('#biz_status').val()
+            city_id : $('#municipality').val(),
+            status : $('#kind').val()
         },
         type : 'POST',
         url : '/visualization',
