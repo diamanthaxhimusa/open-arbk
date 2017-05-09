@@ -33,17 +33,30 @@
     margin-top: 30px;
 }
 
+#type, #places {
+    color: #fff!important;
+}
+
+#type option, #places option {
+    color: #000!important;
+}
+
+
 #kind, #municipalities {
-  color:#67696c!important;
+  color:#67696c;
 }
 
 #kind option, #municipalities option {
-  color: #67696c!important;
+  color: #67696c;
 }
 
-.custom-form-item {
+select.custom-form-item {
     height: 39px!important;
     padding: 9px 18px!important;
+
+}
+select.custom-form-item option {
+    color: #000!important;
 }
 .select-kind {
     padding-left: 0px!important;

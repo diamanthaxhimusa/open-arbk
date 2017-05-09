@@ -36,7 +36,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">Kërkimi</a></li>
               <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
-              <li><a href="#service">Harta</a></li>
+              <li {% if request.path == '/activitymap' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
             </ul>
           </div>
         </div>
@@ -65,16 +65,16 @@
                           </span>
                       </div>
                     <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
-                      <label for="kind">Zgjedh llojin:</label>
-                        <select id="kind" class="custom-form-item form-control" name="person">
-                            <option style="color: #fff;" value="any" selected="selected">Pronarë dhe Zyrtarë</option>
+                      <label for="type">Zgjedh llojin:</label>
+                        <select id="type" class="custom-form-item form-control" name="person">
+                            <option value="any" selected="selected">Pronarë dhe Zyrtarë</option>
                             <option value="owner">Pronarë</option>
                             <option value="auth">Zyrtarë</option>
                         </select>
                     </div>
                     <div class="search-people-input form-group col-md-4 col-xs-12">
-                      <label for="municipalities">Zgjedh komunën:</label>
-                        <select id="municipalities" class="custom-form-item form-control" name="municipality" id="poz">
+                      <label for="places">Zgjedh komunën:</label>
+                        <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
                             <option value="any" selected="selected">Gjithë Kosova</option>
                             {% for municipality in municipalities%}
                             <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
@@ -82,7 +82,7 @@
                         </select>
                     </div>
                     <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                        <button type="submit" class="btn btn-default filter-people-btn">Filtro</button>
+                        <button type="submit" class="btn btn-default filter-people-btn">Kërko</button>
                     </div>
                   </div>
                 </form>
@@ -95,6 +95,12 @@
                 <p class="lead">Këtu mund të gjeni forma të ndryshme të visualizimeve ku tregojnë gjendjen e saktë të bizneseve të Kosovës, zbuloni se cilët jane top dhjetë bizneset me kapital më të madh, zbuloni aktivitetet të cilat shërbehen më së shumti nga bizneset, mundësi filtrimi për të marr informata më konkrete rreth bizneseve.</p>
               </div>
             {% endif %}
+            {% if request.path == url_for('main.activity_map') %}
+              <div class="banner-info text-center">
+                <h2 class="bnr-sub-title">Harta</h2>
+                <p class="lead">Lorem ipsum dolor sit amet..</p>
+              </div>
+            {% endif %}
           </div>
         </div>
         </div>
@@ -105,7 +111,7 @@
     <section id="service" class="section-padding wow fadeIn delay-05s">
       <div class="container">
         <div class="row">
-            <h3 style="text-align:center;">Rezultatet:</h3>
+            {% if request.path == url_for('main.index') %}<h3 style="text-align:center;">Rezultatet:</h3>{% endif %}
             {% block content %}
 
             {% endblock %}

@@ -164,3 +164,8 @@ def active_inactive():
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
+
+@mod_main.route('/activitymap', methods=['GET', 'POST'])
+def activity_map():
+    return render_template('activity-map.html')
