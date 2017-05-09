@@ -50,13 +50,15 @@ def profile(status, person):
 
 @mod_main.route('/visualization', methods=['GET', 'POST'])
 def visualization():
-    komunat = mongo_utils.get_municipalities()
     if request.method == 'GET':
         top = mongo_utils.get_top_ten_by_capital()
+        komunat = mongo_utils.get_municipalities()
         return render_template('visualizations.html', top=top, komunat=komunat)
     if request.method == 'POST':
         city = request.form['city_id']
         status = request.form['status']
+        print city
+        print status
         if status == 'any' and city == 'any':
             top = mongo_utils.get_top_ten_by_capital()
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
@@ -123,6 +125,7 @@ def businesses_type():
             api = {'total': docs_count['result'][0]['all'], 'doc': doc}
             return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
+
 
 def set_activity(given_code):
     activities_collection = mongo_utils.get_all_activities()

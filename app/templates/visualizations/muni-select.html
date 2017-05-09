@@ -1,0 +1,6 @@
+<select class="form-control" name="city_id" id="municipalities">
+    <option value="any">T&euml; gjitha</option>
+    {% for i in komunat %}
+    <option value="{{i['municipality']}}">{{i['municipality']}}</option>
+    {% endfor %}
+</select>

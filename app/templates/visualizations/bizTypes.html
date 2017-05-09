@@ -14,8 +14,8 @@
             Komuna
             <select class="form-control" name="biz_city_id" id="biz_city_id">
                 <option value="any">T&euml; gjitha</option>
-                {% for i in komunat %}
-                <option value="{{i['municipality']}}">{{i['municipality']}}</option>
+                {% for j in komunat %}
+                <option value="{{j['municipality']}}">{{j['municipality']}}</option>
                 {% endfor %}
             </select>
         </label>

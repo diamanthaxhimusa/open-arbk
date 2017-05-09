@@ -1,5 +1,5 @@
-<div id="top" style="margin-top:30px">
-    <form id="form-biz3" class="form-inline" method="POST">
+<div class="" style="margin-top:30px">
+    <form id="form-donors-filter" class="form-inline" method="POST">
         <div class="form-group">
                 <label for="status">Statusi</label>
                 <select class="kind form-control" name="status" id="kind">
@@ -10,10 +10,13 @@
         </div>
         <div class="form-group">
             <label for="municipalities">Zgjedh komunën: </label>
-                <select class="form-control" name="city_id" id="municipalities">
+
+            {% set _stub = komunat.rewind() %}
+
+                <select class="form-control" name="city_id" id="municipality">
                     <option value="any">T&euml; gjitha</option>
                     {% for i in komunat %}
-                    <option value="{{i['municipality']}}">{{i['municipality']}}</option>
+                    <option value="{{i.municipality}}">{{i.municipality}}</option>
                     {% endfor %}
                 </select>
         </div>
