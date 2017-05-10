@@ -13,7 +13,6 @@ mod_main = Blueprint('main', __name__)
 def index():
     mongo_utils.index_create()
     municipalities = mongo_utils.get_municipalities()
-    result = mongo_utils.get_limit_businesses(100)
     if request.method == 'POST':
         search_keyword = request.form['search']
         keyword = search_keyword.lower()

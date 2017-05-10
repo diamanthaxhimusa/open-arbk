@@ -14,11 +14,15 @@ function selectDist() {
             '<th>Emri i Biznesit</th>'+
             '<th>Komuna</th>'+
             '<th>Statusi i Biznesit</th>'+
-            '<th>Kapitali</th>'+
+            '<th style="min-width: 168px;">Kapitali</th>'+
             '</thead>'+
             '<tbody>';
             var i = 1;
             $.each(response.result, function(key, val) {
+                var number = numeral(val.capital);
+                number.format();
+                numeral.defaultFormat('0,0.00');
+                var num = number.format();
                 data +='<tr>'+
                 '<td>'+i+'</td>'+
                 '<td id="topname"><a href='+val.arbkUrl+'>'+val.name+'</a>'+
@@ -27,7 +31,7 @@ function selectDist() {
                 '</td>'+
                 '<td class="ksbk">'+val.status+
                 '</td>'+
-                '<td class="ksbk">'+val.capital+
+                '<td class="ksbk">'+num+
                 '</td>'+
                 '</tr>';
                 i++
@@ -39,4 +43,9 @@ function selectDist() {
             console.log(error);
         }
     })
+    // Number.prototype.format = function(n, x) {
+    //     var re = '(\\d)(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    //     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$1,');
+    // };
+    // document.write(numbers[i].format(nn[i], xx[i]) + ' £');
 }
