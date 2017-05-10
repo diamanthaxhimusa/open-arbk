@@ -17,22 +17,26 @@ def index():
     if request.method == 'POST':
         search_keyword = request.form['search']
         keyword = search_keyword.lower()
-        search_person = request.form['person']
-        municipality = request.form['municipality']
-        if keyword == '':
+        status = request.form['person']
+        city = request.form['municipality']
+        if len(keyword) <= 2:
             result = mongo_utils.get_limit_businesses(100)
-        elif search_person == 'owner':
-            if municipality == 'any':
+        elif status == 'any' and city == 'any':
+            result = mongo_utils.get_by_owners_authorized(keyword)
+        elif status != 'any' and city == 'any':
+            if status == 'owner':
                 result = mongo_utils.get_people("slugifiedOwners", keyword)
             else:
-                result = mongo_utils.get_people_by_municipality("slugifiedOwners", keyword, municipality)
-        elif search_person == 'auth':
-            if municipality == 'any':
                 result = mongo_utils.get_people("slugifiedAuthorized", keyword)
+        elif status != 'any' and city != 'any':
+            if status == 'owner':
+                result = mongo_utils.get_people_by_municipality("slugifiedOwners", keyword, city)
             else:
-                result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", keyword, municipality)
+                result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", keyword, city)
+        elif status == 'any' and city != 'any':
+            result = mongo_utils.get_by_owners_authorized_municipality(keyword, city)
         else:
-            result = mongo_utils.get_by_owners_authorized(keyword)
+            result = mongo_utils.get_limit_businesses(100)
     return render_template('index.html', result=result, municipalities=municipalities)
 
 
@@ -169,3 +173,7 @@ def active_inactive():
 @mod_main.route('/activitymap', methods=['GET', 'POST'])
 def activity_map():
     return render_template('activity-map.html')
+@mod_main.route('/mapAPI', methods=['GET', 'POST'])
+def mapp():
+    agg = mongo_utils.map()
+    return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')

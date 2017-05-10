@@ -45,7 +45,11 @@ class MongoUtils(object):
             {'$or': [{"slugifiedOwners": {"$regex": keyword}},
                      {"slugifiedAuthorized": {"$regex": keyword}}]})
         return result
-
+    def get_by_owners_authorized_municipality(self, keyword, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {'$or': [{"slugifiedOwners": {"$regex": keyword}},
+                     {"slugifiedAuthorized": {"$regex": keyword}}], "municipality.municipality":municipality})
+        return result
     # Profile queries
     def get_profiles(self, people_type, person):
         result = self.mongo.db[self.reg_businesses_collection].find({people_type: {"$in": [person]}})
@@ -134,7 +138,10 @@ class MongoUtils(object):
         ])
         return result
 
-
+    # MAP Activities
+    def map(self):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([{'$group': {"_id":"$municipality.municipality", "count":{"$sum":1}}}])
+        return result
     # Top activities
     def get_most_used_activities(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
