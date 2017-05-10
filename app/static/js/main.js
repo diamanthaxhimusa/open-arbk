@@ -91,7 +91,7 @@ function active_inactive_chart(data){
               type: 'pie'
           },
           title: {
-              text: 'Numri i kompanive aktive dhe te shuara mes viteve 2000 - 2018'
+              text: 'Numri i kompanive aktive dhe te shuara mes viteve 2002 - 2018'
           },
           tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

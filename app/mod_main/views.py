@@ -177,3 +177,38 @@ def activity_map():
 def mapp():
     agg = mongo_utils.map()
     return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
+
+@mod_main.route('/gender_owners', methods=['GET', 'POST'])
+def gender_owners():
+    if request.method == 'GET':
+        docs = mongo_utils.get_total_by_gender()
+        total = mongo_utils.get_count_total_gender()
+        api = {
+        'total': total['result'][0]['all'],
+        'doc': docs
+        }
+        return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    if request.method == 'POST':
+        city = request.form['biz_city_id']
+        status = request.form['biz_status']
+        if status != 'any' and city == 'any':
+            docs_count = mongo_utils.get_count_gen_types_status(status)
+            doc = mongo_utils.get_gen_types_by_status(status)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        elif status == 'any' and city != 'any':
+            docs_count = mongo_utils.get_count_gen_types_city(city)
+            doc = mongo_utils.get_gen_types_by_city(city)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        elif status == 'any' and city == 'any':
+            docs_count = mongo_utils.get_count_total_gender()
+            doc = mongo_utils.get_total_by_gender()
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+        else:
+            docs_count = mongo_utils.get_count_gen_types_city_status(status, city)
+            doc = mongo_utils.get_gen_types_by_city_status(status, city)
+            api = {'total': docs_count['result'][0]['all'], 'doc': doc}
+            return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    return 'error'
