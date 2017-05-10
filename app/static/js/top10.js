@@ -31,7 +31,7 @@ function selectDist() {
                 '</td>'+
                 '<td class="ksbk">'+val.status+
                 '</td>'+
-                '<td class="ksbk">'+num+
+                '<td class="ksbk">'+num+'\u20ac'+
                 '</td>'+
                 '</tr>';
                 i++
