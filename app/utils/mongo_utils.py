@@ -140,10 +140,33 @@ class MongoUtils(object):
         return result
 
     # MAP Activities
-    def map(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([{'$group': {"_id":"$municipality.municipality", "count":{"$sum":1}}}])
+    def mapi(self, activity):
+        act = self.mongo.db[self.activities].find({"activity":activity})
+        munis = self.mongo.db[self.municipalities].find()
+        code = 0
+        for doc in act:
+            code = doc['code']
+        muni = []
+        for i in munis:
+            muni.append(i['municipality'])
+        result = {}
+        for i in muni:
+            res = self.mongo.db[self.reg_businesses_collection].aggregate([
+                {'$unwind': "$activities"},
+                {'$match': {"activities":int(code), "municipality.municipality":i}},
+                {'$count':"all"}
+            ])
+            try:
+                result.update({i:res['result'][0]['all']})
+            except Exception as e:
+                result.update({i:0})
         return result
-
+    def get_activities(self):
+        acts = self.mongo.db[self.activities].find()
+        activs = []
+        for act in acts:
+            activs.append(act['activity'])
+        return activs
     # activities queries
     def get_most_used_activities(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
@@ -236,7 +259,6 @@ class MongoUtils(object):
             {'$count':"all"}
         ])
         return result
-
     def get_gen_types_by_city_status(self, status, city):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
             {'$match': {"municipality.municipality":city, "status":status}},

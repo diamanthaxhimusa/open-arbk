@@ -42,7 +42,8 @@
 
     <!-- Header -->
     <div {% if request.path == url_for('main.index') %}class="header"{% endif %}
-         {% if request.path == url_for('main.visualization') %}class="visualization_header"{% endif %}>
+         {% if request.path == url_for('main.visualization') %}class="visualization_header"{% endif %}
+         {% if request.path == url_for('main.activity_map') %}class="map-header"{% endif %}>
       <div class="bg-color">
         <div class="wrapper">
         <div class="container">

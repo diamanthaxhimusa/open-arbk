@@ -4,6 +4,25 @@
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/kv/kv-all.js"></script>
 <script type="text/javascript" src="{{url_for('static', filename="js/activityMap.js")}}"></script>
-
-<div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 700px; margin: 0 auto"></div>
+<div class="container">
+    <div class="row">
+        <div class="con1" style="margin-top:30px;margin-bottom:20px;">
+            <h3 class="headers">Shtrirja e aktiviteteve n&euml; hart&euml;.</h3>
+            <form id="form-3" class="form-inline" method="POST">
+                <div class="form-group">
+                    <label for="status">Aktiviteti</label>
+                    <select class="kind form-control" name="status" id="activity_val" style="max-width:500px;">
+                        {% for i in activities%}
+                        <option>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="showActivities" class="btn btn-default">Listo</button>
+                </div>
+            </form>
+            <div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 700px; margin: 0 auto"></div>
+        </div>
+    </div>
+</div>
 {% endblock %}

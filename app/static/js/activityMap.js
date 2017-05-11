@@ -1,12 +1,4 @@
 $(document).ready(function() {
-    $.ajax({
-        url: "/mapAPI",
-        type: 'GET',
-        success: function(data){
-          proccesAPI(data);
-        }
-    });
-
     var data2 = [
         {//Prishtina
             "name": "Prishtinë",
@@ -84,8 +76,8 @@ $(document).ready(function() {
             "value": 24,
             "hc-key": "kv-7305"
         },
-        {//Vushtri
-            "name": "Vushtri",
+        {//Vushtrri
+            "name": "Vushtrri",
             "value": 24,
             "hc-key": "kv-7304"
         },
@@ -160,32 +152,42 @@ $(document).ready(function() {
             "hc-key": "kv-841"
         }
     ];
-    mapActs(data2);
-    // function proccesAPI(data) {
-    //     city = [];
-    //     var j = 0;
-    //     for(var i=0; i<data.length;i++){
-    //         // city.push([data2[i][0], data.result[i]['count']]);
-    //         j++
-    //     }
-    //     mapActs(city);
-    // }
+    $('#showActivities').on('click', function() {
+        $.ajax({
+            data : {
+                activity_name : $('#activity_val').val()
+            },
+            url: "/mapi",
+            type: 'POST',
+            success: function(data){
+                proccesAPI(data);
+            },
+            error: function(error) {
+            }
+
+        });
+    });
+    function proccesAPI(data) {
+        $.each(data2, function(key2, val2) {
+            $.each(data, function(key, val) {
+                if (key == val2.name) {
+                    val2.value = val;
+                }
+            });
+        });
+        mapActs(data2)
+    }
     function mapActs(data) {
         // Create the chart
         Highcharts.mapChart('mapContainer', {
             chart: {
                 map: 'countries/kv/kv-all'
             },
-
             title: {
-                text: 'Highmaps basic demo'
-            },
-
-            subtitle: {
-                text: 'Kosovo'
-            },
-
+               text: 'Harta e Kosovës'
+           },
             mapNavigation: {
+                enableMouseWheelZoom: false,
                 enabled: true,
                 buttonOptions: {
                     verticalAlign: 'bottom'
@@ -195,10 +197,9 @@ $(document).ready(function() {
             colorAxis: {
                 min: 0
             },
-
             series: [{
                 data: data,
-                name: 'Random data',
+                name: 'Biznese',
                 states: {
                     hover: {
                         color: '#BADA55'
@@ -206,10 +207,10 @@ $(document).ready(function() {
                 },
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}'
+                    format: '{point.options.name}'
                 },
                 tooltip: {
-                    pointFormat: '{point.name}'
+                    pointFormat: '{point.options.value}'
                 }
             }]
         });

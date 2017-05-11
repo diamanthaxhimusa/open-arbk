@@ -135,6 +135,12 @@ HEADER
     min-height: 520px;
     position: relative;
 }
+.map-header{
+	background: url('../img/people_bcg_blurred.jpg') no-repeat fixed;
+    background-size: cover;
+    min-height: 520px;
+    position: relative;
+}
 .bg-color
 {
     background-color: rgba(16, 16, 16, 0.61);

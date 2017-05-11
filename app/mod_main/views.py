@@ -200,12 +200,16 @@ def active_inactive():
 
 @mod_main.route('/activitymap', methods=['GET', 'POST'])
 def activity_map():
-    return render_template('activity-map.html')
-@mod_main.route('/mapAPI', methods=['GET', 'POST'])
-def mapp():
-    agg = mongo_utils.map()
-    return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
+    activities = mongo_utils.get_activities()
+    return render_template('activity-map.html', activities=activities)
 
+@mod_main.route('/mapi', methods=['GET', 'POST'])
+def mapi():
+    if request.method == 'POST':
+        activity = request.form['activity_name']
+        agg = mongo_utils.mapi(activity)
+        return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
+    return Response(response='hello', status=404, mimetype='application/json')
 @mod_main.route('/gender_owners', methods=['GET', 'POST'])
 def gender_owners():
     if request.method == 'GET':
