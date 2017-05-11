@@ -5,7 +5,9 @@
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
 <script src="{{ url_for('static', filename='js/top_activities.js') }}"></script>
-<script type="text/javascript" src="{{url_for('static', filename="js/top10.js")}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename="js/top10.js")}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/select_top_activities.js')}}"></script>
+
 <div class="con1" style="margin-top:30px">
     <h3 class="headers">Llojet e bizneseve</h3>
     {% include 'visualizations/bizTypes.html' %}

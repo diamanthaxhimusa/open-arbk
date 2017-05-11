@@ -1,4 +1,28 @@
-
-<select class="topAct" name="">
-</select>
-<div id="container4" style="min-width: 310px; margin-top:30px !important; height: 400px; max-width: 100%; margin: 0 auto">
+<form id="form-donors-filter" class="form-inline" method="POST">
+    <div class="form-group">
+            <label for="status">Statusi</label>
+            <select class="kind form-control" name="status" id="types">
+                <option value="any" selected="selected">T&euml; gjitha</option>
+                <option>Aktiv</option>
+                <option>Shuar</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="municipalities">Zgjedh komunën: </label>
+        {% set _stub = komunat.rewind() %}
+            <select class="form-control" name="city_id" id="municipalities">
+                <option value="any">T&euml; gjitha</option>
+                {% for i in komunat %}
+                <option value="{{i.municipality}}">{{i.municipality}}</option>
+                {% endfor %}
+            </select>
+    </div>
+    <div class="form-group">
+    <label for="no-activities">Zgjedh aktivitete: </label>
+    <select id="no-activities" class="topAct"></select>
+</div>
+    <div class="form-group">
+        <button type="button" onclick="selectActivities()" class="btn btn-default">Listo</button>
+    </div>
+</form>
+<div id="container4" style="min-width: 310px; margin-top:30px !important; height: 400px; max-width: 100%; margin: 0 auto"></div>

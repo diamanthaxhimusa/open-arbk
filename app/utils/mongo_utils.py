@@ -50,6 +50,7 @@ class MongoUtils(object):
             {'$or': [{"slugifiedOwners": {"$regex": keyword}},
                      {"slugifiedAuthorized": {"$regex": keyword}}], "municipality.municipality":municipality})
         return result
+
     # Profile queries
     def get_profiles(self, people_type, person):
         result = self.mongo.db[self.reg_businesses_collection].find({people_type: {"$in": [person]}})
@@ -81,7 +82,6 @@ class MongoUtils(object):
             {'$limit': 10}])
         return result
 
-
     # Businesses through years queries
     def businesses_through_years(self, iteration):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
@@ -106,6 +106,7 @@ class MongoUtils(object):
             {'$sort': {'total': -1}}
         ])
         return result
+
     def get_biz_types_by_city_status(self, city, status):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
             {'$match': {"municipality.municipality":city, "status":status}},
@@ -142,13 +143,39 @@ class MongoUtils(object):
     def map(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([{'$group': {"_id":"$municipality.municipality", "count":{"$sum":1}}}])
         return result
-    # Top activities
+
+    # activities queries
     def get_most_used_activities(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
             {'$unwind': "$activities"},
             {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
             {'$sort': {"totali": -1}}
         ])
+        return result
+
+    def get_activities_by_status(self, status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {'status': status}},
+            {'$unwind': "$activities"},
+            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
+            {'$sort': {"totali": -1}}
+        ])
+        return result
+
+    def get_activities_by_municipality(self, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {'municipality.municipality': city}},
+            {'$unwind': "$activities"},
+            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
+            {'$sort': {"totali": -1}}])
+        return result
+
+    def get_activities_by_status_municipality(self, status, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {'municipality.municipality': city, 'status': status}},
+            {'$unwind': "$activities"},
+            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
+            {'$sort': {"totali": -1}}])
         return result
 
     # Get total businesses by status

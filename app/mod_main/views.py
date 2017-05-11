@@ -131,7 +131,7 @@ def businesses_type():
     return 'error'
 
 
-def set_activity(given_code):
+def set_name_to_activities(given_code):
     activities_collection = mongo_utils.get_all_activities()
     docs = {}
     for activity in activities_collection:
@@ -145,19 +145,47 @@ def set_activity(given_code):
     return docs
 
 
-@mod_main.route('/top_activities', methods=['GET', 'POST'])
-def activities():
+def prepare_activity_api(activities_collection):
     activity_items = []
-    businesses_activities = mongo_utils.get_most_used_activities()
-    for activity in businesses_activities['result']:
-        activity_set = set_activity(activity['_id'])
+    for activity in activities_collection['result']:
+        activity_set = set_name_to_activities(activity['_id'])
         if len(activity_set) != 0:
             activity_items.append({
                 "total_businesses": activity['totali'],
                 "details": activity_set
             })
     activities_api = {'activities': activity_items}
-    return Response(response=json_util.dumps(activities_api), status=200, mimetype='application/json')
+    return activities_api
+
+
+@mod_main.route('/top_activities', methods=['GET', 'POST'])
+def activities():
+    if request.method == 'GET':
+        all_businesses_activities = mongo_utils.get_most_used_activities()
+        result = prepare_activity_api(all_businesses_activities)
+        return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+    elif request.method == 'POST':
+        city = request.form['city']
+        status = request.form['status']
+        if status == 'any' and city == 'any':
+            print "first"
+            business_activities = mongo_utils.get_most_used_activities()
+            result = prepare_activity_api(business_activities)
+            return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+        elif status != 'any' and city == 'any':
+            print 'second'
+            business_activities = mongo_utils.get_activities_by_status(status)
+            result = prepare_activity_api(business_activities)
+            return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+        elif status == 'any' and city != 'any':
+            business_activities = mongo_utils.get_activities_by_municipality(city)
+            result = prepare_activity_api(business_activities)
+            return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+        else:
+            business_activities = mongo_utils.get_activities_by_status_municipality(status, city)
+            result = prepare_activity_api(business_activities)
+            return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+    return "Error"
 
 
 @mod_main.route('/active_inactive', methods=['GET', 'POST'])
