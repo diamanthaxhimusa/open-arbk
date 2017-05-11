@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function (){
     var maxCount = 10;
     var data = {};
     getAPI(0);
