@@ -184,3 +184,64 @@ class MongoUtils(object):
             {'$group': {"_id": "$status", "total": {"$sum": 1}}},
             {'$sort':  {'total': -1}}])
         return result
+
+    #Get owners count by gender
+    def get_total_by_gender(self):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$unwind': "$owners"},
+            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
+            {'$sort': {"all":-1}}
+        ])
+        return result
+    def get_count_total_gender(self):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$unwind': "$owners"},
+            {'$count': "all"}
+        ])
+        return result
+    def get_count_gen_types_status(self, status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"status":status}},
+            {'$unwind': "$owners"},
+            {'$count':"all"}
+        ])
+        return result
+    def get_gen_types_by_status(self, status):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"status":status}},
+            {'$unwind': "$owners"},
+            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
+            {'$sort': {"all":-1}},
+        ])
+        return result
+    def get_count_gen_types_city(self, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city}},
+            {'$unwind': "$owners"},
+            {'$count':"all"}
+        ])
+        return result
+    def get_gen_types_by_city(self, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city}},
+            {'$unwind': "$owners"},
+            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
+            {'$sort': {"sum":-1}}
+        ])
+        return result
+    def get_count_gen_types_city_status(self, status, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city, "status":status}},
+            {'$unwind': "$owners"},
+            {'$count':"all"}
+        ])
+        return result
+
+    def get_gen_types_by_city_status(self, status, city):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"municipality.municipality":city, "status":status}},
+            {'$unwind': "$owners"},
+            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
+            {'$sort': {"sum":-1}}
+        ])
+        return result
