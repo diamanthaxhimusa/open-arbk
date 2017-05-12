@@ -170,7 +170,7 @@ HEADER
 {
 }
 .navbar-default {
-    background-color: transparent;
+    background-color: rgba(34, 34, 33, 0.93);
     border:0px;
     padding: 20px 0;
     transition: all 0.3s;
@@ -245,7 +245,7 @@ h2.bnr-sub-title
 {
     font-size: 32px;
     /*text-transform: uppercase;*/
-    padding: 20px 0px;
+    padding: 40px 0px;
     font-weight: 700;
 }
 .bnr-para
