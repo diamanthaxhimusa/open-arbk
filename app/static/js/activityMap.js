@@ -213,7 +213,8 @@ $(document).ready(function() {
             downloadJPEG: "Shkarko JPG",
             downloadPDF: "Shkarko PDF",
             downloadPNG: "Shkarko FOTO",
-            downloadSVG: "Shkarko SVG"
+            downloadSVG: "Shkarko SVG",
+            printChart: "Printo Grafikun"
         }
     });
 
@@ -247,10 +248,11 @@ $(document).ready(function() {
                 },
                 dataLabels: {
                     enabled: true,
+                    allowOverlap: true,
                     format: '{point.options.name}'
                 },
                 tooltip: {
-                    pointFormat: '{point.options.value}'
+                    pointFormat: '{point.options.name}: '+'{point.options.value}'
                 }
             }]
         });
