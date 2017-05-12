@@ -58,8 +58,14 @@ select.custom-form-item {
 select.custom-form-item option {
     color: #000!important;
 }
-.select-kind {
-    padding-left: 0px!important;
+
+@media (min-width:992px) {
+	.select-kind {
+		padding-left: 0px!important;
+	}
+	.search-people-input-btn {
+		padding-right: 0px!important;
+	}
 }
 
 .filter-people-btn {
@@ -76,5 +82,4 @@ select.custom-form-item option {
 }
 .search-people-input-btn {
     margin-top: 30px;
-    padding-right: 0px!important;
 }
