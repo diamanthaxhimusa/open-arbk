@@ -74,7 +74,7 @@ $(document).ready(function(){
     });
   }
 $.ajax({
-    url: "/active_inactive",
+    url: "/active-inactive",
     type: 'GET',
     success: function(data){
       // $('#name').text(data.result[0]['_id']);

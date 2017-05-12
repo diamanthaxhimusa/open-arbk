@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-      url: "/gender_owners",
+      url: "/gender-owners",
       type: 'GET',
       success: function(data){
           proccesAPI(data);
@@ -12,7 +12,7 @@ $(document).ready(function(){
               biz_city_id : $('#muni_gen').val(),
               biz_status : $('#stat_gen').val()
           },
-          url: "/gender_owners",
+          url: "/gender-owners",
           type: 'POST',
           success: function(data){
               proccesAPI(data);

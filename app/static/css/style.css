@@ -41,6 +41,26 @@ h1, h2, h3, h4, h5, h6{
 {
     padding: 10px 0px;
 }
+
+#dropdown-menu-first .glyphicon{
+    float: right;
+}
+#dropdown-menu-first{
+	min-width: 320px;
+	max-width: 400px;
+	white-space: normal;
+}
+#searchTable_wrapper{
+	width: 100%;
+	overflow: auto;
+}
+#activity_val{
+	max-height: 320px;
+	overflow-y: scroll;
+}
+#activity_val li a{
+	white-space: normal;
+}
 #loader {
   position: absolute;
   left: 50%;

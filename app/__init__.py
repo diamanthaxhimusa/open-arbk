@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 from flask.ext.pymongo import PyMongo
 from flask.ext.cors import CORS
 from app.utils.mongo_utils import MongoUtils
-
+from flask_basicauth import BasicAuth
 # Create MongoDB database object.
 mongo = PyMongo()
 
@@ -50,6 +50,11 @@ def load_config(app):
 
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
+
+    app.config['BASIC_AUTH_USERNAME'] = 'admin'
+    app.config['BASIC_AUTH_PASSWORD'] = 'qwe123'
+    app.config['BASIC_AUTH_FORCE'] = True
+    basic_auth = BasicAuth(app)
 
     # Logging path might be relative or starts from the root.
     # If it's relative then be sure to prepend the path with the application's root directory path.

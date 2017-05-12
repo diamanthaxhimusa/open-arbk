@@ -165,7 +165,7 @@ class MongoUtils(object):
         acts = self.mongo.db[self.activities].find()
         activs = []
         for act in acts:
-            activs.append(act['activity'])
+            activs.append({"activity":act['activity'],"code":act['code']})
         return activs
     # activities queries
     def get_most_used_activities(self):

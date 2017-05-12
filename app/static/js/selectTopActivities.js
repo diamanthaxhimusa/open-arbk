@@ -10,7 +10,7 @@ function selectActivities(){
         status : $('#types').val()
     },
     type : 'POST',
-    url : '/top_activities'
+    url : '/top-activities'
         }).done(function (dataAPI) {
                 data = dataAPI;
                 buildDropDown(dataAPI.activities.length);

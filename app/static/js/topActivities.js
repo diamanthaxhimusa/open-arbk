@@ -3,7 +3,7 @@ $(document).ready(function (){
     var data = {};
     getAPI(0);
     function getAPI(selected) {
-        $.getJSON('/top_activities', function (dataAPI) {
+        $.getJSON('/top-activities', function (dataAPI) {
         }).done(function (dataAPI) {
             data = dataAPI;
             buildDropDown(dataAPI.activities.length);

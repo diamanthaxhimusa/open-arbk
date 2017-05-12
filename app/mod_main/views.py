@@ -61,8 +61,6 @@ def visualization():
     if request.method == 'POST':
         city = request.form['city_id']
         status = request.form['status']
-        print city
-        print status
         if status == 'any' and city == 'any':
             top = mongo_utils.get_top_ten_by_capital()
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
@@ -158,7 +156,7 @@ def prepare_activity_api(activities_collection):
     return activities_api
 
 
-@mod_main.route('/top_activities', methods=['GET', 'POST'])
+@mod_main.route('/top-activities', methods=['GET', 'POST'])
 def activities():
     if request.method == 'GET':
         all_businesses_activities = mongo_utils.get_most_used_activities()
@@ -168,12 +166,10 @@ def activities():
         city = request.form['city']
         status = request.form['status']
         if status == 'any' and city == 'any':
-            print "first"
             business_activities = mongo_utils.get_most_used_activities()
             result = prepare_activity_api(business_activities)
             return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
         elif status != 'any' and city == 'any':
-            print 'second'
             business_activities = mongo_utils.get_activities_by_status(status)
             result = prepare_activity_api(business_activities)
             return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
@@ -188,7 +184,7 @@ def activities():
     return "Error"
 
 
-@mod_main.route('/active_inactive', methods=['GET', 'POST'])
+@mod_main.route('/active-inactive', methods=['GET', 'POST'])
 def active_inactive():
     docs = mongo_utils.get_total_by_status()
     api = {
@@ -198,19 +194,22 @@ def active_inactive():
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
 
-@mod_main.route('/activitymap', methods=['GET', 'POST'])
+@mod_main.route('/activity-map', methods=['GET', 'POST'])
 def activity_map():
     activities = mongo_utils.get_activities()
     return render_template('activity-map.html', activities=activities)
 
 @mod_main.route('/mapi', methods=['GET', 'POST'])
 def mapi():
+    if request.method == 'GET':
+        agg = mongo_utils.mapi("Aktivitetet e tjera p.k.t.")
+        return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     if request.method == 'POST':
         activity = request.form['activity_name']
         agg = mongo_utils.mapi(activity)
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     return Response(response='hello', status=404, mimetype='application/json')
-@mod_main.route('/gender_owners', methods=['GET', 'POST'])
+@mod_main.route('/gender-owners', methods=['GET', 'POST'])
 def gender_owners():
     if request.method == 'GET':
         docs = mongo_utils.get_total_by_gender()
