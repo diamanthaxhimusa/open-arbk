@@ -51,8 +51,8 @@ def load_config(app):
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
 
-    app.config['BASIC_AUTH_USERNAME'] = 'admin'
-    app.config['BASIC_AUTH_PASSWORD'] = 'qwe123'
+    app.config['BASIC_AUTH_USERNAME'] = config.get('Application', 'username')
+    app.config['BASIC_AUTH_PASSWORD'] = config.get('Application', 'password')
     app.config['BASIC_AUTH_FORCE'] = True
     basic_auth = BasicAuth(app)
 
