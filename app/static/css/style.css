@@ -721,27 +721,10 @@ contact
 	margin: auto;
 }
 
-#footer
-{
-    background-color: rgba(230, 230, 230, 0.7);
-}
-/*#footer-logo{
-    padding: 30px;
-}*/
-.footer-bottom a{
-	color: white;
-	text-decoration: none;
-}
 #dropSect{
 	width: 320px;
 	background-color: rgba(146, 152, 156, 0.59);
 	font-family: 'Fira Sans', sans-serif;
-}
-.footer-bottom{
-	text-align: center;
-	background-color: #343434;
-	color: white;
-	text-decoration: none;
 }
 .scrollToTop {
     position: fixed;
@@ -878,4 +861,70 @@ body{
     line-height: 22px;
     text-align: center;
 }
+}
+
+
+/* FOOTER
+---------------
+*/
+#footer
+{
+    background-color: rgba(230, 230, 230, 0.7);
+}
+#footer-logo{
+    margin: auto;
+}
+.footer-bottom a{
+	color: white;
+	text-decoration: none;
+}
+
+.footer-bottom{
+	text-align: center;
+	background-color: #343434;
+	color: white;
+	text-decoration: none;
+}
+
+.footCols{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.follow-us{
+	margin: auto;
+	display: inline-flex;;
+}
+.fb, .tw, .eM, .in{
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	border-radius: 100%;
+	background-color: #161d32;
+	vertical-align: middle;
+	margin: auto;
+	display: flex;
+}
+a .fb, a .tw, a .eM, a .in{
+	font-size: 25px;
+    margin: auto;
+    color: #fff;
+	text-decoration: none;
+}
+.follow-us i{
+	margin: auto;
+}
+#ndjekja{
+	font-size: 20px;
+	font-weight: 500;
+}
+#mission{
+	font-size: 20px;
+	font-weight: 500;
+}
+#footer a:hover{
+	text-decoration: none;
+}
+.social:hover{
+	background-color: #bfd730;
+	color: #161d32;
 }
