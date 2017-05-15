@@ -700,7 +700,25 @@ contact
 ***********************************/
 #footer
 {
-    padding: 20px 0px;
+    background-color: rgba(230, 230, 230, 0.7);
+}
+/*#footer-logo{
+    padding: 30px;
+}*/
+.footer-bottom a{
+	color: white;
+	text-decoration: none;
+}
+#dropSect{
+	width: 320px;
+	background-color: rgba(146, 152, 156, 0.59);
+	font-family: 'Fira Sans', sans-serif;
+}
+.footer-bottom{
+	text-align: center;
+	background-color: #343434;
+	color: white;
+	text-decoration: none;
 }
 .scrollToTop {
     position: fixed;

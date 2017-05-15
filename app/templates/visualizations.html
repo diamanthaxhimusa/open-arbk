@@ -8,35 +8,56 @@
 <script src="{{ url_for('static', filename='js/selectTopActivities.js') }}"></script>
 <script src="{{url_for('static', filename="js/top10.js")}}"></script>
 <script src="{{url_for('static', filename="js/genderStats.js")}}"></script>
-
-<div class="con1" style="margin-top:30px">
+<section id="bizKind">
+    <div class="con1" style="margin-top:30px">
     <h3 class="headers">Llojet e bizneseve</h3>
     {% include 'visualizations/bizTypes.html' %}
 </div>
+</section>
+
 <hr style="border-width: 3px;">
+
+<section id="thruYears">
 <div class="con2" style="margin-top:30px">
     <h3 class="headers">Bizneset sipas viteve</h3>
     <div id="container2" style="margin-top:30px !important; min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
+</section>
+
 <hr style="border-width: 3px;">
+
+<section id="top10$">
 <div class="con3" style="margin-top:30px">
     <h3 class="headers">Top 10 bizneset sipas kapitalit</h3>
     {% include 'visualizations/top10.html' %}
 </div>
+</section>
+
 <hr style="border-width: 3px;">
+<section id="top10Act">
 <div class="con5" style="margin-top:30px; margin-bottom: 50px;">
     <h3 class="headers">Top 10 aktivitetet që shërbehen nga bizneset</h3>
     {% include 'visualizations/topActivities.html'%}
 </div>
+</section>
+
 <hr style="border-width: 3px;">
+
+<section id="ActInact">
 <div class="con4" style="margin-top:30px">
     <h3 class="headers">Bizneset e shuara dhe aktive</h3>
     <div id="container3" style="min-width: 310px; margin-top:30px !important; height: 400px; max-width: 600px; margin: 0 auto">
 </div>
+</section>
+
 <hr style="border-width: 3px;">
+
+<section id="gender">
 <div class="con5" style="margin-top:30px; margin-bottom: 50px;">
     <h3 class="headers">Gjinia e Pronareve</h3>
     {% include 'visualizations/gender.html'%}
 </div>
+</section>
+
 <hr style="border-width: 3px;">
 {% endblock %}

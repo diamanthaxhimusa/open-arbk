@@ -100,6 +100,19 @@
               <div class="banner-info text-center">
                 <h2 class="bnr-sub-title">Zbuloni gjendjen e bizneseve të Kosovës ndërvite</h2>
                 <p class="lead">Këtu mund të gjeni forma të ndryshme të visualizimeve ku tregojnë gjendjen e saktë të bizneseve të Kosovës, zbuloni se cilët jane top dhjetë bizneset me kapital më të madh, zbuloni aktivitetet të cilat shërbehen më së shumti nga bizneset, mundësi filtrimi për të marr informata më konkrete rreth bizneseve.</p>
+                <div class="btn-group">
+                    <button type="button" id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sektori <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="width: 320px;">
+                        <li><a href="#bizKind">Llojet e bizneseve</a></li>
+                        <li><a href="#thruYears">Bizneset sipas viteve</a></li>
+                        <li><a href="#top10$">Top 10 bizneset sipas kapitalit</a></li>
+                        <li><a href="#top10Act">Top 10 aktivitetet që shërbehen nga bizneset</a></li>
+                        <li><a href="#ActInact">Bizneset e shuara dhe aktive</a></li>
+                        <li><a href="#gender">Gjinia e Pronareve</a></li>
+                    </ul>
+                </div>
               </div>
             {% endif %}
             {% if request.path == url_for('main.activity_map') %}
@@ -130,11 +143,17 @@
     <!-- Footer -->
     <footer id="footer">
       <div class="container">
-        <div class="row text-center">
-          <div>
-            Zhvilluar nga <a target="_blank" href="https://opendatakosovo.org/">Open Data Kosovo</a>
+        <div class="row" style="padding: 20px 0px;">
+            <div class="col-xs-12 col-sm-6">
+                <img src="{{url_for('static', filename='img/logo.png')}}" class="img-responsive" id="footer-logo" alt="">
+            </div>
+            <div class="col-xs-12 col-sm-6 text-center">
+                <span>Open Data Kosovo is a nonprofit organization that believes that opening data is essential in establishing good governance, government transparency, and accountability. This initiative promotes the idea that governance data should be made freely available for everyone to use and republished as they wish, without restrictions from copyright, patents or other mechanisms of control.</span>
+            </div>
         </div>
-        </div>
+      </div>
+      <div class="footer-bottom">
+          Zhvilluar nga <a target="_blank" href="https://opendatakosovo.org/">Open Data Kosovo</a>
       </div>
     </footer>
 
