@@ -28,7 +28,14 @@
                     </div>
                 </div>
             </form>
-            <div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 700px; margin: 0 auto"></div>
+            <div class="col-xs-12">
+                <div class="overllay">
+                    <div class="loader-gif">
+                        <img src="{{url_for('static', filename='img/preloader.gif')}}" alt="">
+                    </div>
+                </div>
+                <div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 700px; margin: 0 auto"></div>
+            </div>
         </div>
     </div>
 </div>

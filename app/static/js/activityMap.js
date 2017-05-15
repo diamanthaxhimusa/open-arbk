@@ -5,6 +5,7 @@ $(document).ready(function() {
         type: 'GET',
         success: function(data){
             proccesAPI(data);
+            $(".overllay").hide();
         },
         error: function(error) {
         }
@@ -18,8 +19,12 @@ function onActivitySelection(name) {
         },
         url: "/mapi",
         type: 'POST',
+        beforeSend: function(){
+           $(".overllay").show();
+        },
         success: function(data){
             proccesAPI(data);
+            $(".overllay").hide();
         },
         error: function(error) {
         }
