@@ -26,11 +26,15 @@ def index():
         elif status != 'any' and city == 'any':
             if status == 'owner':
                 result = mongo_utils.get_people("slugifiedOwners", keyword)
+            elif status == 'biz':
+                result = mongo_utils.get_people("name", keyword)
             else:
                 result = mongo_utils.get_people("slugifiedAuthorized", keyword)
         elif status != 'any' and city != 'any':
             if status == 'owner':
                 result = mongo_utils.get_people_by_municipality("slugifiedOwners", keyword, city)
+            elif status == 'biz':
+                result = mongo_utils.get_people_by_municipality("name", keyword, city)
             else:
                 result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", keyword, city)
         elif status == 'any' and city != 'any':

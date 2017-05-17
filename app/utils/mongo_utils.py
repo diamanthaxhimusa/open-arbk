@@ -43,7 +43,8 @@ class MongoUtils(object):
     def get_by_owners_authorized(self, keyword):
         result = self.mongo.db[self.reg_businesses_collection].find(
             {'$or': [{"slugifiedOwners": {"$regex": keyword}},
-                     {"slugifiedAuthorized": {"$regex": keyword}}]})
+                     {"slugifiedAuthorized": {"$regex": keyword}},
+                     {"name": {"$regex": keyword}}]})
         return result
     def get_by_owners_authorized_municipality(self, keyword, municipality):
         result = self.mongo.db[self.reg_businesses_collection].find(

@@ -884,6 +884,7 @@ body{
 }
 #footer-logo{
     margin: auto;
+	width: 150px;
 }
 .footer-bottom a{
 	color: white;
@@ -920,6 +921,7 @@ a .fb, a .tw, a .eM, a .inst{
     margin: auto;
     color: #fff;
 	text-decoration: none;
+    margin: 0px 5px !important;
 }
 .follow-us i{
 	margin: auto;
