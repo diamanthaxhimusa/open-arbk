@@ -161,6 +161,28 @@ class MongoUtils(object):
             except Exception as e:
                 result.update({i:0})
         return result
+    def mapi_status(self, activity, status):
+        act = self.mongo.db[self.activities].find({"activity":activity})
+        munis = self.mongo.db[self.municipalities].find()
+        code = 0
+        for doc in act:
+            code = doc['code']
+        muni = []
+        for i in munis:
+            muni.append(i['municipality'])
+        result = {}
+        for i in muni:
+            res = self.mongo.db[self.reg_businesses_collection].aggregate([
+                {'$unwind': "$activities"},
+                {'$match': {"activities":int(code), "municipality.municipality":i, "status":status}},
+                {'$count':"all"}
+            ])
+            try:
+                result.update({i:res['result'][0]['all']})
+            except Exception as e:
+                result.update({i:0})
+        return result
+
     def get_activities(self):
         acts = self.mongo.db[self.activities].find()
         activs = []

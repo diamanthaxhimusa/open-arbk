@@ -15,15 +15,27 @@
             <form id="form-3" class="form-inline" method="POST">
                 <div class="form-group">
                     <div class="dropdown" id="dropdown-first">
-                        <label for="status">Aktiviteti</label>
+                        <label for="activity" class="lbl-filter">Aktiviteti</label>
                         <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-first" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="selected-value"></span>
                             &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </button>
-                        <ul class="dropdown-menu kind" name="status" id="activity_val" style="max-width:500px;" aria-labelledby="dropdown-menu-first">
+                        <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:500px;" aria-labelledby="dropdown-menu-first">
                             {% for i in activities%}
                             <li><a href="javascript:onActivitySelection('{{ i['activity'] }}')">{{ i['code'] }} - {{ i['activity'] }}</a></li>
                             {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="dropdown" id="dropdown-second" style="margin-top: 10px;">
+                        <label for="status" class="lbl-filter">Statusi</label>
+                        <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="selected-value-status"></span>
+                            &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                        </button>
+                        <ul class="dropdown-menu acts" name="status" id="activity_val" style="max-width:500px;" aria-labelledby="dropdown-menu-second">
+                            <li><a href="javascript:onStatusSelection('T&euml; gjith&euml;')">T&euml; gjith&euml;</a></li>
+                            <li><a href="javascript:onStatusSelection('Aktiv')">Aktiv</a></li>
+                            <li><a href="javascript:onStatusSelection('Shuar')">Shuar</a></li>
                         </ul>
                     </div>
                 </div>

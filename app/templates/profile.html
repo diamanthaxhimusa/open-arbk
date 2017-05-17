@@ -54,7 +54,7 @@
               <div class="col-sm-10 col-sm-offset-1">
                 <form class="form" method="POST" action="{{ url_for('main.index') }}">
                   <div id="imaginary_container">
-                      <div class="input-group stylish-input-group">
+                      <div class="stylish-input-group form-group col-md-12 col-xs-12">
                           <input type="text" class="form-control" name="search"  placeholder="Sh&euml;no emrin..." >
                           <span class="input-group-addon">
                               <button type="submit">
@@ -116,8 +116,10 @@
                           <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
                       </td>
                       <td>
+                          {{i['status']}}
                       </td>
                       <td>
+                          {{i['municipality']['municipality']}}
                       </td>
                       <td>
                         {% if status == 'owner' %}
