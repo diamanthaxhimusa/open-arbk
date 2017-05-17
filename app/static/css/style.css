@@ -724,8 +724,10 @@ contact
 }
 
 #dropSect{
-	width: 320px;
-	background-color: rgba(146, 152, 156, 0.59);
+	background-color: transparent;
+    border-radius: 0px;
+    color: #fff!important;
+    border-color: #fff;
 	font-family: 'Fira Sans', sans-serif;
 }
 .scrollToTop {
@@ -809,6 +811,7 @@ Responsive media queries
 .navbar-default .navbar-brand {
     padding-left: 16px;
     margin-top: 0px;
+    font-size: 20px;
 }
 .banner-info {
     padding-top: 40px;
