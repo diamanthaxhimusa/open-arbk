@@ -113,6 +113,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .stylish-input-group .input-group-addon{
     background: transparent !important;
+	border-radius: 0px !important;
 }
 .stylish-input-group .form-control{
 	border-right:0;
@@ -125,6 +126,9 @@ h1, h2, h3, h4, h5, h6{
     border:0;
     background:transparent;
 		color: white;
+}
+.stylish-input-group{
+	display: table;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: #fff!important;
@@ -200,10 +204,8 @@ HEADER
     color: #fff;
 }
 .navbar-brand {
-    padding: 0px;
     font-size: 24px;
     text-transform: uppercase;
-    padding: 15px 0px;
     margin-top: 6px;
 }
 .navbar-default .navbar-nav > li > a
@@ -867,9 +869,9 @@ body{
 /* FOOTER
 ---------------
 */
-#footer
-{
+#footer{
     background-color: rgba(230, 230, 230, 0.7);
+	margin-top: 50px;
 }
 #footer-logo{
     margin: auto;
@@ -894,7 +896,7 @@ body{
 	margin: auto;
 	display: inline-flex;;
 }
-.fb, .tw, .eM, .in{
+.fb, .tw, .eM, .inst{
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -904,7 +906,7 @@ body{
 	margin: auto;
 	display: flex;
 }
-a .fb, a .tw, a .eM, a .in{
+a .fb, a .tw, a .eM, a .inst{
 	font-size: 25px;
     margin: auto;
     color: #fff;

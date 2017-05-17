@@ -59,14 +59,14 @@ select.custom-form-item option {
     color: #000!important;
 }
 
-@media (min-width:992px) {
+/*@media (min-width:992px) {
 	.select-kind {
 		padding-left: 0px!important;
 	}
 	.search-people-input-btn {
 		padding-right: 0px!important;
 	}
-}
+}*/
 
 .filter-people-btn {
     width: 100%;
