@@ -16,6 +16,7 @@ body {
 }
 ol, ul {
 	list-style: none;
+	padding-left: 0px;
 }
 blockquote, q {
 	quotes: none;
@@ -119,7 +120,6 @@ h1, h2, h3, h4, h5, h6{
 	border-radius: 0px !important;
 }
 .stylish-input-group .form-control{
-	border-right:0;
 	box-shadow:0 0 0;
 	border-color:#ccc;
 	font-size: 18px;

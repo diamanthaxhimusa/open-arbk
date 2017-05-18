@@ -265,16 +265,17 @@ function mapActs(data) {
                 verticalAlign: 'bottom'
             }
         },
-
         colorAxis: {
-            min: 0
+            min: 0,
+            minColor: '#77baff',
+            maxColor: '#274866'
         },
         series: [{
             data: data,
             name: 'Biznese',
             states: {
                 hover: {
-                    color: '#BADA55'
+                    color: '#a9dcec'
                 }
             },
             dataLabels: {

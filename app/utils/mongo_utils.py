@@ -22,34 +22,142 @@ class MongoUtils(object):
         result = self.mongo.db[self.reg_businesses_collection].create_index("formatted.slugifiedOwners", 1)
         return result
 
+    def get_docs_by_municipality(self, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"municipality.municipality": municipality})
+        return result
+    def search_biz_people_status_municipality(self, business, person, person_status, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"name": {"$regex": business}},
+            {person_status: {"$regex": person}},
+            {"municipality.municipality": municipality})
+        return result
+    def search_biz_people_status(self, business, person, status):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            status: {"$regex": person}})
+        return result
+    def search_biz_status_people_status_municipality(self, business, biz_status, person, person_status, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"name": {"$regex": business}},
+            {person_status: {"$regex": person}},
+            {"status": biz_status},
+            {"municipality.municipality": municipality})
+        return result
+    def search_biz_status_people_status(self, business, biz_status, person, person_status):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            person_status: {"$regex": person},
+            "status": biz_status})
+        return result
+    def search_biz_status_people_municipality(self, business, biz_status, person, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                    {"slugifiedAuthorized": {"$regex": person}}],
+            "status": biz_status,
+            "municipality.municipality": municipality})
+        return result
+    def search_biz_people_municipality(self, business, person, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}],
+            "municipality.municipality": municipality})
+        return result
+    def search_biz_status_people(self, business, biz_status, person):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}],
+            "status":biz_status})
+        return result
+    def search_biz_people(self, business, person):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}]})
+        return result
+
+    def search_people_status_municipality(self, person, status, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {status: {"$regex": person}},
+            {"municipality.municipality": municipality})
+        return result
+    def search_people_status(self, person, status):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            status: {"$regex": person}})
+        return result
+    def search_people_status_municipality_biz_stat(self, biz_status, person, person_status, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {status: {"$regex": person}},
+            {"status": biz_status},
+            {"municipality.municipality": municipality})
+        return result
+    def search_people_status_biz_stat(self, biz_status, person, person_status):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {status: {"$regex": person}},
+            {"status": biz_status})
+        return result
+    def search_people_municipality_biz_stat(self, biz_status, person, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                    {"slugifiedAuthorized": {"$regex": person}}],
+            "status": biz_status,
+            "municipality.municipality": municipality})
+        return result
+    def search_people_municipality(self, person, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}],
+            "municipality.municipality": municipality})
+        return result
+    def search_people_biz_stat(self, biz_status, person):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}],
+            "status":biz_status})
+        return result
+    def search_people(self, person):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            '$or': [{"slugifiedOwners": {"$regex": person}},
+                     {"slugifiedAuthorized": {"$regex": person}}]})
+        return result
+    def search_biz_by_status(self, business, biz_status):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+        {"name": {"$regex": business},
+        "status": biz_status})
+        return result
+
+
     def get_limit_businesses(self, num):
         result = self.mongo.db[self.reg_businesses_collection].find().limit(num)
         return result
-
     def get_municipalities(self):
         result = self.mongo.db[self.municipalities].find().sort("municipality", 1)
         return result
-
     def get_people(self, people_type, keyword):
         result = self.mongo.db[self.reg_businesses_collection].find({people_type: {"$regex": keyword}})
         return result
-
+    def get_biz_by_municipality_status(self, business, municipality, biz_status):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"name": {"$regex": business},
+             "municipality.municipality": municipality,
+             "status": biz_status})
+        return result
+    def get_biz_by_municipality(self, business, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"name": {"$regex": business},
+             "municipality.municipality": municipality})
+        return result
+    def get_biz(self, business):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"name": {"$regex": business}})
+        return result
     def get_people_by_municipality(self, people_type, keyword, municipality):
         result = self.mongo.db[self.reg_businesses_collection].find(
             {people_type: {"$regex": keyword},
              "municipality.municipality": municipality})
-        return result
-
-    def get_by_owners_authorized(self, keyword):
-        result = self.mongo.db[self.reg_businesses_collection].find(
-            {'$or': [{"slugifiedOwners": {"$regex": keyword}},
-                     {"slugifiedAuthorized": {"$regex": keyword}},
-                     {"name": {"$regex": keyword}}]})
-        return result
-    def get_by_owners_authorized_municipality(self, keyword, municipality):
-        result = self.mongo.db[self.reg_businesses_collection].find(
-            {'$or': [{"slugifiedOwners": {"$regex": keyword}},
-                     {"slugifiedAuthorized": {"$regex": keyword}}], "municipality.municipality":municipality})
         return result
 
     # Profile queries

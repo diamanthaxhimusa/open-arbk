@@ -9,38 +9,100 @@ reload(sys)
 mod_main = Blueprint('main', __name__)
 
 
+def search_engine(business, biz_status, person, person_status, municipality):
+    if business == "" and person == "":
+        result = mongo_utils.get_docs_by_municipality(municipality)
+        return result
+    elif business == "" and person != "":
+        if person_status == "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.search_people(person)
+        elif person_status == "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_people_municipality(person, municipality)
+        elif person_status == "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_people_biz_stat(biz_status, person)
+        elif person_status == "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_people_municipality_biz_stat(biz_status, person, municipality)
+        elif person_status != "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.search_people_status(person, person_status)
+            print person_status + "awda"
+        elif person_status != "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_people_status_municipality(person, person_status, municipality)
+        elif person_status != "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status)
+        elif person_status != "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality)
+        return result
+    elif business != "" and person == "":
+        if municipality == "any" and biz_status == "any":
+            result = mongo_utils.get_biz(business)
+        elif municipality == "any" and biz_status != "any":
+            result = mongo_utils.search_biz_by_status(business, biz_status)
+        elif municipality !="any" and biz_status == "any":
+            result = mongo_utils.get_biz_by_municipality(business, municipality)
+        elif municipality !="any" and biz_status != "any":
+            result = mongo_utils.get_biz_by_municipality_status(business, municipality, biz_status)
+        return result
+    elif business !="" and person != "":
+        if person_status == "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.search_biz_people(business, person)
+        elif person_status == "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_biz_people_municipality(business, person, municipality)
+        elif person_status == "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_biz_status_people(business, biz_status, person)
+        elif person_status == "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_biz_status_people_municipality(business, biz_status, person, municipality)
+        elif person_status != "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.search_biz_people_status(business, person, person_status)
+        elif person_status != "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_biz_people_status_municipality(business, person, person_status, municipality)
+        elif person_status != "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_biz_status_people_status(business, biz_status, person, person_status)
+        elif person_status != "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_biz_status_people_status_municipality(business, biz_status, person, person_status, municipality)
+        return result
+    else:
+        result = "erorr"
+    return result
+
 @mod_main.route('/', methods=['GET', 'POST'])
 def index():
     mongo_utils.index_create()
     municipalities = mongo_utils.get_municipalities()
     result = mongo_utils.get_limit_businesses(100)
     if request.method == 'POST':
-        search_keyword = request.form['search']
-        keyword = search_keyword.lower()
-        status = request.form['person']
+        search_keyword = request.form['person']
+        business_keyword = request.form['business']
+        # business = business_keyword.lower()
+        person = search_keyword.lower()
+        status = request.form['person_status']
         city = request.form['municipality']
-        if len(keyword) <= 2:
-            result = mongo_utils.get_limit_businesses(100)
-        elif status == 'any' and city == 'any':
-            result = mongo_utils.get_by_owners_authorized(keyword)
-        elif status != 'any' and city == 'any':
-            if status == 'owner':
-                result = mongo_utils.get_people("slugifiedOwners", keyword)
-            elif status == 'biz':
-                result = mongo_utils.get_people("name", keyword)
-            else:
-                result = mongo_utils.get_people("slugifiedAuthorized", keyword)
-        elif status != 'any' and city != 'any':
-            if status == 'owner':
-                result = mongo_utils.get_people_by_municipality("slugifiedOwners", keyword, city)
-            elif status == 'biz':
-                result = mongo_utils.get_people_by_municipality("name", keyword, city)
-            else:
-                result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", keyword, city)
-        elif status == 'any' and city != 'any':
-            result = mongo_utils.get_by_owners_authorized_municipality(keyword, city)
+        biz_status = request.form['biz_status']
+        person_status = ""
+        if status == "auth":
+            person_status = "slugifiedAuthorized"
+        elif status == "owner":
+            person_status = "slugifiedOwners"
         else:
-            result = mongo_utils.get_limit_businesses(100)
+            person_status = "any"
+        result = search_engine(business_keyword, biz_status, person, status, city)
+        # if len(person) <= 2 and len(business) <2:
+            # result = mongo_utils.get_limit_businesses(100)
+            # elif status == 'any' and city == 'any':
+            #     result = mongo_utils.get_by_owners_authorized(person)
+            # elif status != 'any' and city == 'any':
+            #     if status == 'owner':
+            #         result = mongo_utils.get_people("slugifiedOwners", person)
+            #     else:
+            #         result = mongo_utils.get_people("slugifiedAuthorized", person)
+            # elif status != 'any' and city != 'any':
+            #     if status == 'owner':
+            #         result = mongo_utils.get_people_by_municipality("slugifiedOwners", person, city)
+            #     else:
+            #         result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", person, city)
+            # elif status == 'any' and city != 'any':
+            #     result = mongo_utils.get_by_owners_authorized_municipality(person, city)
+            # else:
+            #     result = mongo_utils.get_limit_businesses(100)
     return render_template('index.html', result=result, municipalities=municipalities)
 
 
@@ -251,3 +313,8 @@ def gender_owners():
             api = {'total': docs_count['result'][0]['all'], 'doc': doc}
             return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
+
+@mod_main.route('/download', methods=['GET', 'POST'])
+def download():
+    cursor = mongo_utils.get_limit_businesses(100)
+    return render_template('downloads.html', cursor=json_util.dumps(cursor))
