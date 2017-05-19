@@ -258,6 +258,22 @@ function mapActs(data) {
         title: {
            text: ''
        },
+       legend: {
+            title: {
+                text: 'Numri i bizneseve',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            },
+            align: 'right',
+            verticalAlign: 'bottom',
+            floating: true,
+            layout: 'vertical',
+            valueDecimals: 0,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+            symbolRadius: 0,
+            symbolHeight: 14
+        },
         mapNavigation: {
             enableMouseWheelZoom: false,
             enabled: true,
@@ -266,16 +282,36 @@ function mapActs(data) {
             }
         },
         colorAxis: {
-            min: 0,
-            minColor: '#77baff',
-            maxColor: '#274866'
+            // minColor: '#fff',
+            // maxColor: '#274866',
+            dataClasses: [{
+                                to: 3
+                            }, {
+                                from: 3,
+                                to: 10
+                            }, {
+                                from: 10,
+                                to: 30
+                            }, {
+                                from: 30,
+                                to: 100
+                            }, {
+                                from: 100,
+                                to: 300
+                            }, {
+                                from: 300,
+                                to: 1000
+                            }, {
+                                from: 1000
+                        }]
         },
         series: [{
             data: data,
             name: 'Biznese',
+            nullColor: 'white',
             states: {
                 hover: {
-                    color: '#a9dcec'
+                    color: '#2bb9ae'
                 }
             },
             dataLabels: {

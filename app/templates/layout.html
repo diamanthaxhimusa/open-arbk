@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="{{url_for('static', filename='js/search.js')}}"></script>
   </head>
   <body>
     <!-- Navbar -->
@@ -64,12 +65,12 @@
             <div class="banner-info text-center">
                 <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
                 <div class="col-sm-10 col-sm-offset-1">
-                     <form class="form" method="POST" action="{{ url_for('main.index') }}">
+                     <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">
                       <div id="imaginary_container">
                         <div class="row">
                             <div class="stylish-input-group form-group col-md-8 col-xs-12">
                                  <label for="places">K&euml;rko biznesin:</label>
-                                <input type="text" class="form-control" name="business"  placeholder="Sh&euml;no emrin e biznesit" >
+                                <input type="text" class="form-control" name="business" id="biz-search-field" placeholder="Sh&euml;no emrin e biznesit" >
                             </div>
                             <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
                                 <label for="type">Statusi i Biznesit:</label>
@@ -83,7 +84,7 @@
                         <div class="row">
                             <div class="stylish-input-group form-group col-md-8 col-xs-12">
                                  <label for="places">K&euml;rko personin:</label>
-                                <input type="text" class="form-control" name="person"  placeholder="Sh&euml;no emrin e personit" >
+                                <input type="text" class="form-control" name="person" id="person-search-field" placeholder="Sh&euml;no emrin e personit" >
                             </div>
                             <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
                                 <label for="type">Zgjedh llojin:</label>
@@ -104,7 +105,7 @@
                             </select>
                         </div>
                         <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                            <button type="submit" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
+                            <button onclick="search()" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
                         </div>
                       </div>
                      </form>
