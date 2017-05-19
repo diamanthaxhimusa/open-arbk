@@ -49,6 +49,13 @@ h1, h2, h3, h4, h5, h6{
 .acts{
 	z-index: 1001
 }
+#pick-muni-lbl{
+	position: absolute;
+	white-space: nowrap;
+	top: -26px;
+	left: 0;
+	right: 0;
+}
 #dropdown-menu-first{
 	min-width: 320px;
 	max-width: 400px;
@@ -121,7 +128,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .stylish-input-group .form-control{
 	box-shadow:0 0 0;
-	border-color:#ccc;
+	border-color:#fff;
 	font-size: 18px;
 	height: 47px;
 }

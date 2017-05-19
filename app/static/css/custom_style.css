@@ -29,11 +29,7 @@
     background-color: #000;
 }
 
-.search-people-input {
-    margin-top: 30px;
-}
-
-#type, #places {
+#type, #places, #biz_status {
     color: #fff!important;
 }
 
@@ -51,9 +47,12 @@
 }
 
 select.custom-form-item {
-    height: 39px!important;
+    height: 47px!important;
     padding: 9px 18px!important;
 
+}
+.btn-default{
+	border-color: #fff !important;
 }
 select.custom-form-item option {
     color: #000!important;

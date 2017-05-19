@@ -38,11 +38,11 @@ class MongoUtils(object):
             status: {"$regex": person}})
         return result
     def search_biz_status_people_status_municipality(self, business, biz_status, person, person_status, municipality):
-        result = self.mongo.db[self.reg_businesses_collection].find(
-            {"name": {"$regex": business}},
-            {person_status: {"$regex": person}},
-            {"status": biz_status},
-            {"municipality.municipality": municipality})
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "name": {"$regex": business},
+            person_status: {"$regex": person},
+            "status": biz_status,
+            "municipality.municipality": municipality})
         return result
     def search_biz_status_people_status(self, business, biz_status, person, person_status):
         result = self.mongo.db[self.reg_businesses_collection].find({
@@ -89,14 +89,14 @@ class MongoUtils(object):
             status: {"$regex": person}})
         return result
     def search_people_status_municipality_biz_stat(self, biz_status, person, person_status, municipality):
-        result = self.mongo.db[self.reg_businesses_collection].find(
-            {status: {"$regex": person}},
-            {"status": biz_status},
-            {"municipality.municipality": municipality})
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            person_status: {"$regex": person},
+            "status": biz_status,
+            "municipality.municipality": municipality})
         return result
     def search_people_status_biz_stat(self, biz_status, person, person_status):
         result = self.mongo.db[self.reg_businesses_collection].find(
-            {status: {"$regex": person}},
+            {person_status: {"$regex": person}},
             {"status": biz_status})
         return result
     def search_people_municipality_biz_stat(self, biz_status, person, municipality):

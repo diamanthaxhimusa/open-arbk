@@ -12,7 +12,6 @@ mod_main = Blueprint('main', __name__)
 def search_engine(business, biz_status, person, person_status, municipality):
     if business == "" and person == "":
         result = mongo_utils.get_docs_by_municipality(municipality)
-        return result
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people(person)
@@ -24,10 +23,10 @@ def search_engine(business, biz_status, person, person_status, municipality):
             result = mongo_utils.search_people_municipality_biz_stat(biz_status, person, municipality)
         elif person_status != "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people_status(person, person_status)
-            print person_status + "awda"
         elif person_status != "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality(person, person_status, municipality)
         elif person_status != "any" and biz_status != "any" and municipality == "any":
+            print 'awdadw'
             result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status)
         elif person_status != "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality)
@@ -84,7 +83,7 @@ def index():
             person_status = "slugifiedOwners"
         else:
             person_status = "any"
-        result = search_engine(business_keyword, biz_status, person, status, city)
+        result = search_engine(business_keyword, biz_status, person, person_status, city)
         # if len(person) <= 2 and len(business) <2:
             # result = mongo_utils.get_limit_businesses(100)
             # elif status == 'any' and city == 'any':
