@@ -20,9 +20,9 @@ db = client['arbk']
 
 for year in range(2002,2018):
     query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
-    cmd="mongoexport -d arbk -c reg_businesses -q '%s' --type=csv --fields registrationNum,name,status,owners,authorized,capital,municipality.municipality,municipality.place,arbkUrl,activities --out app/static/downloads/arbk-%s.csv"%(query,year)
-    print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
     cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
+    print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
+    cmd="mongoexport -d arbk -c reg_businesses -q '%s' --type=csv --fields registrationNum,name,status,owners,authorized,capital,municipality.municipality,municipality.place,arbkUrl,activities --out app/static/downloads/arbk-%s.csv"%(query,year)
     print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
     # cursor = download_biz_by_year(year)
     # filename = 'app/static/downloads/arbk-%s.json'%year
