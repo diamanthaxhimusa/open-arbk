@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, Response, request
-from app import mongo_utils
+from flask import Blueprint, render_template, Response, request, send_file, send_from_directory
+from app import mongo_utils, download_folder
 from bson import json_util
-import sys
+import sys, csv, json
 reload(sys)
 
 mod_main = Blueprint('main', __name__)
@@ -84,26 +84,7 @@ def index():
         else:
             person_status = "any"
         result = search_engine(business_keyword, biz_status, person, person_status, city)
-        # if len(person) <= 2 and len(business) <2:
-            # result = mongo_utils.get_limit_businesses(100)
-            # elif status == 'any' and city == 'any':
-            #     result = mongo_utils.get_by_owners_authorized(person)
-            # elif status != 'any' and city == 'any':
-            #     if status == 'owner':
-            #         result = mongo_utils.get_people("slugifiedOwners", person)
-            #     else:
-            #         result = mongo_utils.get_people("slugifiedAuthorized", person)
-            # elif status != 'any' and city != 'any':
-            #     if status == 'owner':
-            #         result = mongo_utils.get_people_by_municipality("slugifiedOwners", person, city)
-            #     else:
-            #         result = mongo_utils.get_people_by_municipality("slugifiedAuthorized", person, city)
-            # elif status == 'any' and city != 'any':
-            #     result = mongo_utils.get_by_owners_authorized_municipality(person, city)
-            # else:
-            #     result = mongo_utils.get_limit_businesses(100)
     return render_template('index.html', result=result, municipalities=municipalities)
-
 
 @mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])
 def profile(status, person):
@@ -115,7 +96,6 @@ def profile(status, person):
         person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower)
     return render_template('profile.html', profile_data=person_data,
                            municipalities=municipalities, status=status, person=person)
-
 
 @mod_main.route('/visualization', methods=['GET', 'POST'])
 def visualization():
@@ -139,7 +119,6 @@ def visualization():
             top = mongo_utils.get_top_ten_capital_by_city_status(status, city)
             return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
-
 @mod_main.route('/through-years', methods=['GET', 'POST'])
 def start_date():
     api = {}
@@ -159,7 +138,6 @@ def start_date():
         }
         api.update({year: res})
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-
 
 @mod_main.route('/businesses-type', methods=['GET', 'POST'])
 def businesses_type():
@@ -193,7 +171,6 @@ def businesses_type():
             return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
 
-
 def set_name_to_activities(given_code):
     activities_collection = mongo_utils.get_all_activities()
     docs = {}
@@ -207,7 +184,6 @@ def set_name_to_activities(given_code):
             continue
     return docs
 
-
 def prepare_activity_api(activities_collection):
     activity_items = []
     for activity in activities_collection['result']:
@@ -219,7 +195,6 @@ def prepare_activity_api(activities_collection):
             })
     activities_api = {'activities': activity_items}
     return activities_api
-
 
 @mod_main.route('/top-activities', methods=['GET', 'POST'])
 def activities():
@@ -248,7 +223,6 @@ def activities():
             return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     return "Error"
 
-
 @mod_main.route('/active-inactive', methods=['GET', 'POST'])
 def active_inactive():
     docs = mongo_utils.get_total_by_status()
@@ -257,7 +231,6 @@ def active_inactive():
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-
 
 @mod_main.route('/activity-map', methods=['GET', 'POST'])
 def activity_map():
@@ -314,6 +287,9 @@ def gender_owners():
     return 'error'
 
 @mod_main.route('/download', methods=['GET', 'POST'])
-def download():
-    cursor = mongo_utils.get_limit_businesses(100)
-    return render_template('downloads.html', cursor=json_util.dumps(cursor))
+def download_page():
+    return render_template('downloads.html')
+
+@mod_main.route('/download/<string:doc_type>/<string:year>', methods=['GET'])
+def download_doc_year(doc_type, year):
+    return send_from_directory(download_folder, "arbk-%s.%s"%(year,doc_type), as_attachment=True)

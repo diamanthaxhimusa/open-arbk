@@ -4,6 +4,177 @@
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/kv/kv-all.js"></script>
 <script type="text/javascript" src="{{url_for('static', filename="js/activityMap.js")}}"></script>
+<script  src="{{url_for('static', filename="js/papaparse.min.js")}}">
+</script>
+<script type="text/javascript">
+var data2 = [
+    {//Prishtina
+        "name": "Prishtinë",
+        "value": 0,
+        "hc-key": "kv-7310",
+        "id": 0
+    },
+    {//Gjilani
+        "name": "Gjilan",
+        "value": 0,
+        "hc-key": "kv-842"
+    },
+    {//Prizereni
+        "name": "Prizren",
+        "value": 0,
+        "hc-key": "kv-843"
+    },
+    {
+        "name": "Ferizaj",
+        "value": 0,
+        "hc-key": "kv-7324"
+    },
+    {
+        "name": "Lipjan",
+        "value": 0,
+        "hc-key": "kv-7311"
+    },
+    {
+        "name": "Podujevë",
+        "value": 0,
+        "hc-key": "kv-7309"
+    },
+    {
+        "name": "Obiliq",
+        "value": 0,
+        "hc-key": "kv-7308"
+    },
+    {
+        "name": "Gllogoc",
+        "value": 0,
+        "hc-key": "kv-7307"
+    },
+    {
+        "name": "Malishevë",
+        "value": 0,
+        "hc-key": "kv-7317"
+    },
+    {
+        "name": "Gjakovë",
+        "value": 0,
+        "hc-key": "kv-7321"
+    },
+    {
+        "name": "Rahovec",
+        "value": 0,
+        "hc-key": "kv-7322"
+    },
+    {
+        "name": "Klinë",
+        "value": 0,
+        "hc-key": "kv-7319"
+    },
+    {
+        "name": "Deçan",
+        "value": 0,
+        "hc-key": "kv-7320"
+    },
+    {
+        "name": "Istog",
+        "value": 0,
+        "hc-key": "kv-7318"
+    },
+    {//Skenderaj
+        "name": "Skënderaj",
+        "value": 0,
+        "hc-key": "kv-7305"
+    },
+    {//Vushtrri
+        "name": "Vushtrri",
+        "value": 0,
+        "hc-key": "kv-7304"
+    },
+    {//Artanë
+        "name": "Novobërdë",
+        "value": 0,
+        "hc-key": "kv-7313"
+    },
+    {//kamenice
+        "name": "Kamenicë",
+        "value": 0,
+        "hc-key": "kv-7314"
+    },
+    {//Mitrovice
+        "name": "Mitrovicë",
+        "value": 0,
+        "hc-key": "kv-7303"
+    },
+    {//Suharek
+        "name": "Suhareka",
+        "value": 0,
+        "hc-key": "kv-7316"
+    },
+    { //shtime
+        "name": "Shtime",
+        "value": 0,
+        "hc-key": "kv-7323"
+    },
+    { //Vitia
+        "name": "Viti",
+        "value":0,
+        "hc-key": "kv-7312"
+    },
+    { // Shterpce
+        "name": "Shtërpcë",
+        "value": 0,
+        "hc-key": "kv-7325"
+    },
+    { // Kaqanik
+        "name": "Kaçanik",
+        "value": 0,
+        "hc-key": "kv-7326"
+    },
+    {
+        "name": "Zveçan",
+        "value": 0,
+        "hc-key": "kv-844"
+    },
+    {
+        "name": "Leposaviq",
+        "value": 0,
+        "hc-key": "kv-7302"
+    },
+    {
+        "name": "Zubin Potok",
+        "value": 0,
+        "hc-key": "kv-7306"
+    },
+    {
+        "name": "Fushë Kosovë",
+        "value": 0,
+        "hc-key": "kv-845"
+    },
+    {
+        "name": "Dragash",
+        "value": 0,
+        "hc-key": "kv-7315"
+    },
+    {
+        "name": "Pejë",
+        "value": 0,
+        "hc-key": "kv-841"
+    }
+];
+
+// Parse CSV string
+// var data = Papa.parse(data2);
+
+// // Convert back to CSV
+var csv = Papa.unparse(data2);
+console.log(csv);
+// Parse local CSV file
+// Papa.parse(file, {
+// complete: function(results) {
+//     console.log("Finished:", results.data);
+// }
+// });
+
+</script>
 <div class="container">
     <div class="row">
         <div class="alert alert-danger alert-dismissible" role="alert">

@@ -142,6 +142,7 @@ def main():
                 epl_nr = doc['formatted']['employeeCount']
         except Exception as e:
             pass
+        slug_company = slug_data(slugified_company_string)
         db.reg_businesses.insert({
         "registrationNum": reg_num,
         "type": buss_type,
@@ -156,6 +157,7 @@ def main():
         "establishmentDate": establishmentDate,
         "owners": gender_owners,
         "name": slugified_company_string,
+        "slugifiedBusiness": slug_company,
         "slugifiedAuthorized": slug_auth,
         "authorized": gen_auth,
         "municipality": city,

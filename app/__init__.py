@@ -6,11 +6,15 @@ from flask.ext.pymongo import PyMongo
 from flask.ext.cors import CORS
 from app.utils.mongo_utils import MongoUtils
 from flask_basicauth import BasicAuth
+from os.path import join, dirname, realpath
 # Create MongoDB database object.
 mongo = PyMongo()
 
 #Initialize mongo access point
 mongo_utils = MongoUtils(mongo)
+
+#Downloads folder
+download_folder = join(dirname(realpath(__file__)),'static/downloads/')
 
 def create_app():
     # Here we  create flask instance

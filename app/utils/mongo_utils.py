@@ -9,6 +9,9 @@ class MongoUtils(object):
         self.municipalities = 'municipalities'
         self.activities = 'activities'
 
+    def get_all_docs(self):
+        result = self.mongo.db[self.reg_businesses_collection].find()
+        return result
     def docs_count(self):
         result = self.mongo.db[self.reg_businesses_collection].count()
         return result
