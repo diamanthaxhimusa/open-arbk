@@ -1,14 +1,19 @@
 from pymongo import MongoClient
-import os, os.path, re, json, datetime, sys, csv
-import time
-import subprocess
-import shutil
-
+import os, os.path, re, json, datetime, sys, csv, time, subprocess, shutil
+from bson import json_util
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
+
+if not os.path.exists('app/static/downloads'):
+    try:
+        print 'creating downloads folder'
+        os.makedirs('app/static/downloads')
+    except OSError as exc: # Guard against race condition
+        if exc.errno != errno.EEXIST:
+            raise
 
 # DOWNLOADS
 def download_biz_by_year( year):
@@ -18,17 +23,6 @@ def download_biz_by_year( year):
              "$lte": datetime.datetime(year+1, 1, 1)}})
     return result
 
-for year in range(2002,2018):
-    # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
-    # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
-    # print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
-    # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --type=csv --fields registrationNum,name,status,owners,authorized,capital,municipality.municipality,municipality.place,arbkUrl,activities --out app/static/downloads/arbk-%s.csv"%(query,year)
-    # print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
-    cursor = download_biz_by_year(year)
-    filename = 'app/static/downloads/arbk-%s.json'%year
-    with open(filename, 'w') as f:
-        for doc in cursor:
-            f.write('%s\n'%doc)
 def set_name_to_activities(given_code):
     activities_collection =db.activities.find()
     name = ''
@@ -38,18 +32,51 @@ def set_name_to_activities(given_code):
         else:
             continue
     return name
-for year in range(2002,2018):
-    cursor = download_biz_by_year(year)
-    with open('app/static/downloads/arbk-%s.csv'%year, 'w') as csvfile:
-        fieldnames = ['Emri i biznesit', 'Statusi', 'Pronare', 'Linku ne arbk', 'Numri i regjistrimit', 'Komuna', 'Vendi', 'Aktivitetet']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for doc in cursor:
-            acts = ''
-            owners = ''
-            for i in doc['activities']:
-                dc = set_name_to_activities(i)
-                acts += '%s-%s\n'%(str(i),dc)
-            for owner in doc['owners']:
-                owners += '%s\n'%owner['name']
-            writer.writerow({'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Pronare':owners, 'Linku ne arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Komuna': doc['municipality']['municipality'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts})
+
+class DictUnicodeProxy(object):
+    def __init__(self, d):
+        self.d = d
+    def __iter__(self):
+        return self.d.__iter__()
+    def get(self, item, default=None):
+        i = self.d.get(item, default)
+        if isinstance(i, unicode):
+            return i.encode('utf-8')
+        return i
+
+def make_json(download_dir, range_download_year):
+    for year in range_download_year:
+        cursor = download_biz_by_year(year)
+        print 'creating file: arbk-%s.json'%year
+        filename_json = '%s/arbk-%s.json'%(download_dir, year)
+        with open(filename_json, 'w') as jsonfile:
+            jsonfile.write(json_util.dumps(cursor))
+def make_csv(download_dir, range_download_year):
+    for year in range_download_year:
+        cursor = download_biz_by_year(year)
+        print 'creating file: arbk-%s.csv'%year
+        filename_csv = '%s/arbk-%s.csv'%(download_dir, year)
+        with open(filename_csv, 'w') as csvfile:
+            fieldnames = ['Emri i biznesit', 'Statusi','Kapitali', 'Pronare', 'Linku ne arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for doc in cursor:
+                acts = ''
+                owners = ''
+                for i in doc['activities']:
+                    dc = set_name_to_activities(i)
+                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                for owner in doc['owners']:
+                    owners += '%s\n'%owner['name'].encode('utf-8')
+                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Kapitali':doc['capital'],'Pronare':owners, 'Linku ne arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                writer.writerow(DictUnicodeProxy(row))
+
+download_dir = 'app/static/downloads'
+range_download_year = range(2002,2018)
+make_json(download_dir, range_download_year)
+make_csv(download_dir, range_download_year)
+# query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
+# cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
+# print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
+# cmd="mongoexport -d arbk -c reg_businesses -q '%s' --type=csv --fields registrationNum,name,status,owners,authorized,capital,municipality.municipality,municipality.place,arbkUrl,activities --out app/static/downloads/arbk-%s.csv"%(query,year)
+# print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
