@@ -8,7 +8,7 @@ function selectDist() {
         type : 'POST',
         url : '/visualization',
         success: function(response) {
-            var data = '<table class="table table-entities table-bordered table-striped table-hover">'+
+            var data = '<table id="topTable" class="table table-entities table-bordered table-striped table-hover">'+
             '<thead>'+
             '<th>#</th>'+
             '<th>Emri i Biznesit</th>'+
@@ -43,9 +43,4 @@ function selectDist() {
             console.log(error);
         }
     })
-    // Number.prototype.format = function(n, x) {
-    //     var re = '(\\d)(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-    //     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$1,');
-    // };
-    // document.write(numbers[i].format(nn[i], xx[i]) + ' £');
 }

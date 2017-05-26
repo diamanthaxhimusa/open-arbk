@@ -11,7 +11,7 @@ mod_main = Blueprint('main', __name__)
 
 def search_engine(business, biz_status, person, person_status, municipality):
     if business == "" and person == "":
-        result = mongo_utils.get_docs_by_municipality(municipality)
+        result = mongo_utils.get_limit_businesses(100)
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people(person)
@@ -26,10 +26,10 @@ def search_engine(business, biz_status, person, person_status, municipality):
         elif person_status != "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality(person, person_status, municipality)
         elif person_status != "any" and biz_status != "any" and municipality == "any":
-            print 'awdadw'
             result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status)
         elif person_status != "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality)
+            print json_util.dumps(result)
         return result
     elif business != "" and person == "":
         if municipality == "any" and biz_status == "any":
@@ -65,13 +65,21 @@ def search_engine(business, biz_status, person, person_status, municipality):
 
 @mod_main.route('/', methods=['GET', 'POST'])
 def index():
-    mongo_utils.index_create()
     municipalities = mongo_utils.get_municipalities()
-    result = mongo_utils.get_limit_businesses(100)
+    return render_template('index.html', municipalities = municipalities)
+@mod_main.route('/search-result', methods=['GET', 'POST'])
+def search_result():
+    if request.method == 'GET':
+        mongo_utils.index_create()
+        municipalities = mongo_utils.get_municipalities()
+        result = mongo_utils.get_limit_businesses(100)
+        return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     if request.method == 'POST':
+        mongo_utils.index_create()
+        municipalities = mongo_utils.get_municipalities()
         search_keyword = request.form['person']
         business_keyword = request.form['business']
-        # business = business_keyword.lower()
+        business = business_keyword.lower()
         person = search_keyword.lower()
         status = request.form['person_status']
         city = request.form['municipality']
@@ -83,8 +91,8 @@ def index():
             person_status = "slugifiedOwners"
         else:
             person_status = "any"
-        result = search_engine(business_keyword, biz_status, person, person_status, city)
-    return render_template('index.html', result=result, municipalities=municipalities)
+        result = search_engine(business, biz_status, person, person_status, city)
+        return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
 
 @mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])
 def profile(status, person):

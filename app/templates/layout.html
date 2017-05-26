@@ -70,12 +70,12 @@
                            <div class="row">
                               <div class="stylish-input-group form-group col-md-8 col-xs-12">
                                   <label for="places">K&euml;rko personin:</label>
-                                  <input type="text" class="form-control" name="person" id="person-search-field" placeholder="Sh&euml;no emrin e personit" >
+                                  <input type="text" class="form-control" name="person" id="person-search-field" placeholder="Sh&euml;no emrin e personit">
                               </div>
                               <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
-                                      <label for="type">Statusi i personit:</label>
+                                  <label for="type">Statusi i personit:</label>
                                   <select id="type" class="custom-form-item form-control" name="person_status">
-                                      <option value="any" selected="selected">T&euml; gjitha</option>
+                                      <option value="any">T&euml; gjitha</option>
                                       <option value="owner">Pronar&euml;</option>
                                       <option value="auth">Zyrtar&euml;</option>
                                   </select>
@@ -84,7 +84,7 @@
                            <div class="row">
                             <div class="stylish-input-group form-group col-md-8 col-xs-12">
                                  <label for="places">K&euml;rko biznesin:</label>
-                                <input type="text" class="form-control" name="business" id="biz-search-field" placeholder="Sh&euml;no emrin e biznesit" >
+                                <input type="text" class="form-control" name="business" id="biz-search-field" placeholder="Sh&euml;no emrin e biznesit">
                             </div>
                             <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
                                 <label for="type">Statusi i biznesit:</label>
@@ -105,7 +105,7 @@
                                 </select>
                             </div>
                             <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                                <button onclick="search()" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
+                                <button  onclick="search()" id="searchBtn" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
                             </div>
                       </div>
                      </form>
@@ -134,6 +134,11 @@
                 <h2 class="bnr-sub-title">Harta</h2>
                 <p class="lead">Lorem ipsum dolor sit amet..</p>
               </div>
+             {% elif request.path == url_for('main.download_page') %}
+                 <div class="banner-info text-center">
+                   <h2 class="bnr-sub-title">Shkarkoni Dokumentet</h2>
+                   <p class="lead">Lorem ipsum dolor sit amet..</p>
+                 </div>
              {% else %}
              <div class="banner-info text-center">
                  <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>

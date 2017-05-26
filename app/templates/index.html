@@ -1,60 +1,98 @@
 {% extends 'layout.html' %}
 {% block content %}
-<table class="table table-striped" id="searchTable">
-    <thead>
-        <th>Emri i Biznesit</th>
-        <th>Statusi i Biznesit</th>
-        <th>Komuna</th>
-        <th>Pronar&euml;t</th>
-        <th>T&euml; autorizuar&euml;t</th>
-    </thead>
-    <tbody>
-        {% for i in result %}
-        <tr>
-            <td>
-                <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
-            </td>
-            <td>
-                {{i['status']}}
-            </td>
-            <td>
-                {{i['municipality']['municipality']}}
-            </td>
-            <td>
-                <ul>
-                    {% for owner in i['owners'] %}
-                        <li><a href="{{url_for('main.profile', person=owner['name'], status='owner')}}">{{owner['name']}}</a></li>
-                    {% endfor %}
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    {% for authorized in i['authorized'] %}
-                        <li><a href="{{url_for('main.profile', person=authorized['name'], status='authorized')}}">{{authorized['name']}}</a></li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+<div id="table-search">
+    <table class="table table-striped" id="searchTable">
+        <thead>
+            <tr>
+                <th>Emri i Biznesit</th>
+                <th>Statusi i Biznesit</th>
+                <th>Komuna</th>
+                <th>Pronar&euml;t</th>
+                <th>T&euml; autorizuar&euml;t</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 <script type="text/javascript">
     $(document).ready( function () {
-        $('#searchTable').DataTable({
-        searching: false,
-        responsive: true,
-        "language": {
-            "lengthMenu": "Të shfaqur  _MENU_  persona",
-            "zeroRecords": "Asgjë nuk u gjet!",
-            "info": "Faqja _PAGE_ nga _PAGES_",
-            "infoEmpty": "Nuk ka rezultate!",
-            "infoFiltered": "(filtruar nga _MAX_ totali i rezultateve)",
-            "paginate": {
-                "previous": "Prapa",
-                "next": "Para"
-            }
-        }});
+        var oTable;
+        var newRowData = $.ajax({
+           url: "{{ url_for('main.search_result') }}", //this is the submit URL
+           type: 'GET',
+           dataType: 'json',
+           async: false,
+        }).responseJSON;
+        init_table(newRowData);
     });
+    function init_table(newRowData) {
+        oTable = $('#searchTable').dataTable({
+           "aaData": newRowData,
+           searching: false,
+           responsive: true,
+           "aoColumns": [
+               {"mData": "name",
+                   "render": function (data, type, row) {
+                       var res = '<a href="'+row.arbkUrl+'">'+data+'</a>';
+                       return res
+                    }
+                },
+               {"mData": "status"},
+               {"mData": "municipality.municipality"},
+               {"mData": "owners",
+                   "render": function (data) {
+                       result = '';
+                   $.each(data, function(key, val) {
+                       result += '<a href="{{url_for('main.profile', status="owner", person="")}}'+val.name+'">'+val.name+'</a><br/>';
+                   });
+                    return result
+                   }
+               },
+               {"mData": "authorized",
+                   "render": function (data) {
+                       result = '';
+                   $.each(data, function(key, val) {
+                       result += '<a href="{{url_for('main.profile', status="authorized", person="")}}'+val.name+'">'+val.name+'</a><br/>';
+                   });
+                    return result
+                   }
+               }
+           ],
+           "language": {
+             "lengthMenu": "Të shfaqur  _MENU_  persona",
+             "zeroRecords": "Asgjë nuk u gjet!",
+             "info": "Faqja _PAGE_ nga _PAGES_",
+             "infoEmpty": "Nuk ka rezultate!",
+             "infoFiltered": "(filtruar nga _MAX_ totali i rezultateve)",
+             "paginate": {
+                 "previous": "Prapa",
+                 "next": "Para"
+             }
+            }
+        });
+    };
+    function search() {
+         $.ajax({
+            url: "/search-result", //this is the submit URL
+            type: 'POST',
+            dataType: 'json',
+            data : {
+                municipality : $('#places').val(),
+                biz_status : $('#biz_status').val(),
+                person_status : $('#type').val(),
+                person : $('#person-search-field').val(),
+                business : $('#biz-search-field').val()
+            },
+            success: function (data) {
+                oTable.fnClearTable();
+                if (data.length != 0 && data != null && data != undefined){
+                    oTable.fnAddData(data);
+                }
+                oTable.fnDraw();
+            }
+        });
+    }
+
 </script>
 {% endblock %}

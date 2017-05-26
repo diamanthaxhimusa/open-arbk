@@ -57,7 +57,7 @@ def make_csv(download_dir, range_download_year):
         print 'creating file: arbk-%s.csv'%year
         filename_csv = '%s/arbk-%s.csv'%(download_dir, year)
         with open(filename_csv, 'w') as csvfile:
-            fieldnames = ['Emri i biznesit', 'Statusi','Kapitali', 'Pronare', 'Linku ne arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
+            fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for doc in cursor:
@@ -68,12 +68,12 @@ def make_csv(download_dir, range_download_year):
                     acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                 for owner in doc['owners']:
                     owners += '%s\n'%owner['name'].encode('utf-8')
-                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Kapitali':doc['capital'],'Pronare':owners, 'Linku ne arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
                 writer.writerow(DictUnicodeProxy(row))
 
 download_dir = 'app/static/downloads'
 range_download_year = range(2002,2018)
-make_json(download_dir, range_download_year)
+# make_json(download_dir, range_download_year)
 make_csv(download_dir, range_download_year)
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
 # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
