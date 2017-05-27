@@ -72,6 +72,7 @@ def gender_person(person):
 def main():
     docs = db.businesses.find()
     # Looping through each doc
+    i = 0
     for doc in docs:
         sluged_owners = []
         gender_owners = []
@@ -92,7 +93,6 @@ def main():
             gender_authorized = gender_person(authorized)
             slug_auth.append(slugified_authorized_string)
             gen_auth.append(gender_authorized)
-
         try:
             city = set_muni(doc['formatted']['municipality'])
         except Exception as e:
@@ -134,7 +134,6 @@ def main():
                 capi = int(doc['formatted']['capital'])
         except Exception as e:
             pass
-
         try:
             if doc['formatted']['employeeCount'] is None:
                 epl_nr = 0
@@ -144,24 +143,26 @@ def main():
             pass
         slug_company = slug_data(slugified_company_string)
         db.reg_businesses.insert({
-        "registrationNum": reg_num,
-        "type": buss_type,
-        "employeeCount": epl_nr,
-        "applicationDate": applicationDate,
-        "capital": capi,
-        "atkStatus": atkStatus,
-        "status": status,
-        "arbkUrl": arbkUrl,
-        "activities": doc['formatted']['activities'],
-        "slugifiedOwners": sluged_owners,
-        "establishmentDate": establishmentDate,
-        "owners": gender_owners,
-        "name": slugified_company_string,
-        "slugifiedBusiness": slug_company,
-        "slugifiedAuthorized": slug_auth,
-        "authorized": gen_auth,
-        "municipality": city,
-        "timestamp": datetime.datetime.now()
+            "registrationNum": reg_num,
+            "type": buss_type,
+            "employeeCount": epl_nr,
+            "applicationDate": applicationDate,
+            "capital": capi,
+            "atkStatus": atkStatus,
+            "status": status,
+            "arbkUrl": arbkUrl,
+            "activities": doc['formatted']['activities'],
+            "slugifiedOwners": sluged_owners,
+            "establishmentDate": establishmentDate,
+            "owners": gender_owners,
+            "name": slugified_company_string,
+            "slugifiedBusiness": slug_company,
+            "slugifiedAuthorized": slug_auth,
+            "authorized": gen_auth,
+            "municipality": city,
+            "timestamp": datetime.datetime.now()
         })
+        i += 1
+        print 'Generating documents: [%s]'%i
 
 main()
