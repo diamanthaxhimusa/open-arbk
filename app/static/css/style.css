@@ -944,7 +944,15 @@ a .fb, a .tw, a .eM, a .inst{
 #footer a:hover{
 	text-decoration: none;
 }
+.social{
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+}
 .social:hover{
+	-webkit-transform: scale(1.4);
+	-moz-transform: scale(1.4);
+	-o-transform: scale(1.4);
 	background-color: #bfd730;
 	color: #161d32;
 }

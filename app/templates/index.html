@@ -85,7 +85,6 @@
                 business : $('#biz-search-field').val()
             },
             success: function (data) {
-                console.log(data);
                 oTable.fnClearTable();
                 if (data.length != 0 && data != null && data != undefined){
                     oTable.fnAddData(data);
