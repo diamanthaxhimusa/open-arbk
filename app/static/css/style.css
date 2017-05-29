@@ -53,8 +53,10 @@ h1, h2, h3, h4, h5, h6{
 	position: absolute;
 	white-space: nowrap;
 	top: -26px;
-	left: 0;
-	right: 0;
+	left: 15px;
+}
+.form-group label{
+	float: left !important;
 }
 #dropdown-menu-first{
 	min-width: 320px;
@@ -244,6 +246,7 @@ HEADER
 .banner-info
 {
     padding-top: 135px;
+    padding-bottom: 85px;
     color: #fff;
 }
 .bnr-title, .bnr-sub-title

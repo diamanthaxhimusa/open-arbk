@@ -30,6 +30,7 @@
 }
 
 #type, #places, #biz_status {
+	font-size: 18px !important;
     color: #fff!important;
 }
 
@@ -68,16 +69,17 @@ select.custom-form-item option {
 }*/
 
 .filter-people-btn {
+	text-transform: uppercase;
     width: 100%;
-    background: transparent!important;
-    color: #fff!important;
+	color: #000!important;
+	background: #fff!important;
     height: 39px;
     border-radius: 0px!important;
     margin-top: 26px;
 }
 .filter-people-btn:hover {
-    background: #fff!important;
-    color: #000!important;
+	background: transparent!important;
+	color: #fff!important;
 }
 .search-people-input-btn {
     margin-top: 30px;
