@@ -144,11 +144,11 @@ h1, h2, h3, h4, h5, h6{
 	display: table;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #fff!important;
+  color: #d0afaf!important;
 	font-size: 18px;
 }
 input:-moz-placeholder, textarea:-moz-placeholder {
-  color: #fff!important;
+  color: #d0afaf!important;
 	font-size: 18px;
 }
 
