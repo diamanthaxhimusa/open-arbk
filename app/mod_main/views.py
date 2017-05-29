@@ -12,55 +12,75 @@ mod_main = Blueprint('main', __name__)
 def search_engine(business, biz_status, person, person_status, municipality):
     if business == "" and person == "":
         result = mongo_utils.get_limit_businesses(100)
+        return result
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people(person)
+            return result
         elif person_status == "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_people_municipality(person, municipality)
+            return result
         elif person_status == "any" and biz_status != "any" and municipality == "any":
             result = mongo_utils.search_people_biz_stat(biz_status, person)
+            return result
         elif person_status == "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_people_municipality_biz_stat(biz_status, person, municipality)
+            return result
         elif person_status != "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people_status(person, person_status)
+            return result
         elif person_status != "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality(person, person_status, municipality)
+            return result
         elif person_status != "any" and biz_status != "any" and municipality == "any":
             result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status)
+            return result
         elif person_status != "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality)
-            print json_util.dumps(result)
-        return result
+            return result
+        return 'error'
     elif business != "" and person == "":
         if municipality == "any" and biz_status == "any":
             result = mongo_utils.get_biz(business)
+            return result
         elif municipality == "any" and biz_status != "any":
             result = mongo_utils.search_biz_by_status(business, biz_status)
+            return result
         elif municipality !="any" and biz_status == "any":
             result = mongo_utils.get_biz_by_municipality(business, municipality)
+            return result
         elif municipality !="any" and biz_status != "any":
             result = mongo_utils.get_biz_by_municipality_status(business, municipality, biz_status)
-        return result
+            return result
+        return 'error'
     elif business !="" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_biz_people(business, person)
+            return result
         elif person_status == "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_biz_people_municipality(business, person, municipality)
+            return result
         elif person_status == "any" and biz_status != "any" and municipality == "any":
             result = mongo_utils.search_biz_status_people(business, biz_status, person)
+            return result
         elif person_status == "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_biz_status_people_municipality(business, biz_status, person, municipality)
+            return result
         elif person_status != "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_biz_people_status(business, person, person_status)
+            return result
         elif person_status != "any" and biz_status == "any" and municipality != "any":
             result = mongo_utils.search_biz_people_status_municipality(business, person, person_status, municipality)
+            return result
         elif person_status != "any" and biz_status != "any" and municipality == "any":
             result = mongo_utils.search_biz_status_people_status(business, biz_status, person, person_status)
+            return result
         elif person_status != "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_biz_status_people_status_municipality(business, biz_status, person, person_status, municipality)
+            return result
         return result
     else:
-        result = "erorr"
+        result = "error"
     return result
 
 @mod_main.route('/', methods=['GET', 'POST'])

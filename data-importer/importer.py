@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-import os, os.path, re, json, datetime
+import re, json, datetime
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
