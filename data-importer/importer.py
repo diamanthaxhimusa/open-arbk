@@ -172,6 +172,6 @@ def main():
             })
             i += 1
             print 'Generating documents: [%s]'%i
-        except Exception as e:
-            print e
+    except Exception as e:
+        print e
 main()
