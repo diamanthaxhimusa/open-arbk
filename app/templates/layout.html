@@ -11,10 +11,10 @@
     <meta property="og:image" content="{{ url_for('static', filename='img/share.png') }}">
     <meta property="og:url" content="/">
     <!-- Twitter meta tags -->
-    <meta name="twitter:title" content="Bizneset e Hapura">
-    <meta name="twitter:description" content="Bizneset e Hapura">
-    <meta name="twitter:image" content="{{ url_for('static', filename='img/share.png') }}">
-    <meta name="twitter:card" content="summary_medium_image">
+    <meta property="twitter:title" content="Bizneset e Hapura">
+    <meta property="twitter:description" content="Bizneset e Hapura">
+    <meta property="twitter:image" content="{{ url_for('static', filename='img/share.png') }}">
+    <meta property="twitter:card" content="summary_medium_image">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom_style.css') }}"/>
@@ -29,7 +29,7 @@
   </head>
   <body>
     <!-- Navbar -->
-    <header id="main-header">
+    <nav id="main-header">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -50,7 +50,7 @@
           </div>
         </div>
       </nav>
-    </header>
+  </nav>
 
     <!-- Header -->
     <div {% if request.path == url_for('main.index') %}class="header"
@@ -62,7 +62,9 @@
           <div class="row">
             {% if request.path == url_for('main.index') %}
             <div class="banner-info text-center">
-                <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
+                <div class="col-xs-12">
+                    <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
+                </div>
                 <div class="col-sm-10 col-sm-offset-1">
                      <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">
                       <div id="imaginary_container">
@@ -94,18 +96,20 @@
                                 </select>
                             </div>
                            </div>
-                            <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
-                              <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
-                                <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
-                                    <option value="any" selected="selected">Gjith&euml; Kosova</option>
-                                    {% for municipality in municipalities%}
-                                    <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                                <button  onclick="search()" id="searchBtn" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
-                            </div>
+                           <div class="row">
+                               <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
+                                   <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
+                                   <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
+                                       <option value="any" selected="selected">Gjith&euml; Kosova</option>
+                                       {% for municipality in municipalities%}
+                                       <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
+                                       {% endfor %}
+                                   </select>
+                               </div>
+                               <div class="search-people-input-btn form-group col-md-4 col-xs-12">
+                                   <button  onclick="search()" id="searchBtn" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
+                               </div>
+                           </div>
                       </div>
                      </form>
                 </div>
@@ -172,18 +176,20 @@
                                  </select>
                              </div>
                             </div>
-                             <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
-                               <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
-                                 <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
-                                     <option value="any" selected="selected">Gjith&euml; Kosova</option>
-                                     {% for municipality in municipalities%}
-                                     <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
-                                     {% endfor %}
-                                 </select>
-                             </div>
-                             <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                                 <button onclick="search()" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
-                             </div>
+                            <div class="row">
+                                <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
+                                    <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
+                                    <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
+                                        <option value="any" selected="selected">Gjith&euml; Kosova</option>
+                                        {% for municipality in municipalities%}
+                                        <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="search-people-input-btn form-group col-md-4 col-xs-12">
+                                    <button onclick="search()" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
+                                </div>
+                            </div>
                        </div>
                       </form>
                  </div>
