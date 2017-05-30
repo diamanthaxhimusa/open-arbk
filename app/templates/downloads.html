@@ -46,10 +46,9 @@
         <hr>
     </div>
 </div>
-<script type="text/javascript" src="{{url_for('static', filename="js/papaparse.min.js")}}"></script>
 <script type="text/javascript">
     function downloadAllDoc() {
-        window.location.href = "/download/all";
+        window.location.href = "{{url_for('main.download_doc_all')}}";
     }
     function downloadDocYear() {
         var type = $('.file-type').val();

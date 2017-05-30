@@ -161,10 +161,7 @@ def start_date():
                 data['result'].append({"_id": "Shuar", "count": 0})
             else:
                 data['result'].append({"_id": "Aktiv", "count": 0})
-        res = {
-                data['result'][0]['_id']: data['result'][0]['count'],
-                data['result'][1]['_id']: data['result'][1]['count']
-        }
+        res = {data['result'][0]['_id']: data['result'][0]['count'],data['result'][1]['_id']: data['result'][1]['count']}
         api.update({year: res})
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
@@ -323,6 +320,6 @@ def download_page():
 def download_doc_year(doc_type, year):
     return send_from_directory(download_folder, "arbk-%s.%s"%(year,doc_type), as_attachment=True)
 
-@mod_main.route('/download/all', methods=['GET'])
+@mod_main.route('/download/all-zip', methods=['GET'])
 def download_doc_all():
     return send_from_directory(download_folder, "arbk-data.zip", as_attachment=True)
