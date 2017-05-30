@@ -112,6 +112,7 @@ def search_result():
         else:
             person_status = "any"
         result = search_engine(business, biz_status, person, person_status, city)
+        print result
         return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
 
 @mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])

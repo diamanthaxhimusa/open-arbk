@@ -74,13 +74,13 @@
     };
     function search() {
          $.ajax({
-            url: "/search-result", //this is the submit URL
+            url: "{{ url_for('main.search_result') }}", //this is the submit URL
             type: 'POST',
             dataType: 'json',
             data : {
-                municipality : $('#places').val(),
-                biz_status : $('#biz_status').val(),
-                person_status : $('#type').val(),
+                municipality : $('#placesSearch').val(),
+                biz_status : $('#biz_statusSearch').val(),
+                person_status : $('#typeSearch').val(),
                 person : $('#person-search-field').val(),
                 business : $('#biz-search-field').val()
             },
