@@ -17,6 +17,16 @@
 </div>
 <script type="text/javascript">
     $(document).ready( function () {
+        $('#searchBtn').on('click', function() {
+            var target = $('#service');
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top - 100
+                }, 1000);
+                return false;
+            }            
+        })
         var oTable;
         var newRowData = $.ajax({
            url: "{{ url_for('main.search_result') }}", //this is the submit URL
@@ -74,14 +84,6 @@
     };
     function search() {
         // service
-        var target = $('#service');
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-            $('html,body').animate({
-              scrollTop: target.offset().top - 100
-            }, 1000);
-            return false;
-        }
          $.ajax({
             url: "{{ url_for('main.search_result') }}", //this is the submit URL
             type: 'POST',
