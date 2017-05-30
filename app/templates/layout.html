@@ -137,15 +137,14 @@
                 <h2 class="bnr-sub-title">Harta</h2>
                 <p class="lead">Lorem ipsum dolor sit amet..</p>
               </div>
-             {% elif request.path == url_for('main.download_page') %}
-                 <div class="banner-info text-center">
-                   <h2 class="bnr-sub-title">Shkarkoni Dokumentet</h2>
-                   <p class="lead">Lorem ipsum dolor sit amet..</p>
-                 </div>
-             {% else %}
+            {% elif request.path == url_for('main.download_page') %}
              <div class="banner-info text-center">
-                 <h2 class="bnr-sub-title">kthehu</h2>
-
+               <h2 class="bnr-sub-title">Shkarkoni Dokumentet</h2>
+               <p class="lead">Lorem ipsum dolor sit amet..</p>
+             </div>
+            {% else %}
+             <div class="banner-info text-center">
+                 <h2 class="bnr-sub-title"><a href="/">Kthehu tek k&euml;rkimi</a></h2>
              </div>
              {% endif %}
           </div>
