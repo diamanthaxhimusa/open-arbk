@@ -61,7 +61,7 @@
         <div class="container">
           <div class="row">
             {% if request.path == url_for('main.index') %}
-            <div class="banner-info text-center">
+            <div class="col-xs-12 banner-info text-center">
                 <div class="col-xs-12">
                     <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
                 </div>
@@ -107,7 +107,7 @@
                                    </select>
                                </div>
                                <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                                   <button  onclick="search()" id="searchBtn" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
+                                   <button onclick="search()" id="searchBtn" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
                                </div>
                            </div>
                       </div>
@@ -208,7 +208,6 @@
           Zhvilluar nga <a target="_blank" href="https://opendatakosovo.org/">Open Data Kosovo</a>
       </div>
     </footer>
-
     <script src="{{ url_for('static', filename='js/jquery.easing.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/wow.js')}}"></script>
