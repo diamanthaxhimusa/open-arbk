@@ -94,8 +94,8 @@ def make_all_data_zip(download_dir):
 
 download_dir = 'app/static/downloads'
 range_download_year = range(2002,2018)
-# make_json(download_dir, range_download_year)
-# make_csv(download_dir, range_download_year)
+make_json(download_dir, range_download_year)
+make_csv(download_dir, range_download_year)
 make_all_data_zip(download_dir)
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
 # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
