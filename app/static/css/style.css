@@ -32,7 +32,8 @@ table {
 }
 select.form-control{
     color: #67696c!important;
-    padding-left: 5px !important;
+	font-weight: bold;
+    /*padding-left: 5px !important;*/
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -179,7 +180,7 @@ HEADER
     position: relative;
 }
 .lbl-filter{
-	width: 70px !important;
+	width: 90px !important;
 }
 .bg-color
 {

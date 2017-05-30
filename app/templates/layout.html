@@ -61,7 +61,7 @@
         <div class="container">
           <div class="row">
             {% if request.path == url_for('main.index') %}
-            <div class="row banner-info text-center">
+            <div class="banner-info text-center">
                 <div class="col-xs-12">
                     <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
                 </div>
@@ -75,7 +75,7 @@
                               </div>
                               <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
                                   <label for="type">Statusi i personit:</label>
-                                  <select id="type" class="custom-form-item form-control" name="person_status">
+                                  <select id="typeSearch" class="custom-form-item form-control" name="person_status">
                                       <option value="any">T&euml; gjitha</option>
                                       <option value="owner">Pronar&euml;</option>
                                       <option value="auth">Zyrtar&euml;</option>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
                                 <label for="type">Statusi i biznesit:</label>
-                                <select id="biz_status" class="custom-form-item form-control" name="biz_status">
+                                <select id="biz_statusSearch" class="custom-form-item form-control" name="biz_status">
                                     <option value="any" selected="selected">T&euml; gjitha</option>
                                     <option value="Aktiv">Aktiv</option>
                                     <option value="Shuar">Jo Aktiv</option>
@@ -99,7 +99,7 @@
                            <div class="row">
                                <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
                                    <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
-                                   <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
+                                   <select id="placesSearch" class="custom-form-item form-control" name="municipality" id="poz">
                                        <option value="any" selected="selected">Gjith&euml; Kosova</option>
                                        {% for municipality in municipalities%}
                                        <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
@@ -144,55 +144,8 @@
                  </div>
              {% else %}
              <div class="banner-info text-center">
-                 <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
-                 <div class="col-sm-10 col-sm-offset-1">
-                      <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">
-                       <div id="imaginary_container">
-                            <div class="row">
-                               <div class="stylish-input-group form-group col-md-8 col-xs-12">
-                                   <label for="places">K&euml;rko personin:</label>
-                                   <input type="text" class="form-control" name="person" id="person-search-field" placeholder="Sh&euml;no emrin e personit" >
-                               </div>
-                               <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
-                                       <label for="type">Statusi i personit:</label>
-                                   <select id="type" class="custom-form-item form-control" name="person_status">
-                                       <option value="any" selected="selected">T&euml; gjitha</option>
-                                       <option value="owner">Pronar&euml;</option>
-                                       <option value="auth">Zyrtar&euml;</option>
-                                   </select>
-                               </div>
-                            </div>
-                            <div class="row">
-                             <div class="stylish-input-group form-group col-md-8 col-xs-12">
-                                  <label for="places">K&euml;rko biznesin:</label>
-                                 <input type="text" class="form-control" name="business" id="biz-search-field" placeholder="Sh&euml;no emrin e biznesit" >
-                             </div>
-                             <div class="search-people-input select-kind form-group col-md-4 col-xs-12">
-                                 <label for="type">Statusi i biznesit:</label>
-                                 <select id="biz_status" class="custom-form-item form-control" name="biz_status">
-                                     <option value="any" selected="selected">T&euml; gjitha</option>
-                                     <option value="Aktiv">Aktiv</option>
-                                     <option value="Shuar">Jo Aktiv</option>
-                                 </select>
-                             </div>
-                            </div>
-                            <div class="row">
-                                <div style="margin-top: 30px;" class="search-people-input form-group col-md-4 col-md-offset-2 col-xs-12">
-                                    <label for="places" id="pick-muni-lbl">Zgjedh komun&euml;n:</label>
-                                    <select id="places" class="custom-form-item form-control" name="municipality" id="poz">
-                                        <option value="any" selected="selected">Gjith&euml; Kosova</option>
-                                        {% for municipality in municipalities%}
-                                        <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="search-people-input-btn form-group col-md-4 col-xs-12">
-                                    <button onclick="search()" type="button" style="margin-top: 0px;height: 47px;" class="btn btn-default filter-people-btn">K&euml;rko</button>
-                                </div>
-                            </div>
-                       </div>
-                      </form>
-                 </div>
+                 <h2 class="bnr-sub-title">kthehu</h2>
+
              </div>
              {% endif %}
           </div>

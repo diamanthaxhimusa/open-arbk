@@ -29,8 +29,9 @@
     background-color: #000;
 }
 
-#type, #places, #biz_status {
+#typeSearch, #placesSearch, #biz_statusSearch {
 	font-size: 18px !important;
+	font-weight: 300 !important;
     color: #fff!important;
 }
 

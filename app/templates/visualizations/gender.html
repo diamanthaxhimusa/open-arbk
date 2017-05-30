@@ -1,16 +1,16 @@
 <form id="form-3" class="form-inline" method="POST">
     <div class="form-group">
-            <label for="status">Statusi</label>
+        <label for="status">Statusi
             <select class="kind form-control" name="status" id="stat_gen">
                 <option value="any" selected="selected">T&euml; gjitha</option>
                 <option>Aktiv</option>
                 <option>Shuar</option>
             </select>
+        </label>
     </div>
     <div class="form-group">
-        <label for="municipalities">Zgjedh komunën: </label>
-
-        {% set _stub = komunat.rewind() %}
+        <label for="municipalities">Zgjedh komunën:
+            {% set _stub = komunat.rewind() %}
 
             <select class="form-control" name="city_id" id="muni_gen">
                 <option value="any">T&euml; gjitha</option>
@@ -18,10 +18,10 @@
                 <option value="{{i.municipality}}">{{i.municipality}}</option>
                 {% endfor %}
             </select>
+        </label>
     </div>
     <div class="form-group">
-        <button type="button" id="getGen" class="btn btn-default">Listo</button>
+        <button type="button" id="getGen" class="btn btn-default" style="border-color: #ccc !important;">Listo</button>
     </div>
 </form>
-
 <div id="container6" style="min-width: 310px; margin-top:30px !important; height: 400px; max-width: 100%; margin: 0 auto">
