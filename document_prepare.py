@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 import os, os.path, re, json, datetime, sys, csv, time, subprocess, shutil
+import zipfile
 from bson import json_util
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -70,11 +71,32 @@ def make_csv(download_dir, range_download_year):
                     owners += '%s\n'%owner['name'].encode('utf-8')
                 row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
                 writer.writerow(DictUnicodeProxy(row))
+def make_all_data_zip(download_dir):
+    cursor = db.reg_businesses.find()
+    filename_json = "arbk-data.json"
+    try:
+        import zlib
+        compression = zipfile.ZIP_DEFLATED
+    except:
+        compression = zipfile.ZIP_STORED
+
+    modes = { zipfile.ZIP_DEFLATED: 'deflated',
+              zipfile.ZIP_STORED:   'stored',
+              }
+
+    zf = zipfile.ZipFile('%s/arbk-data.zip'%download_dir, mode='w')
+    try:
+        print 'adding arbk-data.zip', modes[compression]
+        zf.writestr(filename_json, json_util.dumps(cursor))
+    finally:
+        print 'closing'
+        zf.close()
 
 download_dir = 'app/static/downloads'
 range_download_year = range(2002,2018)
-make_json(download_dir, range_download_year)
-make_csv(download_dir, range_download_year)
+# make_json(download_dir, range_download_year)
+# make_csv(download_dir, range_download_year)
+make_all_data_zip(download_dir)
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
 # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
 # print subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
