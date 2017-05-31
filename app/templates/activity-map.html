@@ -10,17 +10,18 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <span>Njoftim!!! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna gjithsej, kjo &euml;sht&euml; p&euml;r shkak se ende nuk jan&euml; p&euml;rdit&euml;suar komunat e krijuara se fundmi. Komunat q&euml; mungojn jan&euml; t&euml; bashkuara me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;.</span>
         </div>
-        <div class="con1" style="margin-top:30px;margin-bottom:20px;">
+        <div class="col-xs-12 con1" style="margin-top:30px;margin-bottom:20px;">
             <h3 class="headers">Shtrirja e aktiviteteve n&euml; hart&euml;.</h3>
+            <hr>
             <form id="form-3" class="form-inline" method="POST">
                 <div class="form-group">
                     <div class="dropdown" id="dropdown-first">
-                        <label for="activity" class="lbl-filter">Aktiviteti:</label>
+                        <label for="activity" class="lbl-filter">Aktiviteti:</label><br>
                         <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-first" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="selected-value"></span>
                             &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </button>
-                        <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:500px;" aria-labelledby="dropdown-menu-first">
+                        <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
                             {% for i in activities%}
                             <li><a href="javascript:onActivitySelection('{{ i['activity'] }}')">
                                 {% if i['code']|length == 3 %}
@@ -32,13 +33,13 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="dropdown" id="dropdown-second" style="margin-top: 10px;">
-                        <label for="status" class="lbl-filter">Statusi:</label>
+                    <div class="dropdown" id="dropdown-second">
+                        <label for="status" class="lbl-filter">Statusi:</label><br>
                         <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="selected-value-status"></span>
                             &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </button>
-                        <ul class="dropdown-menu acts" name="status" id="activity_val" style="max-width:500px;" aria-labelledby="dropdown-menu-second">
+                        <ul class="dropdown-menu acts" name="status" id="statVal" style="max-width:290px;" aria-labelledby="dropdown-menu-second">
                             <li><a href="javascript:onStatusSelection('T&euml; gjith&euml;')">T&euml; gjith&euml;</a></li>
                             <li><a href="javascript:onStatusSelection('Aktiv')">Aktiv</a></li>
                             <li><a href="javascript:onStatusSelection('Shuar')">Shuar</a></li>
