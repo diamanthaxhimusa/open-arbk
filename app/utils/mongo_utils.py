@@ -25,9 +25,18 @@ class MongoUtils(object):
         result = self.mongo.db[self.reg_businesses_collection].create_index("formatted.slugifiedOwners", 1)
         return result
 
-    def get_docs_by_municipality(self, municipality):
+    def search_docs_by_municipality(self, municipality):
         result = self.mongo.db[self.reg_businesses_collection].find(
             {"municipality.municipality": municipality})
+        return result
+    def search_docs_by_biz_status(self, status):
+        result = self.mongo.db[self.reg_businesses_collection].find({
+            "status": status})
+        return result
+    def search_docs_by_biz_status_municipality(self, status, municipality):
+        result = self.mongo.db[self.reg_businesses_collection].find(
+            {"municipality.municipality": municipality,
+             "status":status})
         return result
     def search_biz_people_status_municipality(self, business, person, person_status, municipality):
         result = self.mongo.db[self.reg_businesses_collection].find({

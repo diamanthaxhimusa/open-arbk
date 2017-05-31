@@ -11,7 +11,30 @@ mod_main = Blueprint('main', __name__)
 
 def search_engine(business, biz_status, person, person_status, municipality):
     if business == "" and person == "":
-        result = mongo_utils.get_limit_businesses(100)
+        if person_status == "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.get_limit_businesses(100)
+            return result
+        elif person_status == "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_docs_by_municipality(municipality)
+            return result
+        elif person_status == "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_docs_by_biz_status(biz_status)
+            return result
+        elif person_status == "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality)
+            return result
+        elif person_status != "any" and biz_status == "any" and municipality == "any":
+            result = mongo_utils.get_limit_businesses(100)
+            return result
+        elif person_status != "any" and biz_status == "any" and municipality != "any":
+            result = mongo_utils.search_docs_by_municipality(municipality)
+            return result
+        elif person_status != "any" and biz_status != "any" and municipality == "any":
+            result = mongo_utils.search_docs_by_biz_status(biz_status)
+            return result
+        elif person_status != "any" and biz_status != "any" and municipality != "any":
+            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality)
+            return result
         return result
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
@@ -112,7 +135,6 @@ def search_result():
         else:
             person_status = "any"
         result = search_engine(business, biz_status, person, person_status, city)
-        print result
         return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
 
 @mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])
