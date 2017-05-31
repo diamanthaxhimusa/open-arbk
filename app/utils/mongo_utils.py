@@ -38,6 +38,7 @@ class MongoUtils(object):
             {"municipality.municipality": municipality,
              "status":status})
         return result
+
     def search_biz_people_status_municipality(self, business, person, person_status, municipality):
         result = self.mongo.db[self.reg_businesses_collection].find({
             "slugifiedBusiness": {"$regex": business},

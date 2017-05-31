@@ -35,7 +35,7 @@ def search_engine(business, biz_status, person, person_status, municipality):
         elif person_status != "any" and biz_status != "any" and municipality != "any":
             result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality)
             return result
-        return result
+        return 'error'
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
             result = mongo_utils.search_people(person)
