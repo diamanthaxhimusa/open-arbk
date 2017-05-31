@@ -79,7 +79,7 @@ def make_csv(download_dir, range_download_year, type_of_date):
                 row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
                 writer.writerow(DictUnicodeProxy(row))
 def make_all_data_zip(download_dir):
-    cursor = db.reg_businesses.find().limit(10)
+    cursor = db.reg_businesses.find()
     filename_json = "arbk-data.json"
     import zlib
     zf = zipfile.ZipFile('%s/arbk-data(json).zip'%download_dir, 'w', zipfile.ZIP_DEFLATED)
@@ -123,9 +123,9 @@ download_dir = 'app/static/downloads'
 range_download_year = range(2002,2018)
 make_json(download_dir, range_download_year, "establishmentDate")
 make_json(download_dir, range_download_year, "applicationDate")
-# make_csv(download_dir, range_download_year, "establishmentDate")
-# make_csv(download_dir, range_download_year, "applicationDate")
-# make_all_data_zip(download_dir)
+make_csv(download_dir, range_download_year, "establishmentDate")
+make_csv(download_dir, range_download_year, "applicationDate")
+make_all_data_zip(download_dir)
 
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
