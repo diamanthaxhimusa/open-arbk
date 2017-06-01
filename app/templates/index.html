@@ -24,7 +24,7 @@
     $(document).ready( function () {
         var height = $('#table-search').height();
         var width = $('#table-search').width();
-        $('.overllaySearch').attr('style', 'height:'+height+'px;width:'+width+'px;');
+        $('.overllaySearch').attr('style', 'height:'+height+'px;width:100%');
         $(".overllaySearch").hide();
         $('#searchBtn').on('click', function() {
             var target = $('#service');
@@ -92,7 +92,7 @@
          "fnDrawCallback": function( oSettings ) {
              var height = $('#table-search').height();
              var width = $('#table-search').width();
-             $('.overllaySearch').attr('style', 'height:'+height+'px;width:'+width+'px;');
+             $('.overllaySearch').attr('style', 'height:'+height+'px;width:100%');
              $(".overllaySearch").hide();
          }
         });
