@@ -1,5 +1,5 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-<div class="" style="margin-top:30px;overflow: auto;">
+<div class="" style="margin-top:30px;">
     <form id="form-3" class="form-inline row" method="POST">
         <div class="col-xs-12 col-sm-5 col-md-4 form-group">
             <label for="status">Statusi:
@@ -25,40 +25,42 @@
             <button type="button" onclick="selectDist()" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">Listo</button>
         </div>
     </form>
-    <table id="topTable" class="table table-responsive table-bordered table-striped table-hover">
-        <thead>
-            <th>#</th>
-            <th>Emri i Biznesit</th>
-            <th>Komuna</th>
-            <th>Statusi i Biznesit</th>
-            <th style="min-width: 168px;">Kapitali</th>
-        </thead>
-        <tbody>
-            {% for i in top['result'] %}
-            <tr>
-                <td>
-                    {{loop.index}}
-                </td>
-                <td id="topname">
-                    <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
-                </td>
-                <td class="ksbk">
-                    {{i['municipality']['municipality']}}
-                </td>
-                <td class="ksbk">
-                    {{i['status']}}
-                </td>
-                <td class="ksbk">
-                    <script type="text/javascript">
+    <div class="" style="overflow: auto;">
+        <table id="topTable" class="table table-responsive table-bordered table-striped table-hover">
+            <thead>
+                <th>#</th>
+                <th>Emri i Biznesit</th>
+                <th>Komuna</th>
+                <th>Statusi i Biznesit</th>
+                <th style="min-width: 168px;">Kapitali</th>
+            </thead>
+            <tbody>
+                {% for i in top['result'] %}
+                <tr>
+                    <td>
+                        {{loop.index}}
+                    </td>
+                    <td id="topname">
+                        <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
+                    </td>
+                    <td class="ksbk">
+                        {{i['municipality']['municipality']}}
+                    </td>
+                    <td class="ksbk">
+                        {{i['status']}}
+                    </td>
+                    <td class="ksbk">
+                        <script type="text/javascript">
                         var number = numeral({{i['capital']}});
                         number.format();
                         numeral.defaultFormat('0,0.00');
                         var num = number.format();
                         document.write(num+'\u20ac');
-                    </script>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        </script>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
