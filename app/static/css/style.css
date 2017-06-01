@@ -58,9 +58,9 @@ button{
 	top: -26px;
 	left: 15px;
 }
-.form-group label{
+/*.form-group label{
 	float: left !important;
-}
+}*/
 #dropdown-menu-first,#dropdown-menu-second{
 	min-width: 290px;
 	max-width: 400px;
@@ -78,7 +78,6 @@ button{
 	width: 290px !important;
 	margin-bottom: 10px !important
 }
-
 
 #searchTable_wrapper{
 	width: 100%;
@@ -322,11 +321,11 @@ h2.bnr-sub-title
     color: #fff;
 }
 
-/*@media (max-width:768px) {
-	 .btn-filter-data{
-		 margin-top: 23px;
-	 }
-}*/
+@media (min-width:768px) {
+	.btn-filter-data{
+	   	 margin-top:27px !important;
+    }
+}
 
 
 .overlay-detail a i{

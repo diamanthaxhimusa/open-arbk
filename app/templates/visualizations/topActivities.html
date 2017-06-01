@@ -1,5 +1,5 @@
 <form id="top-activities-chart" class="form-inline" method="POST">
-    <div class="form-group">
+    <div class="col-xs-12 col-sm-5 col-md-4 form-group">
         <label for="status">Statusi:
         </label><br>
         <select class="kind form-control select-vizualizations" name="status" id="top-act-types">
@@ -8,7 +8,7 @@
             <option>Shuar</option>
         </select>
     </div>
-    <div class="form-group">
+    <div class="col-xs-12 col-sm-5 col-md-4 form-group">
         <label for="municipalities">Komuna:
         </label><br>
         {% set _stub = komunat.rewind() %}
@@ -19,7 +19,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="form-group">
+    <div class="col-xs-12 col-sm-2 col-md-2 form-group">
         <button type="button" onclick="selectActivities()" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">Listo</button>
     </div>
 </form>
