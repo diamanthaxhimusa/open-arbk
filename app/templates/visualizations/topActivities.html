@@ -1,31 +1,29 @@
-<form id="form-donors-filter" class="form-inline" method="POST">
+<form id="top-activities-chart" class="form-inline" method="POST">
     <div class="form-group">
-        <label for="status">Statusi
-            <select class="kind form-control" name="status" id="types">
-                <option value="any" selected="selected">T&euml; gjitha</option>
-                <option>Aktiv</option>
-                <option>Shuar</option>
-            </select>
-        </label>
+        <label for="status">Statusi:
+        </label><br>
+        <select class="kind form-control select-vizualizations" name="status" id="top-act-types">
+            <option value="any" selected="selected">T&euml; gjitha</option>
+            <option>Aktiv</option>
+            <option>Shuar</option>
+        </select>
     </div>
     <div class="form-group">
-        <label for="municipalities">Zgjedh komunën:
-            {% set _stub = komunat.rewind() %}
-            <select class="form-control" name="city_id" id="municipalities">
-                <option value="any">T&euml; gjitha</option>
-                {% for i in komunat %}
-                <option value="{{i.municipality}}">{{i.municipality}}</option>
-                {% endfor %}
-            </select>
-        </label>
-    </div>
-    <div class="form-group">
+        <label for="municipalities">Komuna:
+        </label><br>
+        {% set _stub = komunat.rewind() %}
+        <select class="form-control select-vizualizations" name="city_id" id="top-act-municipalities">
+            <option value="any">T&euml; gjitha</option>
+            {% for i in komunat %}
+            <option value="{{i.municipality}}">{{i.municipality}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <button type="button" onclick="selectActivities()" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">Listo</button>
     </div>
 </form>
-<label for="no-activities">Shfaq aktivitetet nga:
+<label for="no-activities" style="float:right">Shfaq aktivitetet nga:
     <select id="no-activities" class="topAct"></select>
 </label>
 <div id="container4" style="min-width: 100%; margin-top:30px !important; height: 400px; max-width: 100%; margin: 0 auto"></div>

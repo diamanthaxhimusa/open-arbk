@@ -1,24 +1,24 @@
 <form id="form-3" class="form-inline" method="POST">
     <div class="form-group">
-        <label for="status">Statusi
-            <select class="kind form-control" name="status" id="stat_gen">
-                <option value="any" selected="selected">T&euml; gjitha</option>
-                <option>Aktiv</option>
-                <option>Shuar</option>
-            </select>
+        <label for="status">Statusi:
         </label>
+        <select class="kind form-control select-vizualizations" name="status" id="stat_gen">
+            <option value="any" selected="selected">T&euml; gjitha</option>
+            <option>Aktiv</option>
+            <option>Shuar</option>
+        </select>
     </div>
     <div class="form-group">
-        <label for="municipalities">Zgjedh komunën:
-            {% set _stub = komunat.rewind() %}
-
-            <select class="form-control" name="city_id" id="muni_gen">
-                <option value="any">T&euml; gjitha</option>
-                {% for i in komunat %}
-                <option value="{{i.municipality}}">{{i.municipality}}</option>
-                {% endfor %}
-            </select>
+        <label for="municipalities">Komuna:
         </label>
+        {% set _stub = komunat.rewind() %}
+
+        <select class="form-control select-vizualizations" name="city_id" id="muni_gen">
+            <option value="any">T&euml; gjitha</option>
+            {% for i in komunat %}
+            <option value="{{i.municipality}}">{{i.municipality}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <button type="button" id="getGen" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">Listo</button>
