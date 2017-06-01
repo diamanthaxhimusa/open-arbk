@@ -22,6 +22,10 @@
 </div>
 <script type="text/javascript">
     $(document).ready( function () {
+        var height = $('#table-search').height();
+        var width = $('#table-search').width();
+        $('.overllaySearch').attr('style', 'height:'+height+'px;width:'+width+'px;');
+        $(".overllaySearch").hide();
         $('#searchBtn').on('click', function() {
             var target = $('#service');
             target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -40,10 +44,6 @@
            async: false,
         }).responseJSON;
         init_table(newRowData);
-        var height = $('#table-search').height();
-        var width = $('#table-search').width();
-        $('.overllaySearch').attr('style', 'height:'+height+'px;width:'+width+'px;');
-        $(".overllaySearch").hide();
     });
     function init_table(newRowData) {
         oTable = $('#searchTable').dataTable({
@@ -88,7 +88,13 @@
                  "previous": "Prapa",
                  "next": "Para"
              }
-            }
+         },
+         "fnDrawCallback": function( oSettings ) {
+             var height = $('#table-search').height();
+             var width = $('#table-search').width();
+             $('.overllaySearch').attr('style', 'height:'+height+'px;width:'+width+'px;');
+             $(".overllaySearch").hide();
+         }
         });
     };
     function search() {
@@ -108,7 +114,6 @@
                 $(".overllaySearch").show();
             },
             success: function (data) {
-                console.log("writing data in table");
                 oTable.fnClearTable();
                 if (data.length != 0 && data != null && data != undefined){
                     oTable.fnAddData(data);
