@@ -158,6 +158,9 @@ button{
 .stylish-input-group{
 	display: table;
 }
+.stylish-input-group, .search-people-input{
+	text-align: left;
+}
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: #d0afaf!important;
 	font-size: 18px;
@@ -966,13 +969,10 @@ a .fb, a .tw, a .eM, a .inst{
 .follow-us i{
 	margin: auto;
 }
-#ndjekja{
+#ndjekja, #mission{
 	font-size: 20px;
 	font-weight: 500;
-}
-#mission{
-	font-size: 20px;
-	font-weight: 500;
+	color: #161d32;
 }
 #footer a:hover{
 	text-decoration: none;
