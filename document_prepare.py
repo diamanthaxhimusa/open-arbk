@@ -81,22 +81,15 @@ def make_csv(download_dir, range_download_year, type_of_date):
                     for i in doc['activities']:
                         dc = set_name_to_activities(i)
                         acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
-                        for owner in doc['owners']:
-                            owners += '%s\n'%owner['name'].encode('utf-8')
-                            row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
-                            writer.writerow(DictUnicodeProxy(row))
+                    for owner in doc['owners']:
+                        owners += '%s\n'%owner['name'].encode('utf-8')
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                    writer.writerow(DictUnicodeProxy(row))
 
-def make_all_data_zip(download_dir):
+def make_all_data_zip_csv(download_dir):
     cursor = db.reg_businesses.find()
-    filename_json = "arbk-data.json"
+    i =0
     import zlib
-    zf = zipfile.ZipFile('%s/arbk-data(json).zip'%download_dir, 'w', zipfile.ZIP_DEFLATED)
-    try:
-        print 'creating file: arbk-data(json).zip'
-        zf.writestr(filename_json, json_util.dumps(cursor))
-    finally:
-        print 'closing'
-        zf.close()
     print 'creating file: arbk-data(csv).zip'
     with zipfile.ZipFile("%s/arbk-data(csv).zip"%download_dir, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         filename_csv = 'arbk-data.csv'
@@ -104,7 +97,6 @@ def make_all_data_zip(download_dir):
         fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
         csvwriter = csv.DictWriter(string_buffer, delimiter=',', fieldnames=fieldnames)
         csvwriter.writeheader()
-        i =0
         for doc in cursor:
             i+=1
             print 'printing doc: [%s]'%str(i)
@@ -115,10 +107,21 @@ def make_all_data_zip(download_dir):
                 acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
             for owner in doc['owners']:
                 owners += '%s\n'%owner['name'].encode('utf-8')
-                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
-                csvwriter.writerow(DictUnicodeProxy(row))
+            row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+            csvwriter.writerow(DictUnicodeProxy(row))
         zip_file.writestr(filename_csv, string_buffer.getvalue())
-
+def make_all_data_zip_json(download_dir):
+    cursor = db.reg_businesses.find()
+    filename_json = "arbk-data.json"
+    i =0
+    import zlib
+    zf = zipfile.ZipFile('%s/arbk-data(json).zip'%download_dir, 'w', zipfile.ZIP_DEFLATED)
+    try:
+        print 'creating file: arbk-data(json).zip'
+        zf.writestr(filename_json, json_util.dumps(cursor))
+    finally:
+        print 'closing'
+        zf.close()
 class DictUnicodeProxy(object):
     def __init__(self, d):
         self.d = d
@@ -136,8 +139,8 @@ make_json(download_dir, range_download_year, "establishmentDate")
 make_json(download_dir, range_download_year, "applicationDate")
 make_csv(download_dir, range_download_year, "establishmentDate")
 make_csv(download_dir, range_download_year, "applicationDate")
-make_all_data_zip(download_dir)
-
+make_all_data_zip_csv(download_dir)
+make_all_data_zip_json(download_dir)
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
 # cmd="mongoexport -d arbk -c reg_businesses -q '%s' --out app/static/downloads/arbk-%s.json"%(query,year)
