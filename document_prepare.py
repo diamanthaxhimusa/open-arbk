@@ -116,14 +116,14 @@ def make_all_data_zip_csv(download_dir):
 def make_all_data_zip_json(download_dir):
     filename_json_zip = "%s/arbk-data(json).zip"%download_dir
     if os.path.isfile(filename_json_zip):
-        print 'arbk-data(csv).zip exitsts. Skipping'
+        print 'arbk-data(json).zip exitsts. Skipping'
     else:
         cursor = db.reg_businesses.find()
-        filename_json = "arbk-data.json"
+        print 'creating file: arbk-data(json).zip'
         with zipfile.ZipFile(filename_json_zip, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            print 'creating file: arbk-data(json).zip'
-            zipfile.writestr(filename_json, json_util.dumps(cursor))
-            zipfile.close()
+            filename_json = "arbk-data.json"
+            zip_file.writestr(filename_json, json_util.dumps(cursor))
+            zip_file.close()
 
 class DictUnicodeProxy(object):
     def __init__(self, d):
