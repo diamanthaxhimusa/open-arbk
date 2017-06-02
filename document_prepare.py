@@ -125,7 +125,7 @@ def make_all_data_zip_json(download_dir):
             docs = {}
             for doc in cursor:
                 docs.update(doc)
-            zip_file.writestr(filename_json, docs)
+            zip_file.writestr(filename_json, json.dumps(docs))
             zip_file.close()
 
 class DictUnicodeProxy(object):
