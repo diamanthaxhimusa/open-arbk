@@ -99,7 +99,7 @@ def make_all_data_zip_csv(download_dir):
             csvwriter.writeheader()
             try:
                 for doc in cursor:
-                    # print 'printing doc: [%s]'%doc['name']
+                    print 'printing doc: [%s]'%doc['name']
                     acts = ''
                     owners = ''
                     for i in doc['activities']:
@@ -114,7 +114,7 @@ def make_all_data_zip_csv(download_dir):
 
 def make_all_data_zip_json(download_dir):
     filename_json = "%s/arbk-data.json"%download_dir
-    if os.path.isfile(filename_json_zip):
+    if os.path.isfile(filename_json):
         print 'arbk-data.json exitsts. Skipping'
     else:
         cursor = db.reg_businesses.find()
