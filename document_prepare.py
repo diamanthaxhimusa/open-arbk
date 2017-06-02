@@ -36,7 +36,6 @@ def set_name_to_activities(given_code):
 
 def make_json(download_dir, range_download_year, type_of_date):
     for year in range_download_year:
-        cursor = download_biz_by_year(type_of_date,year)
         print 'creating %s documents: arbk-%s.json'%(type_of_date, year)
         if year == 2017:
             if type_of_date == "applicationDate":
@@ -48,11 +47,15 @@ def make_json(download_dir, range_download_year, type_of_date):
                 filename_json = '%s/arbk-%s(dataAplikimit).json'%(download_dir, year)
             else:
                 filename_json = '%s/arbk-%s(dataFillimit).json'%(download_dir, year)
-        with open(filename_json, 'w') as jsonfile:
-            jsonfile.write(json_util.dumps(cursor))
+        if os.path.isfile(filename_json):
+            print 'json exitsts: %s' % filename_json
+        else:
+            cursor = download_biz_by_year(type_of_date,year)
+            with open(filename_json, 'w') as jsonfile:
+                jsonfile.write(json_util.dumps(cursor))
+
 def make_csv(download_dir, range_download_year, type_of_date):
     for year in range_download_year:
-        cursor = download_biz_by_year(type_of_date,year)
         print 'creating %s documents: arbk-%s.csv'%(type_of_date, year)
         if year == 2017:
             if type_of_date == "applicationDate":
@@ -64,20 +67,25 @@ def make_csv(download_dir, range_download_year, type_of_date):
                 filename_csv = '%s/arbk-%s(dataAplikimit).csv'%(download_dir, year)
             else:
                 filename_csv = '%s/arbk-%s(dataFillimit).csv'%(download_dir, year)
-        with open(filename_csv, 'w') as csvfile:
-            fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for doc in cursor:
-                acts = ''
-                owners = ''
-                for i in doc['activities']:
-                    dc = set_name_to_activities(i)
-                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
-                for owner in doc['owners']:
-                    owners += '%s\n'%owner['name'].encode('utf-8')
-                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
-                writer.writerow(DictUnicodeProxy(row))
+        if os.path.isfile(filename_csv):
+            print 'csv exitsts: %s' % filename_csv
+        else:
+            cursor = download_biz_by_year(type_of_date,year)
+            with open(filename_csv, 'w') as csvfile:
+                fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for doc in cursor:
+                    acts = ''
+                    owners = ''
+                    for i in doc['activities']:
+                        dc = set_name_to_activities(i)
+                        acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                        for owner in doc['owners']:
+                            owners += '%s\n'%owner['name'].encode('utf-8')
+                            row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                            writer.writerow(DictUnicodeProxy(row))
+
 def make_all_data_zip(download_dir):
     cursor = db.reg_businesses.find()
     filename_json = "arbk-data.json"
@@ -125,7 +133,7 @@ make_json(download_dir, range_download_year, "establishmentDate")
 make_json(download_dir, range_download_year, "applicationDate")
 make_csv(download_dir, range_download_year, "establishmentDate")
 make_csv(download_dir, range_download_year, "applicationDate")
-make_all_data_zip(download_dir)
+# make_all_data_zip(download_dir)
 
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
