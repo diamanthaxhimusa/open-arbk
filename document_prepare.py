@@ -122,11 +122,7 @@ def make_all_data_zip_json(download_dir):
         print 'creating file: arbk-data(json).zip'
         with zipfile.ZipFile(filename_json_zip, 'w', zipfile.ZIP_DEFLATED) as zip_file:
             filename_json = "arbk-data.json"
-            docs = {}
-            for doc in cursor:
-                print 'printing doc: [%s]'%doc['name']
-                docs = doc
-            zip_file.writestr(filename_json, docs)
+            zip_file.writestr(filename_json, json_util.dumps(cursor))
             zip_file.close()
 
 class DictUnicodeProxy(object):
