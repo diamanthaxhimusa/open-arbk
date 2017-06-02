@@ -31,11 +31,11 @@ gender_people_json = json.load(gender_people_json_file)
 def slug_data(slug_string):
 	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
-    if "ë" in slug_string or "Ë" in slug_string:
-    	slugified_string = slugified_string.lower().replace("ë", "e").decode('utf-8')
-    elif "ç".decode('utf-8') in slug_string.decode('utf-8') or "Ç".decode('utf-8') in slug_string.decode('utf-8'):
-    	slugified_string = slugified_string.lower().replace("ç", "c").decode('utf-8')
     slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
+    slugified_string = re.sub(r'[ç|Ç|č|Ć|ć|Č]',r'c', slugified_string)
+    slugified_string = re.sub(r'[Š|š]',r's', slugified_string)
+    slugified_string = re.sub(r'[ž|Ž]',r'z', slugified_string)
+    slugified_string = re.sub(r'[Ë|ë]',r'e', slugified_string)
     return slugified_string.lower()
 
 def set_muni(given_city_bus):
