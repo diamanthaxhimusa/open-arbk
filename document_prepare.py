@@ -122,7 +122,10 @@ def make_all_data_zip_json(download_dir):
         print 'creating file: arbk-data(json).zip'
         with zipfile.ZipFile(filename_json_zip, 'w', zipfile.ZIP_DEFLATED) as zip_file:
             filename_json = "arbk-data.json"
-            zip_file.writestr(filename_json, json_util.dumps(cursor))
+            docs = {}
+            for doc in cursor:
+                docs.update(doc)
+            zip_file.writestr(filename_json, docs)
             zip_file.close()
 
 class DictUnicodeProxy(object):
@@ -137,12 +140,12 @@ class DictUnicodeProxy(object):
         return i
 
 download_dir = 'app/static/downloads'
-range_download_year = range(2002,2018)
-make_json(download_dir, range_download_year, "establishmentDate")
-make_json(download_dir, range_download_year, "applicationDate")
-make_csv(download_dir, range_download_year, "establishmentDate")
-make_csv(download_dir, range_download_year, "applicationDate")
-make_all_data_zip_csv(download_dir)
+# range_download_year = range(2002,2018)
+# make_json(download_dir, range_download_year, "establishmentDate")
+# make_json(download_dir, range_download_year, "applicationDate")
+# make_csv(download_dir, range_download_year, "establishmentDate")
+# make_csv(download_dir, range_download_year, "applicationDate")
+# make_all_data_zip_csv(download_dir)
 make_all_data_zip_json(download_dir)
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
