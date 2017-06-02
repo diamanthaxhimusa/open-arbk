@@ -119,8 +119,20 @@ def make_all_data_zip_json(download_dir):
     else:
         cursor = db.reg_businesses.find()
         print 'creating file: arbk-data.json'
-        with open(filename_json, 'w') as jsonfile:
-            jsonfile.write(json_util.dumps(cursor))
+        with open(filename_json, 'wb') as jsonfile:
+            doc_json = []
+            for doc in cursor:
+                print 'printing doc: [%s]'%doc['name']
+                acts = ''
+                owners = ''
+                for i in doc['activities']:
+                    dc = set_name_to_activities(i)
+                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                for owner in doc['owners']:
+                    owners += '%s\n'%owner['name'].encode('utf-8')
+                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                doc_json.append(row)
+            jsonfile.write(json_util.dumps(doc_json))
 
 class DictUnicodeProxy(object):
     def __init__(self, d):
