@@ -88,7 +88,6 @@ def make_csv(download_dir, range_download_year, type_of_date):
 
 def make_all_data_zip_csv(download_dir):
     cursor = db.reg_businesses.find()
-    i =0
     import zlib
     print 'creating file: arbk-data(csv).zip'
     with zipfile.ZipFile("%s/arbk-data(csv).zip"%download_dir, 'w', zipfile.ZIP_DEFLATED) as zip_file:
@@ -98,8 +97,7 @@ def make_all_data_zip_csv(download_dir):
         csvwriter = csv.DictWriter(string_buffer, delimiter=',', fieldnames=fieldnames)
         csvwriter.writeheader()
         for doc in cursor:
-            i+=1
-            print 'printing doc: [%s]'%str(i)
+            print 'printing doc: [%s]'%doc['name']
             acts = ''
             owners = ''
             for i in doc['activities']:
@@ -113,7 +111,6 @@ def make_all_data_zip_csv(download_dir):
 def make_all_data_zip_json(download_dir):
     cursor = db.reg_businesses.find()
     filename_json = "arbk-data.json"
-    i =0
     import zlib
     zf = zipfile.ZipFile('%s/arbk-data(json).zip'%download_dir, 'w', zipfile.ZIP_DEFLATED)
     try:
