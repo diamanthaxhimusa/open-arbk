@@ -92,19 +92,22 @@ def make_all_data_zip(download_dir):
     import zlib
     zf = zipfile.ZipFile('%s/arbk-data(json).zip'%download_dir, 'w', zipfile.ZIP_DEFLATED)
     try:
-        print 'adding arbk-data(json).zip'
+        print 'creating file: arbk-data(json).zip'
         zf.writestr(filename_json, json_util.dumps(cursor))
     finally:
         print 'closing'
         zf.close()
-    print 'creating file: arbk-data.csv'
+    print 'creating file: arbk-data(csv).zip'
     with zipfile.ZipFile("%s/arbk-data(csv).zip"%download_dir, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         filename_csv = 'arbk-data.csv'
         string_buffer = StringIO()
         fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
         csvwriter = csv.DictWriter(string_buffer, delimiter=',', fieldnames=fieldnames)
         csvwriter.writeheader()
+        i =0
         for doc in cursor:
+            i+=1
+            print 'printing doc: [%s]'%str(i)
             acts = ''
             owners = ''
             for i in doc['activities']:
