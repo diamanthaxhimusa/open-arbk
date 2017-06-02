@@ -125,14 +125,7 @@ def make_all_data_zip_json(download_dir):
             docs = {}
             for doc in cursor:
                 print 'printing doc: [%s]'%doc['name']
-                acts = ''
-                owners = ''
-                for i in doc['activities']:
-                    dc = set_name_to_activities(i)
-                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
-                for owner in doc['owners']:
-                    owners += '%s\n'%owner['name'].encode('utf-8')
-                docs = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                docs = doc
             zip_file.writestr(filename_json, docs)
             zip_file.close()
 

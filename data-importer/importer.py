@@ -9,6 +9,7 @@ sys.setdefaultencoding('utf-8')
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
 
+
 with open("data-importer/activities.json","r") as data:
     activities = json.load(data)
     for activity in activities['activities']:
@@ -21,6 +22,12 @@ with open("data-importer/komunat.json","r") as data:
         for muni_place in municipalities[municipality]:
             place.append(muni_place)
         db.municipalities.insert({"municipality":municipality, "districts":place})
+
+municipalities_json_file = open("data-importer/komunat.json")
+municipalities_json = json.load(municipalities_json_file)
+gender_people_json_file = open("data-importer/gender_people.json")
+gender_people_json = json.load(gender_people_json_file)
+
 def slug_data(slug_string):
 	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
@@ -32,42 +39,40 @@ def slug_data(slug_string):
     return slugified_string.lower()
 
 def set_muni(given_city_bus):
-    with open("data-importer/komunat.json","r") as data:
-        municipalities = json.load(data)
-    	cities = {}
-    	found = False
-    	for place in municipalities:
-            for city in municipalities[place]:
-                if city != '_id':
-        			for village in municipalities[place]:
-        				if village == given_city_bus:
-        					found = True
-        					cities = {
-        						"municipality": place,
-        						"place": given_city_bus
-        					}
-    	if found:
-    		return cities
-    	else:
-    		cities = {
-    			"municipality": "Unknown",
-    			"place": given_city_bus
-    		}
-    		return cities
+    municipalities = municipalities_json
+	cities = {}
+	found = False
+	for place in municipalities:
+        for city in municipalities[place]:
+            if city != '_id':
+    			for village in municipalities[place]:
+    				if village == given_city_bus:
+    					found = True
+    					cities = {
+    						"municipality": place,
+    						"place": given_city_bus
+    					}
+	if found:
+		return cities
+	else:
+		cities = {
+			"municipality": "Unknown",
+			"place": given_city_bus
+		}
+		return cities
 
 def gender_person(person):
-    with open("data-importer/gender_people.json","r") as data2:
-        names = json.load(data2)
-        owner = {}
-        divide = person.split(" ")
-        # for gender in names:
-    	if divide[0].title() in names['females']:
-    		owner = {"name":person, "gender" : "female"}
-    	elif divide[0].title() in names['males']:
-    		owner = {"name":person, "gender" : "male"}
-    	else:
-    		owner = {"name":person, "gender" : "unknown"}
-        return owner
+    names = gender_people_json
+    owner = {}
+    divide = person.split(" ")
+    # for gender in names:
+	if divide[0].title() in names['females']:
+		owner = {"name":person, "gender" : "female"}
+	elif divide[0].title() in names['males']:
+		owner = {"name":person, "gender" : "male"}
+	else:
+		owner = {"name":person, "gender" : "unknown"}
+    return owner
 
 def main():
     docs = db.businesses.find()
@@ -165,3 +170,5 @@ def main():
         print 'Generating documents: [%s]'%i
 
 main()
+municipalities_json_file.close()
+gender_people_json_file.close()
