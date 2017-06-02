@@ -124,8 +124,16 @@ def make_all_data_zip_json(download_dir):
             filename_json = "arbk-data.json"
             docs = {}
             for doc in cursor:
-                docs.update(doc)
-            zip_file.writestr(filename_json, json.dumps(docs))
+                print 'printing doc: [%s]'%doc['name']
+                acts = ''
+                owners = ''
+                for i in doc['activities']:
+                    dc = set_name_to_activities(i)
+                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                for owner in doc['owners']:
+                    owners += '%s\n'%owner['name'].encode('utf-8')
+                docs = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+            zip_file.writestr(filename_json, docs)
             zip_file.close()
 
 class DictUnicodeProxy(object):
@@ -140,12 +148,12 @@ class DictUnicodeProxy(object):
         return i
 
 download_dir = 'app/static/downloads'
-# range_download_year = range(2002,2018)
-# make_json(download_dir, range_download_year, "establishmentDate")
-# make_json(download_dir, range_download_year, "applicationDate")
-# make_csv(download_dir, range_download_year, "establishmentDate")
-# make_csv(download_dir, range_download_year, "applicationDate")
-# make_all_data_zip_csv(download_dir)
+range_download_year = range(2002,2018)
+make_json(download_dir, range_download_year, "establishmentDate")
+make_json(download_dir, range_download_year, "applicationDate")
+make_csv(download_dir, range_download_year, "establishmentDate")
+make_csv(download_dir, range_download_year, "applicationDate")
+make_all_data_zip_csv(download_dir)
 make_all_data_zip_json(download_dir)
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
