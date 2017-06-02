@@ -87,43 +87,40 @@ def make_csv(download_dir, range_download_year, type_of_date):
                     writer.writerow(DictUnicodeProxy(row))
 
 def make_all_data_zip_csv(download_dir):
-    filename_csv_zip = "%s/arbk-data(csv).zip"%download_dir
-    if os.path.isfile(filename_csv_zip):
+    filename_csv = '%s/arbk-data.csv'%download_dir
+    if os.path.isfile(filename_csv):
         print 'arbk-data(csv).zip exitsts. Skipping'
     else:
         cursor = db.reg_businesses.find()
         print 'creating file: arbk-data(csv).zip'
-        with zipfile.ZipFile(filename_csv_zip, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            filename_csv = 'arbk-data.csv'
-            string_buffer = StringIO()
+        with open(filename_csv, 'w') as csvfile:
             fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet']
-            csvwriter = csv.DictWriter(string_buffer, delimiter=',', fieldnames=fieldnames)
+            csvwriter = csv.DictWriter(csvfile, delimiter=',', fieldnames=fieldnames)
             csvwriter.writeheader()
-            for doc in cursor:
-                print 'printing doc: [%s]'%doc['name']
-                acts = ''
-                owners = ''
-                for i in doc['activities']:
-                    dc = set_name_to_activities(i)
-                    acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
-                for owner in doc['owners']:
-                    owners += '%s\n'%owner['name'].encode('utf-8')
-                row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
-                csvwriter.writerow(DictUnicodeProxy(row))
-            zip_file.writestr(filename_csv, string_buffer.getvalue())
-            zip_file.close()
+            try:
+                for doc in cursor:
+                    # print 'printing doc: [%s]'%doc['name']
+                    acts = ''
+                    owners = ''
+                    for i in doc['activities']:
+                        dc = set_name_to_activities(i)
+                        acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                    for owner in doc['owners']:
+                        owners += '%s\n'%owner['name'].encode('utf-8')
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
+                    csvwriter.writerow(DictUnicodeProxy(row))
+            except Exception:
+                print str(Exception)
 
 def make_all_data_zip_json(download_dir):
-    filename_json_zip = "%s/arbk-data(json).zip"%download_dir
+    filename_json = "%s/arbk-data.json"%download_dir
     if os.path.isfile(filename_json_zip):
-        print 'arbk-data(json).zip exitsts. Skipping'
+        print 'arbk-data.json exitsts. Skipping'
     else:
         cursor = db.reg_businesses.find()
-        print 'creating file: arbk-data(json).zip'
-        with zipfile.ZipFile(filename_json_zip, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            filename_json = "arbk-data.json"
-            zip_file.writestr(filename_json, json_util.dumps(cursor))
-            zip_file.close()
+        print 'creating file: arbk-data.json'
+        with open(filename_json, 'w') as jsonfile:
+            jsonfile.write(json_util.dumps(cursor))
 
 class DictUnicodeProxy(object):
     def __init__(self, d):
