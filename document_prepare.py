@@ -133,7 +133,7 @@ make_json(download_dir, range_download_year, "establishmentDate")
 make_json(download_dir, range_download_year, "applicationDate")
 make_csv(download_dir, range_download_year, "establishmentDate")
 make_csv(download_dir, range_download_year, "applicationDate")
-# make_all_data_zip(download_dir)
+make_all_data_zip(download_dir)
 
 
 # query = "{"'"establishmentDate"'":{"'"$gt"'": ISODate("'"%s-01-01T00:00:00.000Z"'"),"'"$lte"'": ISODate("'"%s-01-01T00:00:00.000Z"'")}}"%(str(year),str(year+1))
