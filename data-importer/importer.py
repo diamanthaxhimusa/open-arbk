@@ -40,38 +40,35 @@ def slug_data(slug_string):
 
 def set_muni(given_city_bus):
     municipalities = municipalities_json
-	cities = {}
-	found = False
-	for place in municipalities:
+    cities = {}
+    found = False
+    for place in municipalities:
         for city in municipalities[place]:
             if city != '_id':
-    			for village in municipalities[place]:
-    				if village == given_city_bus:
-    					found = True
-    					cities = {
-    						"municipality": place,
-    						"place": given_city_bus
-    					}
-	if found:
-		return cities
-	else:
-		cities = {
-			"municipality": "Unknown",
-			"place": given_city_bus
-		}
-		return cities
+                for village in municipalities[place]:
+                    if village == given_city_bus:
+                        found = True
+                        cities = {"municipality": place,"place": given_city_bus}
+    if found:
+        return cities
+    else:
+        cities = {
+        "municipality": "Unknown",
+        "place": given_city_bus
+        }
+        return cities
 
 def gender_person(person):
     names = gender_people_json
     owner = {}
     divide = person.split(" ")
     # for gender in names:
-	if divide[0].title() in names['females']:
-		owner = {"name":person, "gender" : "female"}
-	elif divide[0].title() in names['males']:
-		owner = {"name":person, "gender" : "male"}
-	else:
-		owner = {"name":person, "gender" : "unknown"}
+    if divide[0].title() in names['females']:
+    	owner = {"name":person, "gender" : "female"}
+    elif divide[0].title() in names['males']:
+    	owner = {"name":person, "gender" : "male"}
+    else:
+    	owner = {"name":person, "gender" : "unknown"}
     return owner
 
 def main():
