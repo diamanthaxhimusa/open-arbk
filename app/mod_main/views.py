@@ -367,4 +367,4 @@ def download_doc_year(doc_type, doc_date_type, year):
 
 @mod_main.route('/download/<string:doc_type>/all-zip', methods=['GET'])
 def download_doc_all(doc_type):
-    return send_from_directory(download_folder, "arbk-data.%s"%doc_type, as_attachment=True)
+    return send_from_directory(download_folder, "arbk-data-%s.zip"%doc_type, as_attachment=True)
