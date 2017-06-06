@@ -102,7 +102,7 @@
                                        <select id="placesSearch" class="custom-form-item form-control" name="municipality" id="poz">
                                            <option value="any" selected="selected">Gjith&euml; Kosova</option>
                                            {% for municipality in municipalities%}
-                                           <option value="{{municipality.municipality}}">{{municipality.municipality}}</option>
+                                           <option value="{{municipality.slug}}">{{municipality.municipality}}</option>
                                            {% endfor %}
                                        </select>
                                    </div>

@@ -57,11 +57,6 @@
         var person_status = getUrlParameter('person-status');
         var person = getUrlParameter('person');
         var business = getUrlParameter('business');
-        $('#placesSearch').val(municipality);
-        $('#biz_statusSearch').val(biz_status);
-        $('#typeSearch').val(person_status);
-        $('#person-search-field').val(person);
-        $('#biz-search-field').val(business);
         if (isNaN(parseFloat(urlParam))) {
             urlParam = 1;
         }
@@ -69,6 +64,20 @@
             person_status = "any";
             biz_status = "any";
             municipality = "any";
+        }
+        else if (person_status == null && biz_status == null && municipality == null) {
+            person_status = "any";
+            biz_status = "any";
+            municipality = "any";
+            $('#placesSearch').val("any");
+            $('#biz_statusSearch').val("any");
+            $('#typeSearch').val("any");
+        }else{
+            $('#placesSearch').val(municipality);
+            $('#biz_statusSearch').val(biz_status);
+            $('#typeSearch').val(person_status);
+            $('#person-search-field').val(person);
+            $('#biz-search-field').val(business);
         }
         if (person == undefined && business == undefined) {
             person = "";
@@ -107,7 +116,16 @@
         var person_status = $('#typeSearch').val();
         var person = $('#person-search-field').val();
         var business = $('#biz-search-field').val();
-
+        if (person_status == undefined && biz_status == undefined && municipality == undefined) {
+            person_status = "any";
+            biz_status = "any";
+            municipality = "any";
+        }
+        if (person_status == null && biz_status == null && municipality == null) {
+            person_status = "any";
+            biz_status = "any";
+            municipality = "any";
+        }
         window.location.href = "?municipality="+municipality+"&biz-status="+biz_status+"&person-status="+person_status+"&person="+person+"&business="+business+"";
     }
 </script>

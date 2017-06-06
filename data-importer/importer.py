@@ -1,28 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-import re, json
+import re, json, unidecode
+from slugify import slugify
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
-
-
-with open("data-importer/activities.json","r") as data:
-    activities = json.load(data)
-    for activity in activities['activities']:
-        db.activities.insert(activity)
-
-with open("data-importer/komunat.json","r") as data:
-    municipalities = json.load(data)
-    for municipality in municipalities:
-        place = []
-        for muni_place in municipalities[municipality]:
-            place.append(muni_place)
-        db.municipalities.insert({"municipality":municipality, "districts":place})
-
+db.reg_businesses.drop()
 municipalities_json_file = open("data-importer/komunat.json")
 municipalities_json = json.load(municipalities_json_file)
 gender_people_json_file = open("data-importer/gender_people.json")
@@ -32,10 +19,7 @@ def slug_data(slug_string):
 	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
     slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
-    slugified_string = re.sub(r'[ç|Ç|č|Ć|ć|Č]',r'c', slugified_string)
-    slugified_string = re.sub(r'[Š|š]',r's', slugified_string)
-    slugified_string = re.sub(r'[ž|Ž]',r'z', slugified_string)
-    slugified_string = re.sub(r'[Ë|ë]',r'e', slugified_string)
+    slugified_string = unidecode.unidecode(slugified_string)
     return slugified_string.lower()
 
 def set_muni(given_city_bus):
@@ -144,6 +128,7 @@ def main():
         except Exception as e:
             pass
         slug_company = slug_data(slugified_company_string)
+        slug_city = slugify(city['municipality'])
         db.reg_businesses.insert({
             "registrationNum": reg_num,
             "type": buss_type,
@@ -161,7 +146,8 @@ def main():
             "slugifiedBusiness": slug_company,
             "slugifiedAuthorized": slug_auth,
             "authorized": gen_auth,
-            "municipality": city
+            "municipality": city,
+            "slugifiedMunicipality":slug_city
         })
         i += 1
         print 'Generating documents: [%s]'%i

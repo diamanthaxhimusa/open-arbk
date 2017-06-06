@@ -106,31 +106,6 @@ def search_engine(page, items_per_page, business, biz_status, person, person_sta
         result = "error"
     return result
 
-# @mod_main.route('/', methods=['GET', 'POST'])
-# def index():
-#     municipalities = mongo_utils.get_municipalities()
-#     if request.method == 'GET':
-#         page = request.args.get('page', default=1, type=int)
-#         result = mongo_utils.get_limit_search(page, 10)
-#         docs_count = mongo_utils.docs_count() / 10
-#     if request.method == 'POST':
-#         search_keyword = request.form['person']
-#         business_keyword = request.form['business']
-#         business = business_keyword.lower()
-#         person = search_keyword.lower()
-#         status = request.form['person_status']
-#         city = request.form['municipality']
-#         biz_status = request.form['biz_status']
-#         person_status = ""
-#         if status == "auth":
-#             person_status = "slugifiedAuthorized"
-#         elif status == "owner":
-#             person_status = "slugifiedOwners"
-#         else:
-#             person_status = "any"
-#         result = search_engine(business, biz_status, person, person_status, city)
-#     return render_template('index.html', search_result=result, count=docs_count, municipalities = municipalities)
-
 @mod_main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
