@@ -162,12 +162,15 @@ def search_result():
 def profile(status, person):
     person_to_lower = person.lower()
     municipalities = mongo_utils.get_municipalities()
+    page = request.args.get('page', default=1, type=int)
+    items_per_page = 10
     if status == 'owner':
-        person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower)
+        person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower, page, items_per_page)
     else:
-        person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower)
-    return render_template('profile.html', profile_data=person_data,
-                           municipalities=municipalities, status=status, person=person)
+        person_data = mongo_utils.get_profiles("slugifiedAuthorized", person_to_lower, page, items_per_page)
+
+    return render_template('profile.html', profile_data=person_data['result'], count=person_data['count'],
+                           municipalities=municipalities, status=status, person=person, items_per_page=items_per_page)
 
 @mod_main.route('/visualization', methods=['GET', 'POST'])
 def visualization():

@@ -9,73 +9,97 @@
         </div>
         <div class="row">
           <h3 style="text-align:center;">Rezultatet rreth {{person}}</h3>
-            <table class="table table-striped" id="searchTable">
+          <div class="col-xs-12 text-left">
+              <span>T&euml;
+                  {%if count < 10%}
+                      shfaqura {{count}} dokumente
+                  {%else%}
+                      shfaqura 10 nga {{count}} dokumente
+                  {%endif%}
+                   dokumente:</span>
+          </div>
+          <table class="table table-striped table-bordered" id="searchTable">
               <thead>
-                  <th>Emri i Biznesit</th>
-                  <th>Statusi i Biznesit</th>
-                  <th>Komuna</th>
-                  <th>Pronaret</th>
-                  <th>Te autorizuaret</th>
+                  <tr>
+                      <th>Emri i Biznesit</th>
+                      <th>Statusi i Biznesit</th>
+                      <th>Komuna</th>
+                      <th>Pronar&euml;t</th>
+                      <th>T&euml; autorizuar&euml;t</th>
+                  </tr>
               </thead>
               <tbody>
-                  {% for i in profile_data %}
-                  <tr>
-                      <td>
-                          <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
-                      </td>
-                      <td>
-                          {{i['status']}}
-                      </td>
-                      <td>
-                          {{i['municipality']['municipality']}}
-                      </td>
-                      <td>
-                        {% if status == 'owner' %}
-                            {{person}}
-                        {% else %}
-                          <ul>
-                            {% for owner in i['owners'] %}
-                                <li><a href="{{url_for('main.profile', person=owner['name'], status='owner')}}">{{owner['name']}}</a></li>
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
-                      </td>
-                      <td>
-                        {% if status == 'authorized' %}
-                            {{person}}
-                        {% else %}
-                          <ul>
-                            {% for auth in i['authorized'] %}
-                                <li><a href="{{url_for('main.profile', person=auth['name'], status='authorized')}}">{{auth['name']}}</a></li>
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
-                      </td>
-                  </tr>
-                  {% endfor %}
+                  {%if count != 0%}
+                      {% for doc in profile_data %}
+                      <tr>
+                          <td><a href="{{doc['arbkUrl']}}">{{doc['name']}}</a></td>
+                          <td>{{doc['status']}}</td>
+                          <td>{{doc['municipality']['municipality']}}</td>
+                          <td>
+                              {% for owner in doc['owners'] %}
+                              <a href="{{url_for('main.profile', status="owner", person=owner['name'])}}">{{owner['name']}}</a><br/>
+                              {% endfor %}
+                          </td>
+                          <td>
+                              {% for auth in doc['authorized'] %}
+                              <a href="{{url_for('main.profile', status="authorized", person=auth['name'])}}">{{auth['name']}}</a><br/>
+                              {% endfor %}
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  {%else%}
+                      <tr>
+                          <td colspan="5" class="text-center">
+                              Nuk u gjet ansj&euml; dokument!
+                          </td>
+                      </tr>
+                  {%endif%}
               </tbody>
           </table>
+          <div class="col-xs-12 text-center">
+              <ul id="pagination-demo" class="pagination-sm"></ul>
+          </div>
           </div>
         </div>
       </div>
     </section>
-
+    <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
     <script type="text/javascript">
     $(document).ready( function () {
-        $('#searchTable').DataTable({
-        searching: false,
-        "language": {
-            "lengthMenu": "T&euml; shfaqur  _MENU_  persona",
-            "zeroRecords": "Asgj&euml; nuk u gjet!",
-            "info": "Faqja _PAGE_ nga _PAGES_",
-            "infoEmpty": "Nuk ka rezultate!",
-            "infoFiltered": "(filtruar nga _MAX_ totali i rezultateve)",
-            "paginate": {
-                "previous": "Prapa",
-                "next": "Para"
-            }
-        }});
+        var urlParam = parseInt(getUrlParameter('page'));
+        if (isNaN(parseFloat(urlParam))) {
+            urlParam = 1;
+        }
+        if (parseInt("{{count}}") != 0) {
+            $('#pagination-demo').twbsPagination({
+                startPage: urlParam,
+                totalPages: Math.ceil(parseInt("{{count}}")/parseInt("{{items_per_page}}")),
+                visiblePages: 7,
+                first:"E para",
+                prev:"Prapa",
+                next:"Perpara",
+                last:"E fundit",
+                initiateStartPageClick: false,
+                onPageClick: function (event, page) {
+                    window.location.href = "?page="+page;
+                }
+            });
+        }
     });
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    }
 </script>
 
 {% endblock %}

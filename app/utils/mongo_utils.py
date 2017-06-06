@@ -266,9 +266,11 @@ class MongoUtils(object):
         return {"result":result, "count":count}
 
     # Profile queries
-    def get_profiles(self, people_type, person):
+    def get_profiles(self, people_type, person, page, items_per_page):
         result = self.mongo.db[self.reg_businesses_collection].find({people_type: {"$in": [person]}})
-        return result
+        final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
+        count = result.count()
+        return {"result":final_result, "count":count}
 
     # Top ten capital businesses
     def get_top_ten_by_capital(self):
