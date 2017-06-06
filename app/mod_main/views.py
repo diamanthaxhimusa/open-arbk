@@ -3,120 +3,166 @@
 from flask import Blueprint, render_template, Response, request, send_file, send_from_directory
 from app import mongo_utils, download_folder
 from bson import json_util
-import sys, csv, json
+import sys, csv, json, math
 reload(sys)
 
 mod_main = Blueprint('main', __name__)
 
 
-def search_engine(business, biz_status, person, person_status, municipality):
+def search_engine(page, items_per_page, business, biz_status, person, person_status, municipality):
     if business == "" and person == "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.get_limit_businesses(100)
+            result = mongo_utils.get_limit_search(page, items_per_page)
             return result
         elif person_status == "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_docs_by_municipality(municipality)
+            result = mongo_utils.search_docs_by_municipality(municipality, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_docs_by_biz_status(biz_status)
+            result = mongo_utils.search_docs_by_biz_status(biz_status, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality)
+            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.get_limit_businesses(100)
+            result = mongo_utils.get_limit_search(page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_docs_by_municipality(municipality)
+            result = mongo_utils.search_docs_by_municipality(municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_docs_by_biz_status(biz_status)
+            result = mongo_utils.search_docs_by_biz_status(biz_status, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality)
+            result = mongo_utils.search_docs_by_biz_status_municipality(biz_status, municipality, page, items_per_page)
             return result
         return 'error'
     elif business == "" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.search_people(person)
+            result = mongo_utils.search_people(person, page, items_per_page)
             return result
         elif person_status == "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_people_municipality(person, municipality)
+            result = mongo_utils.search_people_municipality(person, municipality, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_people_biz_stat(biz_status, person)
+            result = mongo_utils.search_people_biz_stat(biz_status, person, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_people_municipality_biz_stat(biz_status, person, municipality)
+            result = mongo_utils.search_people_municipality_biz_stat(biz_status, person, municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.search_people_status(person, person_status)
+            result = mongo_utils.search_people_status(person, person_status, page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_people_status_municipality(person, person_status, municipality)
+            result = mongo_utils.search_people_status_municipality(person, person_status, municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status)
+            result = mongo_utils.search_people_status_biz_stat(biz_status, person, person_status, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality)
+            result = mongo_utils.search_people_status_municipality_biz_stat(biz_status, person, person_status, municipality, page, items_per_page)
             return result
         return 'error'
     elif business != "" and person == "":
         if municipality == "any" and biz_status == "any":
-            result = mongo_utils.get_biz(business)
+            result = mongo_utils.get_biz(business, page, items_per_page)
             return result
         elif municipality == "any" and biz_status != "any":
-            result = mongo_utils.search_biz_by_status(business, biz_status)
+            result = mongo_utils.search_biz_by_status(business, biz_status, page, items_per_page)
             return result
         elif municipality !="any" and biz_status == "any":
-            result = mongo_utils.get_biz_by_municipality(business, municipality)
+            result = mongo_utils.get_biz_by_municipality(business, municipality, page, items_per_page)
             return result
         elif municipality !="any" and biz_status != "any":
-            result = mongo_utils.get_biz_by_municipality_status(business, municipality, biz_status)
+            result = mongo_utils.get_biz_by_municipality_status(business, municipality, biz_status, page, items_per_page)
             return result
         return 'error'
     elif business !="" and person != "":
         if person_status == "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.search_biz_people(business, person)
+            result = mongo_utils.search_biz_people(business, person, page, items_per_page)
             return result
         elif person_status == "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_biz_people_municipality(business, person, municipality)
+            result = mongo_utils.search_biz_people_municipality(business, person, municipality, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_biz_status_people(business, biz_status, person)
+            result = mongo_utils.search_biz_status_people(business, biz_status, person, page, items_per_page)
             return result
         elif person_status == "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_biz_status_people_municipality(business, biz_status, person, municipality)
+            result = mongo_utils.search_biz_status_people_municipality(business, biz_status, person, municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality == "any":
-            result = mongo_utils.search_biz_people_status(business, person, person_status)
+            result = mongo_utils.search_biz_people_status(business, person, person_status, page, items_per_page)
             return result
         elif person_status != "any" and biz_status == "any" and municipality != "any":
-            result = mongo_utils.search_biz_people_status_municipality(business, person, person_status, municipality)
+            result = mongo_utils.search_biz_people_status_municipality(business, person, person_status, municipality, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality == "any":
-            result = mongo_utils.search_biz_status_people_status(business, biz_status, person, person_status)
+            result = mongo_utils.search_biz_status_people_status(business, biz_status, person, person_status, page, items_per_page)
             return result
         elif person_status != "any" and biz_status != "any" and municipality != "any":
-            result = mongo_utils.search_biz_status_people_status_municipality(business, biz_status, person, person_status, municipality)
+            result = mongo_utils.search_biz_status_people_status_municipality(business, biz_status, person, person_status, municipality, page, items_per_page)
             return result
         return result
     else:
         result = "error"
     return result
 
+# @mod_main.route('/', methods=['GET', 'POST'])
+# def index():
+#     municipalities = mongo_utils.get_municipalities()
+#     if request.method == 'GET':
+#         page = request.args.get('page', default=1, type=int)
+#         result = mongo_utils.get_limit_search(page, 10)
+#         docs_count = mongo_utils.docs_count() / 10
+#     if request.method == 'POST':
+#         search_keyword = request.form['person']
+#         business_keyword = request.form['business']
+#         business = business_keyword.lower()
+#         person = search_keyword.lower()
+#         status = request.form['person_status']
+#         city = request.form['municipality']
+#         biz_status = request.form['biz_status']
+#         person_status = ""
+#         if status == "auth":
+#             person_status = "slugifiedAuthorized"
+#         elif status == "owner":
+#             person_status = "slugifiedOwners"
+#         else:
+#             person_status = "any"
+#         result = search_engine(business, biz_status, person, person_status, city)
+#     return render_template('index.html', search_result=result, count=docs_count, municipalities = municipalities)
+
 @mod_main.route('/', methods=['GET', 'POST'])
 def index():
-    municipalities = mongo_utils.get_municipalities()
-    return render_template('index.html', municipalities = municipalities)
+    if request.method == 'GET':
+        search_keyword = request.args.get('person', default="", type=str)
+        business_keyword = request.args.get('business', default="", type=str)
+        status = request.args.get('person-status', default="any", type=str)
+        city = request.args.get('municipality', default="any", type=str)
+        biz_status = request.args.get('biz-status', default="any", type=str)
+        business = business_keyword.lower()
+        person = search_keyword.lower()
+        person_status = ""
+        if status == "auth":
+            person_status = "slugifiedAuthorized"
+        elif status == "owner":
+            person_status = "slugifiedOwners"
+        else:
+            person_status = "any"
+        page = request.args.get('page', default=1, type=int)
+        municipalities = mongo_utils.get_municipalities()
+        items_per_page = 10
+        result = search_engine(page, items_per_page, business, biz_status, person, person_status, city)
+        docs_count = result['count']
+        return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)
+
 @mod_main.route('/search-result', methods=['GET', 'POST'])
 def search_result():
     if request.method == 'GET':
-        mongo_utils.index_create()
         municipalities = mongo_utils.get_municipalities()
-        result = mongo_utils.get_limit_businesses(100)
-        return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+        page = request.args.get('page', default=1, type=int)
+        result = mongo_utils.get_limit_search(page, 10)
+        docs_count = mongo_utils.docs_count() / 10
+        return render_template('index.html', search_result=result, count=docs_count, municipalities = municipalities)
     if request.method == 'POST':
         mongo_utils.index_create()
         municipalities = mongo_utils.get_municipalities()
