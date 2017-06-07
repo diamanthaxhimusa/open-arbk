@@ -66,6 +66,10 @@
         if (isNaN(parseFloat(urlParam))) {
             urlParam = 1;
         }
+        $('html, body').stop().animate({
+            scrollTop: ($('#searchTable').offset().top - 150)
+        }, 1250, 'easeInOutExpo');
+        event.preventDefault();
         if (person_status == undefined && biz_status == undefined && municipality == undefined) {
             person_status = "any";
             biz_status = "any";
