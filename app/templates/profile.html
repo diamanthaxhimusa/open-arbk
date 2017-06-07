@@ -14,7 +14,7 @@
                   {%if count < 10%}
                       shfaqura {{count}} dokumente
                   {%else%}
-                      shfaqura 10 nga {{count}} dokumente
+                      shfaqura <span id="tableLength"></span> nga {{count}} dokumente
                   {%endif%}
                    dokumente:</span>
           </div>
@@ -67,6 +67,7 @@
     <script src="{{url_for('static', filename='js/search.js')}}"></script>
     <script type="text/javascript">
     $(document).ready( function () {
+        $('#tableLength').html($('#searchTable tbody tr').length);
         $('html, body').stop().animate({
             scrollTop: ($('#searchTable').offset().top - 190)
         }, 1250, 'easeInOutExpo');

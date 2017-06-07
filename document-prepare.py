@@ -109,8 +109,8 @@ def make_all_data_zip_csv(download_dir):
                         owners += '%s\n'%owner['name'].encode('utf-8')
                     row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts}
                     csvwriter.writerow(DictUnicodeProxy(row))
-            except Exception:
-                print str(Exception)
+            except Exception as e:
+                print str(e)
 
 class DictUnicodeProxy(object):
     def __init__(self, d):
