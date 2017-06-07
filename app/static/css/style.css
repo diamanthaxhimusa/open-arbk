@@ -83,6 +83,12 @@ button{
 	width: 100%;
 	overflow: auto;
 }
+
+#pageNotFound{
+	font-size: 20px;
+	font-weight: bold;
+}
+
 #activity_val{
 	max-height: 320px;
 	overflow-y: scroll;

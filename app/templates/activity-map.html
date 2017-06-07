@@ -22,6 +22,7 @@
                             &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </button>
                         <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
+                            <li><a href="javascript:onActivitySelection('all')">T&euml; gjitha</a></li>
                             {% for i in activities%}
                             <li><a href="javascript:onActivitySelection('{{ i['activity'] }}')">
                                 {% if i['code']|length == 3 %}

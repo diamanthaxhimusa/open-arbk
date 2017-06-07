@@ -187,17 +187,23 @@ def activity_map():
 @mod_main.route('/mapi', methods=['GET', 'POST'])
 def mapi():
     if request.method == 'GET':
-        agg = mongo_utils.mapi("Aktivitetet e tjera p.k.t.")
+        agg = mongo_utils.mapi_all()
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     if request.method == 'POST':
         activity = request.form['activity_name']
         status = request.form['status']
-        if status == "Aktiv" or status == "Shuar":
-            agg = mongo_utils.mapi_status(activity, status)
+        if activity != "all":
+            if status == "Aktiv" or status == "Shuar":
+                agg = mongo_utils.mapi_status(activity, status)
+            else:
+                agg = mongo_utils.mapi(activity)
         else:
-            agg = mongo_utils.mapi(activity)
+            if status == "Aktiv" or status == "Shuar":
+                agg = mongo_utils.mapi_all_status(status)
+            else:
+                agg = mongo_utils.mapi_all()
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
-    return Response(response='hello', status=404, mimetype='application/json')
+    return Response(response='Error', status=404, mimetype='application/json')
 @mod_main.route('/gender-owners', methods=['GET', 'POST'])
 def gender_owners():
     if request.method == 'GET':

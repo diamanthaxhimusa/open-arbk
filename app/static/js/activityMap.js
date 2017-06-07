@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('.selected-value').html("Aktivitetet e tjera p.k.t.");
+    $('.selected-value').html("Të gjitha");
     $('.selected-value-status').html("Të gjitha");
     $.ajax({
         url: "/mapi",
@@ -14,10 +14,18 @@ $(document).ready(function() {
 });
 function onStatusSelection(name) {
     $('.selected-value-status').html(name);
+    var actDrop = $('.selected-value').html();
+    if (actDrop== "all") {
+        actDrop = "Të gjitha"
+    }
+    var actVal = actDrop;
+    if (actVal == "Të gjitha") {
+        actVal = "all"
+    }
     if (name != 'Të gjitha') {
         $.ajax({
             data : {
-                activity_name : $('.selected-value').html(),
+                activity_name : actVal,
                 status: name
             },
             url: "/mapi",
@@ -33,11 +41,17 @@ function onStatusSelection(name) {
             }
         });
     }else {
+
         onActivitySelection($('.selected-value').html())
     }
 }
 function onActivitySelection(name) {
-    $('.selected-value').html(name);
+    if (name == "all") {
+        $('.selected-value').html("Të gjitha");
+    }
+    else {
+        $('.selected-value').html(name);
+    }
     $('.selected-value-status').html("Të gjitha");
     $.ajax({
         data : {

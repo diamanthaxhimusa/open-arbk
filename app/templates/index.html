@@ -70,33 +70,38 @@
             }, 1250, 'easeInOutExpo');
         }
         event.preventDefault();
-        if (person_status == undefined && biz_status == undefined && municipality == undefined) {
+        if (person_status == null || person_status == undefined){
             person_status = "any";
-            biz_status = "any";
-            municipality = "any";
+            $('#typeSearch').val("any");
+        }else {
+            $('#typeSearch').val(person_status);
         }
-        else if (person_status == null && biz_status == null && municipality == null) {
-            person_status = "any";
+        if(biz_status == null || biz_status == undefined){
             biz_status = "any";
+            $('#biz_statusSearch').val("any");
+        }else {
+            $('#biz_statusSearch').val(biz_status);
+        }
+        if(municipality == null || municipality == undefined){
             municipality = "any";
             $('#placesSearch').val("any");
-            $('#biz_statusSearch').val("any");
-            $('#typeSearch').val("any");
-        }else{
+        }else {
             $('#placesSearch').val(municipality);
-            $('#biz_statusSearch').val(biz_status);
-            $('#typeSearch').val(person_status);
-            $('#person-search-field').val(person);
-            $('#biz-search-field').val(business);
         }
         if (person == undefined && business == undefined) {
             person = "";
             business = "";
         }
-        if (parseInt("{{count}}") != 0) {
+        $('#person-search-field').val(person);
+        $('#biz-search-field').val(business);
+        var totPages = Math.ceil(parseInt("{{count}}")/parseInt("{{items_per_page}}"))
+        if (totPages < urlParam) {
+            $('#table-search').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
+        }
+        if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
             $('#pagination-demo').twbsPagination({
                 startPage: urlParam,
-                totalPages: Math.ceil(parseInt("{{count}}")/parseInt("{{items_per_page}}")),
+                totalPages: totPages,
                 visiblePages: 7,
                 first:"E para",
                 prev:"Prapa",
@@ -130,16 +135,12 @@
         var person_status = $('#typeSearch').val();
         var person = $('#person-search-field').val();
         var business = $('#biz-search-field').val();
-        if (person_status == undefined && biz_status == undefined && municipality == undefined) {
-            person_status = "any";
-            biz_status = "any";
-            municipality = "any";
-        }
-        if (person_status == null && biz_status == null && municipality == null) {
-            person_status = "any";
-            biz_status = "any";
-            municipality = "any";
-        }
+        if (person_status == undefined)person_status = "any";
+        if(biz_status === undefined)biz_status = "any";
+        if(municipality == undefined)municipality = "any";
+        if (person_status == null)person_status = "any";
+        if(biz_status === null)biz_status = "any";
+        if(municipality == null)municipality = "any";
         window.location.href = "?page=1&municipality="+municipality+"&biz-status="+biz_status+"&person-status="+person_status+"&person="+person+"&business="+business+"";
     }
 </script>
