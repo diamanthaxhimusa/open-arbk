@@ -1,4 +1,4 @@
 #! /usr/bin/env bash
 
-echo `zip -r app/static/downloads/arbk-data-json.zip app/static/downloads/arbk-data.json`
-echo `zip -r app/static/downloads/arbk-data-csv.zip app/static/downloads/arbk-data.csv`
+echo `cd app/static/downloads/; zip -r arbk-data-json.zip arbk-data.json`
+echo `cd app/static/downloads/; zip -r arbk-data-csv.zip arbk-data.csv`

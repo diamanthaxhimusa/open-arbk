@@ -16,7 +16,7 @@
                   {%else%}
                       shfaqura <span id="tableLength"></span> nga {{count}} dokumente
                   {%endif%}
-                   dokumente:</span>
+              </span>
           </div>
           <table class="table table-striped table-bordered" id="searchTable">
               <thead>
@@ -64,7 +64,6 @@
       </div>
     </section>
     <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
-    <script src="{{url_for('static', filename='js/search.js')}}"></script>
     <script type="text/javascript">
     $(document).ready( function () {
         $('#tableLength').html($('#searchTable tbody tr').length);
