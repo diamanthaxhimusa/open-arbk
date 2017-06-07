@@ -60,7 +60,7 @@
             {% if request.path == url_for('main.index') %}
                 <div class="col-xs-12 banner-info text-center">
                     <div class="col-xs-12">
-                        <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo zyrtar n&euml; gjith&euml; Kosov&euml;n</h2>
+                        <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml; apo persona t&euml; autorizuar nga kompanit&euml; e regjistruara n&euml; Kosov&euml;</h2>
                     </div>
                     <div class="col-sm-10 col-sm-offset-1">
                          <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">
@@ -74,8 +74,8 @@
                                       <label for="type">Statusi i personit:</label>
                                       <select id="typeSearch" class="custom-form-item form-control" name="person_status">
                                           <option value="any">T&euml; gjitha</option>
-                                          <option value="owner">Pronar&euml;</option>
-                                          <option value="auth">Zyrtar&euml;</option>
+                                          <option value="owner">Pronar</option>
+                                          <option value="auth">Person i Autorizuar</option>
                                       </select>
                                   </div>
                                </div>
@@ -89,7 +89,7 @@
                                     <select id="biz_statusSearch" class="custom-form-item form-control" name="biz_status">
                                         <option value="any" selected="selected">T&euml; gjitha</option>
                                         <option value="Aktiv">Aktiv</option>
-                                        <option value="Shuar">Jo Aktiv</option>
+                                        <option value="Shuar">I shuar</option>
                                     </select>
                                 </div>
                                </div>
@@ -174,7 +174,7 @@
                 <span>Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave &euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; mir&euml;, qeverisjes transparente dhe llogaridh&euml;n&euml;se.</span>
             </div>
             <div class="col-xs-12 col-sm-4 footCols" style="text-align:center">
-                <span id="ndjekja">Na ndiqni</span><br><br>
+                <span id="ndjekja">Na ndiqni n&euml;:</span><br><br>
                 <div class="follow-us">
                     <a href="https://www.facebook.com/opendatakosovo" target="_blank">
                         <div class="fb social">

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('.selected-value').html("Aktivitetet e tjera p.k.t.");
-    $('.selected-value-status').html("Të gjithë");
+    $('.selected-value-status').html("Të gjitha");
     $.ajax({
         url: "/mapi",
         type: 'GET',
@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 function onStatusSelection(name) {
     $('.selected-value-status').html(name);
-    if (name != 'Të gjithë') {
+    if (name != 'Të gjitha') {
         $.ajax({
             data : {
                 activity_name : $('.selected-value').html(),
@@ -38,11 +38,11 @@ function onStatusSelection(name) {
 }
 function onActivitySelection(name) {
     $('.selected-value').html(name);
-    $('.selected-value-status').html("Të gjithë");
+    $('.selected-value-status').html("Të gjitha");
     $.ajax({
         data : {
             activity_name : name,
-            status: 'Të gjithë'
+            status: 'Të gjitha'
         },
         url: "/mapi",
         type: 'POST',
