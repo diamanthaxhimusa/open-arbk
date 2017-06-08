@@ -52,7 +52,7 @@ $(document).ready(function (){
         },
         yAxis: {
           title: {
-            text: 'Numri total i bizneseve'
+            text: 'Numri i bizneseve'
           }
         },
         tooltip: {

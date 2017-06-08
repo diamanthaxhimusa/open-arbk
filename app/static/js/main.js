@@ -29,15 +29,15 @@ $(document).ready(function(){
           emri.push(data.doc.result[i]['_id']);
           vals.push(data.doc.result[i]['total'] / data.total * 100);
       }
-      business_type(emri, vals);
+      business_type(emri, vals, data.total);
   }
-  function business_type(emri, vals) {
+  function business_type(emri, vals, total) {
     Highcharts.chart('container', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Numri total i bizneseve në bazë të llojeve të biznesit'
+            text: 'Përqindja e bizneseve në bazë të llojit'
         },
         xAxis: {
             categories: emri
@@ -64,10 +64,10 @@ $(document).ready(function(){
         },
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total '+total+'<br/>'
         },
         series: [{
-            name: 'Brands',
+            name: 'Biznese',
             colorByPoint: true,
             data: vals
         }]
@@ -91,10 +91,11 @@ function active_inactive_chart(data){
               type: 'pie'
           },
           title: {
-              text: 'Numri i kompanive aktive dhe te shuara mes viteve 2002 - 2018'
+              text: 'Kompanitë e shuara dhe aktive gjatë viteve 2002-2018 nga '+data.total+' të themeluara në total.'
           },
           tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%'
           },
           plotOptions: {
               pie: {
@@ -110,10 +111,10 @@ function active_inactive_chart(data){
               name: 'Numri i kompanive',
               colorByPoint: true,
               data: [{
-                  name: 'Aktive',
+                  name: 'Aktive ('+data.docs.result[0]['total']+')',
                   y: (data.docs.result[0]['total'] / data.total) * 100
               }, {
-                  name: 'Shuar',
+                  name: 'Shuar('+data.docs.result[1]['total']+')',
                   y: (data.docs.result[1]['total'] / data.total) * 100
               }]
           }]
