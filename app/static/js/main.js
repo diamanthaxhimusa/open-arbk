@@ -23,53 +23,46 @@ $(document).ready(function(){
       });
   });
   function proccesAPI(data) {
-      emri = [];
-      vals = [];
+      resultData = [];
       for(var i=0; i<data.doc.result.length;i++){
-          emri.push(data.doc.result[i]['_id']);
-          vals.push(data.doc.result[i]['total'] / data.total * 100);
+          resultData.push({"name":data.doc.result[i]['_id'],"y":data.doc.result[i]['total'] / data.total * 100, "tot":data.doc.result[i]['total']});
       }
-      business_type(emri, vals, data.total);
+      business_type(resultData, data.total);
   }
-  function business_type(emri, vals, total) {
+  function business_type(data, total) {
     Highcharts.chart('container', {
         chart: {
-            type: 'column'
+            type: 'pie'
         },
         title: {
             text: 'Përqindja e bizneseve në bazë të llojit'
-        },
-        xAxis: {
-            categories: emri
-        },
-        yAxis: {
-            title: {
-                text: 'Numri total i bizneseve'
-            },
-            min: 0,
-            max: 12
-
         },
         legend: {
             enabled: false
         },
         plotOptions: {
-            series: {
-                borderWidth: 0,
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    format: '{point.y:.1f}%'
+                    format: '<b>{point.name}</b>: {point.percentage:.3f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 }
             }
         },
         tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total '+total+'<br/>'
+            formatter: function () {
+                return ''+this.point.name+': <b>'+this.point.tot+'<b><br>'+
+                    ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+total+'</b><br/>';
+            }
         },
         series: [{
             name: 'Biznese',
             colorByPoint: true,
-            data: vals
+            data: data
         }]
     });
   }
@@ -83,6 +76,7 @@ $.ajax({
 })
 
 function active_inactive_chart(data){
+  $('#totalBiznese').html(data.total);
   Highcharts.chart('container3', {
           chart: {
               plotBackgroundColor: null,
@@ -91,7 +85,7 @@ function active_inactive_chart(data){
               type: 'pie'
           },
           title: {
-              text: 'Kompanitë e shuara dhe aktive gjatë viteve 2002-2018 nga '+data.total+' të themeluara në total.'
+              text: ''
           },
           tooltip: {
               headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
