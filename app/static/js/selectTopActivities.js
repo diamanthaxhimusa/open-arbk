@@ -6,8 +6,8 @@ function selectActivities(){
     function getAPI(selected) {
             $.ajax({
     data : {
-        city : $('#municipalities').val(),
-        status : $('#types').val()
+        city : $('#top-act-municipalities').val(),
+        status : $('#top-act-types').val()
     },
     type : 'POST',
     url : '/top-activities'

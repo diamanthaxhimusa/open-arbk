@@ -67,49 +67,49 @@
     </section>
     <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
     <script type="text/javascript">
-    $(document).ready( function () {
-        $('#tableLength').html($('#searchTable tbody tr').length);
-        $('html, body').stop().animate({
-            scrollTop: ($('#searchTable').offset().top - 190)
-        }, 1250, 'easeInOutExpo');
-        var urlParam = parseInt(getUrlParameter('page'));
-        if (isNaN(parseFloat(urlParam))) {
-            urlParam = 1;
-        }
-        var totPages = Math.ceil(parseInt("{{count}}")/parseInt("{{items_per_page}}"))
-        if (totPages < urlParam) {
-            $('#service .container .row').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
-        }
-        if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
-            $('#pagination-demo').twbsPagination({
-                startPage: urlParam,
-                totalPages: totPages,
-                visiblePages: 7,
-                first:"E para",
-                prev:"Prapa",
-                next:"Perpara",
-                last:"E fundit",
-                initiateStartPageClick: false,
-                onPageClick: function (event, page) {
-                    window.location.href = "?page="+page;
+        $(document).ready( function () {
+            $('#tableLength').html($('#searchTable tbody tr').length);
+            $('html, body').stop().animate({
+                scrollTop: ($('#searchTable').offset().top - 190)
+            }, 1250, 'easeInOutExpo');
+            var urlParam = parseInt(getUrlParameter('page'));
+            if (isNaN(parseFloat(urlParam))) {
+                urlParam = 1;
+            }
+            var totPages = Math.ceil(parseInt("{{count}}")/parseInt("{{items_per_page}}"))
+            if (totPages < urlParam) {
+                $('#service .container .row').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
+            }
+            if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
+                $('#pagination-demo').twbsPagination({
+                    startPage: urlParam,
+                    totalPages: totPages,
+                    visiblePages: 7,
+                    first:"E para",
+                    prev:"Prapa",
+                    next:"Perpara",
+                    last:"E fundit",
+                    initiateStartPageClick: false,
+                    onPageClick: function (event, page) {
+                        window.location.href = "?page="+page;
+                    }
+                });
+            }
+        });
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
-            });
-        }
-    });
-    function getUrlParameter(sParam) {
-        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : sParameterName[1];
             }
         }
-    }
-</script>
+    </script>
 
 {% endblock %}

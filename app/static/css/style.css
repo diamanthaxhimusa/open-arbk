@@ -257,6 +257,10 @@ HEADER
     text-transform: uppercase;
     margin-top: 6px;
 }
+
+.nav > li.active{
+    background-color: #403e3b;
+}
 .navbar-default .navbar-nav > li > a
 {
     padding: 5px 10px;

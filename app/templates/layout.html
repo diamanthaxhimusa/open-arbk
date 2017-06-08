@@ -41,7 +41,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
               <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
-              <li {% if request.path == '/activitymap' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
+              <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
               <li {% if request.path == '/download' %}class="active"{% endif %}><a href="{{ url_for('main.download_page') }}">Shkarko</a></li>
             </ul>
           </div>
@@ -60,7 +60,10 @@
             {% if request.path == url_for('main.index') %}
                 <div class="col-xs-12 banner-info text-center">
                     <div class="col-xs-12">
-                        <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar nga kompanit&euml; e regjistruara n&euml; Kosov&euml;</h2>
+                        <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar p&euml;r kompanit&euml; e regjistruara n&euml; Kosov&euml;</h2>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        K&euml;rko p&euml;rmes nj&euml; apo m&euml; shum&euml; kritereve t&euml; m&euml;poshtme:<br>
                     </div>
                     <div class="col-sm-10 col-sm-offset-1">
                          <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">
