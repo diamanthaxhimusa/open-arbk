@@ -41,8 +41,7 @@ function onStatusSelection(name) {
             }
         });
     }else {
-
-        onActivitySelection($('.selected-value').html())
+        onActivitySelection("all")
     }
 }
 function onActivitySelection(name) {
