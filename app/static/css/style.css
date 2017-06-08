@@ -83,6 +83,15 @@ button{
 	width: 100%;
 	overflow: auto;
 }
+.page-item{
+	display: inline-block !important;
+}
+li.first a.page-link,li.next a.page-link,li.prev a.page-link,li.last a.page-link{
+	background-color: #eee;
+}
+li.disabled a.page-link{
+	background-color: #fff;
+}
 
 #pageNotFound{
 	font-size: 20px;
