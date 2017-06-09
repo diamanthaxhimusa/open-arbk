@@ -7,12 +7,12 @@
 
     <!-- Facebook meta tags -->
     <meta property="og:title" content="Bizneset e Hapura">
-    <meta property="og:description" content="Bizneset e Hapura">
+    <meta property="og:description" content="Bizneset e Hapura te ARBK'se">
     <meta property="og:image" content="{{ url_for('static', filename='img/share.png') }}">
     <meta property="og:url" content="/">
     <!-- Twitter meta tags -->
     <meta property="twitter:title" content="Bizneset e Hapura">
-    <meta property="twitter:description" content="Bizneset e Hapura">
+    <meta property="twitter:description" content="Bizneset e Hapura te ARBK'se">
     <meta property="twitter:image" content="{{ url_for('static', filename='img/share.png') }}">
     <meta property="twitter:card" content="summary_medium_image">
 
@@ -39,7 +39,7 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <li {% if request.path == '/recommendations' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
+              <li {% if request.path == '/recommendation' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
               <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
               <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
               <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
@@ -65,6 +65,7 @@
                     </div>
                     <div class="col-xs-12 text-center">
                         K&euml;rko p&euml;rmes nj&euml; apo m&euml; shum&euml; kritereve t&euml; m&euml;poshtme:<br>
+                        <br>
                     </div>
                     <div class="col-sm-10 col-sm-offset-1">
                          <form class="form" id="search-form" method="POST" action="{{ url_for('main.index') }}">

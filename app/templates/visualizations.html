@@ -22,7 +22,7 @@
 <section id="ActInact">
     <div id="active-inactive" class="col-xs-12 con4" style="">
         <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
-        <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017.</p>
+        <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017</p>
         <div id="container3" style="min-width: 100%; height: 400px; max-width: 600px; margin: 0 auto">
         </div>
         <hr style="border-width: 3px;">
@@ -47,7 +47,7 @@
 </section>
 
 <section id="top10Act">
-    <div id="top-ten-activities" class="col-xs-12 con5" style="; margin-bottom: 50px;">
+    <div id="top-ten-activities" class="col-xs-12 con5">
         <h2 class="headers">Top 10 Aktivitetet që Shërbehen nga Bizneset</h2>
         {% include 'visualizations/topActivities.html'%}
         <hr style="border-width: 3px;">
@@ -55,7 +55,7 @@
 </section>
 
 <section>
-    <div id="activities-years" class="col-xs-12 con8" style="margin-bottom: 50px;">
+    <div id="activities-years" class="col-xs-12 con8">
         <h2 class="headers">Aktivitet Gjat&euml; Viteve</h2>
         {% include 'visualizations/activityYears.html'%}
         <hr style="border-width: 3px;">
@@ -65,9 +65,11 @@
 
 
 <section>
-    <div id="gender" class="col-xs-12 con5" style="margin-bottom: 50px;">
+    <div id="gender" class="col-xs-12 con5">
         <h2 class="headers">Gjinia e Pronar&euml;ve</h2>
-        {% include 'visualizations/gender.html'%}
+        <div class="">
+            {% include 'visualizations/gender.html'%}
+        </div>
         <hr style="border-width: 3px;">
     </div>
 </section>
