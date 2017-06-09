@@ -2,6 +2,8 @@
 {% block content %}
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
 <script src="{{ url_for('static', filename='js/topActivities.js') }}"></script>
@@ -9,6 +11,8 @@
 <script src="{{url_for('static', filename="js/top10.js")}}"></script>
 <script src="{{url_for('static', filename="js/genderStats.js")}}"></script>
 <script src="{{url_for('static', filename="js/scroll.js")}}"></script>
+<script src="{{url_for('static', filename="js/topGenderActs.js")}}"></script>
+<script src="{{url_for('static', filename="js/activityByYears.js")}}"></script>
 <section id="bizKind">
     <div id="business-types" class="col-xs-12 con1" style="">
         <h2 class="headers">Llojet e Bizneseve</h2>
@@ -17,6 +21,15 @@
     </div>
 </section>
 
+<section id="ActInact">
+    <div id="active-inactive" class="col-xs-12 con4" style="">
+        <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
+        <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017.</p>
+        <div id="container3" style="min-width: 100%; height: 400px; max-width: 600px; margin: 0 auto">
+        </div>
+        <hr style="border-width: 3px;">
+    </div>
+</section>
 
 <section id="thruYears">
     <div id="business-years" class="col-xs-12 con2" style="">
@@ -43,16 +56,15 @@
     </div>
 </section>
 
-
-<section id="ActInact">
-    <div id="active-inactive" class="col-xs-12 con4" style="">
-        <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
-        <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017.</p>
-        <div id="container3" style="min-width: 100%; height: 400px; max-width: 600px; margin: 0 auto">
-        </div>
+<section>
+    <div id="activities-years" class="col-xs-12 con8" style="margin-bottom: 50px;">
+        <h2 class="headers">Aktivitet Nder vite</h2>
+        {% include 'visualizations/activityYears.html'%}
         <hr style="border-width: 3px;">
     </div>
 </section>
+
+
 
 <section>
     <div id="gender" class="col-xs-12 con5" style="margin-bottom: 50px;">
@@ -60,6 +72,13 @@
         {% include 'visualizations/gender.html'%}
         <hr style="border-width: 3px;">
     </div>
+</section>
+<section>
+    <div id="gender-activities" class="col-xs-12 con7" style="margin-bottom: 50px;">
+        <h2 class="headers">Top 10 Bizeset e Pronareve Meshkuj/Femra</h2>
+        {% include 'visualizations/genderActivities.html'%}
+    </div>
+    <hr style="border-width: 3px;">
 </section>
 
 {% endblock %}

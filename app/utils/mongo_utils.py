@@ -433,7 +433,38 @@ class MongoUtils(object):
         for act in acts:
             activs.append({"activity":act['activity'],"code":act['code']})
         return activs
+
+
+    # top 10 activity divided in genders
+    def get_top_ten_activities_by_gender(self, gender):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$unwind': "$activities"},
+            {'$unwind': "$owners"},
+            {'$match' : {"owners.gender":gender}},
+            {'$group': {"_id": "$activities",'totali': {'$sum': 1}}},
+            {'$sort': {"totali": -1}},
+            {'$limit' : 10}
+        ])
+        return result
+
     # activities queries
+
+    def activity_years(self, year, activity):
+        act = self.mongo.db[self.activities].find({"activity":activity})
+        code = 0
+        for doc in act:
+            code = doc['code']
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"establishmentDate": {"$gt": datetime.datetime(year, 1, 1),
+                                              "$lte": datetime.datetime(year+1, 1, 1)}}},
+            {'$unwind': "$activities"},
+            {'$match': {"activities":int(code)}},
+            {'$count': "all"}
+        ])
+        if len(result['result']) < 1:
+            result = {"ok":1, 'result':[{"all":0}]}
+        return result
+
     def get_most_used_activities(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
             {'$unwind': "$activities"},

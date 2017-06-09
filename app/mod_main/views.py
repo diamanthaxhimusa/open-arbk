@@ -50,9 +50,10 @@ def profile(status, person):
 @mod_main.route('/visualization', methods=['GET', 'POST'])
 def visualization():
     if request.method == 'GET':
+        activities = mongo_utils.get_activities()
         top = mongo_utils.get_top_ten_by_capital()
         komunat = mongo_utils.get_municipalities()
-        return render_template('visualizations.html', top=top, komunat=komunat)
+        return render_template('visualizations.html', top=top, komunat=komunat, activities=activities)
     if request.method == 'POST':
         city = request.form['city_id']
         status = request.form['status']
@@ -85,6 +86,19 @@ def start_date():
         res = {data['result'][0]['_id']: data['result'][0]['count'],data['result'][1]['_id']: data['result'][1]['count']}
         api.update({year: res})
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
+@mod_main.route('/activities-years', methods=['GET', 'POST'])
+def activity_years():
+    if request.method == 'POST':
+        activity = request.form['activity']
+        api = {}
+        y = 1
+        for i in range(2002, 2018):
+            y += 1
+            year = "d" + str(y)
+            result = mongo_utils.activity_years(i, activity)
+            api.update({year: result['result'][0]})
+        return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
 @mod_main.route('/businesses-type', methods=['GET', 'POST'])
 def businesses_type():
@@ -237,6 +251,17 @@ def gender_owners():
             doc = mongo_utils.get_gen_types_by_city_status(status, city)
             api = {'total': docs_count['result'][0]['all'], 'doc': doc}
             return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+    return 'error'
+
+@mod_main.route('/top-10-gender-activities', methods=['GET', 'POST'])
+def top_gender_acts():
+    if request.method == 'GET':
+        docs_females = mongo_utils.get_top_ten_activities_by_gender("female")
+        docs_males = mongo_utils.get_top_ten_activities_by_gender("male")
+        result_females = prepare_activity_api(docs_females)
+        result_males = prepare_activity_api(docs_males)
+        result = {"females":result_females, "males":result_males}
+        return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     return 'error'
 
 @mod_main.route('/download', methods=['GET', 'POST'])
