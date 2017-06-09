@@ -1,15 +1,19 @@
 {% extends 'layout.html' %}
 {% block content %}
+<style media="screen">
+    .map-header {
+        display: none;
+    }
+    .bg-color{
+        min-height: auto;
+    }
+</style>
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/kv/kv-all.js"></script>
 <script type="text/javascript" src="{{url_for('static', filename="js/activityMap.js")}}"></script>
-<div class="container">
+<div class="container" style="padding-top:100px">
     <div class="row">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span>Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; p&euml;rdit&euml;suar komunat e krijuara s&euml; fundmi ne gjeo-portalin shtet&euml;ror. Komunat q&euml; mungojn&euml; jan&euml; t&euml; bashkuara me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;.</span>
-        </div>
         <div class="col-xs-12 con1" style="margin-top:30px;margin-bottom:20px;">
             <h3 class="headers">Ndarja n&euml; baz&euml; t&euml; aktiviteteve biznesore:</h3>
             <hr>
@@ -56,6 +60,13 @@
                 </div>
                 <div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 700px; margin: 0 auto"></div>
             </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span>Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; p&euml;rdit&euml;suar komunat e krijuara s&euml; fundmi ne gjeo-portalin shtet&euml;ror. Komunat q&euml; mungojn&euml; jan&euml; t&euml; bashkuara me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;.</span>
+            </div>
+
         </div>
     </div>
 </div>

@@ -47,7 +47,7 @@ $(document).ready(function(){
             type: 'pie'
         },
         title: {
-            text: 'Numri total i pronarëve në bazë të llojeve të biznesit'
+            text: 'Përqindja e pronarëve sipas gjinisë'
         },
         plotOptions: {
             pie: {
@@ -63,7 +63,7 @@ $(document).ready(function(){
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         series: [{
-            name: 'pronarë në perqindje',
+            name: 'Pronarë në perqindje',
             colorByPoint: true,
             data: [{
                 name: emri[0],

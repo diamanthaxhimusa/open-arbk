@@ -33,6 +33,15 @@ def index():
         docs_count = result['count']
         return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)
 
+
+
+@mod_main.route('/recommendation', methods=['GET'])
+def recommendation():
+    if request.method == 'GET':
+        return render_template('recommendationPage.html')
+
+
+
 @mod_main.route('/search/<string:status>/<string:person>', methods=['GET', 'POST'])
 def profile(status, person):
     person_to_lower = person.lower()

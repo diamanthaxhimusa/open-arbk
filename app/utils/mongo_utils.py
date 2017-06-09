@@ -455,7 +455,7 @@ class MongoUtils(object):
         for doc in act:
             code = doc['code']
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"establishmentDate": {"$gt": datetime.datetime(year, 1, 1),
+            {'$match': {"applicationDate": {"$gt": datetime.datetime(year, 1, 1),
                                               "$lte": datetime.datetime(year+1, 1, 1)}}},
             {'$unwind': "$activities"},
             {'$match': {"activities":int(code)}},

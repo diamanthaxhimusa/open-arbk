@@ -2,8 +2,6 @@
 {% block content %}
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/highcharts-more.js"></script>
-<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
 <script src="{{ url_for('static', filename='js/topActivities.js') }}"></script>
@@ -58,7 +56,7 @@
 
 <section>
     <div id="activities-years" class="col-xs-12 con8" style="margin-bottom: 50px;">
-        <h2 class="headers">Aktivitet Nder vite</h2>
+        <h2 class="headers">Aktivitet Gjat&euml; Viteve</h2>
         {% include 'visualizations/activityYears.html'%}
         <hr style="border-width: 3px;">
     </div>
@@ -75,7 +73,7 @@
 </section>
 <section>
     <div id="gender-activities" class="col-xs-12 con7" style="margin-bottom: 50px;">
-        <h2 class="headers">Top 10 Bizeset e Pronareve Meshkuj/Femra</h2>
+        <h2 class="headers">Top 10 Bizeset e Pronar&euml;ve Meshkuj/Femra</h2>
         {% include 'visualizations/genderActivities.html'%}
     </div>
     <hr style="border-width: 3px;">

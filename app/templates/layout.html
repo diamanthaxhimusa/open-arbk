@@ -39,6 +39,7 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+              <li {% if request.path == '/recommendations' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
               <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
               <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
               <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
@@ -117,8 +118,8 @@
             {% elif request.path == url_for('main.visualization') %}
               <div class="banner-info text-center">
                 <h2 class="bnr-sub-title">Zbuloni Gjendjen e Bizneseve n&euml; Kosov&euml;</h2>
-                <p class="lead">K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;.</p>
-                <p class="lead">Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industi apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.</p>
+                <span class="lead">K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;.</span><br>
+                <span class="lead">Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industi apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.</span><br><br>
                 <div class="btn-group">
                     <button type="button" id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Shiko <span class="caret"></span>
@@ -130,19 +131,23 @@
                         <li><a class="page-scroll" href="#top-ten-activities">Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset</a></li>
                         <li><a class="page-scroll" href="#active-inactive">Bizneset e Shuara dhe Aktive</a></li>
                         <li><a class="page-scroll" href="#gender">Gjinia e Pronar&euml;ve</a></li>
+                        <li><a class="page-scroll" href="#activities-years">Aktivitetet Nder Vite</a></li>
+                        <li><a class="page-scroll" href="#gender-activities ">top 10 aktivitetet nga Gjinia e Pronar&euml;ve</a></li>
                     </ul>
                 </div>
               </div>
             {% elif request.path == url_for('main.activity_map') %}
               <div class="banner-info text-center">
                 <h2 class="bnr-sub-title">Harta</h2>
-                <p class="lead">Lorem ipsum dolor sit amet..</p>
               </div>
             {% elif request.path == url_for('main.download_page') %}
              <div class="banner-info text-center">
                <h2 class="bnr-sub-title">Shkarkoni Dokumentet</h2>
-               <p class="lead">Lorem ipsum dolor sit amet..</p>
              </div>
+             {% elif request.path == url_for('main.recommendation') %}
+              <div class="banner-info text-center">
+                <h2 class="bnr-sub-title">Pse Bizneset e Hapura?</h2>
+              </div>
             {% else %}
              <div class="banner-info text-center">
                  <h2 class="bnr-sub-title"><a href="/" style="color: #fff;">Kthehu tek k&euml;rkimi</a></h2>
