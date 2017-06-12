@@ -123,7 +123,7 @@
               <div class="banner-info text-center">
                 <h2 class="bnr-sub-title">Zbuloni Gjendjen e Bizneseve n&euml; Kosov&euml;</h2>
                 <span class="lead">K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;.</span><br>
-                <span class="lead">Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industi apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.</span><br><br>
+                <span class="lead">Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industri apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.</span><br><br>
                 <div class="btn-group">
                     <button type="button" id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Shiko <span class="caret"></span>
@@ -135,8 +135,8 @@
                         <li><a class="page-scroll" href="#top-ten-activities">Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset</a></li>
                         <li><a class="page-scroll" href="#active-inactive">Bizneset e Shuara dhe Aktive</a></li>
                         <li><a class="page-scroll" href="#gender">Gjinia e Pronar&euml;ve</a></li>
-                        <li><a class="page-scroll" href="#activities-years">Aktivitetet Gjat&euml; Vite</a></li>
-                        <li><a class="page-scroll" href="#gender-activities ">Aktivitetet Biznesore t&euml; Ndara në Gjini</a></li>
+                        <li><a class="page-scroll" href="#activities-years">Aktivitetet Gjat&euml; Viteve</a></li>
+                        <li><a class="page-scroll" href="#gender-activities ">Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; Pronar&euml;ve</a></li>
                     </ul>
                 </div>
               </div>
@@ -166,12 +166,9 @@
     <!--Content -->
     <section id="service" class="section-padding wow fadeIn delay-05s">
       <div class="container">
-        <div class="row">
             {% if request.path == url_for('main.index') %}<h3 style="text-align:center;">Rezultatet:</h3>{% endif %}
             {% block content %}
-
             {% endblock %}
-        </div>
       </div>
     </section>
 

@@ -12,53 +12,64 @@
 <script src="{{url_for('static', filename="js/topGenderActs.js")}}"></script>
 <script src="{{url_for('static', filename="js/activityByYears.js")}}"></script>
 <section id="bizKind">
-    <div id="business-types" class="col-xs-12 con1" style="">
-        <h2 class="headers">Llojet e Bizneseve</h2>
-        {% include 'visualizations/bizTypes.html' %}
-        <hr style="border-width: 3px;">
+    <div class="row">
+        <div id="business-types" class="col-xs-12 con1" style="">
+            <h2 class="headers">Llojet e Bizneseve</h2>
+            {% include 'visualizations/bizTypes.html' %}
+            <hr style="border-width: 3px;">
+        </div>
     </div>
 </section>
 
 <section id="ActInact">
-    <div id="active-inactive" class="col-xs-12 con4" style="">
-        <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
-        <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017</p>
-        <div id="container3" style="min-width: 100%; height: 400px; max-width: 600px; margin: 0 auto">
+    <div class="row">
+        <div id="active-inactive" class="col-xs-12 con4" style="">
+            <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
+            <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2002-2017</p>
+            <div id="container3" style="min-width: 100%; height: 400px; max-width: 600px; margin: 0 auto">
+            </div>
+            <hr style="border-width: 3px;">
         </div>
-        <hr style="border-width: 3px;">
     </div>
 </section>
 
 <section id="thruYears">
-    <div id="business-years" class="col-xs-12 con2" style="">
-        <h2 class="headers">Bizneset Sipas Viteve</h2>
-        <div id="container2" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
-        <hr style="border-width: 3px;">
+    <div class="row">
+        <div id="business-years" class="col-xs-12 con2" style="">
+            <h2 class="headers">Bizneset Sipas Viteve</h2>
+            <div id="container2" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+            <hr style="border-width: 3px;">
+        </div>
     </div>
 </section>
 
 
 <section id="top10">
-    <div id="top-ten" class="col-xs-12 con3" style="">
-        <h2 class="headers">Top 10 Bizneset Sipas Kapitalit</h2>
-        {% include 'visualizations/top10.html' %}
-        <hr style="border-width: 3px;">
+    <div class="row">
+        <div id="top-ten" class="col-xs-12 con3" style="">
+            <h2 class="headers">Top 10 Bizneset Sipas Kapitalit</h2>
+            {% include 'visualizations/top10.html' %}
+            <hr style="border-width: 3px;">
+        </div>
     </div>
 </section>
 
 <section id="top10Act">
-    <div id="top-ten-activities" class="col-xs-12 con5">
-        <h2 class="headers">Top 10 Aktivitetet që Shërbehen nga Bizneset</h2>
-        {% include 'visualizations/topActivities.html'%}
-        <hr style="border-width: 3px;">
+    <div class="row">
+        <div id="top-ten-activities" class="col-xs-12 con5">
+            <h2 class="headers">Top 10 Aktivitetet që Shërbehen nga Bizneset</h2>
+            {% include 'visualizations/topActivities.html'%}
+            <hr style="border-width: 3px;">
+        </div>
     </div>
 </section>
-
 <section>
-    <div id="activities-years" class="col-xs-12 con8">
-        <h2 class="headers">Aktivitet Gjat&euml; Viteve</h2>
-        {% include 'visualizations/activityYears.html'%}
-        <hr style="border-width: 3px;">
+    <div class="row">
+        <div id="activities-years" class="col-xs-12 con8">
+            <h2 class="headers">Aktivitet Gjat&euml; Viteve</h2>
+            {% include 'visualizations/activityYears.html'%}
+            <hr style="border-width: 3px;">
+        </div>
     </div>
 </section>
 
@@ -75,7 +86,7 @@
 </section>
 <section>
     <div id="gender-activities" class="col-xs-12 con7" style="margin-bottom: 50px;">
-        <h2 class="headers">Aktivitetet Biznesore t&euml; Ndara në Gjini</h2>
+        <h2 class="headers">Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; Pronar&euml;ve</h2>
         {% include 'visualizations/genderActivities.html'%}
     </div>
     <hr style="border-width: 3px;">
