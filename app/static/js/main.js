@@ -4,6 +4,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(data){
         proccesAPI(data);
+        $('#bizTypesLoader').hide();
       }
     });
     $('#getBizTypes').on('click', function() {
@@ -14,8 +15,12 @@ $(document).ready(function(){
           },
           url: "/businesses-type",
           type: 'POST',
+          beforeSend: function() {
+            $('#bizTypesLoader').show();  
+          },
           success: function(data){
               proccesAPI(data);
+              $('#bizTypesLoader').hide();
           },
           error: function(error) {
           }

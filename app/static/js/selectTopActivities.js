@@ -10,11 +10,15 @@ function selectActivities(){
                     status : $('#top-act-types').val()
                 },
                 type : 'POST',
-                url : '/top-activities'
+                url : '/top-activities',
+                beforeSend: function() {
+                    $('#topActivitiesLoader').show();
+                }
             }).done(function (dataAPI) {
                     data = dataAPI;
                     buildDropDown(dataAPI.activities.length);
                     proccesAPI(data, 0, maxCount);
+                    $('#topActivitiesLoader').hide();
             });
         }
         $('.topAct').on('change', function() {

@@ -8,6 +8,7 @@ $(document).ready(function (){
             data = dataAPI;
             buildDropDown(dataAPI.activities.length);
             proccesAPI(data, 0, maxCount);
+            $('#topActivitiesLoader').hide();
         });
     }
     $('.topAct').on('change', function() {

@@ -4,6 +4,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(data){
           proccesAPI(data);
+          $('#genderLoader').hide();
       }
   });
   $('#getGen').on('click', function() {
@@ -14,8 +15,12 @@ $(document).ready(function(){
           },
           url: "/gender-owners",
           type: 'POST',
+          beforeSend: function () {
+              $('#genderLoader').show();
+          },
           success: function(data){
               proccesAPI(data);
+              $('#genderLoader').hide();
           },
           error: function(error) {
           }

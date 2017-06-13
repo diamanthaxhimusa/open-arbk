@@ -6,8 +6,12 @@ $(document).ready(function() {
         },
         url: "/activities-years",
         type: 'POST',
+        beforeSend:function() {
+            $('#activityYearsLoader').show();
+        },
         success: function(data){
             dates(data);
+            $('#activityYearsLoader').hide();
         },
         error: function(error) {
         }
@@ -21,8 +25,12 @@ function onActivitySelection(name) {
         },
         url: "/activities-years",
         type: 'POST',
+        beforeSend:function() {
+            $('#activityYearsLoader').show();
+        },
         success: function(data){
             dates(data);
+            $('#activityYearsLoader').hide();
         },
         error: function(error) {
         }
