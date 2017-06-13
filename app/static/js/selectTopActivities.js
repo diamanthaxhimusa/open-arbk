@@ -5,16 +5,16 @@ function selectActivities(){
     getAPI(0);
     function getAPI(selected) {
             $.ajax({
-    data : {
-        city : $('#top-act-municipalities').val(),
-        status : $('#top-act-types').val()
-    },
-    type : 'POST',
-    url : '/top-activities'
-        }).done(function (dataAPI) {
-                data = dataAPI;
-                buildDropDown(dataAPI.activities.length);
-                proccesAPI(data, 0, maxCount);
+                data : {
+                    city : $('#top-act-municipalities').val(),
+                    status : $('#top-act-types').val()
+                },
+                type : 'POST',
+                url : '/top-activities'
+            }).done(function (dataAPI) {
+                    data = dataAPI;
+                    buildDropDown(dataAPI.activities.length);
+                    proccesAPI(data, 0, maxCount);
             });
         }
         $('.topAct').on('change', function() {
@@ -33,7 +33,7 @@ function selectActivities(){
                 $('.topAct').append('<option value='+min+' id='+max+'>'+min+'-'+max+'</option>');
             }
             if (pak != 0) {
-                $('.topAct').append('<option value='+max+' id='+((max+pak)-1)+'>'+max+'-'+(max+pak)+'</option>');
+                $('.topAct').append('<option value='+max+' id='+((max+pak))+'>'+max+'-'+(max+pak)+'</option>');
             }
         }
         function proccesAPI(data, min, max) {
@@ -41,7 +41,7 @@ function selectActivities(){
             var end = max;
             emri = [];
             vals = [];
-            for(var i=start; i<=end;i++){
+            for(var i=start; i<end;i++){
                 emri.push(data.activities[i].details.activity);
                 vals.push(data.activities[i].total_businesses);
             }
@@ -75,7 +75,79 @@ function selectActivities(){
                 type: 'column',
                 colorByPoint: true,
                 data: data,
-                showInLegend: false
+                showInLegend: false,
+                colors: [
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#4A0D67'],
+                           [1, '#7B4F90']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#473198'],
+                           [1, '#7969B4']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#71B1AF'],
+                           [1, '#8DDDDB']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#C38537'],
+                           [1, '#EFAA54']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#BBFCA5'],
+                           [1, '#D2FDC3']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#4AAD52'],
+                           [1, '#7BC381']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#5C80BC'],
+                           [1, '#88A2CE']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#3D3B30'],
+                           [1, '#95948E']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#9E2B25'],
+                           [1, '#B86460']
+                        ]
+                    },
+                    {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        stops: [
+                           [0, '#FFE066'],
+                           [1, '#FFEB9D']
+                        ]
+                    }
+                ]
             }]
 
         });

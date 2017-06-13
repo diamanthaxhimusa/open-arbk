@@ -62,7 +62,45 @@ $(document).ready(function(){
             series: [{
                 name: 'Biznese',
                 colorByPoint: true,
-                data: data
+                data: data,
+                colors: [{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#9578AD'],
+                       [1, '#684A7F']
+                    ]
+                },{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#85BBB9'],
+                       [1, '#218380']
+                    ]
+                },{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#EFBEA0'],
+                       [1, '#DD7230']
+                    ]
+                },{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#6D1B5D'],
+                       [1, '#A26D97']
+                    ]
+                },{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#69A2B0'],
+                       [1, '#BAD4DB']
+                    ]
+                },{
+                    radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                    stops: [
+                       [0, '#C7D7C1'],
+                       [1, '#659157']
+                    ]
+                }
+                ]
             }]
         });
     }
