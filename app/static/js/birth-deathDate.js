@@ -3,7 +3,8 @@ $(document).ready(function(){
         url: "/through-years",
         type: 'GET',
         success: function(data){
-          dates(data)
+          dates(data);
+          $('#thruYearsLoader').hide();
         }
     })
     function dates(data) {

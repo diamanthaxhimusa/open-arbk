@@ -16,7 +16,7 @@ $(document).ready(function(){
           url: "/businesses-type",
           type: 'POST',
           beforeSend: function() {
-            $('#bizTypesLoader').show();  
+            $('#bizTypesLoader').show();
           },
           success: function(data){
               proccesAPI(data);
@@ -113,7 +113,8 @@ $(document).ready(function(){
         url: "/active-inactive",
         type: 'GET',
         success: function(data){
-            active_inactive_chart(data)
+            active_inactive_chart(data);
+            $('#ActInactLoader').hide();
         }
     })
     function active_inactive_chart(data){
