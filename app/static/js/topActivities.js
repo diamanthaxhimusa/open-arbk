@@ -43,7 +43,6 @@ $(document).ready(function (){
 
     function top_activities(emri, data){
     var chart = Highcharts.chart('container4', {
-
         title: {
             text: ''
         },
@@ -54,13 +53,9 @@ $(document).ready(function (){
           title: {
             text: 'Numri i bizneseve'
           }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.x}</span><br>',
-            pointFormat: '<span style="color:{point.color}">Total{point.name}</span>: <b>{point.y}</b> biznese<br/>'
-        },
-
-        xAxis: {
+        },tooltip: {
+            pointFormat: 'total: <b>{point.y} biznese</b>'
+        },xAxis: {
             categories: emri
         },
 

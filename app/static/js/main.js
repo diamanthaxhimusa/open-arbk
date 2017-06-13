@@ -102,6 +102,20 @@ $(document).ready(function(){
          series: [{
              name: 'Numri i kompanive',
              colorByPoint: true,
+             colors:[{
+                     radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                     stops: [
+                        [0, '#99D5D2'],
+                        [1, '#20A39E']
+                     ]
+                 },{
+                     radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
+                     stops: [
+                        [0, '#9B8B98'],
+                        [1, '#23001E']
+                     ]
+                 }
+             ],
              data: [{
                  name: 'Aktive ('+data.docs.result[0]['total']+')',
                  y: (data.docs.result[0]['total'] / data.total) * 100

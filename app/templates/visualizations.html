@@ -2,15 +2,15 @@
 {% block content %}
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="{{url_for('static', filename="js/scroll.js")}}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
 <script src="{{ url_for('static', filename='js/topActivities.js') }}"></script>
 <script src="{{ url_for('static', filename='js/selectTopActivities.js') }}"></script>
 <script src="{{url_for('static', filename="js/top10.js")}}"></script>
-<script src="{{url_for('static', filename="js/genderStats.js")}}"></script>
-<script src="{{url_for('static', filename="js/scroll.js")}}"></script>
-<script src="{{url_for('static', filename="js/topGenderActs.js")}}"></script>
 <script src="{{url_for('static', filename="js/activityByYears.js")}}"></script>
+<script src="{{url_for('static', filename="js/genderStats.js")}}"></script>
+<script src="{{url_for('static', filename="js/topGenderActs.js")}}"></script>
 <section id="bizKind">
     <div class="row">
         <div id="business-types" class="col-xs-12 con1" style="">
