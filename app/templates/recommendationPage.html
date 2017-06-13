@@ -20,79 +20,77 @@
         width: 70px;
         height: 70px;
     }
-    #recommendationPage .row {
+    #recommendationPage .illustration-row {
         text-align: center;
     }
+    @media (max-width:767px) {
+        .illustration-content{
+            height: 200px !important;
+        }
+    }
+
     .illustration-content{
-        height: 330px !important;
         padding-bottom: 20px !important;
         padding-top: 20px !important;
         transition: all 0.5s;
     }
 </style>
 <section id="recommendationPage">
-    <!-- <div class="container"> -->
-    <div class="row">
-        <p>Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave &euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; mir&euml;, transparente dhe llogaridh&euml;n&euml;se. T&euml; dh&euml;nat e hapura jan&euml; m&euml;nyr&euml; fundamentale e pjes&euml;marrjes qytetare n&euml; vendimarrje. P&euml;r k&euml;t&euml; arsye t&euml; dh&euml;nat q&euml; ofrohen nga institucionet qeveritare duhet t&euml; jen&euml; publike, leht&euml;sisht t&euml; qasshme, si dhe n&euml; formate t&euml; hapura.</p>
-        <p>Me dat&euml; 13.05.2016 Qeveria e Kosov&euml;s miratoi Kart&euml;n p&euml;r Hapjen e t&euml; Dh&euml;nave n&euml; Republik&euml;n e Kosov&euml;s. Sipas k&euml;tij dokumenti Republika e Kosov&euml;s ka marr&euml; zotim t'i p&euml;rshtatet principit t&euml; hapjes s&euml; dh&euml;nave p&euml;r t&euml; mir&euml;n publike. </p>
-        <p>Qasja e limitueshme n&euml; t&euml; dh&euml;nat e kompanive &euml;sht&euml; problem p&euml;r t&euml; gjith&euml;. Informatat e mbyllura t&euml; bizneseve krijojn&euml; hapsir&euml; p&euml;r pastrim parash, korrupsion, keqp&euml;rdorim dhe krim t&euml; organizuar. K&euml;to probleme e ndalojn&euml; zhvillimin ekonomik lokalisht si dhe n&euml; shkall&euml; globale. </p>
-        <br>
-    </div>
-        <div class="row" style="padding-top:20px; padding-bottom:-20px">
-            <div class="col-xs-6 col-sm-3 illustration-content">
-                <span><img src="{{url_for('static', filename="img/illustration-1.png")}}" class="illustration-img"></span>
-                <br><br>
-                <span>
-                    Hapja e t&euml; dh&euml;nave biznesore lejon analiza ekonomike p&euml;r sektor&euml; si dhe aktivitete t&euml; ndryshme ekonomike
-                </span>
-            </div>
-            <div class="col-xs-6 col-sm-3 illustration-content">
-                <span><img src="{{url_for('static', filename="img/illustration-2.png")}}" class="illustration-img"></span>
-                <br><br>
-                <span>
-                    Krijon hapsir&euml; p&euml;r analizimin e trendeve ekonomike n&euml; periudha dhe rajone t&euml; ndryshme
-                </span>
-            </div>
-            <div class="col-xs-6 col-sm-3 illustration-content">
-                <span><img src="{{url_for('static', filename="img/illustration-3.png")}}" class="illustration-img"></span>
-                <br><br>
-                <span>
-                    Krijon hapsir&euml; p&euml;r analiz&euml; t&euml; tregut nga investitor&euml;t lokal dhe nd&euml;rkomb&euml;tar
-                </span>
-            </div>
-            <div class="col-xs-6 col-sm-3 illustration-content">
-                <span><img src="{{url_for('static', filename="img/illustration-4.png")}}" class="illustration-img"></span>
-                <br><br>
-                <span>
-                    Hapja e t&euml; dh&euml;nave mund t&euml; p&euml;rdoret edhe si mjet marketingu p&euml;r bizneset
-                </span>
-            </div>
+    <p>Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave &euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; mir&euml;, transparente dhe llogaridh&euml;n&euml;se. T&euml; dh&euml;nat e hapura jan&euml; m&euml;nyr&euml; fundamentale e pjes&euml;marrjes qytetare n&euml; vendimarrje. P&euml;r k&euml;t&euml; arsye t&euml; dh&euml;nat q&euml; ofrohen nga institucionet qeveritare duhet t&euml; jen&euml; publike, leht&euml;sisht t&euml; qasshme, si dhe n&euml; formate t&euml; hapura.</p>
+    <p>Me dat&euml; 13.05.2016 Qeveria e Kosov&euml;s miratoi Kart&euml;n p&euml;r Hapjen e t&euml; Dh&euml;nave n&euml; Republik&euml;n e Kosov&euml;s. Sipas k&euml;tij dokumenti Republika e Kosov&euml;s ka marr&euml; zotim t'i p&euml;rshtatet principit t&euml; hapjes s&euml; dh&euml;nave p&euml;r t&euml; mir&euml;n publike. </p>
+    <p>Qasja e limitueshme n&euml; t&euml; dh&euml;nat e kompanive &euml;sht&euml; problem p&euml;r t&euml; gjith&euml;. Informatat e mbyllura t&euml; bizneseve krijojn&euml; hapsir&euml; p&euml;r pastrim parash, korrupsion, keqp&euml;rdorim dhe krim t&euml; organizuar. K&euml;to probleme e ndalojn&euml; zhvillimin ekonomik lokalisht si dhe n&euml; shkall&euml; globale. </p>
+    <div class="row illustration-row" style="padding-top:20px; padding-bottom:20px">
+        <div class="col-xs-6 col-sm-3 illustration-content">
+            <span><img src="{{url_for('static', filename="img/illustration-1.png")}}" class="illustration-img"></span>
+            <br><br>
+            <span>
+                Hapja e t&euml; dh&euml;nave biznesore lejon analiza ekonomike p&euml;r sektor&euml; si dhe aktivitete t&euml; ndryshme ekonomike
+            </span>
         </div>
-        <br>
-        <p>Duke ndjekur k&euml;to principle Agjencia e Regjistrimit t&euml; Bizneseve n&euml; Kosov&euml; (ARBK) duhet t&euml; p&euml;rmir&euml;soj&euml; dhe thjesht&euml;zoj&euml; qasjen n&euml; informatat biznesore n&euml; Kosov&euml;.</p>
-        <ul class="recPage">
-            <li>
-                T&euml; dh&euml;nat e bizneseve, duke p&euml;rjashtuar t&euml; dh&euml;nat sensitive personale, duhet t&euml; jen&euml; publikisht t&euml; qasshme pa pages&euml;;
-            </li>
-            <li>
-                Ato duhet t&euml; jen&euml; t&euml; p&euml;rdit&euml;suara dhe t&euml; prezentuara n&euml; koh&euml; reale;
-            </li>
-            <li>
-                P&euml;r t&euml; qen&euml; t&euml; p&euml;rdorueshme nga publiku t&euml; dh&euml;nat duhet t&euml; j&euml;n&euml; t&euml; publikuara n&euml; format t&euml; hapur, q&euml; lexohen leht&euml; nga programet softuerike;
-            </li>
-            <li>
-                T&euml; dh&euml;nat duhet t&euml; lejojn&euml; mund&euml;si q&euml; t&euml; shkarkohen n&euml; t&euml;r&euml;si, si dhe n&euml;n licens&euml; t&euml; hapur, q&euml; lejon p&euml;rdorimin dhe ri-p&euml;rdorimin nga publiku i gjer&euml;.
-            </li>
-        </ul>
-        <p>Open Data Kosovo &euml;sht&euml; e gatshme p&euml;r bashk&euml;punim n&euml; implementimin e principeve t&euml; t&euml; dh&euml;nave t&euml; hapura, p&euml;r t’i ndihmuar institucionet q&euml; t&euml; arrijn&euml; nivelin m&euml; t&euml; lart&euml; t&euml; trasparenc&euml;s, q&euml; kontribon n&euml; t&euml; mir&euml;n e gjith&euml; vendit. </p>
-        <br>
-        <p>Lexoni m&euml; shum&euml; p&euml;r l&euml;min&euml; e t&euml; dh&euml;nave t&euml; hapura: </p>
-        <br>
-        <a target="_blank" href="https://www.opengovpartnership.org">https://www.opengovpartnership.org</a><br>
-        <a target="_blank" href="https://okfn.org">https://okfn.org</a> <br>
-        <a target="_blank" href="https://opencorporates.com">https://opencorporates.com</a> <br>
-        <a target="_blank" href="http://data.worldbank.org">http://data.worldbank.org</a> <br>
-
-    <!-- </div> -->
+        <div class="col-xs-6 col-sm-3 illustration-content">
+            <span><img src="{{url_for('static', filename="img/illustration-2.png")}}" class="illustration-img"></span>
+            <br><br>
+            <span>
+                Krijon hapsir&euml; p&euml;r analizimin e trendeve ekonomike n&euml; periudha dhe rajone t&euml; ndryshme
+            </span>
+        </div>
+        <div class="col-xs-6 col-sm-3 illustration-content">
+            <span><img src="{{url_for('static', filename="img/illustration-3.png")}}" class="illustration-img"></span>
+            <br><br>
+            <span>
+                Krijon hapsir&euml; p&euml;r analiz&euml; t&euml; tregut nga investitor&euml;t lokal dhe nd&euml;rkomb&euml;tar
+            </span>
+        </div>
+        <div class="col-xs-6 col-sm-3 illustration-content">
+            <span><img src="{{url_for('static', filename="img/illustration-4.png")}}" class="illustration-img"></span>
+            <br><br>
+            <span>
+                Hapja e t&euml; dh&euml;nave mund t&euml; p&euml;rdoret edhe si mjet marketingu p&euml;r bizneset
+            </span>
+        </div>
+    </div>
+    <p>Duke ndjekur k&euml;to principle Agjencia e Regjistrimit t&euml; Bizneseve n&euml; Kosov&euml; (ARBK) duhet t&euml; p&euml;rmir&euml;soj&euml; dhe thjesht&euml;zoj&euml; qasjen n&euml; informatat biznesore n&euml; Kosov&euml;.</p>
+    <ul class="recPage">
+        <li>
+            T&euml; dh&euml;nat e bizneseve, duke p&euml;rjashtuar t&euml; dh&euml;nat sensitive personale, duhet t&euml; jen&euml; publikisht t&euml; qasshme pa pages&euml;;
+        </li>
+        <li>
+            Ato duhet t&euml; jen&euml; t&euml; p&euml;rdit&euml;suara dhe t&euml; prezentuara n&euml; koh&euml; reale;
+        </li>
+        <li>
+            P&euml;r t&euml; qen&euml; t&euml; p&euml;rdorueshme nga publiku t&euml; dh&euml;nat duhet t&euml; j&euml;n&euml; t&euml; publikuara n&euml; format t&euml; hapur, q&euml; lexohen leht&euml; nga programet softuerike;
+        </li>
+        <li>
+            T&euml; dh&euml;nat duhet t&euml; lejojn&euml; mund&euml;si q&euml; t&euml; shkarkohen n&euml; t&euml;r&euml;si, si dhe n&euml;n licens&euml; t&euml; hapur, q&euml; lejon p&euml;rdorimin dhe ri-p&euml;rdorimin nga publiku i gjer&euml;.
+        </li>
+    </ul>
+    <p>Open Data Kosovo &euml;sht&euml; e gatshme p&euml;r bashk&euml;punim n&euml; implementimin e principeve t&euml; t&euml; dh&euml;nave t&euml; hapura, p&euml;r t’i ndihmuar institucionet q&euml; t&euml; arrijn&euml; nivelin m&euml; t&euml; lart&euml; t&euml; trasparenc&euml;s, q&euml; kontribon n&euml; t&euml; mir&euml;n e gjith&euml; vendit. </p>
+    <br>
+    <p>Lexoni m&euml; shum&euml; p&euml;r l&euml;min&euml; e t&euml; dh&euml;nave t&euml; hapura: </p>
+    <br>
+    <a target="_blank" href="https://www.opengovpartnership.org">https://www.opengovpartnership.org</a><br>
+    <a target="_blank" href="https://okfn.org">https://okfn.org</a> <br>
+    <a target="_blank" href="https://opencorporates.com">https://opencorporates.com</a> <br>
+    <a target="_blank" href="http://data.worldbank.org">http://data.worldbank.org</a> <br>
 </section>
 {%endblock%}
