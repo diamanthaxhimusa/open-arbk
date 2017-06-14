@@ -4,7 +4,8 @@ $('document').ready(function() {
         type: 'GET',
         success: function(data){
           proccesAPIFemra(data.females.activities);
-          proccesAPIMeshkuj(data.males.activities)
+          proccesAPIMeshkuj(data.males.activities);
+          $('#genderActivitiesLoader').hide()
         }
     })
 })
