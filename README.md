@@ -72,7 +72,7 @@ sudo a2dissite 000-default.conf
 
 Pastaj aktivizo ate qe sapo krijuam:
 ```
-sudo a2ensite peaceobservatory-cgs.org.conf
+sudo a2ensite open-arbk.conf
 ```
 
 Restarto serverin per te marr efekt ndryshimet:
