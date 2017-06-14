@@ -79,3 +79,47 @@ Restarto serverin per te marr efekt ndryshimet:
 ```
 sudo service apache2 restart
 ```
+
+### 2. Instalimi Lokal (UBUNTU)
+
+
+Se pari, krijo nje folder ne desktopin tuaj:
+```
+cd ~
+mkdir dev
+cd dev
+```
+
+Merrni projektin lokalisht:
+```
+git clone https://github.com/opendatakosovo/open-arbk.git
+cd bpo
+```
+
+Instalo the fillo projektin:
+```
+bash install.sh
+bash run-debug.sh
+```
+
+### 3. Pergaditja e dokumenteve dhe databases
+Se pari pasi qe te importoni databasen ne mongo duhet startuar skripta qe rregullon dokumentet:
+```
+ruby fix_activities.rb
+```
+
+```
+bash activity-importer.sh
+bash muni-importer.sh
+```
+
+Pastaj startoni skripten e cila formaton databasen e vjeter ne nje te re te formatuar:
+```
+bash data-importer.sh
+```
+
+Pasi te perfundoj krijimi i koleksionit te ri, duhet pergatitur dokumentet per shkarkim:
+```
+bash document-prepare.sh
+bash zip-json-csv.sh
+```
