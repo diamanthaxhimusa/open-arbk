@@ -9,7 +9,9 @@ sys.setdefaultencoding('utf-8')
 
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
+# drop old collection if there is any
 db.municipalities.drop()
+# crete new collection with municipalities and their villages
 with open("data-importer/komunat.json","r") as data:
     municipalities = json.load(data)
     for municipality in municipalities:

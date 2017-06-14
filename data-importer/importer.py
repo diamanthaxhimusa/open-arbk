@@ -9,19 +9,22 @@ sys.setdefaultencoding('utf-8')
 
 client = MongoClient("mongodb://localhost:27017")
 db = client['arbk']
+# drop old collection if there is any
 db.reg_businesses.drop()
+# open json files where is the data for municipalities and activities
 municipalities_json_file = open("data-importer/komunat.json")
 municipalities_json = json.load(municipalities_json_file)
 gender_people_json_file = open("data-importer/gender_people.json")
 gender_people_json = json.load(gender_people_json_file)
 
+# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
 def slug_data(slug_string):
-	# Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
     slugified_string = slug_string
     slugified_string = re.sub(r'[,|?|$|/|\|"]',r'', slugified_string)
     slugified_string = unidecode.unidecode(slugified_string)
     return slugified_string.lower()
 
+# Set municipality each place corresponds to
 def set_muni(given_city_bus):
     municipalities = municipalities_json
     cities = {}
@@ -41,12 +44,11 @@ def set_muni(given_city_bus):
         "place": given_city_bus
         }
         return cities
-
+# Set gender to persons based on their names, if they match our database with names or not
 def gender_person(person):
     names = gender_people_json
     owner = {}
     divide = person.split(" ")
-    # for gender in names:
     if divide[0].title() in names['females']:
     	owner = {"name":person, "gender" : "female"}
     elif divide[0].title() in names['males']:
@@ -57,8 +59,8 @@ def gender_person(person):
 
 def main():
     docs = db.businesses.find()
-    # Looping through each doc
     i = 0
+    # Looping through each doc
     for doc in docs:
         sluged_owners = []
         gender_owners = []
@@ -153,5 +155,6 @@ def main():
         print 'Generating documents: [%s]'%i
 
 main()
+# close json files
 municipalities_json_file.close()
 gender_people_json_file.close()

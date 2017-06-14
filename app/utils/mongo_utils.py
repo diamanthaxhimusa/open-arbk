@@ -22,220 +22,40 @@ class MongoUtils(object):
 
     # Search engine
     def search_engine(self, page, items_per_page, business, status, person, person_status, municipality):
-        if business == "" and person == "":
-            if person_status == "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find()
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedMunicipality": municipality,
-                     "status":status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find()
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedMunicipality": municipality,
-                     "status":status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            return 'error'
-        elif business == "" and person != "":
-            if person_status == "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}]})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}],
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}],
-                    "status":status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                            {"slugifiedAuthorized": {"$regex": person}}],
-                    "status": status,
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    status: {"$regex": person}})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    status: {"$regex": person},
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    person_status: {"$regex": person},
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    person_status: {"$regex": person},
-                    "status": status,
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            return 'error'
-        elif business != "" and person == "":
-            if municipality == "any" and status == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedBusiness": {"$regex": business}})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif municipality == "any" and status != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif municipality !="any" and status == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find(
-                    {"slugifiedBusiness": {"$regex": business},
-                     "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif municipality !="any" and status != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    "slugifiedMunicipality": municipality,
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            return 'error'
-        elif business !="" and person != "":
-            if person_status == "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}]})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}],
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                             {"slugifiedAuthorized": {"$regex": person}}],
-                    "status":status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status == "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    '$or': [{"slugifiedOwners": {"$regex": person}},
-                            {"slugifiedAuthorized": {"$regex": person}}],
-                    "status": status,
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    status: {"$regex": person}})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status == "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    person_status: {"$regex": person},
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality == "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    person_status: {"$regex": person},
-                    "status": status})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            elif person_status != "any" and status != "any" and municipality != "any":
-                result = self.mongo.db[self.reg_businesses_collection].find({
-                    "slugifiedBusiness": {"$regex": business},
-                    person_status: {"$regex": person},
-                    "status": status,
-                    "slugifiedMunicipality": municipality})
-                final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
-                count = result.count()
-                return {"result":final_result, "count":count}
-            return 'Error'
-        else:
-            result = "Error"
+        search = {}
+        search_person = {
+            '$or':[
+                    {"slugifiedOwners": {"$regex": person}},
+                    {"slugifiedAuthorized": {"$regex": person}}
+                ]
+            }
+        search_person_status = {
+            person_status: {"$regex": person}
+            }
+        search_bussiness = {
+            "slugifiedBusiness": {"$regex": business}
+            }
+        search_bussiness_status = {
+            "status": status
+            }
+        search_municipality = {
+            "slugifiedMunicipality": municipality
+            }
+        if person != "":
+            if person_status != "any":
+                search.update(search_person_status)
+            else:
+                search.update(search_person)
+        if business != "":
+            search.update(search_bussiness)
+        if status != "any":
+            search.update(search_bussiness_status)
+        if municipality != "any":
+            search.update(search_municipality)
+        result = self.mongo.db[self.reg_businesses_collection].find(search)
+        final_result = result.skip(items_per_page*(page-1)).limit(items_per_page)
+        count = result.count()
+        return {"result":final_result, "count":count}
 
     def index_create(self):
         result = self.mongo.db[self.reg_businesses_collection].create_index("formatted.slugifiedOwners", 1)
@@ -269,29 +89,19 @@ class MongoUtils(object):
         return {"result":final_result, "count":count}
 
     # Top ten capital businesses
-    def get_top_ten_by_capital(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([{'$sort': {"capital": -1}}, {'$limit': 10}])
-        return result
-
-    def get_top_ten_capital_by_status(self, business_status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"status": business_status}},
-            {'$sort': {"capital": -1}},
-            {'$limit': 10}])
-        return result
-
-    def get_top_ten_capital_by_city(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality": city}},
-            {'$sort': {"capital": -1}},
-            {'$limit': 10}])
-        return result
-
-    def get_top_ten_capital_by_city_status(self, business_status, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"status": business_status, "municipality.municipality": city}},
-            {'$sort': {"capital": -1}},
-            {'$limit': 10}])
+    def get_top_ten_businesses(self, biz_status, municipality):
+        query = []
+        limit = {'$limit': 10}
+        capital_sort = {'$sort': {"capital": -1}}
+        status = {'$match': {"status": biz_status}}
+        muni = {'$match': {"municipality.municipality": municipality}}
+        if biz_status != "any":
+            query.append(status)
+        if municipality != "any":
+            query.append(muni)
+        query.append(capital_sort)
+        query.append(limit)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
 
     # Businesses through years queries
@@ -303,52 +113,31 @@ class MongoUtils(object):
         return result
 
     # Businesses type
-    def get_biz_types_by_status(self, business_status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"status":business_status}},
-            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
-            {'$sort': {'total': -1}}
-        ])
+    def get_business_types(self, municipality, business_status):
+        query = []
+        sort_biz = {'$sort': {'total': -1}}
+        group = {'$group': {"_id": "$type", "total": {"$sum": 1}}}
+        match_status = {'$match': {"status":business_status}}
+        match_muni = {'$match': {"municipality.municipality":municipality}}
+        if business_status != "any":
+            query.append(match_status)
+        if municipality != "any":
+            query.append(match_muni)
+        query.append(group)
+        query.append(sort_biz)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
-
-    def get_biz_types_by_city(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city}},
-            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
-            {'$sort': {'total': -1}}
-        ])
-        return result
-
-    def get_biz_types_by_city_status(self, city, status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city, "status":status}},
-            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
-            {'$sort': {'total': -1}}
-        ])
-        return result
-    def get_biz_types_all(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$group': {"_id": "$type", "total": {"$sum": 1}}},
-            {'$sort': {'total': -1}}
-        ])
-        return result
-    def get_count_biz_types_city(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-        {'$match': {"municipality.municipality":city}},
-        {'$count':"all"}
-        ])
-        return result
-    def get_count_biz_types_status(self, status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-        {'$match': {"status":status}},
-        {'$count':"all"}
-        ])
-        return result
-    def get_count_biz_types_city_status(self, status, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-        {'$match': {"municipality.municipality":city, "status":status}},
-        {'$count':"all"}
-        ])
+    def get_count_biz_types(self, business_status, city):
+        query = []
+        match_status = {'$match': {"status":business_status}}
+        match_muni = {'$match': {"municipality.municipality":city}}
+        count = {'$count':"all"}
+        if biz_status != "any":
+            query.append(match_status)
+        if municipality != "any":
+            query.append(match_muni)
+        query.append(count)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
 
     # MAP Activities
@@ -427,13 +216,13 @@ class MongoUtils(object):
                 result.update({i:0})
         return result
 
+    # Get activities from db
     def get_activities(self):
         acts = self.mongo.db[self.activities].find()
         activs = []
         for act in acts:
             activs.append({"activity":act['activity'],"code":act['code']})
         return activs
-
 
     # top 10 activity divided in genders
     def get_top_ten_activities_by_gender(self, gender):
@@ -448,7 +237,6 @@ class MongoUtils(object):
         return result
 
     # activities queries
-
     def activity_years(self, year, activity):
         act = self.mongo.db[self.activities].find({"activity":activity})
         code = 0
@@ -465,37 +253,22 @@ class MongoUtils(object):
             result = {"ok":1, 'result':[{"all":0}]}
         return result
 
-    def get_most_used_activities(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$unwind': "$activities"},
-            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
-            {'$sort': {"totali": -1}}
-        ])
-        return result
-
-    def get_activities_by_status(self, status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {'status': status}},
-            {'$unwind': "$activities"},
-            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
-            {'$sort': {"totali": -1}}
-        ])
-        return result
-
-    def get_activities_by_municipality(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {'municipality.municipality': city}},
-            {'$unwind': "$activities"},
-            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
-            {'$sort': {"totali": -1}}])
-        return result
-
-    def get_activities_by_status_municipality(self, status, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {'municipality.municipality': city, 'status': status}},
-            {'$unwind': "$activities"},
-            {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}},
-            {'$sort': {"totali": -1}}])
+    # top used activities
+    def get_most_used_activities(self, status, municipality):
+        query = []
+        unwind = {'$unwind': "$activities"}
+        group = {'$group': {"_id": "$activities", 'totali': {'$sum': 1}}}
+        sort_activities = {'$sort': {"totali": -1}}
+        match_muni = {'$match': {'municipality.municipality': municipality}}
+        match_status = {'$match': {'status': status}}
+        if status != "any":
+            query.append(match_status)
+        if municipality != "any":
+            query.append(match_muni)
+        query.append(unwind)
+        query.append(group)
+        query.append(sort_activities)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
 
     # Get total businesses by status
@@ -506,61 +279,37 @@ class MongoUtils(object):
         return result
 
     #Get owners count by gender
-    def get_total_by_gender(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$unwind': "$owners"},
-            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
-            {'$sort': {"all":-1}}
-        ])
+    def get_gender_owners_data(self, status, city):
+        query = []
+        unwind = {'$unwind': "$owners"}
+        sort_owners = {'$sort': {"all":-1}}
+        group = {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}}
+        match_status = {'$match': {"status":status}}
+        match_muni = {'$match': {"municipality.municipality":city}}
+        if status != "any":
+            query.append(match_status)
+        if city != "any":
+            query.append(match_muni)
+        query.append(unwind)
+        query.append(group)
+        query.append(sort_owners)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
-    def get_count_total_gender(self):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$unwind': "$owners"},
-            {'$count': "all"}
-        ])
-        return result
-    def get_count_gen_types_status(self, status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"status":status}},
-            {'$unwind': "$owners"},
-            {'$count':"all"}
-        ])
-        return result
-    def get_gen_types_by_status(self, status):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"status":status}},
-            {'$unwind': "$owners"},
-            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
-            {'$sort': {"all":-1}},
-        ])
-        return result
-    def get_count_gen_types_city(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city}},
-            {'$unwind': "$owners"},
-            {'$count':"all"}
-        ])
-        return result
-    def get_gen_types_by_city(self, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city}},
-            {'$unwind': "$owners"},
-            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
-            {'$sort': {"sum":-1}}
-        ])
-        return result
-    def get_count_gen_types_city_status(self, status, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city, "status":status}},
-            {'$unwind': "$owners"},
-            {'$count':"all"}
-        ])
-        return result
-    def get_gen_types_by_city_status(self, status, city):
-        result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"municipality.municipality":city, "status":status}},
-            {'$unwind': "$owners"},
-            {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}},
-            {'$sort': {"sum":-1}}
-        ])
+    def get_gender_owners_data_count(self, status, city):
+        query = []
+        unwind = {'$unwind': "$owners"}
+        sort_owners = {'$sort': {"all":-1}}
+        group = {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}}
+        match_status = {'$match': {"status":status}}
+        match_muni = {'$match': {"municipality.municipality":city}}
+        count = {'$count':"all"}
+        if status != "any":
+            query.append(match_status)
+        if city != "any":
+            query.append(match_muni)
+        query.append(unwind)
+        query.append(group)
+        query.append(sort_owners)
+        query.append(count)
+        result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result

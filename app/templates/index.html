@@ -57,6 +57,11 @@
 <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#search-form').keydown(function(e) {
+            if (e.keyCode == 13) {
+                search();
+            }
+        });
         var urlParam = parseInt(getUrlParameter('page'));
         var municipality = getUrlParameter('municipality');
         var biz_status = getUrlParameter('biz-status');
@@ -99,6 +104,8 @@
         if (totPages < urlParam) {
             $('#table-search').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
         }
+        person = person.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        business = business.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
             $('#pagination-demo').twbsPagination({
                 startPage: urlParam,
@@ -142,6 +149,8 @@
         if (person_status == null)person_status = "any";
         if(biz_status === null)biz_status = "any";
         if(municipality == null)municipality = "any";
+        person = person.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        business = business.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         window.location.href = "?page=1&municipality="+municipality+"&biz-status="+biz_status+"&person-status="+person_status+"&person="+person+"&business="+business+"";
     }
 </script>

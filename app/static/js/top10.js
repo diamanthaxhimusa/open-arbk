@@ -7,7 +7,7 @@ function selectDist() {
             status : $('#kind').val()
         },
         type : 'POST',
-        url : '/visualization',
+        url : '/vizualizimet',
         success: function(response) {
             var data = '<table id="topTable" class="table table-entities table-bordered table-striped table-hover">'+
             '<thead>'+
