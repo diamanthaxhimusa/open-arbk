@@ -75,7 +75,7 @@ def main():
             sluged_owners.append(slugified_owner_string)
             gender_owner = gender_person(owner)
             gender_owners.append(gender_owner)
-            slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
+        slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
         for authorized in doc['formatted']['authorized']:
             slugified_authorized_string = slug_data(authorized)
             gender_authorized = gender_person(authorized)

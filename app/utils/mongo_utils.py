@@ -127,12 +127,12 @@ class MongoUtils(object):
         query.append(sort_biz)
         result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
-    def get_count_biz_types(self, business_status, city):
+    def get_count_biz_types(self, business_status, municipality):
         query = []
         match_status = {'$match': {"status":business_status}}
-        match_muni = {'$match': {"municipality.municipality":city}}
+        match_muni = {'$match': {"municipality.municipality":municipality}}
         count = {'$count':"all"}
-        if biz_status != "any":
+        if business_status != "any":
             query.append(match_status)
         if municipality != "any":
             query.append(match_muni)
