@@ -16,12 +16,13 @@ require 'mongo'
 
 # Establish connection to database
 client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'arbk')
+Mongo::Logger.logger.level = ::Logger::FATAL
 $collection_businesses = client[:businesses]
 
 
 def fix()
     fix_count = 0
-    businesses = $collection_businesses.find().each { |business|
+    businesses = $collection_businesses.find({'fixed': {'$exists' => false}}).each { |business|
         catch :problematic do
             id = business['_id']
             regnum = business['formatted']['registrationNum'].to_s
@@ -50,10 +51,11 @@ def fix_formatted_activities(id, regnum, activities)
         end
     }
 
+    puts 'Fixing: ' + regnum
     # Update/fix document
     $collection_businesses.update_one(
         {'_id' => id},
-        {'$set' => {'formatted.activities' => activity_codes}})
+        {'$set' => {'formatted.activities' => activity_codes, 'fixed' => true}})
 end
 
 fix()

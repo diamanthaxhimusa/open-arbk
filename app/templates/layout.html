@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/preLoader.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{url_for('static', filename="js/scroll.js")}}"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -41,28 +42,28 @@
   <body>
     <!-- Navbar -->
     <nav id="main-header">
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Bizneset e Hapura</a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-              <li {% if request.path == '/recommendation' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
-              <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
-              <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
-              <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
-              <li {% if request.path == '/download' %}class="active"{% endif %}><a href="{{ url_for('main.download_page') }}">Shkarko</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-  </nav>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Bizneset e Hapura</a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li {% if request.path == '/recommendation' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
+                  <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
+                  <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
+                  <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
+                  <li {% if request.path == '/download' %}class="active"{% endif %}><a href="{{ url_for('main.download_page') }}">Shkarko</a></li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </nav>
 
     <!-- Header -->
     <div {% if request.path == url_for('main.index') %}class="header"

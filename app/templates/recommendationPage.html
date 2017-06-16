@@ -1,40 +1,6 @@
 {% extends 'layout.html' %}
 {% block content%}
-<style media="screen">
-    .header {
-        min-height: auto;
-    }
-    .bg-color{
-        min-height: auto;
-    }
-    .recPage{
-        padding-left: 40px;
-        list-style-type: disc;
-    }
-    #recommendationPage{
-        color: #000;
-        font-size: 17px;
-        padding-top: 80px
-    }
-    .illustration-img{
-        width: 70px;
-        height: 70px;
-    }
-    #recommendationPage .illustration-row {
-        text-align: center;
-    }
-    @media (max-width:767px) {
-        .illustration-content{
-            height: 200px !important;
-        }
-    }
-
-    .illustration-content{
-        padding-bottom: 20px !important;
-        padding-top: 20px !important;
-        transition: all 0.5s;
-    }
-</style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/recommendationStyle.css')}}">
 <section id="recommendationPage">
     <p>Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave &euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; mir&euml;, transparente dhe llogaridh&euml;n&euml;se. T&euml; dh&euml;nat e hapura jan&euml; m&euml;nyr&euml; fundamentale e pjes&euml;marrjes qytetare n&euml; vendimarrje. P&euml;r k&euml;t&euml; arsye t&euml; dh&euml;nat q&euml; ofrohen nga institucionet qeveritare duhet t&euml; jen&euml; publike, leht&euml;sisht t&euml; qasshme, si dhe n&euml; formate t&euml; hapura.</p>
     <p>Me dat&euml; 13.05.2016 Qeveria e Kosov&euml;s miratoi Kart&euml;n p&euml;r Hapjen e t&euml; Dh&euml;nave n&euml; Republik&euml;n e Kosov&euml;s. Sipas k&euml;tij dokumenti Republika e Kosov&euml;s ka marr&euml; zotim t'i p&euml;rshtatet principit t&euml; hapjes s&euml; dh&euml;nave p&euml;r t&euml; mir&euml;n publike. </p>
