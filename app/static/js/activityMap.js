@@ -15,34 +15,30 @@ $(document).ready(function() {
 function onStatusSelection(name) {
     $('.selected-value-status').html(name);
     var actDrop = $('.selected-value').html();
-    if (actDrop== "all") {
+    if (actDrop == "all") {
         actDrop = "Të gjitha"
     }
-    var actVal = actDrop;
-    if (actVal == "Të gjitha") {
-        actVal = "all"
-    }
-    if (name != 'Të gjitha') {
-        $.ajax({
-            data : {
-                activity_name : actVal,
-                status: name
-            },
-            url: "/mapi",
-            type: 'POST',
-            beforeSend: function(){
-                $(".overllay").show();
-            },
-            success: function(data){
-                proccesAPI(data);
-                $(".overllay").hide();
-            },
-            error: function(error) {
-            }
-        });
-    }else {
-        onActivitySelection("all")
-    }
+    // var actVal = actDrop;
+    // if (actVal == actDrop) {
+    //     actVal = "all"
+    // }
+    $.ajax({
+        data : {
+            activity_name : actDrop,
+            status: name
+        },
+        url: "/mapi",
+        type: 'POST',
+        beforeSend: function(){
+            $(".overllay").show();
+        },
+        success: function(data){
+            proccesAPI(data);
+            $(".overllay").hide();
+        },
+        error: function(error) {
+        }
+    });
 }
 function onActivitySelection(name) {
     if (name == "all") {
