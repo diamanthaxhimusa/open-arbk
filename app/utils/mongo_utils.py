@@ -25,16 +25,16 @@ class MongoUtils(object):
     def get_puntor(self):
         db = self.mongo.db[self.reg_businesses_collection]
         result_micro = db.aggregate([
-            {'$match': {"employeeCount": {"$gt": 0,"$lte": 9}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+            {'$match': {"employeeCount": {"$gte": 1,"$lte": 9}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
         result_mini = db.aggregate([
-            {'$match': {"employeeCount": {"$gt": 10,"$lte": 49}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+            {'$match': {"employeeCount": {"$gte": 10,"$lte": 49}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
         result_middle = db.aggregate([
-            {'$match': {"employeeCount": {"$gt": 50,"$lte": 249}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+            {'$match': {"employeeCount": {"$gte": 50,"$lte": 249}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
         result_big = db.aggregate([
-            {'$match': {"employeeCount": {"$gt": 250}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+            {'$match': {"employeeCount": {"$gte": 250}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
         total = db.count()
         return {"micro":{"total":result_micro['result'][0]['count']+result_micro['result'][1]['count'],result_micro['result'][1]['_id']:result_micro['result'][1]['count'],result_micro['result'][0]['_id']:result_micro['result'][0]['count']},

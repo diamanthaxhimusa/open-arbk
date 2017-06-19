@@ -49,12 +49,15 @@ function employeesChart(data) {
             }
         },
         tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total<br/>'
+            headerFormat: '',
+            pointFormat: '<span style="font-size:11px">{series.name}: {point.totalD}</span><br><span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total<br/>'
         },
         legend: {
             labelFormatter: function () {
-                return this.name+' ('+this.min+'-'+this.max+')';
+                var val = '';
+                if (this.min != undefined)
+                    val = ' ('+this.min+''+this.max+')';
+                return this.name+val;
             }
         },
         series: [{
@@ -63,27 +66,31 @@ function employeesChart(data) {
             data: [{
                 name: 'Mikrond\xebrmarrje',
                 y: Math.round((data.micro.total / data.total * 100)*100)/100,
-                drilldown: 'Micro',
-                min:0,
-                max:9
+                drilldown: 'micro',
+                totalD:data.micro.total,
+                min:'1',
+                max:'-9'
             }, {
                 name: 'Nd\xebrmarrje e vog\xebl',
                 y: Math.round((data.mini.total / data.total * 100)*100)/100,
                 drilldown: 'mini',
-                min:10,
-                max:49
+                totalD:data.mini.total,
+                min:'10',
+                max:'-49'
             }, {
                 name: 'Ndermarrje e mesme',
                 y: Math.round((data.middle.total / data.total * 100)*100)/100,
                 drilldown: 'middle',
-                min:50,
-                max:249
+                totalD:data.middle.total,
+                min:'50',
+                max:'-249'
             }, {
                 name: 'Nd\xebrmarrje e madhe',
                 y: Math.round((data.big.total / data.total * 100)*100)/100,
                 drilldown: 'big',
-                min:250,
-                max:'\u221e'
+                totalD:data.big.total,
+                min:'250+',
+                max:''
             }]
         }],
         drilldown: {
