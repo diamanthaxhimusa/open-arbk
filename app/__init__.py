@@ -55,10 +55,6 @@ def load_config(app):
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
 
-    app.config['BASIC_AUTH_USERNAME'] = config.get('Application', 'username')
-    app.config['BASIC_AUTH_PASSWORD'] = config.get('Application', 'password')
-    app.config['BASIC_AUTH_FORCE'] = True
-    basic_auth = BasicAuth(app)
 
     # Logging path might be relative or starts from the root.
     # If it's relative then be sure to prepend the path with the application's root directory path.
