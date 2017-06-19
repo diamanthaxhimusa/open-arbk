@@ -13,15 +13,15 @@ $(document).ready(function() {
     });
 });
 function onStatusSelection(name) {
-    $('.selected-value-status').html(name);
-    var actDrop = $('.selected-value').html();
-    if (actDrop == "all") {
-        actDrop = "T\xeb gjitha"
+    if (name == "Shuar") {
+        $('.selected-value-status').html("I shuar");
+    }else {        
+        $('.selected-value-status').html(name);
     }
-    // var actVal = actDrop;
-    // if (actVal == actDrop) {
-    //     actVal = "all"
-    // }
+    var actDrop = $('.selected-value').html();
+    if (actDrop == "T\xeb gjitha") {
+        actDrop = "all"
+    }
     $.ajax({
         data : {
             activity_name : actDrop,
