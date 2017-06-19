@@ -1,4 +1,3 @@
-
 function selectDist() {
     $('.test').html('')
     $.ajax({

@@ -39,7 +39,7 @@ $(document).ready(function(){
           }else if (data.doc.result[i]['_id'] == 'female') {
               gen_data.females = {"name":"Femra", "result":data.doc.result[i]['all']}
           }else {
-              gen_data.unknown = {"name":"Papërcaktuar", "result":data.doc.result[i]['all']}
+              gen_data.unknown = {"name":"Pap\xebrcaktuar", "result":data.doc.result[i]['all']}
           }
       }
       gender_owners(gen_data);
@@ -51,7 +51,7 @@ $(document).ready(function(){
             type: 'pie'
         },
         title: {
-            text: 'Përqindja e pronarëve sipas gjinisë'
+            text: 'P\xebrqindja e pronar\xebve sipas gjinis\xeb'
         },
         plotOptions: {
             pie: {
@@ -67,7 +67,7 @@ $(document).ready(function(){
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         series: [{
-            name: 'Pronarë në perqindje',
+            name: 'Pronar\xeb n\xeb perqindje',
             // colors: ['#E0777D','#4C86A8', '#E1DD8F'],
             colors: [{
                 radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },

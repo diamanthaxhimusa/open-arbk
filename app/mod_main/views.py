@@ -220,6 +220,13 @@ def top_gender_acts():
         return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     return 'error'
 
+@mod_main.route('/employees', methods=['GET'])
+def employee():
+    result = mongo_utils.get_puntor()
+    print result
+    return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
+
+
 @mod_main.route('/shkarko', methods=['GET', 'POST'])
 def download_page():
     return render_template('downloads.html')

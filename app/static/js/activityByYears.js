@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $('.selected-value').html("Kultivimi i drithërave (përveç orizit), i bimëve bishtajore dhe i farërave vajore");
+    $('.selected-value').html("Kultivimi i drith\xebrave (p\xebrveç orizit), i bim\xebve bishtajore dhe i far\xebrave vajore");
     $.ajax({
         data : {
-            activity: 'Kultivimi i drithërave (përveç orizit), i bimëve bishtajore dhe i farërave vajore'
+            activity: 'Kultivimi i drith\xebrave (p\xebrveç orizit), i bim\xebve bishtajore dhe i far\xebrave vajore'
         },
         url: "/activities-years",
         type: 'POST',
@@ -42,7 +42,7 @@ function dates(data) {
             type: 'line'
         },
         title: {
-            text: 'Krijimi i bizneseve gjatë viteve 2002-2017 sipas aktivitetit'
+            text: 'Krijimi i bizneseve gjat\xeb viteve 2002-2017 sipas aktivitetit'
         },
         xAxis: {
             categories: ['2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']

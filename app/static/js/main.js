@@ -40,7 +40,7 @@ $(document).ready(function(){
                 type: 'pie'
             },
             title: {
-                text: 'Përqindja e bizneseve në bazë të llojit'
+                text: 'P\xebrqindja e bizneseve n\xeb baz\xeb t\xeb llojit'
             },
             legend: {
                 enabled: false

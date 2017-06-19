@@ -20,6 +20,30 @@ class MongoUtils(object):
         result = self.mongo.db[self.activities].find()
         return result
 
+
+    # IDEA:
+    def get_puntor(self):
+        db = self.mongo.db[self.reg_businesses_collection]
+        result_micro = db.aggregate([
+            {'$match': {"employeeCount": {"$gt": 0,"$lte": 9}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+        ])
+        result_mini = db.aggregate([
+            {'$match': {"employeeCount": {"$gt": 10,"$lte": 49}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+        ])
+        result_middle = db.aggregate([
+            {'$match': {"employeeCount": {"$gt": 50,"$lte": 249}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+        ])
+        result_big = db.aggregate([
+            {'$match': {"employeeCount": {"$gt": 250}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
+        ])
+        total = db.count()
+        return {"micro":{"total":result_micro['result'][0]['count']+result_micro['result'][1]['count'],result_micro['result'][1]['_id']:result_micro['result'][1]['count'],result_micro['result'][0]['_id']:result_micro['result'][0]['count']},
+                "mini":{"total":result_mini['result'][0]['count']+result_mini['result'][1]['count'],result_mini['result'][1]['_id']:result_mini['result'][1]['count'],result_mini['result'][0]['_id']:result_mini['result'][0]['count']},
+                "middle":{"total":result_middle['result'][0]['count']+result_middle['result'][1]['count'],result_middle['result'][1]['_id']:result_middle['result'][1]['count'],result_middle['result'][0]['_id']:result_middle['result'][0]['count']},
+                "big":{"total":result_big['result'][0]['count']+result_big['result'][1]['count'],result_big['result'][1]['_id']:result_big['result'][1]['count'],result_big['result'][0]['_id']:result_big['result'][0]['count']},
+                "total":total}
+
+
     # Search engine
     def search_engine(self, page, items_per_page, business, status, person, person_status, municipality):
         search = {}
