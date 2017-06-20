@@ -120,8 +120,8 @@ bash data-importer.sh
 
 Pasi te perfundoj krijimi i koleksionit te ri, duhet pergatitur dokumentet per shkarkim:
 ```
-bash document-prepare.sh
-bash zip-json-csv.sh
+sudo bash document-prepare.sh
+sudo bash zip-json-csv.sh
 ```
 
 ***
@@ -248,6 +248,6 @@ bash data-importer.sh
 
 When creating the new collection is finished , run scripts to prepare data for download:
 ```
-bash document-prepare.sh
-bash zip-json-csv.sh
+sudo bash document-prepare.sh
+sudo bash zip-json-csv.sh
 ```
