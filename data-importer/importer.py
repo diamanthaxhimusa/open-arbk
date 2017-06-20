@@ -149,7 +149,8 @@ def main():
             "slugifiedAuthorized": slug_auth,
             "authorized": gen_auth,
             "municipality": city,
-            "slugifiedMunicipality":slug_city
+            "slugifiedMunicipality":slug_city,
+            "dataRetrieved": doc['formatted']['timestamp']
         })
         i += 1
         print 'Generating documents: [%s]'%i
