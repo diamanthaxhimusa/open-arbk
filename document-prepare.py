@@ -83,7 +83,7 @@ def make_csv(download_dir, range_download_year, type_of_date):
                         acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
                         owners += '%s\n'%owner['name'].encode('utf-8')
-                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved']}
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
                     writer.writerow(DictUnicodeProxy(row))
 
 def make_all_data_zip_csv(download_dir):
@@ -107,7 +107,7 @@ def make_all_data_zip_csv(download_dir):
                         acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
                         owners += '%s\n'%owner['name'].encode('utf-8')
-                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'],'Data e aplikimit': doc['applicationDate'], 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved']}
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
                     csvwriter.writerow(DictUnicodeProxy(row))
             except Exception as e:
                 print str(e)
