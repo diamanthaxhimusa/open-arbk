@@ -17,6 +17,9 @@
     width: 70px;
     height: 70px;
 }
+.recommendation-links{
+    padding-left: 40px;
+}
 #recommendationPage .illustration-row {
     text-align: center;
 }
