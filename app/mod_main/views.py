@@ -223,7 +223,6 @@ def top_gender_acts():
 @mod_main.route('/employees', methods=['GET'])
 def employee():
     result = mongo_utils.get_puntor()
-    print result
     return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
 
 
