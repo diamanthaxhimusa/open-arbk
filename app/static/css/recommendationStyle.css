@@ -25,6 +25,17 @@
         height: 200px !important;
     }
 }
+@media (max-width:420px) {
+    .illustration-content{
+        height: 300px !important;
+    }
+}
+@media (min-width:420px)and(max-width:767px) {
+    .illustration-content{
+        height: 250px !important;
+    }
+}
+
 
 .illustration-content{
     padding-bottom: 20px !important;
