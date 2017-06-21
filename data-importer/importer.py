@@ -71,13 +71,13 @@ def main():
         capi = 0
         # Looping in owner array of 'formatted' JSON in docs
         for owner in doc['formatted']['owners']:
-            slugified_owner_string = slug_data(owner)
+            slugified_owner_string = slugify(owner.lower())
             sluged_owners.append(slugified_owner_string)
             gender_owner = gender_person(owner)
             gender_owners.append(gender_owner)
         slugified_company_string = re.sub(r'[,|?|$|/|\|"]',r'', doc['formatted']['name'])
         for authorized in doc['formatted']['authorized']:
-            slugified_authorized_string = slug_data(authorized)
+            slugified_authorized_string = slugify(authorized.lower())
             gender_authorized = gender_person(authorized)
             slug_auth.append(slugified_authorized_string)
             gen_auth.append(gender_authorized)

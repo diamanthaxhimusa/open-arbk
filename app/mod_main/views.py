@@ -3,6 +3,7 @@
 from flask import Blueprint, render_template, Response, request, send_file, send_from_directory
 from app import mongo_utils, download_folder
 from bson import json_util
+from slugify import slugify
 import re, unidecode, urllib
 import sys, csv, json, math
 reload(sys)
@@ -20,8 +21,8 @@ def index():
         city = request.args.get('municipality', default="any", type=str)
         biz_status = request.args.get('biz-status', default="any", type=str)
         page = request.args.get('page', default=1, type=int)
-        business = business_keyword.lower()
-        person = search_keyword.lower()
+        business = slugify(business_keyword.lower())
+        person = slugify(search_keyword.lower())
         person_status = ""
         if status == "auth":
             person_status = "slugifiedAuthorized"
@@ -40,7 +41,7 @@ def index():
 def profile(status, person):
     items_per_page = 10
     page = request.args.get('page', default=1, type=int)
-    person_to_lower = unidecode.unidecode(person.lower())
+    person_to_lower = slugify(person.lower())
     municipalities = mongo_utils.get_municipalities()
     if status == 'owner':
         person_data = mongo_utils.get_profiles("slugifiedOwners", person_to_lower, page, items_per_page)
