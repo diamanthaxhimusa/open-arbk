@@ -67,6 +67,9 @@
               </table>
           </div>
           <div class="col-xs-12 text-center">
+              <div class="text-center">
+                  <span>Faqe <span id="pageStart"></span> nga <span id="pageEnd"></span></span>
+              </div>
               <ul id="pagination-demo" class="pagination-sm"></ul>
           </div>
           </div>
@@ -74,6 +77,7 @@
       </div>
     </section>
     <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
+    <script src="{{url_for('static', filename='js/urlEncoder.js')}}"></script>
     <script type="text/javascript">
         $(document).ready( function () {
             $('#tableLength').html($('#searchTable tbody tr').length);
@@ -88,6 +92,8 @@
             if (totPages < urlParam) {
                 $('#service .container .row').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
             }
+            $('#pageStart').html(urlParam);
+            $('#pageEnd').html(totPages);
             if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
                 $('#pagination-demo').twbsPagination({
                     startPage: urlParam,
@@ -104,20 +110,6 @@
                 });
             }
         });
-        function getUrlParameter(sParam) {
-            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : sParameterName[1];
-                }
-            }
-        }
     </script>
 
 {% endblock %}

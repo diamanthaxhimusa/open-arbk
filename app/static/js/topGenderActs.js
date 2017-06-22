@@ -55,7 +55,7 @@ function topGenderActivitiesFemra(data, categories) {
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{point.color}"><b>{point.y:.0f}</b> biznese</span><br/>'
+            pointFormat: '<span style="color:{point.color}"><b>{point.y:,.0f}</b> biznese</span><br/>'
         },
         plotOptions: {
             series: {
@@ -104,7 +104,7 @@ function topGenderActivitiesMeshkuj(data, categories) {
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{point.color}"><b>{point.y:.0f}</b> biznese</span><br/>'
+            pointFormat: '<span style="color:{point.color}"><b>{point.y:,.0f}</b> biznese</span><br/>'
         },
         plotOptions: {
             series: {

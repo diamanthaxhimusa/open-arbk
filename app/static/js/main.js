@@ -61,7 +61,7 @@ $(document).ready(function(){
             tooltip: {
                 formatter: function () {
                     return ''+this.point.name+': <b>'+this.point.tot+'<b><br>'+
-                        ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+total+'</b><br/>';
+                        ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+Highcharts.numberFormat(this.point.y, 2,'.', ',')+'</b><br/>';
                 }
             },
             series: [{
@@ -131,7 +131,7 @@ $(document).ready(function(){
          },
          tooltip: {
              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%'
+             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:,.0f}%'
          },
          plotOptions: {
              pie: {
