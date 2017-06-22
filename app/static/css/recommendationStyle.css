@@ -19,6 +19,9 @@
 }
 .recommendation-links{
     padding-left: 40px;
+    padding-right: 40px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
 }
 #recommendationPage .illustration-row {
     text-align: center;
