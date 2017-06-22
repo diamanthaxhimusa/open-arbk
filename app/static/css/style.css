@@ -11,13 +11,14 @@ ol, ul {
 	list-style: none;
 	padding-left: 0px;
 }
-blockquote, q {
-	quotes: none;
+q{
+	white-space: nowrap;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+q:before {
+    content: open-quote;
+}
+q:after {
+    content: close-quote;
 }
 table {
 	border-collapse: collapse;
@@ -39,6 +40,10 @@ button{
 .section-padding
 {
     padding: 10px 0px;
+}
+
+.date-text{
+	white-space: nowrap;
 }
 
 #dropdown-menu-first .glyphicon, #dropdown-menu-second .glyphicon{

@@ -158,7 +158,12 @@
             {% elif request.path == url_for('main.download_page') %}
              <div class="banner-info text-center">
                <h2 class="bnr-sub-title">Shkarkoni Dokumentet</h2>
-               <span class="lead">Dokumentet q&euml; jan&euml; paraqitur n&euml; k&euml;t&euml; platform&euml; vijn&euml; nga faqja zyrtare e ARBK's&euml;.<br> Keto t&euml; dh&euml;na jan&euml; marr&euml; me metod&euml;n e quajtur "Web Crawling".<br> Kjo technologji e p&euml;rdorur merr t&euml; dh&euml;nat q&euml; shfaqen n&euml; faqen zyrtare t&euml; arbk's&euml; dhe i fut n&euml; databaz.<br> T&euml; dh&euml;nat jan&euml; marr&euml; mes dat&euml;s 18-03-2017 dhe 18-05-2017.</span>
+                <span class="lead">
+                        T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml; nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e quajtur <span><q>Web Scraping</q></span>.
+                    <br>Kjo teknologji e p&euml;rdorur sh&euml;rben p&euml;r nxjerrjen automatike dhe n&euml; t&euml;r&euml;si t&euml; sasive t&euml; m&euml;dha t&euml; t&euml; dh&euml;nave nga faqet e internetit.
+
+                    <br>K&euml;to t&euml; dh&euml;na jan&euml; nxjerr&euml; mes dat&euml;s <span class="date-text">18-03-2017</span> dhe <span class="date-text">18-05-2017</span>.
+                </span>
              </div>
              {% elif request.path == url_for('main.recommendation') %}
               <div class="banner-info text-center">
@@ -226,12 +231,10 @@
     <script src="{{ url_for('static', filename='js/wow.js')}}"></script>
     <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).click(function (event) {
-                var clickover = $(event.target);
-                var _opened = $(".navbar-collapse").hasClass("navbar-collapse collapse in");
-                if (_opened === true && !clickover.hasClass("navbar-toggle")) {
-                    $("button.navbar-toggle").click();
+        $(document).ready(function() {
+            $('body').on('touchstart click',function(e) {
+                if (!$(e.target).is('a')) {
+                    $('.collapse').collapse('hide');
                 }
             });
         });
