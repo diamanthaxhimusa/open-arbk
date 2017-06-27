@@ -279,10 +279,7 @@ class MongoUtils(object):
                                               "$lte": datetime.datetime(year+1, 1, 1)}}},
             {'$unwind': "$activities"},
             {'$match': {"activities":int(code)}},
-            {'$count': "all"}
-        ])
-        if len(result['result']) < 1:
-            result = {"ok":1, 'result':[{"all":0}]}
+            {'$group': {"_id": "$status", "count": {"$sum": 1}}}])
         return result
 
     # top used activities

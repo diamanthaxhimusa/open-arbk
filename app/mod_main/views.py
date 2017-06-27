@@ -94,8 +94,17 @@ def activity_years():
         for i in range(2003, 2017):
             year = "d" + str(y)
             y += 1
-            result = mongo_utils.activity_years(i, activity)
-            api.update({year: result['result'][0]})
+            data = mongo_utils.activity_years(i, activity)
+            if len(data['result']) == 0:
+                data['result'].append({"_id": "Shuar", "count": 0})
+                data['result'].append({"_id": "Aktiv", "count": 0})
+            elif len(data['result']) == 1:
+                if data['result'][0]['_id'] == "Aktiv":
+                    data['result'].append({"_id": "Shuar", "count": 0})
+                else:
+                    data['result'].append({"_id": "Aktiv", "count": 0})
+            res = {data['result'][0]['_id']: data['result'][0]['count'],data['result'][1]['_id']: data['result'][1]['count']}
+            api.update({year: res})
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 
 @mod_main.route('/businesses-type', methods=['GET', 'POST'])
