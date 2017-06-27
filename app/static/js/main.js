@@ -60,8 +60,8 @@ $(document).ready(function(){
             },
             tooltip: {
                 formatter: function () {
-                    return ''+this.point.name+': <b>'+this.point.tot+'<b><br>'+
-                        ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+Highcharts.numberFormat(this.point.y, 2,'.', ',')+'</b><br/>';
+                    return ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.tot, 0)+'<b><br>'+
+                        ''+this.point.name+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+Highcharts.numberFormat(this.point.y, 3,' ', ' ')+'</b><br/>';
                 }
             },
             series: [{
@@ -118,7 +118,7 @@ $(document).ready(function(){
         }
     })
     function active_inactive_chart(data){
-      $('#totalBiznese').html(data.total);
+      $('#totalBiznese').html(Highcharts.numberFormat(data.total, 0));
      Highcharts.chart('container3', {
          chart: {
              plotBackgroundColor: null,
@@ -161,10 +161,10 @@ $(document).ready(function(){
                  }
              ],
              data: [{
-                 name: 'Aktive ('+data.docs.result[0]['total']+')',
+                 name: 'Aktive ('+Highcharts.numberFormat(data.docs.result[0]['total'], 0)+')',
                  y: (data.docs.result[0]['total'] / data.total) * 100
              }, {
-                 name: 'Shuar('+data.docs.result[1]['total']+')',
+                 name: 'Shuar('+Highcharts.numberFormat(data.docs.result[1]['total'], 0)+')',
                  y: (data.docs.result[1]['total'] / data.total) * 100
              }]
          }]

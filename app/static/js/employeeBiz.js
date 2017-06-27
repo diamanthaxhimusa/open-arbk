@@ -49,8 +49,21 @@ function employeesChart(data) {
             }
         },
         tooltip: {
-            headerFormat: '',
-            pointFormat: '<span style="font-size:11px">{series.name}: {point.totalD}</span><br><span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total<br/>'
+            formatter: function () {
+                var num = Highcharts.numberFormat(this.point.totalD, 0);
+                if (num==0) {
+                    num = '';
+                }
+                return '<span style="font-size:11px">'+this.series.name+': '+
+                            num+
+                            '</span><br><span style="color:{point.color}">'+
+                            this.point.name+
+                            '</span>: <b>'+
+                            Highcharts.numberFormat(this.point.y, 2, '.')+
+                            '%</b> nga total<br/>';
+            }
+            // headerFormat: '',
+            // pointFormat: '<span style="font-size:11px">{series.name}: {point.totalD}</span><br><span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> nga total<br/>'
         },
         legend: {
             labelFormatter: function () {

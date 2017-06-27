@@ -129,7 +129,7 @@ def main():
                 epl_nr = doc['formatted']['employeeCount']
         except Exception as e:
             pass
-        slug_company = slug_data(slugified_company_string)
+        slug_company = slugify(slugified_company_string.lower())
         slug_city = slugify(city['municipality'])
         db.reg_businesses.insert({
             "registrationNum": reg_num,

@@ -71,10 +71,10 @@ def visualization():
 @mod_main.route('/through-years', methods=['GET', 'POST'])
 def start_date():
     api = {}
-    y = 1
-    for i in range(2002, 2018):
-        y += 1
+    y = 3
+    for i in range(2003, 2017):
         year = "d" + str(y)
+        y += 1
         data = mongo_utils.businesses_through_years(i)
         if len(data['result']) == 1:
             if data['result'][0]['_id'] == "Aktiv":
@@ -90,10 +90,10 @@ def activity_years():
     if request.method == 'POST':
         activity = request.form['activity']
         api = {}
-        y = 1
-        for i in range(2002, 2018):
-            y += 1
+        y = 3
+        for i in range(2003, 2017):
             year = "d" + str(y)
+            y += 1
             result = mongo_utils.activity_years(i, activity)
             api.update({year: result['result'][0]})
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')

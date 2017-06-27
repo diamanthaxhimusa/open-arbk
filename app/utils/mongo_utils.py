@@ -119,6 +119,7 @@ class MongoUtils(object):
         capital_sort = {'$sort': {"capital": -1}}
         status = {'$match': {"status": biz_status}}
         muni = {'$match': {"municipality.municipality": municipality}}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if biz_status != "any":
             query.append(status)
         if municipality != "any":
@@ -129,10 +130,10 @@ class MongoUtils(object):
         return result
 
     # Businesses through years queries
-    def businesses_through_years(self, iteration):
+    def businesses_through_years(self, year):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"establishmentDate": {"$gt": datetime.datetime(iteration, 1, 1),
-                                              "$lte": datetime.datetime(iteration+1, 1, 1)}}},
+            {'$match': {"applicationDate": {"$gte": datetime.datetime(year, 1, 1),
+                                              "$lte": datetime.datetime(year+1, 1, 1)}}},
             {'$group': {"_id": "$status", "count": {"$sum": 1}}}])
         return result
 
@@ -143,6 +144,7 @@ class MongoUtils(object):
         group = {'$group': {"_id": "$type", "total": {"$sum": 1}}}
         match_status = {'$match': {"status":business_status}}
         match_muni = {'$match': {"municipality.municipality":municipality}}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if business_status != "any":
             query.append(match_status)
         if municipality != "any":
@@ -156,6 +158,7 @@ class MongoUtils(object):
         match_status = {'$match': {"status":business_status}}
         match_muni = {'$match': {"municipality.municipality":municipality}}
         count = {'$count':"all"}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if business_status != "any":
             query.append(match_status)
         if municipality != "any":
@@ -177,6 +180,7 @@ class MongoUtils(object):
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
+                {'$match': {"applicationDate": {"$gt": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
                 {'$unwind': "$activities"},
                 {'$match': {"activities":int(code), "municipality.municipality":i}},
                 {'$count':"all"}
@@ -194,7 +198,8 @@ class MongoUtils(object):
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
-                {'$match': {"municipality.municipality":i}},
+                {'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
+                            "municipality.municipality":i}},
                 {'$count':"all"}
             ])
             try:
@@ -210,7 +215,8 @@ class MongoUtils(object):
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
-                {'$match': {"municipality.municipality":i, "status":status}},
+                {'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
+                            "municipality.municipality":i, "status":status}},
                 {'$count':"all"}
             ])
             try:
@@ -230,6 +236,7 @@ class MongoUtils(object):
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
+                {'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
                 {'$unwind': "$activities"},
                 {'$match': {"activities":int(code), "municipality.municipality":i, "status":status}},
                 {'$count':"all"}
@@ -251,6 +258,7 @@ class MongoUtils(object):
     # top 10 activity divided in genders
     def get_top_ten_activities_by_gender(self, gender):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
             {'$unwind': "$activities"},
             {'$unwind': "$owners"},
             {'$match' : {"owners.gender":gender}},
@@ -267,7 +275,7 @@ class MongoUtils(object):
         for doc in act:
             code = doc['code']
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"applicationDate": {"$gt": datetime.datetime(year, 1, 1),
+            {'$match': {"applicationDate": {"$gte": datetime.datetime(year, 1, 1),
                                               "$lte": datetime.datetime(year+1, 1, 1)}}},
             {'$unwind': "$activities"},
             {'$match': {"activities":int(code)}},
@@ -285,6 +293,7 @@ class MongoUtils(object):
         sort_activities = {'$sort': {"totali": -1}}
         match_muni = {'$match': {'municipality.municipality': municipality}}
         match_status = {'$match': {'status': status}}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if status != "any":
             query.append(match_status)
         if municipality != "any":
@@ -298,6 +307,7 @@ class MongoUtils(object):
     # Get total businesses by status
     def get_total_by_status(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
             {'$group': {"_id": "$status", "total": {"$sum": 1}}},
             {'$sort':  {'total': -1}}])
         return result
@@ -310,6 +320,7 @@ class MongoUtils(object):
         group = {'$group': {"_id":"$owners.gender", "all":{"$sum":1}}}
         match_status = {'$match': {"status":status}}
         match_muni = {'$match': {"municipality.municipality":city}}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if status != "any":
             query.append(match_status)
         if city != "any":
@@ -327,6 +338,7 @@ class MongoUtils(object):
         match_status = {'$match': {"status":status}}
         match_muni = {'$match': {"municipality.municipality":city}}
         count = {'$count':"all"}
+        query.append({'$match': {"applicationDate": {"$gte": datetime.datetime(2003, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}})
         if status != "any":
             query.append(match_status)
         if city != "any":

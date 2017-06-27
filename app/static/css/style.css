@@ -768,13 +768,10 @@ contact
 .overllay{
     position:absolute;
 	display: flex;
-    /*padding:0;
-    margin:0;
-    top:0;
-    left:0;*/
     z-index: 1000;
+	left: 0;
+	right: 0;
 	min-width: 100%;
-    margin-top: 30px !important;
     height: 620px;
     background:rgba(255,255,255,0.8);
 }
@@ -988,7 +985,7 @@ body{
 	height: 40px;
 	text-align: center;
 	border-radius: 100%;
-	background-color: #161d32;
+	background-color: #ededed;
 	vertical-align: middle;
 	margin: auto;
 	display: flex;
@@ -996,7 +993,7 @@ body{
 a .fb, a .tw, a .eM, a .inst{
 	font-size: 25px;
     margin: auto;
-    color: #fff;
+    color: #343434;
 	text-decoration: none;
     margin: 0px 5px !important;
 }
@@ -1020,6 +1017,6 @@ a .fb, a .tw, a .eM, a .inst{
 	-webkit-transform: scale(1.4);
 	-moz-transform: scale(1.4);
 	-o-transform: scale(1.4);
-	background-color: #bfd730;
-	color: #161d32;
+	background-color: #343434;
+    color: #ededed;
 }

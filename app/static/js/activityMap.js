@@ -15,7 +15,7 @@ $(document).ready(function() {
 function onStatusSelection(name) {
     if (name == "Shuar") {
         $('.selected-value-status').html("I shuar");
-    }else {        
+    }else {
         $('.selected-value-status').html(name);
     }
     var actDrop = $('.selected-value').html();
@@ -248,17 +248,17 @@ function proccesAPI(data) {
     });
     mapActs(data2)
 }
-Highcharts.setOptions({
-    lang:{
-        downloadJPEG: "Shkarko JPG",
-        downloadPDF: "Shkarko PDF",
-        downloadPNG: "Shkarko FOTO",
-        downloadSVG: "Shkarko SVG",
-        printChart: "Printo Grafikun"
-    }
-});
-
 function mapActs(data) {
+    Highcharts.setOptions({
+        lang:{
+            downloadJPEG: "Shkarko JPG",
+            downloadPDF: "Shkarko PDF",
+            downloadPNG: "Shkarko FOTO",
+            downloadSVG: "Shkarko SVG",
+            printChart: "Printo Grafikun"
+        }
+    });
+
     // Create the chart
     Highcharts.mapChart('mapContainer', {
         chart: {
@@ -329,7 +329,7 @@ function mapActs(data) {
                 format: '{point.options.name}'
             },
             tooltip: {
-                pointFormat: '{point.options.name}: '+'{point.options.value}'
+                pointFormat: '{point.options.name}: '+'{point.options.value:,.0f}'
             }
         }]
     });
