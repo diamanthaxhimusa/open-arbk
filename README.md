@@ -93,7 +93,7 @@ cd dev
 Getting the project in your local machine:
 ```
 git clone https://github.com/opendatakosovo/open-arbk.git
-cd bpo
+cd open-arbk
 ```
 
 Install and run the app:
