@@ -91,7 +91,7 @@ function employeesChart(data) {
                 min:'10',
                 max:'-49'
             }, {
-                name: 'Ndermarrje e mesme',
+                name: 'Nd\xebrmarrje e mesme',
                 y: Math.round((data.middle.total / data.total * 100)*100)/100,
                 drilldown: 'middle',
                 totalD:data.middle.total,
