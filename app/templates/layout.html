@@ -36,6 +36,16 @@
       ga('create', 'UA-59188119-7', 'auto');
       ga('send', 'pageview');
     </script>
+    <style media="screen">
+        .stat-heading{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #top-stat, #act-stat, #inact-stat{
+            border: 1px solid white
+        }
+
+    </style>
   </head>
   <body>
     <!-- Navbar -->
@@ -75,6 +85,23 @@
                 <div class="col-xs-12 banner-info text-center">
                     <div class="col-xs-12">
                         <h2 class="bnr-sub-title">K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar p&euml;r kompanit&euml; e regjistruara n&euml; Kosov&euml;</h2>
+                    </div>
+                    <div class="col-xs-12 text-center" style="padding-bottom:40px;">
+                        <div class="col-xs-12" style="padding-bottom:10px;">
+                            <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4" id="top-stat">
+                                <span class="stat-heading" id="stat-all"></span><br>
+                                <span id="stat-bt">biznese ne databasen tone.</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-3 col-md-offset-2" id="act-stat">
+                            <span class="stat-heading" id="stat-act"></span><br>
+                            <span id="stat-bt">biznese aktive</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-3 col-md-offset-2" id="inact-stat">
+                            <span class="stat-heading" id="stat-inact"></span><br>
+                            <span id="stat-btn">biznese joaktive</span>
+                        </div>
+                        <br>
                     </div>
                     <div class="col-xs-12 text-center">
                         K&euml;rko p&euml;rmes nj&euml; apo m&euml; shum&euml; kritereve t&euml; m&euml;poshtme:<br>
