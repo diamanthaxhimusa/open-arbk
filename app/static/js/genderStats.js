@@ -38,7 +38,7 @@ $(document).ready(function(){
           }else if (data.doc.result[i]['_id'] == 'female') {
               gen_data.females = {"name":"Femra", "result":data.doc.result[i]['all']}
           }else {
-              gen_data.unknown = {"name":"Pap\xebrcaktuar", "result":data.doc.result[i]['all']}
+              gen_data.unknown = {"name":"E Panjohur", "result":data.doc.result[i]['all']}
           }
       }
       gender_owners(gen_data);

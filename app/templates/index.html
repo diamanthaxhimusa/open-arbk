@@ -60,6 +60,8 @@
 <script src="{{url_for('static', filename='js/jquery.twbsPagination.js')}}"></script>
 <script src="{{url_for('static', filename='js/charReplace.js')}}"></script>
 <script src="{{url_for('static', filename='js/urlEncoder.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+<script src="{{url_for('static', filename='js/jquery.counterup.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $.ajax({
@@ -69,6 +71,10 @@
                 $('#stat-all').text(data.total)
                 $('#stat-act').text(data.docs.result[0].total)
                 $('#stat-inact').text(data.docs.result[1].total)
+                $('.countUp').counterUp({
+                    delay: 10, // the delay time in ms
+                    time: 1000 // the speed time in ms
+                });
             }
         })
         $('#search-form').keydown(function(e) {
