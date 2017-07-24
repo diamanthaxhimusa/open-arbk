@@ -68,14 +68,15 @@ def visualization():
         top = mongo_utils.get_top_ten_businesses(status, city)
         return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 
-@mod_main.route('/through-years', methods=['GET', 'POST'])
+@mod_main.route('/through-years', methods=['POST'])
 def start_date():
     api = {}
-    y = 3
-    for i in range(2003, 2017):
+    y = 0
+    date_type = request.form['date_type']
+    for i in range(2000, 2017):
         year = "d" + str(y)
         y += 1
-        data = mongo_utils.businesses_through_years(i)
+        data = mongo_utils.businesses_through_years(date_type, i)
         if len(data['result']) == 1:
             if data['result'][0]['_id'] == "Aktiv":
                 data['result'].append({"_id": "Shuar", "count": 0})
@@ -90,8 +91,8 @@ def activity_years():
     if request.method == 'POST':
         activity = request.form['activity']
         api = {}
-        y = 3
-        for i in range(2003, 2017):
+        y = 0
+        for i in range(2000, 2017):
             year = "d" + str(y)
             y += 1
             data = mongo_utils.activity_years(i, activity)

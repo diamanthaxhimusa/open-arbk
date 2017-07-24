@@ -52,6 +52,15 @@
     <div class="row">
         <div id="business-years" class="col-xs-12 con2" style="">
             <h2 class="headers">Bizneset Sipas Viteve</h2>
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-4 form-group">
+                    <label for="date_type">Tipi i dat&euml;s:</label><br>
+                    <select class="kind form-control date-type-select select-vizualizations" id="date-type-b" name="date_type">
+                        <option value="applicationDate">Data e aplikimit</option>
+                        <option value="establishmentDate">Data e konstituimit</option>
+                    </select>
+                </div>
+            </div>
             <div id="thruYearsLoader">
                 {% include 'preLoader.html' %}
             </div>

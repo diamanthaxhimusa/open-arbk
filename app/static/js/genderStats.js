@@ -24,7 +24,6 @@ $(document).ready(function(){
           },
           error: function(error) {
           }
-
       });
   });
   function proccesAPI(data) {
