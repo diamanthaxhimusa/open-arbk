@@ -72,18 +72,21 @@ def make_csv(download_dir, range_download_year, type_of_date):
         else:
             cursor = download_biz_by_year(type_of_date,year)
             with open(filename_csv, 'w') as csvfile:
-                fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet', 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave']
+                fieldnames = ['Emri i biznesit', 'Statusi', 'Numri fiskal','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''', 'Personat e autorizuar','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet', 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave']
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
                 for doc in cursor:
                     acts = ''
                     owners = ''
+                    authorized = ''
                     for i in doc['activities']:
                         dc = set_name_to_activities(i)
                         acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
                         owners += '%s\n'%owner['name'].encode('utf-8')
-                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
+                    for auth in doc['authorized']:
+                        authorized += '%s\n'%auth['name'].encode('utf-8')
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Numri fiskal':doc['fiscalNum'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners, 'Personat e autorizuar': authorized, 'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
                     writer.writerow(DictUnicodeProxy(row))
 
 def make_all_data_zip_csv(download_dir):
@@ -94,7 +97,7 @@ def make_all_data_zip_csv(download_dir):
         cursor = db.reg_businesses.find()
         print 'creating file: arbk-data(csv).zip'
         with open(filename_csv, 'w') as csvfile:
-            fieldnames = ['Emri i biznesit', 'Statusi','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet', 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave']
+            fieldnames = ['Emri i biznesit', 'Statusi', 'Numri fiskal','Tipi i biznesit','Kapitali', 'Pronar'u'\xeb''', 'Personat e autorizuar','Data e fillimit','Data e aplikimit', 'Linku n'u'\xeb'' arbk', 'Numri i regjistrimit', 'Vendi', 'Aktivitetet', 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave']
             csvwriter = csv.DictWriter(csvfile, delimiter=',', fieldnames=fieldnames)
             csvwriter.writeheader()
             try:
@@ -102,12 +105,15 @@ def make_all_data_zip_csv(download_dir):
                     print 'printing doc: [%s]'%doc['name']
                     acts = ''
                     owners = ''
+                    authorized = ''
                     for i in doc['activities']:
                         dc = set_name_to_activities(i)
                         acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
                         owners += '%s\n'%owner['name'].encode('utf-8')
-                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners,'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
+                    for auth in doc['authorized']:
+                        authorized += '%s\n'%auth['name'].encode('utf-8')
+                    row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Numri fiskal':doc['fiscalNum'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners, 'Personat e autorizuar': authorized, 'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
                     csvwriter.writerow(DictUnicodeProxy(row))
             except Exception as e:
                 print str(e)

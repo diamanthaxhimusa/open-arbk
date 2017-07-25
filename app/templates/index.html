@@ -69,7 +69,6 @@
             type: 'GET',
             success: function(data){
                 numeral.defaultFormat('0,0');
-                // numeral.localeData().delimiters.thousands = ' ';
                 var number = numeral(data.total);
                 var num = number.format();
                 var number1 = numeral(data.docs.result[0].total);
