@@ -7,11 +7,15 @@ from flask.ext.cors import CORS
 from app.utils.mongo_utils import MongoUtils
 from flask_basicauth import BasicAuth
 from os.path import join, dirname, realpath
+from flask.ext.cache import Cache
 # Create MongoDB database object.
 mongo = PyMongo()
 
 #Initialize mongo access point
 mongo_utils = MongoUtils(mongo)
+
+#Initialize cache
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 #Downloads folder
 download_folder = join(dirname(realpath(__file__)),'static/downloads/')
@@ -34,6 +38,9 @@ def create_app():
 
     # Initialize the app to work with MongoDB
     mongo.init_app(app, config_prefix='MONGO')
+
+    # Initialize server side cache
+    cache.init_app(app)
 
     return app
 
