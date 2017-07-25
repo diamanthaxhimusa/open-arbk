@@ -130,7 +130,7 @@ class DictUnicodeProxy(object):
         return i
 
 download_dir = 'app/static/downloads'
-range_download_year = range(2002,2018)
+range_download_year = range(2000,2018)
 make_json(download_dir, range_download_year, "establishmentDate")
 make_json(download_dir, range_download_year, "applicationDate")
 make_csv(download_dir, range_download_year, "establishmentDate")
