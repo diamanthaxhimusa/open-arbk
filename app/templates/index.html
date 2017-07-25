@@ -68,9 +68,17 @@
             url: "/active-inactive",
             type: 'GET',
             success: function(data){
-                $('#stat-all').text(data.total)
-                $('#stat-act').text(data.docs.result[0].total)
-                $('#stat-inact').text(data.docs.result[1].total)
+                numeral.defaultFormat('0,0');
+                // numeral.localeData().delimiters.thousands = ' ';
+                var number = numeral(data.total);
+                var num = number.format();
+                var number1 = numeral(data.docs.result[0].total);
+                var num1 = number1.format();
+                var nuumber2 = numeral(data.docs.result[1].total);
+                var num2 = number1.format();
+                $('#stat-all').text(num)
+                $('#stat-act').text(num1)
+                $('#stat-inact').text(num2)
                 $('.countUp').counterUp({
                     delay: 10, // the delay time in ms
                     time: 1000 // the speed time in ms
