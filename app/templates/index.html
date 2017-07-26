@@ -6,7 +6,7 @@
             {%if count < 10%}
                 shfaqura {{count}} dokumente
             {%else%}
-                shfaqura <span id="tableLength"></span> nga {{count}} dokumente
+                shfaqura <span id="tableLength"></span> nga {{"{:,.0f}".format(count).replace(',',' ')}} dokumente
             {%endif%}
         </span>
     </div>
@@ -80,7 +80,7 @@
                 $('#stat-inact').text(num2)
                 $('.countUp').counterUp({
                     delay: 10, // the delay time in ms
-                    time: 1000 // the speed time in ms
+                    time: 1500 // the speed time in ms
                 });
             }
         })
