@@ -134,7 +134,9 @@
             $('#table-search').html('<div class="col-xs-12 text-center"><span id="pageNotFound">Faqja nuk u gjet!</span></div>')
         }
         $('#pageStart').html(urlParam);
-        $('#pageEnd').html(totPages);
+        var tot = numeral(totPages);
+        var tutnum = tot.format();
+        $('#pageEnd').html(tutnum.replace(',', ' '));
         if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
             $('#pagination-demo').twbsPagination({
                 startPage: urlParam,
