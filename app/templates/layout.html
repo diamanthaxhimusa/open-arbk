@@ -59,11 +59,11 @@
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                  <li {% if request.path == '/recommendation' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
+                  <li {% if request.path == '/rekomandimet' %}class="active"{% endif %}><a href="{{ url_for('main.recommendation') }}">Pse Bizneset e Hapura?</a></li>
                   <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('main.index') }}">K&euml;rkimi</a></li>
-                  <li {% if request.path == '/visualization' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
-                  <li {% if request.path == '/activity-map' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
-                  <li {% if request.path == '/download' %}class="active"{% endif %}><a href="{{ url_for('main.download_page') }}">Shkarko</a></li>
+                  <li {% if request.path == '/vizualizimet' %}class="active"{% endif %}><a href="{{ url_for('main.visualization') }}">Zhvillimi i Bizneseve</a></li>
+                  <li {% if request.path == '/harta' %}class="active"{% endif %}><a href="{{ url_for('main.activity_map') }}">Harta</a></li>
+                  <li {% if request.path == '/shkarko' %}class="active"{% endif %}><a href="{{ url_for('main.download_page') }}">Shkarko</a></li>
                 </ul>
               </div>
             </div>
