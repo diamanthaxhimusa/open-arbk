@@ -112,9 +112,9 @@ def main():
         try:
             status = doc['formatted']['status']
             if status == '':
-                continue
+                satus = ""
         except Exception as e:
-            continue
+            pass
         try:
             if doc['formatted']['capital'] is None:
                 capi = 0
