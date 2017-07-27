@@ -33,7 +33,7 @@ $(document).ready(function(){
                 type: 'line'
             },
             title: {
-                text: 'Paraqitja e bizneseve 2000-2017'
+                text: 'Paraqitja e bizneseve 2000-2016'
             },
             xAxis: {
                 title: {

@@ -135,6 +135,9 @@ class MongoUtils(object):
             {'$match': { date_type: {"$gte": datetime.datetime(year, 1, 1),
                                               "$lte": datetime.datetime(year+1, 1, 1)}}},
             {'$group': {"_id": "$status", "count": {"$sum": 1}}}])
+        for i in result['result']:
+            if i['_id'] == "":
+                result['result'].remove(i)
         return result
 
     # Businesses type
@@ -308,7 +311,11 @@ class MongoUtils(object):
             {'$group': {"_id": "$status", "total": {"$sum": 1}}},
             {'$sort':  {'total': -1}}])
         return result
-
+    def get_stats_by_status(self):
+        result = self.mongo.db[self.reg_businesses_collection].aggregate([
+            {'$group': {"_id": "$status", "total": {"$sum": 1}}},
+            {'$sort':  {'total': -1}}])
+        return result
     #Get owners count by gender
     def get_gender_owners_data(self, status, city):
         query = []
