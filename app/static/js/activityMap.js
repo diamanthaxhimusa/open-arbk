@@ -282,88 +282,174 @@ function proccesAPI(data) {
     mapActs(data2)
 }
 function mapActs(data) {
-    Highcharts.setOptions({
-        lang:{
-            downloadJPEG: "Shkarko JPG",
-            downloadPDF: "Shkarko PDF",
-            downloadPNG: "Shkarko FOTO",
-            downloadSVG: "Shkarko SVG",
-            printChart: "Printo Grafikun"
-        }
-    });
-
-    // Create the chart
-    Highcharts.mapChart('mapContainer', {
-        chart: {
-            map: 'countries/kv/kv-all'
-        },
-        title: {
-           text: ''
-       },
-       legend: {
+    if (document.documentElement.lang == 'sq') {
+        Highcharts.setOptions({
+            lang:{
+                downloadJPEG: "Shkarko JPG",
+                downloadPDF: "Shkarko PDF",
+                downloadPNG: "Shkarko FOTO",
+                downloadSVG: "Shkarko SVG",
+                printChart: "Printo Grafikun"
+            }
+        });
+        // Create the chart
+        Highcharts.mapChart('mapContainer', {
+            chart: {
+                map: 'countries/kv/kv-all'
+            },
             title: {
-                text: 'Numri i bizneseve',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                }
+                text: ''
             },
-            align: 'right',
-            verticalAlign: 'bottom',
-            floating: true,
-            layout: 'vertical',
-            valueDecimals: 0,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
-            symbolRadius: 0,
-            symbolHeight: 14
-        },
-        mapNavigation: {
-            enableMouseWheelZoom: false,
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
-        colorAxis: {
-            // minColor: '#fff',
-            // maxColor: '#274866',
-            dataClasses: [{
-                                to: 3
-                            }, {
-                                from: 3,
-                                to: 10
-                            }, {
-                                from: 10,
-                                to: 30
-                            }, {
-                                from: 30,
-                                to: 100
-                            }, {
-                                from: 100,
-                                to: 300
-                            }, {
-                                from: 300,
-                                to: 1000
-                            }, {
-                                from: 1000
-                        }]
-        },
-        series: [{
-            data: data,
-            name: 'Biznese',
-            nullColor: 'white',
-            states: {
-                hover: {
-                    color: '#2bb9ae'
-                }
+            legend: {
+                title: {
+                    text: 'Numri i bizneseve',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                },
+                align: 'right',
+                verticalAlign: 'bottom',
+                floating: true,
+                layout: 'vertical',
+                valueDecimals: 0,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+                symbolRadius: 0,
+                symbolHeight: 14
             },
-            dataLabels: {
+            mapNavigation: {
+                enableMouseWheelZoom: false,
                 enabled: true,
-                allowOverlap: true,
-                format: '{point.options.name}'
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
             },
-            tooltip: {
-                pointFormat: '{point.options.name}: '+'{point.options.value:,.0f}'
+            colorAxis: {
+                // minColor: '#fff',
+                // maxColor: '#274866',
+                dataClasses: [{
+                    to: 3
+                }, {
+                    from: 3,
+                    to: 10
+                }, {
+                    from: 10,
+                    to: 30
+                }, {
+                    from: 30,
+                    to: 100
+                }, {
+                    from: 100,
+                    to: 300
+                }, {
+                    from: 300,
+                    to: 1000
+                }, {
+                    from: 1000
+                }]
+            },
+            series: [{
+                data: data,
+                name: 'Biznese',
+                nullColor: 'white',
+                states: {
+                    hover: {
+                        color: '#2bb9ae'
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    allowOverlap: true,
+                    format: '{point.options.name}'
+                },
+                tooltip: {
+                    pointFormat: '{point.options.name}: '+'{point.options.value:,.0f}'
+                }
+            }]
+        });
+    }
+    else{
+        Highcharts.setOptions({
+            lang:{
+                downloadJPEG: "Download JPG",
+                downloadPDF: "Download PDF",
+                downloadPNG: "Download FOTO",
+                downloadSVG: "Download SVG",
+                printChart: "Print Chart"
             }
-        }]
-    });
+        });
+        // Create the chart
+        Highcharts.mapChart('mapContainer', {
+            chart: {
+                map: 'countries/kv/kv-all'
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                title: {
+                    text: 'Number of businesses',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                },
+                align: 'right',
+                verticalAlign: 'bottom',
+                floating: true,
+                layout: 'vertical',
+                valueDecimals: 0,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+                symbolRadius: 0,
+                symbolHeight: 14
+            },
+            mapNavigation: {
+                enableMouseWheelZoom: false,
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+            colorAxis: {
+                // minColor: '#fff',
+                // maxColor: '#274866',
+                dataClasses: [{
+                    to: 3
+                }, {
+                    from: 3,
+                    to: 10
+                }, {
+                    from: 10,
+                    to: 30
+                }, {
+                    from: 30,
+                    to: 100
+                }, {
+                    from: 100,
+                    to: 300
+                }, {
+                    from: 300,
+                    to: 1000
+                }, {
+                    from: 1000
+                }]
+            },
+            series: [{
+                data: data,
+                name: 'Businesses',
+                nullColor: 'white',
+                states: {
+                    hover: {
+                        color: '#2bb9ae'
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    allowOverlap: true,
+                    format: '{point.options.name}'
+                },
+                tooltip: {
+                    pointFormat: '{point.options.name}: '+'{point.options.value:,.0f}'
+                }
+            }]
+        });
+    }
 }
