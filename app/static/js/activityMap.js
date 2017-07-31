@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('.selected-value').html("T\xeb gjitha");
     $('.selected-value-status').html("T\xeb gjitha");
     $.ajax({
-        url: "/mapi",
+        url: "mapi",
         type: 'GET',
         success: function(data){
             proccesAPI(data);
@@ -27,7 +27,7 @@ function onStatusSelection(name) {
             activity_name : actDrop,
             status: name
         },
-        url: "/mapi",
+        url: "mapi",
         type: 'POST',
         beforeSend: function(){
             $(".overllay").show();
@@ -53,7 +53,7 @@ function onActivitySelection(name) {
             activity_name : name,
             status: 'T\xeb gjitha'
         },
-        url: "/mapi",
+        url: "mapi",
         type: 'POST',
         beforeSend: function(){
            $(".overllay").show();

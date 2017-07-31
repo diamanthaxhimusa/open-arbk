@@ -14,39 +14,39 @@
 <script type="text/javascript" src="{{url_for('static', filename="js/activityMap.js")}}"></script>
 <div class="row" style="padding-top:100px">
     <div class="col-xs-12 con1" style="margin-top:30px;margin-bottom:20px;">
-        <h3 class="headers">Ndarja n&euml; baz&euml; t&euml; aktiviteteve biznesore:</h3>
+        <h3 class="headers">{{_('Ndarja n&euml; baz&euml; t&euml; aktiviteteve biznesore:')}}</h3>
         <hr>
         <form id="form-3" class="form-inline" method="POST">
             <div class="form-group">
                 <div class="dropdown" id="dropdown-first">
-                    <label for="activity" class="lbl-filter">Aktiviteti:</label><br>
+                    <label for="activity" class="lbl-filter">{{_('Aktiviteti:')}}</label><br>
                     <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-first" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="selected-value"></span>
                         &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                     </button>
                     <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
-                        <li><a href="javascript:onActivitySelection('all')">T&euml; gjitha</a></li>
+                        <li><a href="javascript:onActivitySelection('all')">{{_('T&euml; gjitha')}}</a></li>
                         {% for i in activities%}
-                        <li><a href="javascript:onActivitySelection('{{ i['activity'] }}')">
+                        <li><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
                             {% if i['code']|length == 3 %}
                                 0{{ i['code'] }}
                             {% else %}
                                 {{i['code']}}
                             {% endif %}
-                             - {{ i['activity'] }}</a></li>
+                             - {{ i['activity'][g.current_lang] }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="dropdown" id="dropdown-second">
-                    <label for="status" class="lbl-filter" style="display: inline !important;">Statusi i bizneseve:</label><br>
+                    <label for="status" class="lbl-filter" style="display: inline !important;">{{_('Statusi i bizneseve:')}}</label><br>
                     <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="selected-value-status"></span>
                         &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                     </button>
                     <ul class="dropdown-menu acts" name="status" id="statVal" style="max-width:290px;" aria-labelledby="dropdown-menu-second">
-                        <li><a href="javascript:onStatusSelection('Aktiv')">Aktiv</a></li>
-                        <li><a href="javascript:onStatusSelection('Shuar')">I shuar</a></li>
-                        <li><a href="javascript:onStatusSelection('T&euml; gjitha')">T&euml; gjitha</a></li>
+                        <li><a href="javascript:onStatusSelection('Aktiv')">{{_('Aktiv')}}</a></li>
+                        <li><a href="javascript:onStatusSelection('Shuar')">{{_('I shuar')}}</a></li>
+                        <li><a href="javascript:onStatusSelection('T&euml; gjitha')">{{_('T&euml; gjitha')}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -63,8 +63,9 @@
     <div class="col-xs-12">
         <div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span>Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; p&euml;rdit&euml;suar komunat e krijuara s&euml; fundmi ne gjeo-portalin shtet&euml;ror. Komunat q&euml; mungojn&euml; jan&euml; t&euml; bashkuara me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;.</span>
+            <span>{{_('Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; p&euml;rdit&euml;suar komunat e krijuara s&euml; fundmi ne gjeo-portalin shtet&euml;ror. Komunat q&euml; mungojn&euml; jan&euml; t&euml; bashkuara me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;.')}}</span>
         </div>
     </div>
 </div>
+        awdawdawdawdaawdawdawd{{g.current_lang}}
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, abort, g, app
 import os
 import ConfigParser
 from logging.handlers import RotatingFileHandler
@@ -8,11 +8,16 @@ from app.utils.mongo_utils import MongoUtils
 from flask_basicauth import BasicAuth
 from os.path import join, dirname, realpath
 from flask.ext.cache import Cache
+from flask.ext.babel import Babel
+import ast
 # Create MongoDB database object.
 mongo = PyMongo()
 
 #Initialize mongo access point
 mongo_utils = MongoUtils(mongo)
+
+#Initialize Babel
+babel = Babel()
 
 #Initialize cache
 cache = Cache(config={'CACHE_TYPE': 'simple'})
@@ -33,6 +38,9 @@ def create_app():
     # Configure logging.
     configure_logging(app)
 
+    #Init the internationalization
+    babel.init_app(app)
+
     # Init modules
     init_modules(app)
 
@@ -42,6 +50,18 @@ def create_app():
     # Initialize server side cache
     cache.init_app(app)
 
+    # Get local based on domain name used.
+    @babel.localeselector
+    def get_locale():
+        return g.get('current_lang', 'sq')
+
+    @app.before_request
+    def before():
+        if request.view_args and 'lang_code' in request.view_args:
+            if request.view_args['lang_code'] not in ('en', 'sq'):
+                return abort(404)
+            g.current_lang = request.view_args['lang_code']
+            request.view_args.pop('lang_code')
     return app
 
 

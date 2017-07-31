@@ -2,7 +2,7 @@
 {% block content%}
 <div class="alert alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <span>Njoftim! T&euml; dh&euml;nat p&euml;r bizneset e regjistruara n&euml; vitin 2002 dhe 2017 jan&euml; t&euml; pakompletuara. T&euml; dh&euml;nat e fundit q&euml; jan&euml; nxjerr&euml; jan&euml; deri me dat&euml; <span class="date-text">03-31-2017</span>.</span>
+    <span>{{_('Njoftim! T&euml; dh&euml;nat p&euml;r bizneset e regjistruara n&euml; vitin 2000 dhe 2017 jan&euml; t&euml; pakompletuara. T&euml; dh&euml;nat e fundit q&euml; jan&euml; nxjerr&euml; jan&euml; deri me dat&euml;')}} <span class="date-text">03-31-2017</span>.</span>
 </div>
 <div class="well" style="margin-top: 70px;">
     <div class="text-center">
@@ -16,8 +16,8 @@
                 <option value="json">JSON</option>
             </select>
             <select class="doc-date-type" name="datetype">
-                <option value="dataFillimit">Data e fillimit</option>
-                <option value="dataAplikimit">Data e aplikimit</option>
+                <option value="dataFillimit">{{_('Data e fillimit')}}</option>
+                <option value="dataAplikimit">{{_('Data e aplikimit')}}</option>
             </select>
             <select class="doc-viti" name="year">
                 <option value="2000" selected="selected">2000</option>
@@ -25,12 +25,12 @@
                     <option value="{{i}}">{{i}}</option>
                 {%endfor%}
             </select>
-            <a class="btn" onclick="downloadDocYear()">Shkarko</a>
+            <a class="btn" onclick="downloadDocYear()">{{_('Shkarko')}}</a>
         </div>
     </div>
     <hr style="border-color:#dadada;">
     <div class="text-center">
-        <h3>Shkarkoni t&euml; gjitha bizneset</h3>
+        <h3>{{_('Shkarkoni t&euml; gjitha bizneset')}}</h3>
     </div>
     <hr>
     <div class="row">
@@ -39,7 +39,7 @@
                 <option value="csv">CSV</option>
                 <option value="json">JSON</option>
             </select>
-            <a class="btn" onclick="downloadAllDoc()">Shkarko zip</a>
+            <a class="btn" onclick="downloadAllDoc()">{{_('Shkarko zip')}}</a>
         </div>
     </div>
     <hr>

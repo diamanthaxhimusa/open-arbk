@@ -3,5 +3,7 @@ Flask-PyMongo==0.3.1
 Flask-Cors==2.1.2
 awesome-slugify==1.6.5
 Flask-BasicAuth==0.2.0
+Flask-Babel==0.9
+Babel==2.3.4
 Flask-Cache
 unidecode

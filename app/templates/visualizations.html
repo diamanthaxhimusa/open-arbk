@@ -1,22 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
-<script src="https://code.highcharts.com/stock/highstock.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/drilldown.js"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script src="{{ url_for('static', filename='js/employeeBiz.js') }}"></script>
-<script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
-<script src="{{ url_for('static', filename="js/top10.js")}}"></script>
-<script src="{{ url_for('static', filename='js/topActivities.js') }}"></script>
-<script src="{{ url_for('static', filename="js/activityByYears.js")}}"></script>
-<script src="{{ url_for('static', filename='js/selectTopActivities.js') }}"></script>
-<script src="{{ url_for('static', filename="js/genderStats.js")}}"></script>
-<script src="{{ url_for('static', filename="js/topGenderActs.js")}}"></script>
-
 <section id="bizKind">
     <div class="row">
         <div id="business-types" class="col-xs-12 con1" style="">
-            <h2 class="headers">Llojet e Bizneseve</h2>
+            <h2 class="headers">{{_('Llojet e Bizneseve')}}</h2>
             {% include 'visualizations/bizTypes.html' %}
             <hr style="border-width: 3px;">
         </div>
@@ -25,7 +12,7 @@
 <section id="employees">
     <div class="row">
         <div id="employees" class="col-xs-12 con1" style="">
-            <h2 class="headers">Bizneset sipas Numrit t&euml; Pun&euml;tor&euml;ve</h2>
+            <h2 class="headers">{{_('Bizneset sipas Numrit t&euml; Pun&euml;tor&euml;ve')}}</h2>
             <div id="employeesLoader">
                 {% include 'preLoader.html' %}
             </div>
@@ -37,8 +24,8 @@
 <section id="ActInact">
     <div class="row">
         <div id="active-inactive" class="col-xs-12 con4" style="">
-            <h2 class="headers">Bizneset e Shuara dhe Aktive</h2>
-            <p class="text-center">nga <span id="totalBiznese"></span> biznese t&euml; themeluara gjat&euml; viteve 2003-2016</p>
+            <h2 class="headers">{{_('Bizneset e Shuara dhe Aktive')}}</h2>
+            <p class="text-center">{{_('nga')}} <span id="totalBiznese"></span> {{_('biznese t&euml; themeluara gjat&euml; viteve 2000-2016')}}</p>
             <div id="ActInactLoader">
                 {% include 'preLoader.html' %}
             </div>
@@ -51,13 +38,13 @@
 <section id="thruYears">
     <div class="row">
         <div id="business-years" class="col-xs-12 con2" style="">
-            <h2 class="headers">Bizneset Sipas Viteve</h2>
+            <h2 class="headers">{{_('Bizneset Sipas Viteve')}}</h2>
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-md-4 form-group">
                     <label for="date_type">Tipi i dat&euml;s:</label><br>
                     <select class="kind form-control date-type-select select-vizualizations" id="date-type-b" name="date_type">
-                        <option value="applicationDate">Data e aplikimit</option>
-                        <option value="establishmentDate">Data e konstituimit</option>
+                        <option value="applicationDate">{{_('Data e aplikimit')}}</option>
+                        <option value="establishmentDate">{{_('Data e konstituimit')}}</option>
                     </select>
                 </div>
             </div>
@@ -72,7 +59,7 @@
 <section id="top10">
     <div class="row">
         <div id="top-ten" class="col-xs-12 con3" style="">
-            <h2 class="headers">Top 10 Bizneset Sipas Kapitalit</h2>
+            <h2 class="headers">{{_('Top 10 Bizneset Sipas Kapitalit')}}</h2>
             {% include 'visualizations/top10.html' %}
             <hr style="border-width: 3px;">
         </div>
@@ -81,7 +68,7 @@
 <section id="top10Act">
     <div class="row">
         <div id="top-ten-activities" class="col-xs-12 con5">
-            <h2 class="headers">Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset</h2>
+            <h2 class="headers">{{_('Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset')}}</h2>
             {% include 'visualizations/topActivities.html'%}
             <hr style="border-width: 3px;">
         </div>
@@ -90,7 +77,7 @@
 <section>
     <div class="row">
         <div id="activities-years" class="col-xs-12 con8">
-            <h2 class="headers">Aktivitet Gjat&euml; Viteve</h2>
+            <h2 class="headers">{{_('Aktivitet Gjat&euml; Viteve')}}</h2>
             {% include 'visualizations/activityYears.html'%}
             <hr style="border-width: 3px;">
         </div>
@@ -101,9 +88,9 @@
         <div id="gender" class="col-xs-12 con5">
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <span>Njoftim! Sipas databaz&euml;s t&euml; importuar nga ARBK gjinia e pronar&euml;ve t&euml; bizneseve nuk ka qen&euml; e p&euml;rcaktuar, ne kemi b&euml;r&euml; ndarjen sipas gjinis&euml; duke u bazuar nga emri i pronar&euml;ve t&euml; bizneseve. Gjinia e pap&euml;rcaktuar &euml;sht&euml; si rezultat i mosp&euml;rputhjes s&euml; emrit t&euml; personave me algoritmin ton&euml; q&euml; p&euml;rcakton gjinin&euml;.</span>
+                <span>{{_('Njoftim! Sipas databaz&euml;s t&euml; importuar nga ARBK gjinia e pronar&euml;ve t&euml; bizneseve nuk ka qen&euml; e p&euml;rcaktuar, ne kemi b&euml;r&euml; ndarjen sipas gjinis&euml; duke u bazuar nga emri i pronar&euml;ve t&euml; bizneseve. Gjinia e pap&euml;rcaktuar &euml;sht&euml; si rezultat i mosp&euml;rputhjes s&euml; emrit t&euml; personave me algoritmin ton&euml; q&euml; p&euml;rcakton gjinin&euml;.')}}</span>
             </div>
-            <h2 class="headers">Gjinia e Pronar&euml;ve</h2>
+            <h2 class="headers">{{_('Gjinia e Pronar&euml;ve')}}</h2>
             <div class="">
                 {% include 'visualizations/gender.html'%}
             </div>
@@ -114,11 +101,22 @@
 <section>
     <div class="row">
         <div id="gender-activities" class="col-xs-12 con7" style="margin-bottom: 50px;">
-            <h2 class="headers">Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; Pronar&euml;ve</h2>
+            <h2 class="headers">{{_('Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; Pronar&euml;ve')}}</h2>
             {% include 'visualizations/genderActivities.html'%}
             <hr style="border-width: 3px;">
         </div>
     </div>
 </section>
-
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/employeeBiz.js') }}"></script>
+<script src="{{ url_for('static', filename='js/birth-deathDate.js') }}"></script>
+<script src="{{ url_for('static', filename="js/top10.js")}}"></script>
+<script src="{{ url_for('static', filename='js/topActivities.js') }}"></script>
+<script src="{{ url_for('static', filename="js/activityByYears.js")}}"></script>
+<script src="{{ url_for('static', filename='js/selectTopActivities.js') }}"></script>
+<script src="{{ url_for('static', filename="js/genderStats.js")}}"></script>
+<script src="{{ url_for('static', filename="js/topGenderActs.js")}}"></script>
 {% endblock %}

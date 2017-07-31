@@ -16,7 +16,10 @@ municipalities_json_file = open("data-importer/komunat.json")
 municipalities_json = json.load(municipalities_json_file)
 gender_people_json_file = open("data-importer/gender_people.json")
 gender_people_json = json.load(gender_people_json_file)
-
+municipality_types_en_file = open("data-importer/komunat_en.json")
+municipality_types_en = json.load(municipality_types_en_file)
+business_types_en_file = open("data-importer/business_types_en.json")
+business_types_en = json.load(business_types_en_file)
 # Slugifying each string and then updating new elements in 'formatted' docs with slugified strings
 def slug_data(slug_string):
     slugified_string = slug_string
@@ -35,13 +38,13 @@ def set_muni(given_city_bus):
                 for village in municipalities[place]:
                     if village == given_city_bus:
                         found = True
-                        cities = {"municipality": place,"place": given_city_bus}
+                        cities = {"municipality": {"en":municipality_types_en[place], "sq":place},"place": given_city_bus}
     if found:
         return cities
     else:
         cities = {
-        "municipality": "Unknown",
-        "place": given_city_bus
+            "municipality": {"en":"Unknown", "sq":"I panjohur"},
+            "place": given_city_bus
         }
         return cities
 # Set gender to persons based on their names, if they match our database with names or not
@@ -96,9 +99,9 @@ def main():
         try:
             atkStatus = doc['formatted']['atkStatus']
         except Exception as e:
-            atkStatus = '//'
+            atkStatus = ''
         try:
-            buss_type = doc['formatted']['type']
+            buss_type = {"en":business_types_en[doc['formatted']['type']], "sq":doc['formatted']['type']}
         except Exception as e:
             buss_type = ''
         try:
@@ -113,6 +116,10 @@ def main():
             status = doc['formatted']['status']
             if status == '':
                 satus = ""
+            elif status.lower() == "aktiv":
+                status = {"en":"Active", "sq":"Aktiv"}
+            elif status.lower() == "shuar":
+                status = {"en":"Dissolved", "sq":"Shuar"}
         except Exception as e:
             pass
         try:
@@ -134,7 +141,11 @@ def main():
         except Exception as e:
             fiscal_num = ''
         slug_company = slugify(slugified_company_string.lower())
-        slug_city = slugify(city['municipality'])
+        try:
+            slug_city = {"en":slug_city_en, "sq":slug_city_sq}
+        except Exception as e:
+            slug_city = city['municipality']
+
         db.reg_businesses.insert({
             "registrationNum": reg_num,
             'fiscalNum': fiscal_num,
@@ -164,3 +175,5 @@ main()
 # close json files
 municipalities_json_file.close()
 gender_people_json_file.close()
+municipality_types_en_file.close()
+business_types_en_file.close()

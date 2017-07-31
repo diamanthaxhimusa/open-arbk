@@ -1,37 +1,37 @@
 <div class="" style="margin-top:30px;">
     <form id="form-3" class="form-inline row" method="POST">
         <div class="col-xs-12 col-sm-5 col-md-4 form-group">
-            <label for="status">Statusi:
+            <label for="status">{{_('Statusi:')}}
             </label><br>
             <select class="kind form-control select-vizualizations" name="status" id="kind">
-                <option value="any" selected="selected">T&euml; gjitha</option>
-                <option>Aktiv</option>
-                <option value="Shuar">I shuar</option>
+                <option value="any" selected="selected">{{_('T&euml; gjitha')}}</option>
+                <option>{{_('Aktiv')}}</option>
+                <option value="Shuar">{{_('I shuar')}}</option>
             </select>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-4 form-group">
-            <label for="municipalities">Komuna:
+            <label for="municipalities">{{_('Komuna:')}}
             </label><br>
             {% set _stub = komunat.rewind() %}
             <select class="form-control select-vizualizations" name="city_id" id="municipality">
-                <option value="any">T&euml; gjitha</option>
+                <option value="any">{{_('T&euml; gjitha')}}</option>
                 {% for i in komunat %}
-                <option value="{{i.municipality}}">{{i.municipality}}</option>
+                <option value="{{i.municipality[g.current_lang]}}">{{i.municipality[g.current_lang]}}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="col-xs-12 col-sm-2 col-md-2 form-group">
-            <button type="button" onclick="selectDist()" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">Listo</button>
+            <button type="button" onclick="selectDist()" class="btn btn-default btn-filter-data" style="border-color: #ccc !important;">{{_('Listo')}}</button>
         </div>
     </form>
     <div class="" style="overflow: auto;">
         <table id="topTable" class="table table-responsive table-bordered table-striped table-hover">
             <thead>
                 <th>#</th>
-                <th>Emri i Biznesit</th>
-                <th>Komuna</th>
-                <th>Statusi i Biznesit</th>
-                <th style="min-width: 168px;">Kapitali</th>
+                <th>{{_('Emri i Biznesit')}}</th>
+                <th>{{_('Komuna')}}</th>
+                <th>{{_('Statusi i Biznesit')}}</th>
+                <th style="min-width: 168px;">{{_('Kapitali')}}</th>
             </thead>
             <tbody>
                 {% for i in top['result'] %}
@@ -43,10 +43,10 @@
                         <a href="{{i['arbkUrl']}}">{{i['name']}}</a>
                     </td>
                     <td class="ksbk">
-                        {{i['municipality']['municipality']}}
+                        {{i['municipality']['municipality'][g.current_lang]}}
                     </td>
                     <td class="ksbk">
-                        {{i['status']}}
+                        {{i['status'][g.current_lang]}}
                     </td>
                     <td class="ksbk">
                         <script type="text/javascript">

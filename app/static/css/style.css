@@ -37,6 +37,11 @@ h1, h2, h3, h4, h5, h6{
 button{
 	border-radius: 0px !important
 }
+.stat-heading{
+	font-size: 40px;
+	font-weight: bold;
+}
+
 .section-padding
 {
     padding: 10px 0px;
@@ -44,6 +49,10 @@ button{
 
 .date-text{
 	white-space: nowrap;
+}
+
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: 400px;
 }
 
 #dropdown-menu-first .glyphicon, #dropdown-menu-second .glyphicon{

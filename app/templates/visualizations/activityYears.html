@@ -1,18 +1,18 @@
 <div class="dropdown" id="dropdown-first">
-    <label for="activity" class="lbl-filter">Aktiviteti:</label><br>
+    <label for="activity" class="lbl-filter">{{_('Aktiviteti:')}}</label><br>
     <button style="background-color: #fff;font-weight: 600;" class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-first" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <span class="selected-value"></span>
         &nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
     </button>
     <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
         {% for i in activities%}
-        <li><a href="javascript:onActivitySelection('{{ i['activity'] }}')">
+        <li><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
             {% if i['code']|length == 3 %}
                 0{{ i['code'] }}
             {% else %}
                 {{i['code']}}
             {% endif %}
-             - {{ i['activity'] }}</a></li>
+             - {{ i['activity'][g.current_lang] }}</a></li>
         {% endfor %}
     </ul>
 </div>

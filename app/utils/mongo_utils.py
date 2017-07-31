@@ -20,13 +20,14 @@ class MongoUtils(object):
         result = self.mongo.db[self.activities].find()
         return result
 
-
-    # IDEA:
-    def get_puntor(self):
+    def get_employees(self, current_lang):
         db = self.mongo.db[self.reg_businesses_collection]
         result_micro = db.aggregate([
             {'$match': {"employeeCount": {"$gte": 1,"$lte": 9}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
+        for res in result_micro['result']:
+            if res['_id'] == "":
+                result_micro['result'].remove(res)
         result_mini = db.aggregate([
             {'$match': {"employeeCount": {"$gte": 10,"$lte": 49}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
@@ -37,12 +38,28 @@ class MongoUtils(object):
             {'$match': {"employeeCount": {"$gte": 250}}}, {'$group':{"_id":"$status", "count":{'$sum':1}}}
         ])
         total = db.count()
-        return {"micro":{"total":result_micro['result'][0]['count']+result_micro['result'][1]['count'],result_micro['result'][1]['_id']:result_micro['result'][1]['count'],result_micro['result'][0]['_id']:result_micro['result'][0]['count']},
-                "mini":{"total":result_mini['result'][0]['count']+result_mini['result'][1]['count'],result_mini['result'][1]['_id']:result_mini['result'][1]['count'],result_mini['result'][0]['_id']:result_mini['result'][0]['count']},
-                "middle":{"total":result_middle['result'][0]['count']+result_middle['result'][1]['count'],result_middle['result'][1]['_id']:result_middle['result'][1]['count'],result_middle['result'][0]['_id']:result_middle['result'][0]['count']},
-                "big":{"total":result_big['result'][0]['count']+result_big['result'][1]['count'],result_big['result'][1]['_id']:result_big['result'][1]['count'],result_big['result'][0]['_id']:result_big['result'][0]['count']},
-                "total":total}
-
+        return {
+            "micro":{
+                "total":result_micro['result'][0]['count']+result_micro['result'][1]['count'],
+                result_micro['result'][1]['_id'][current_lang]:result_micro['result'][1]['count'],
+                result_micro['result'][0]['_id'][current_lang]:result_micro['result'][0]['count']
+            },
+            "mini":{
+                "total":result_mini['result'][0]['count']+result_mini['result'][1]['count'],
+                result_mini['result'][1]['_id'][current_lang]:result_mini['result'][1]['count'],
+                result_mini['result'][0]['_id'][current_lang]:result_mini['result'][0]['count']
+            },
+            "middle":{
+                "total":result_middle['result'][0]['count']+result_middle['result'][1]['count'],
+                result_middle['result'][1]['_id'][current_lang]:result_middle['result'][1]['count'],
+                result_middle['result'][0]['_id'][current_lang]:result_middle['result'][0]['count']
+            },
+            "big":{
+                "total":result_big['result'][0]['count']+result_big['result'][1]['count'],
+                result_big['result'][1]['_id'][current_lang]:result_big['result'][1]['count'],
+                result_big['result'][0]['_id'][current_lang]:result_big['result'][0]['count']
+            },
+            "total":total}
 
     # Search engine
     def search_engine(self, page, items_per_page, business, status, person, person_status, municipality):
@@ -60,7 +77,7 @@ class MongoUtils(object):
             "slugifiedBusiness": {"$regex": business}
             }
         search_bussiness_status = {
-            "status": status
+            "status.sq": status
             }
         search_municipality = {
             "slugifiedMunicipality": municipality
@@ -197,12 +214,12 @@ class MongoUtils(object):
         munis = self.mongo.db[self.municipalities].find()
         muni = []
         for i in munis:
-            muni.append(i['municipality'])
+            muni.append(i['municipality']['sq'])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
-                            "municipality.municipality":i}},
+                            "municipality.municipality.sq":i}},
                 {'$count':"all"}
             ])
             try:
@@ -214,12 +231,12 @@ class MongoUtils(object):
         munis = self.mongo.db[self.municipalities].find()
         muni = []
         for i in munis:
-            muni.append(i['municipality'])
+            muni.append(i['municipality']['sq'])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
-                            "municipality.municipality":i, "status":status}},
+                            "municipality.municipality.sq":i, "status":status}},
                 {'$count':"all"}
             ])
             try:
@@ -235,13 +252,13 @@ class MongoUtils(object):
             code = doc['code']
         muni = []
         for i in munis:
-            muni.append(i['municipality'])
+            muni.append(i['municipality']['sq'])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
                 {'$unwind': "$activities"},
-                {'$match': {"activities":int(code), "municipality.municipality":i, "status":status}},
+                {'$match': {"activities":int(code), "municipality.municipality.sq":i, "status":status}},
                 {'$count':"all"}
             ])
             try:
@@ -272,8 +289,8 @@ class MongoUtils(object):
         return result
 
     # activities queries
-    def activity_years(self, year, activity):
-        act = self.mongo.db[self.activities].find({"activity":activity})
+    def activity_years(self, year, activity, current_lang):
+        act = self.mongo.db[self.activities].find({"activity.%s"%current_lang:activity})
         code = 0
         for doc in act:
             code = doc['code']

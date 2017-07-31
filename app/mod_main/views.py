@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, Response, request, send_file, send_from_directory
-from app import mongo_utils, download_folder, cache
+from flask import Blueprint, g, render_template, Response, request, send_file, send_from_directory, redirect
+from app import mongo_utils, download_folder, cache, babel
 from bson import json_util
 from slugify import slugify
 import re, unidecode, urllib
@@ -10,7 +10,11 @@ reload(sys)
 
 mod_main = Blueprint('main', __name__)
 
-@mod_main.route('/', methods=['GET', 'POST'])
+@mod_main.route('/', methods=['GET'])
+def main():
+   return redirect("/sq", code=302)
+
+@mod_main.route('/<lang_code>', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
         # Get the search values from url
@@ -37,7 +41,7 @@ def index():
         docs_count = result['count']
         return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)
 
-@mod_main.route('/kerko/<string:status>/<string:person>', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/kerko/<string:status>/<string:person>', methods=['GET', 'POST'])
 @cache.memoize(timeout=86400)
 def profile(status, person):
     items_per_page = 10
@@ -51,12 +55,12 @@ def profile(status, person):
     return render_template('profile.html', profile_data=person_data['result'], count=person_data['count'],
                            municipalities=municipalities, status=status, person=person, items_per_page=items_per_page)
 
-@mod_main.route('/rekomandimet', methods=['GET'])
+@mod_main.route('/<lang_code>/rekomandimet', methods=['GET'])
 def recommendation():
    if request.method == 'GET':
        return render_template('recommendationPage.html')
 
-@mod_main.route('/vizualizimet', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/vizualizimet', methods=['GET', 'POST'])
 def visualization():
     if request.method == 'GET':
         activities = mongo_utils.get_activities()
@@ -73,13 +77,13 @@ def top_ten(status, city):
     top_result = mongo_utils.get_top_ten_businesses(status, city)
     return top_result
 
-@mod_main.route('/through-years', methods=['POST'])
+@mod_main.route('/<lang_code>/through-years', methods=['POST'])
 def start_date():
     date_type = request.form['date_type']
-    api = through_years(date_type)
+    api = through_years(date_type, g.current_lang)
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 @cache.memoize(timeout=86400)
-def through_years(date_type):
+def through_years(date_type,current_lang):
     api = {}
     y = 0
     for i in range(2000, 2017):
@@ -87,15 +91,15 @@ def through_years(date_type):
         y += 1
         data = mongo_utils.businesses_through_years(date_type, i)
         if len(data['result']) == 1:
-            if data['result'][0]['_id'] == "Aktiv":
-                data['result'].append({"_id": "Shuar", "count": 0})
+            if data['result'][0]['_id'][current_lang] == "Aktiv" or data['result'][0]['_id'][current_lang] == "Active":
+                data['result'].append({"_id": {"sq":"Shuar","en":"Dissolved"}, "count": 0})
             else:
-                data['result'].append({"_id": "Aktiv", "count": 0})
-        res = {data['result'][0]['_id']: data['result'][0]['count'],data['result'][1]['_id']: data['result'][1]['count']}
+                data['result'].append({"_id": {"en":"Active", "sq":"Aktiv"}, "count": 0})
+        res = {data['result'][0]['_id'][current_lang]: data['result'][0]['count'],data['result'][1]['_id'][current_lang]: data['result'][1]['count']}
         api.update({year: res})
     return api
 
-@mod_main.route('/activities-years', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/activities-years', methods=['GET', 'POST'])
 def activity_years():
     if request.method == 'POST':
         activity = request.form['activity']
@@ -108,20 +112,20 @@ def activity_years_func(activity):
     for i in range(2000, 2017):
         year = "d" + str(y)
         y += 1
-        data = mongo_utils.activity_years(i, activity)
+        data = mongo_utils.activity_years(i, activity, g.current_lang)
         if len(data['result']) == 0:
-            data['result'].append({"_id": "Shuar", "count": 0})
-            data['result'].append({"_id": "Aktiv", "count": 0})
+            data['result'].append({"_id": {"sq":"Shuar","en":"Dissolved"}, "count": 0})
+            data['result'].append({"_id": {"en":"Active", "sq":"Aktiv"}, "count": 0})
         elif len(data['result']) == 1:
-            if data['result'][0]['_id'] == "Aktiv":
-                data['result'].append({"_id": "Shuar", "count": 0})
+            if data['result'][0]['_id'][g.current_lang] == "Aktiv" or data['result'][0]['_id'][g.current_lang] == "Active":
+                data['result'].append({"_id": {"sq":"Shuar","en":"Dissolved"}, "count": 0})
             else:
-                data['result'].append({"_id": "Aktiv", "count": 0})
-        res = {data['result'][0]['_id']: data['result'][0]['count'],data['result'][1]['_id']: data['result'][1]['count']}
+                data['result'].append({"_id": {"en":"Active", "sq":"Aktiv"}, "count": 0})
+        res = {data['result'][0]['_id'][g.current_lang]: data['result'][0]['count'],data['result'][1]['_id'][g.current_lang]: data['result'][1]['count']}
         api.update({year: res})
     return api
 
-@mod_main.route('/businesses-type', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/businesses-type', methods=['GET', 'POST'])
 def businesses_type():
     if request.method == 'GET':
         doc = businesses_type_func("any","any")
@@ -168,7 +172,7 @@ def prepare_activity_api(activities_collection):
     activities_api = {'activities': activity_items}
     return activities_api
 
-@mod_main.route('/top-activities', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/top-activities', methods=['GET', 'POST'])
 def activities():
     if request.method == 'GET':
         all_businesses_activities = activities_func("any","any")
@@ -186,7 +190,7 @@ def activities_func(status, city):
     result = mongo_utils.get_most_used_activities(status, city)
     return result
 
-@mod_main.route('/active-inactive', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/active-inactive', methods=['GET', 'POST'])
 @cache.memoize(timeout=86400)
 def active_inactive():
     docs = mongo_utils.get_total_by_status()
@@ -195,7 +199,7 @@ def active_inactive():
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-@mod_main.route('/page-stats', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/page-stats', methods=['GET', 'POST'])
 @cache.memoize(timeout=86400)
 def page_stats():
     docs = mongo_utils.get_stats_by_status()
@@ -204,13 +208,13 @@ def page_stats():
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-@mod_main.route('/harta', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/harta', methods=['GET', 'POST'])
 @cache.memoize(timeout=86400)
 def activity_map():
     activities = mongo_utils.get_activities()
     return render_template('activity-map.html', activities=activities)
 
-@mod_main.route('/mapi', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/mapi', methods=['GET', 'POST'])
 def mapi():
     if request.method == 'GET':
         agg = mapi_all()
@@ -247,7 +251,7 @@ def mapi_all():
     result = mongo_utils.mapi_all()
     return result
 
-@mod_main.route('/gender-owners', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/gender-owners', methods=['GET', 'POST'])
 def gender_owners():
     if request.method == 'GET':
         docs = gender_owners_func("any","any")
@@ -273,7 +277,7 @@ def gender_owners_func(status, city):
     result = mongo_utils.get_gender_owners_data(status, city)
     return result
 
-@mod_main.route('/top-10-gender-activities', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/top-10-gender-activities', methods=['GET', 'POST'])
 @cache.memoize(timeout=86400)
 def top_gender_acts():
     if request.method == 'GET':
@@ -285,23 +289,23 @@ def top_gender_acts():
         return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     return 'error'
 
-@mod_main.route('/employees', methods=['GET'])
+@mod_main.route('/<lang_code>/employees', methods=['GET'])
 @cache.memoize(timeout=86400)
 def employee():
-    result = mongo_utils.get_puntor()
+    result = mongo_utils.get_employees(g.current_lang)
     return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
 
 
-@mod_main.route('/shkarko', methods=['GET', 'POST'])
+@mod_main.route('/<lang_code>/shkarko', methods=['GET', 'POST'])
 def download_page():
     return render_template('downloads.html')
 
-@mod_main.route('/shkarko/<string:doc_type>/<string:doc_date_type>/<string:year>', methods=['GET'])
+@mod_main.route('/<lang_code>/shkarko/<string:doc_type>/<string:doc_date_type>/<string:year>', methods=['GET'])
 def download_doc_year(doc_type, doc_date_type, year):
     if year == "2017":
         return send_from_directory(download_folder, "arbk-%s(%s)(pakompletuar).%s"%(year,doc_date_type, doc_type), as_attachment=True)
     return send_from_directory(download_folder, "arbk-%s(%s).%s"%(year,doc_date_type, doc_type), as_attachment=True)
 
-@mod_main.route('/shkarko/<string:doc_type>/all-zip', methods=['GET'])
+@mod_main.route('/<lang_code>/shkarko/<string:doc_type>/all-zip', methods=['GET'])
 def download_doc_all(doc_type):
     return send_from_directory(download_folder, "arbk-data-%s.zip"%doc_type, as_attachment=True)
