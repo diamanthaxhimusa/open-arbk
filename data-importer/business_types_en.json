@@ -5,7 +5,8 @@
     "Kompani e huaj" : "Foreign company",
     "Shoqëri akcionare" : "Shareholding company",
     "Ortakëri e kufizuar" : "Limited partnership",
-    "Kooperativa bujqësore" : "Agricultural cooperatives",
-    "Ndërmarrje tjera nën juridiksion të akm" : "Other companies under the jurisdiction of KTA",
-    "Ndërmarrje shoqërore" : "Socially owned enterprises"
+    "Kooperativa Bujqësore" : "Agricultural cooperatives",
+    "Ndërmarrje tjera nën juridiksion të AKM" : "Other companies under the jurisdiction of KTA",
+    "Ndërmarrje shoqërore" : "Socially owned enterprises",
+    "Ndërmarrje publike" :  "Public enterprises"
 }

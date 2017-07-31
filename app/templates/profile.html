@@ -95,14 +95,18 @@
             $('#pageStart').html(urlParam);
             $('#pageEnd').html(totPages);
             if (parseInt("{{count}}") != 0 && totPages >= urlParam) {
+                var txtfirst = "{{_('E para')}}";
+                var txtprev = "{{_('Prapa')}}";
+                var txtnext = "{{_('P\xebrpara')}}";
+                var txtlast = "{{_('E fundit')}}";
                 $('#pagination-demo').twbsPagination({
                     startPage: urlParam,
                     totalPages: totPages,
                     visiblePages: 7,
-                    first:"E para",
-                    prev:"Prapa",
-                    next:"Perpara",
-                    last:"E fundit",
+                    first:txtfirst,
+                    prev:txtprev,
+                    next:txtnext,
+                    last:txtlast,
                     initiateStartPageClick: false,
                     onPageClick: function (event, page) {
                         window.location.href = "?page="+page;

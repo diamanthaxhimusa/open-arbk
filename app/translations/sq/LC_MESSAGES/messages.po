@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-07-31 12:57+0200\n"
+"POT-Creation-Date: 2017-07-31 14:33+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -142,6 +142,22 @@ msgstr ""
 
 #: app/templates/index.html:55 app/templates/profile.html:71
 msgid "Faqe"
+msgstr ""
+
+#: app/templates/index.html:141 app/templates/profile.html:98
+msgid "E para"
+msgstr ""
+
+#: app/templates/index.html:142 app/templates/profile.html:99
+msgid "Prapa"
+msgstr ""
+
+#: app/templates/index.html:143 app/templates/profile.html:100
+msgid "Përpara"
+msgstr ""
+
+#: app/templates/index.html:144 app/templates/profile.html:101
+msgid "E fundit"
 msgstr ""
 
 #: app/templates/layout.html:4 app/templates/layout.html:52
@@ -638,6 +654,10 @@ msgstr ""
 
 #: app/templates/visualizations.html:28
 msgid "biznese t&euml; themeluara gjat&euml; viteve 2000-2016"
+msgstr ""
+
+#: app/templates/visualizations.html:44
+msgid "Tipi i dat&euml;s:"
 msgstr ""
 
 #: app/templates/visualizations.html:47

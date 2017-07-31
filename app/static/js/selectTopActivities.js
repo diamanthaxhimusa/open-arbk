@@ -46,7 +46,7 @@ function selectActivities(){
             emri = [];
             vals = [];
             for(var i=start; i<end;i++){
-                emri.push(data.activities[i].details.activity);
+                emri.push(data.activities[i].details.activity[document.documentElement.lang]);
                 vals.push(data.activities[i].total_businesses);
             }
             top_activities(emri, vals);

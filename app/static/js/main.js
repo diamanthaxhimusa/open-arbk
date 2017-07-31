@@ -52,7 +52,7 @@ $(document).ready(function(){
                         cursor: 'pointer',
                         dataLabels: {
                             enabled: true,
-                            format: '<b>{point.name.en}</b>: {point.percentage:.3f} %',
+                            format: '<b>{point.name.sq}</b>: {point.percentage:.3f} %',
                             style: {
                                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                             }

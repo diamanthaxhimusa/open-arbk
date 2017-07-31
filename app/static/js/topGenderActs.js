@@ -13,7 +13,7 @@ function proccesAPIMeshkuj(data) {
     emri = [];
     vals = [];
     for(var i=0; i<data.length;i++){
-        emri.push(data[i].details.activity);
+        emri.push(data[i].details.activity[document.documentElement.lang]);
         vals.push(data[i].total_businesses);
     }
     topGenderActivitiesMeshkuj(vals, emri);

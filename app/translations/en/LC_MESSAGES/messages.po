@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-07-31 12:57+0200\n"
+"POT-Creation-Date: 2017-07-31 14:33+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -144,11 +144,27 @@ msgstr "Authorized Persons"
 
 #: app/templates/index.html:46 app/templates/profile.html:62
 msgid "Nuk u gjet ansj&euml; dokument!"
-msgstr "No data found!"
+msgstr "Page not found!"
 
 #: app/templates/index.html:55 app/templates/profile.html:71
 msgid "Faqe"
 msgstr "Page"
+
+#: app/templates/index.html:141 app/templates/profile.html:98
+msgid "E para"
+msgstr "First"
+
+#: app/templates/index.html:142 app/templates/profile.html:99
+msgid "Prapa"
+msgstr "Previous"
+
+#: app/templates/index.html:143 app/templates/profile.html:100
+msgid "Përpara"
+msgstr "Next"
+
+#: app/templates/index.html:144 app/templates/profile.html:101
+msgid "E fundit"
+msgstr "Last"
 
 #: app/templates/layout.html:4 app/templates/layout.html:52
 msgid "Bizneset e Hapura"
@@ -242,7 +258,7 @@ msgstr "Search"
 
 #: app/templates/layout.html:151
 msgid "Zbuloni Gjendjen e Bizneseve n&euml; Kosov&euml;"
-msgstr ""
+msgstr "Find out the Business Status in Kosovo"
 
 #: app/templates/layout.html:152
 msgid ""
@@ -757,13 +773,17 @@ msgstr ""
 msgid "biznese t&euml; themeluara gjat&euml; viteve 2000-2016"
 msgstr "businesses established during the years 2003-2016"
 
+#: app/templates/visualizations.html:44
+msgid "Tipi i dat&euml;s:"
+msgstr "Date type:"
+
 #: app/templates/visualizations.html:47
 msgid "Data e konstituimit"
 msgstr "Date of establishment"
 
 #: app/templates/visualizations.html:80
 msgid "Aktivitet Gjat&euml; Viteve"
-msgstr ""
+msgstr "Activities over the Years"
 
 #: app/templates/visualizations.html:91
 msgid ""

@@ -1,6 +1,12 @@
 $(document).ready(function() {
-    $('.selected-value').html("T\xeb gjitha");
-    $('.selected-value-status').html("T\xeb gjitha");
+    if (document.documentElement.lang == 'sq') {
+        $('.selected-value').html("T\xeb gjitha");
+        $('.selected-value-status').html("T\xeb gjitha");
+    }
+    else{
+        $('.selected-value').html("All");
+        $('.selected-value-status').html("All");
+    }
     $.ajax({
         url: "mapi",
         type: 'GET',
@@ -14,12 +20,29 @@ $(document).ready(function() {
 });
 function onStatusSelection(name) {
     if (name == "Shuar") {
-        $('.selected-value-status').html("I shuar");
+        if (document.documentElement.lang == 'sq') {
+            $('.selected-value-status').html("I shuar");
+        }
+        else{
+            $('.selected-value-status').html("Dissolved");
+        }
+    }else if(name == "Aktiv") {
+        if (document.documentElement.lang == 'sq') {
+            $('.selected-value-status').html("Aktiv");
+        }
+        else{
+            $('.selected-value-status').html("Active");
+        }
     }else {
-        $('.selected-value-status').html(name);
+        if (document.documentElement.lang == 'sq') {
+            $('.selected-value-status').html("T\xeb gjitha");
+        }
+        else{
+            $('.selected-value-status').html("All");
+        }
     }
     var actDrop = $('.selected-value').html();
-    if (actDrop == "T\xeb gjitha") {
+    if (actDrop == "T\xeb gjitha" || actDrop == "All") {
         actDrop = "all"
     }
     $.ajax({
@@ -42,12 +65,22 @@ function onStatusSelection(name) {
 }
 function onActivitySelection(name) {
     if (name == "all") {
-        $('.selected-value').html("T\xeb gjitha");
+        if (document.documentElement.lang == 'sq') {
+            $('.selected-value').html("T\xeb gjitha");
+        }
+        else{
+            $('.selected-value').html("All");
+        }
     }
     else {
         $('.selected-value').html(name);
     }
-    $('.selected-value-status').html("T\xeb gjitha");
+    if (document.documentElement.lang == 'sq') {
+        $('.selected-value-status').html("T\xeb gjitha");
+    }
+    else{
+        $('.selected-value-status').html("All");
+    }
     $.ajax({
         data : {
             activity_name : name,

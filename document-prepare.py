@@ -34,7 +34,7 @@ def set_name_to_activities(given_code):
             continue
     return name
 
-def make_json(download_dir, range_download_year, type_of_date):
+def make_json_sq(download_dir, range_download_year, type_of_date):
     for year in range_download_year:
         print 'creating %s documents: arbk-%s.json'%(type_of_date, year)
         if year == 2017:
@@ -53,8 +53,27 @@ def make_json(download_dir, range_download_year, type_of_date):
             cursor = download_biz_by_year(type_of_date,year)
             with open(filename_json, 'w') as jsonfile:
                 jsonfile.write(json_util.dumps(cursor))
+def make_json_en(download_dir, range_download_year, type_of_date):
+    for year in range_download_year:
+        print 'creating %s documents: arbk-%s.json'%(type_of_date, year)
+        if year == 2017:
+            if type_of_date == "applicationDate":
+                filename_json = '%s/arbk-%s(applicationDate)(uncomplete).json'%(download_dir, year)
+            else:
+                filename_json = '%s/arbk-%s(establishmentDate)(uncomplete).json'%(download_dir, year)
+        else:
+            if type_of_date == "applicationDate":
+                filename_json = '%s/arbk-%s(applicationDate).json'%(download_dir, year)
+            else:
+                filename_json = '%s/arbk-%s(establishmentDate).json'%(download_dir, year)
+        if os.path.isfile(filename_json):
+            print 'json exitsts: %s' % filename_json
+        else:
+            cursor = download_biz_by_year(type_of_date,year)
+            with open(filename_json, 'w') as jsonfile:
+                jsonfile.write(json_util.dumps(cursor))
 
-def make_csv(download_dir, range_download_year, type_of_date):
+def make_csv_sq(download_dir, range_download_year, type_of_date):
     for year in range_download_year:
         print 'creating %s documents: arbk-%s.csv'%(type_of_date, year)
         if year == 2017:
@@ -88,8 +107,45 @@ def make_csv(download_dir, range_download_year, type_of_date):
                         authorized += '%s\n'%auth['name'].encode('utf-8')
                     row = {'Emri i biznesit': doc['name'], 'Statusi':doc['status'], 'Numri fiskal':doc['fiscalNum'],'Tipi i biznesit':doc['type'] , 'Kapitali':doc['capital'],'Pronar'u'\xeb''':owners, 'Personat e autorizuar': authorized, 'Data e fillimit': doc['establishmentDate'].date(),'Data e aplikimit': doc['applicationDate'].date(), 'Linku n'u'\xeb'' arbk': doc['arbkUrl'], 'Numri i regjistrimit': doc['registrationNum'], 'Vendi':doc['municipality']['place'], 'Aktivitetet':acts, 'Data e marrjes s'u'\xeb'' t'u'\xeb'' dh'u'\xeb''nave': doc['dataRetrieved'].date()}
                     writer.writerow(DictUnicodeProxy(row))
+def make_csv_en(download_dir, range_download_year, type_of_date):
+    for year in range_download_year:
+        print 'creating %s documents: arbk-%s.csv'%(type_of_date, year)
+        if year == 2017:
+            if type_of_date == "applicationDate":
+                filename_json = '%s/arbk-%s(applicationDate)(uncomplete).json'%(download_dir, year)
+            else:
+                filename_json = '%s/arbk-%s(establishmentDate)(uncomplete).json'%(download_dir, year)
+        else:
+            if type_of_date == "applicationDate":
+                filename_json = '%s/arbk-%s(applicationDate).json'%(download_dir, year)
+            else:
+                filename_json = '%s/arbk-%s(establishmentDate).json'%(download_dir, year)
+        if os.path.isfile(filename_csv):
+            print 'csv exitsts: %s' % filename_csv
+        else:
+            cursor = download_biz_by_year(type_of_date,year)
+            with open(filename_csv, 'w') as csvfile:
+                fieldnames = ['Name of Business', 'Status', 'Fiscal number','Business type','Capital', 'Owners',
+                              'Authorized Persons','Date of establishment','Date of application', 'Link of ARBK',
+                              'Registration number', 'Place', 'Activities', 'Date of data retrievement']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for doc in cursor:
+                    acts = ''
+                    owners = ''
+                    authorized = ''
+                    for i in doc['activities']:
+                        dc = set_name_to_activities(i)
+                        acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                    for owner in doc['owners']:
+                        owners += '%s\n'%owner['name'].encode('utf-8')
+                    for auth in doc['authorized']:
+                        authorized += '%s\n'%auth['name'].encode('utf-8')
+                    row = {'Name of Business': doc['name'], 'Status':doc['status'], 'Fiscal number':doc['fiscalNum'],'Business type':doc['type'] , 'Capital':doc['capital'],'Owners':owners,
+                           'Authorized Persons': authorized, 'Date of establishment': doc['establishmentDate'].date(),'Date of application': doc['applicationDate'].date(), 'Link of ARBK': doc['arbkUrl'], 'Registration number': doc['registrationNum'], 'Place':doc['municipality']['place'], 'Activities':acts, 'Date of data retrievement': doc['dataRetrieved'].date()}
+                    writer.writerow(DictUnicodeProxy(row))
 
-def make_all_data_zip_csv(download_dir):
+def make_all_data_zip_csv_sq(download_dir):
     filename_csv = '%s/arbk-data.csv'%download_dir
     if os.path.isfile(filename_csv):
         print 'arbk-data(csv).zip exitsts. Skipping'
@@ -117,6 +173,35 @@ def make_all_data_zip_csv(download_dir):
                     csvwriter.writerow(DictUnicodeProxy(row))
             except Exception as e:
                 print str(e)
+def make_all_data_zip_csv_en(download_dir):
+    filename_csv = '%s/arbk-data.csv'%download_dir
+    if os.path.isfile(filename_csv):
+        print 'arbk-data(csv).zip exitsts. Skipping'
+    else:
+        cursor = db.reg_businesses.find()
+        print 'creating file: arbk-data(csv).zip'
+        with open(filename_csv, 'w') as csvfile:
+            fieldnames = ['Name of Business', 'Status', 'Fiscal number','Business type','Capital', 'Owners', 'Authorized Persons','Date of establishment','Date of application', 'Link of ARBK', 'Registration number', 'Place', 'Activities', 'Date of data retrievement']
+            csvwriter = csv.DictWriter(csvfile, delimiter=',', fieldnames=fieldnames)
+            csvwriter.writeheader()
+            try:
+                for doc in cursor:
+                    print 'printing doc: [%s]'%doc['name']
+                    acts = ''
+                    owners = ''
+                    authorized = ''
+                    for i in doc['activities']:
+                        dc = set_name_to_activities(i)
+                        acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
+                    for owner in doc['owners']:
+                        owners += '%s\n'%owner['name'].encode('utf-8')
+                    for auth in doc['authorized']:
+                        authorized += '%s\n'%auth['name'].encode('utf-8')
+                    row = {'Name of Business': doc['name'], 'Status':doc['status'], 'Fiscal number':doc['fiscalNum'],'Business type':doc['type'] , 'Capital':doc['capital'],'Owners':owners,
+                           'Authorized Persons': authorized, 'Date of establishment': doc['establishmentDate'].date(),'Date of application': doc['applicationDate'].date(), 'Link of ARBK': doc['arbkUrl'], 'Registration number': doc['registrationNum'], 'Place':doc['municipality']['place'], 'Activities':acts, 'Date of data retrievement': doc['dataRetrieved'].date()}
+                    csvwriter.writerow(DictUnicodeProxy(row))
+            except Exception as e:
+                print str(e)
 
 class DictUnicodeProxy(object):
     def __init__(self, d):
@@ -131,8 +216,13 @@ class DictUnicodeProxy(object):
 
 download_dir = 'app/static/downloads'
 range_download_year = range(2000,2018)
-make_json(download_dir, range_download_year, "establishmentDate")
-make_json(download_dir, range_download_year, "applicationDate")
-make_csv(download_dir, range_download_year, "establishmentDate")
-make_csv(download_dir, range_download_year, "applicationDate")
-make_all_data_zip_csv(download_dir)
+make_json_en(download_dir, range_download_year, "establishmentDate")
+make_json_sq(download_dir, range_download_year, "applicationDate")
+make_csv_en(download_dir, range_download_year, "establishmentDate")
+make_csv_sq(download_dir, range_download_year, "applicationDate")
+make_json_sq(download_dir, range_download_year, "establishmentDate")
+make_json_en(download_dir, range_download_year, "applicationDate")
+make_csv_en(download_dir, range_download_year, "establishmentDate")
+make_csv_sq(download_dir, range_download_year, "applicationDate")
+make_all_data_zip_csv_sq(download_dir)
+make_all_data_zip_csv_en(download_dir)

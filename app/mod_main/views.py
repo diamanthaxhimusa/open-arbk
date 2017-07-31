@@ -36,7 +36,7 @@ def index():
             person_status = "any"
         municipalities = mongo_utils.get_municipalities()
         # Call the search_engine function from mongo_utils
-        result = mongo_utils.search_engine(page, items_per_page, business, biz_status, person, person_status, city)
+        result = mongo_utils.search_engine(page, items_per_page, business, biz_status, person, person_status, city, g.current_lang)
         # docs_count is the number of the documents that are found without limits, for pagination.
         docs_count = result['count']
         return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)
@@ -74,7 +74,7 @@ def visualization():
         return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
 @cache.memoize(timeout=86400)
 def top_ten(status, city):
-    top_result = mongo_utils.get_top_ten_businesses(status, city)
+    top_result = mongo_utils.get_top_ten_businesses(status, city, g.current_lang)
     return top_result
 
 @mod_main.route('/<lang_code>/through-years', methods=['POST'])
@@ -135,14 +135,14 @@ def businesses_type():
     if request.method == 'POST':
         city = request.form['biz_city_id']
         status = request.form['biz_status']
-        docs_count = mongo_utils.get_count_biz_types(status, city)
+        docs_count = mongo_utils.get_count_biz_types(status, city, g.current_lang)
         doc = businesses_type_func(status, city)
         api = {'total': docs_count['result'][0]['all'], 'doc': doc}
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
 @cache.memoize(timeout=86400)
 def businesses_type_func(status, city):
-    result = mongo_utils.get_business_types(city, status)
+    result = mongo_utils.get_business_types(city, status, g.current_lang)
     return result
 
 @cache.memoize(timeout=86400)
@@ -187,7 +187,7 @@ def activities():
     return "Error"
 @cache.memoize(timeout=86400)
 def activities_func(status, city):
-    result = mongo_utils.get_most_used_activities(status, city)
+    result = mongo_utils.get_most_used_activities(status, city, g.current_lang)
     return result
 
 @mod_main.route('/<lang_code>/active-inactive', methods=['GET', 'POST'])
@@ -236,26 +236,26 @@ def mapi():
     return Response(response='Error', status=404, mimetype='application/json')
 @cache.memoize(timeout=86400)
 def mapi_all_status(status):
-    result = mongo_utils.mapi_all_status(status)
+    result = mongo_utils.mapi_all_status(status, g.current_lang)
     return result
 @cache.memoize(timeout=86400)
 def mapi_status(activity, status):
-    result = mongo_utils.mapi_status(activity, status)
+    result = mongo_utils.mapi_status(activity, status, g.current_lang)
     return result
 @cache.memoize(timeout=86400)
 def mapi_activity(activity):
-    result = mongo_utils.mapi(activity)
+    result = mongo_utils.mapi(activity, g.current_lang)
     return result
 @cache.memoize(timeout=86400)
 def mapi_all():
-    result = mongo_utils.mapi_all()
+    result = mongo_utils.mapi_all(g.current_lang)
     return result
 
 @mod_main.route('/<lang_code>/gender-owners', methods=['GET', 'POST'])
 def gender_owners():
     if request.method == 'GET':
         docs = gender_owners_func("any","any")
-        total = mongo_utils.get_gender_owners_data_count("any","any")
+        total = mongo_utils.get_gender_owners_data_count("any","any", g.current_lang)
         api = {
             'total': total['result'][0]['all'],
             'doc': docs
@@ -264,7 +264,7 @@ def gender_owners():
     if request.method == 'POST':
         city = request.form['biz_city_id']
         status = request.form['biz_status']
-        docs_count = mongo_utils.get_gender_owners_data_count(status, city)
+        docs_count = mongo_utils.get_gender_owners_data_count(status, city, g.current_lang)
         doc = gender_owners_func(status, city)
         api = {
             'total': docs_count['result'][0]['all'],
@@ -274,7 +274,7 @@ def gender_owners():
     return 'error'
 @cache.memoize(timeout=86400)
 def gender_owners_func(status, city):
-    result = mongo_utils.get_gender_owners_data(status, city)
+    result = mongo_utils.get_gender_owners_data(status, city, g.current_lang)
     return result
 
 @mod_main.route('/<lang_code>/top-10-gender-activities', methods=['GET', 'POST'])
