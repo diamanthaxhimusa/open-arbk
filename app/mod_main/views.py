@@ -303,9 +303,12 @@ def download_page():
 @mod_main.route('/<lang_code>/shkarko/<string:doc_type>/<string:doc_date_type>/<string:year>', methods=['GET'])
 def download_doc_year(doc_type, doc_date_type, year):
     if year == "2017":
-        return send_from_directory(download_folder, "arbk-%s(%s)(pakompletuar).%s"%(year,doc_date_type, doc_type), as_attachment=True)
-    return send_from_directory(download_folder, "arbk-%s(%s).%s"%(year,doc_date_type, doc_type), as_attachment=True)
+        if g.current_lang == "sq":
+            return send_from_directory(download_folder, "arbk-%s(%s)(sq)(pakompletuar).%s"%(year,doc_date_type, doc_type), as_attachment=True)
+        else:
+            return send_from_directory(download_folder, "arbk-%s(%s)(en)(uncomplete).%s"%(year,doc_date_type, doc_type), as_attachment=True)
+    return send_from_directory(download_folder, "arbk-%s(%s)(%s).%s"%(year,doc_date_type, g.current_lang, doc_type), as_attachment=True)
 
 @mod_main.route('/<lang_code>/shkarko/<string:doc_type>/all-zip', methods=['GET'])
 def download_doc_all(doc_type):
-    return send_from_directory(download_folder, "arbk-data-%s.zip"%doc_type, as_attachment=True)
+    return send_from_directory(download_folder, "arbk-data-%s(%s).zip"%(doc_type, g.current_lang), as_attachment=True)
