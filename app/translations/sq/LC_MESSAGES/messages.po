@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-07-31 20:08+0200\n"
+"POT-Creation-Date: 2017-08-01 11:23+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -84,6 +84,10 @@ msgid ""
 "Njoftim! T&euml; dh&euml;nat p&euml;r bizneset e regjistruara n&euml; "
 "vitin 2000 dhe 2017 jan&euml; t&euml; pakompletuara. T&euml; dh&euml;nat "
 "e fundit q&euml; jan&euml; nxjerr&euml; jan&euml; deri me dat&euml;"
+msgstr ""
+
+#: app/templates/downloads.html:9
+msgid "Shkarkoni dokumentet sipas viteve"
 msgstr ""
 
 #: app/templates/downloads.html:19

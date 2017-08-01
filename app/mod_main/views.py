@@ -209,7 +209,6 @@ def page_stats():
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 @mod_main.route('/<lang_code>/harta', methods=['GET', 'POST'])
-@cache.memoize(timeout=86400)
 def activity_map():
     activities = mongo_utils.get_activities()
     return render_template('activity-map.html', activities=activities)
@@ -217,38 +216,38 @@ def activity_map():
 @mod_main.route('/<lang_code>/mapi', methods=['GET', 'POST'])
 def mapi():
     if request.method == 'GET':
-        agg = mapi_all()
+        agg = mapi_all(g.current_lang)
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     if request.method == 'POST':
         activity = request.form['activity_name']
         status = request.form['status']
         if activity != "all":
             if status == "Aktiv" or status == "Shuar":
-                agg = mapi_status(activity, status)
+                agg = mapi_status(activity, status, g.current_lang)
             else:
-                agg = mapi_activity(activity)
+                agg = mapi_activity(activity, g.current_lang)
         else:
             if status == "Aktiv" or status == "Shuar":
-                agg = mapi_all_status(status)
+                agg = mapi_all_status(status, g.current_lang)
             else:
-                agg = mapi_all()
+                agg = mapi_all(g.current_lang)
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     return Response(response='Error', status=404, mimetype='application/json')
 @cache.memoize(timeout=86400)
-def mapi_all_status(status):
-    result = mongo_utils.mapi_all_status(status, g.current_lang)
+def mapi_all_status(status, current_lang):
+    result = mongo_utils.mapi_all_status(status, current_lang)
     return result
 @cache.memoize(timeout=86400)
-def mapi_status(activity, status):
-    result = mongo_utils.mapi_status(activity, status, g.current_lang)
+def mapi_status(activity, status, current_lang):
+    result = mongo_utils.mapi_status(activity, status, current_lang)
     return result
 @cache.memoize(timeout=86400)
-def mapi_activity(activity):
-    result = mongo_utils.mapi(activity, g.current_lang)
+def mapi_activity(activity, current_lang):
+    result = mongo_utils.mapi(activity, current_lang)
     return result
 @cache.memoize(timeout=86400)
-def mapi_all():
-    result = mongo_utils.mapi_all(g.current_lang)
+def mapi_all(current_lang):
+    result = mongo_utils.mapi_all(current_lang)
     return result
 
 @mod_main.route('/<lang_code>/gender-owners', methods=['GET', 'POST'])

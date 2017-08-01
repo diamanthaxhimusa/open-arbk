@@ -16,7 +16,7 @@
         <select class="form-control select-vizualizations" name="city_id" id="muni_gen">
             <option value="any">{{_('T&euml; gjitha')}}</option>
             {% for i in komunat %}
-            <option value="{{i.municipality}}">{{i.municipality}}</option>
+            <option value="{{i.municipality[g.current_lang]}}">{{i.municipality[g.current_lang]}}</option>
             {% endfor %}
         </select>
     </div>

@@ -99,8 +99,10 @@ def make_csv_sq(download_dir, range_download_year, type_of_date):
                     owners = ''
                     authorized = ''
                     status = ""
-                    if doc['status']['sq'] != "":
+                    try:
                         status = doc['status']['sq']
+                    except Exception as e:
+                        status = ""
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'sq')
                         acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
@@ -138,8 +140,10 @@ def make_csv_en(download_dir, range_download_year, type_of_date):
                     owners = ''
                     authorized = ''
                     status = ""
-                    if doc['status']['en'] != "":
+                    try:
                         status = doc['status']['en']
+                    except Exception as e:
+                        status = ""
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'en')
                         acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
@@ -169,8 +173,10 @@ def make_all_data_zip_csv_sq(download_dir):
                     owners = ''
                     authorized = ''
                     status = ""
-                    if doc['status']['sq'] != "":
+                    try:
                         status = doc['status']['sq']
+                    except Exception as e:
+                        status = ""
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'sq')
                         acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
@@ -200,8 +206,10 @@ def make_all_data_zip_csv_en(download_dir):
                     owners = ''
                     authorized = ''
                     status = ""
-                    if doc['status']['en'] != "":
+                    try:
                         status = doc['status']['en']
+                    except Exception as e:
+                        status = ""
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'en')
                         acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))

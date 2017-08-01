@@ -6,7 +6,7 @@
 </div>
 <div class="well" style="margin-top: 70px;">
     <div class="text-center">
-        <h3>Shkarkoni dokumentet sipas viteve</h3>
+        <h3>{{_('Shkarkoni dokumentet sipas viteve')}}</h3>
     </div>
     <hr>
     <div class="row">
@@ -47,14 +47,14 @@
 <script type="text/javascript">
     function downloadAllDoc() {
         var type = $('.all-file-type').val();
-        var link = "/shkarko/"+type+"/all-zip";
+        var link = "shkarko/"+type+"/all-zip";
         window.location.href = link;
     }
     function downloadDocYear() {
         var type = $('.file-type').val();
         var year = $('.doc-viti').val();
         var dateType = $('.doc-date-type').val();
-        window.location.href = "/shkarko/"+type+"/"+dateType+"/"+year;
+        window.location.href = "shkarko/"+type+"/"+dateType+"/"+year;
     }
 </script>
 {% endblock%}
