@@ -58,7 +58,14 @@
                   <li {% if request.path == url_for('main.visualization', lang_code=g.current_lang) %}class="active"{% endif %}><a href="{{ url_for('main.visualization', lang_code=g.current_lang) }}">{{_('Zhvillimi i Bizneseve')}}</a></li>
                   <li {% if request.path == url_for('main.activity_map', lang_code=g.current_lang) %}class="active"{% endif %}><a href="{{ url_for('main.activity_map', lang_code=g.current_lang) }}">{{_('Harta')}}</a></li>
                   <li {% if request.path == url_for('main.download_page', lang_code=g.current_lang) %}class="active"{% endif %}><a href="{{ url_for('main.download_page', lang_code=g.current_lang) }}">{{_('Shkarko')}}</a></li>
-                  <li style="display:inline-flex"><a href="#" class="language-switch sq">SQ</a> <span style="margin: auto;">|</span> <a href="#" class="language-switch en">EN</a></li>
+                  <li class="dropdown">
+                      <a href="#" id="lang-select" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><script>document.write("{{g.current_lang}}".toUpperCase())</script><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="#" class="language-switch sq">SQ</a>
+                          </li>
+                          <li><a href="#" class="language-switch en">EN</a></li>
+                      </ul>
+                  </li>
                 </ul>
               </div>
             </div>
