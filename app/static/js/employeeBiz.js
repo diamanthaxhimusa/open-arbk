@@ -75,7 +75,7 @@ function employeesChart(data) {
                 }
             },
             series: [{
-                name: "{{_('Biznese')}}",
+                name: "Biznese",
                 colorByPoint: true,
                 data: [{
                     name: 'Mikrond\xebrmarrje',

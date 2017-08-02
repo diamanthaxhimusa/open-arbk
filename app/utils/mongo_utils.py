@@ -324,7 +324,7 @@ class MongoUtils(object):
     # Get total businesses by status
     def get_total_by_status(self):
         result = self.mongo.db[self.reg_businesses_collection].aggregate([
-            {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
+            {'$match': { "status":{'$exists' : True,'$ne' : ""}, "applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
             {'$group': {"_id": "$status", "total": {"$sum": 1}}},
             {'$sort':  {'total': -1}}])
         return result

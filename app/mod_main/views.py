@@ -194,8 +194,9 @@ def activities_func(status, city):
 @cache.memoize(timeout=86400)
 def active_inactive():
     docs = mongo_utils.get_total_by_status()
+    print docs
     api = {
-            'total': mongo_utils.docs_count(),
+            'total': docs['result'][0]['total']+docs['result'][1]['total'],
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
