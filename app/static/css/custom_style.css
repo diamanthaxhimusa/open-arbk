@@ -75,7 +75,7 @@ select.custom-form-item option {
 /*.form-inline{
 	display: table-caption;
 }*/
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .navbar-header {
       float: none !important;
   }

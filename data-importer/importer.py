@@ -72,6 +72,19 @@ def main():
         city = {}
         epl_nr = 0
         capi = 0
+        reg_num = ""
+        fiscal_num = 0
+        buss_type = ""
+        epl_nr = ""
+        applicationDate = None
+        atkStatus = ""
+        status = ""
+        arbkUrl = ""
+        sluged_owners = []
+        establishmentDate = None
+        slugified_company_string = ""
+        slug_company = ""
+        slug_city = {}
         # Looping in owner array of 'formatted' JSON in docs
         for owner in doc['formatted']['owners']:
             slugified_owner_string = slugify(owner.lower())
@@ -91,7 +104,7 @@ def main():
         try:
             establishmentDate = doc['formatted']['establishmentDate']
         except Exception as e:
-            pass
+            establishmentDate = None
         try:
             reg_num = doc['formatted']['registrationNum']
         except Exception as e:

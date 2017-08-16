@@ -122,7 +122,7 @@ $(document).ready(function(){
                   type: 'pie'
               },
               title: {
-                  text: 'Percentage of owners by sex'
+                  text: 'Percentage of owners by gender'
               },
               plotOptions: {
                   pie: {

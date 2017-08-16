@@ -106,7 +106,7 @@ def make_csv_sq(download_dir, range_download_year, type_of_date):
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'sq')
                         if len(doc['activities']) > 1:
-                            acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
+                            acts += '%s-%s |\n'%(str(i),dc.encode('utf-8'))
                         else:
                             acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
@@ -156,7 +156,7 @@ def make_csv_en(download_dir, range_download_year, type_of_date):
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'en')
                         if len(doc['activities']) > 1:
-                            acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
+                            acts += '%s-%s |\n'%(str(i),dc.encode('utf-8'))
                         else:
                             acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
@@ -198,7 +198,7 @@ def make_all_data_zip_csv_sq(download_dir):
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'sq')
                         if len(doc['activities']) > 1:
-                            acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
+                            acts += '%s-%s |\n'%(str(i),dc.encode('utf-8'))
                         else:
                             acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
@@ -240,7 +240,7 @@ def make_all_data_zip_csv_en(download_dir):
                     for i in doc['activities']:
                         dc = set_name_to_activities(i,'en')
                         if len(doc['activities']) > 1:
-                            acts += '%s-%s,\n'%(str(i),dc.encode('utf-8'))
+                            acts += '%s-%s |\n'%(str(i),dc.encode('utf-8'))
                         else:
                             acts += '%s-%s\n'%(str(i),dc.encode('utf-8'))
                     for owner in doc['owners']:
