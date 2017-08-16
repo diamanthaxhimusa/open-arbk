@@ -58,7 +58,7 @@
                   <li {% if request.path == url_for('main.index', lang_code=g.current_lang) %}class="active"{% endif %}><a class="tabs" href="{{ url_for('main.index', lang_code=g.current_lang) }}">{{_('K&euml;rkimi')}}</a></li>
                   <li {% if request.path == url_for('main.visualization', lang_code=g.current_lang) %}class="active"{% endif %}><a class="tabs" href="{{ url_for('main.visualization', lang_code=g.current_lang) }}">{{_('Zhvillimi i Bizneseve')}}</a></li>
                   <li {% if request.path == url_for('main.activity_map', lang_code=g.current_lang) %}class="active"{% endif %}><a class="tabs" href="{{ url_for('main.activity_map', lang_code=g.current_lang) }}">{{_('Harta')}}</a></li>
-                  <li><a  data-toggle="modal" data-target="#myModal" href="#">Missing Data</a></li>
+                  <li><a  data-toggle="modal" data-target="#myModal" href="#">{{_('T&euml; Dh&euml;nat Gjysmake')}}</a></li>
                   <li {% if request.path == url_for('main.download_page', lang_code=g.current_lang) %}class="active"{% endif %}><a href="{{ url_for('main.download_page', lang_code=g.current_lang) }}">{{_('Shkarko')}}</a></li>
                   <li class="dropdown">
                       <a href="#" id="lang-select" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><script>document.write("{{g.current_lang}}".toUpperCase())</script><span class="caret"></span></a>
@@ -261,27 +261,27 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-sm-offset-1">
                         <br>
-                        <h4 class="missing-text"><b class="missing-header">62022</b> {{_('biznese nuk kane të paraqitur numrin fiskal prej të cilave')}} <b>52022</b> {{_('janë ende aktive')}}.</h4>
+                        <h4 class="missing-text"><b class="missing-header">62 022</b> {{_('biznese nuk kan&euml; t&euml; paraqitur numrin fiskal')}}, <b>52 022</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-sm-offset-2">
                         <br>
-                        <h4 class="missing-text"><b class="missing-header">2269</b> {{_('biznese nuk kanë datë të konstituimit prej të cilave')}} <b>543</b> {{_('janë ende aktive')}}.</h4>
+                        <h4 class="missing-text"><b class="missing-header">2 269</b> {{_('biznese nuk kan&euml; dat&euml; t&euml; konstituimit')}}, <b>543</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-sm-offset-1">
                         <br>
-                        <h4 class="missing-text"><b class="missing-header">523</b> {{_('biznese nuk kanë të paraqitur emrin e pronarit/es/eve prej të cilave')}} <b>464</b> {{_('prej tyre janë ende aktive')}}.</h4>
+                        <h4 class="missing-text"><b class="missing-header">523</b> {{_('biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve')}}, <b>464</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-sm-offset-2">
                         <br>
-                        <h4 class="missing-text"><b class="missing-header">7643</b> {{_('biznese nuk kanë të paraqitur aktivitetet e tyre prej të cilave')}} <b>759</b> {{_('janë ende aktive')}}.</h4>
+                        <h4 class="missing-text"><b class="missing-header">7 643</b> {{_('biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre')}}, <b>759</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
                         <br>
-                        <h4 class="missing-text"><b class="missing-header">4</b> {{_('biznese nuk kanë status të paraqitur')}}.</h4>
+                        <h4 class="missing-text"><b class="missing-header">4</b> {{_('biznese nuk kan&euml; status t&euml; paraqitur')}}.</h4>
                     </div>
                 </div>
               </div>
