@@ -1,6 +1,6 @@
 body {
 	line-height: 1.4;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif !important;
     color: #67696c;
     font-size: 16px;
     font-weight: 300;
@@ -30,9 +30,11 @@ select.form-control{
     /*padding-left: 5px !important;*/
 }
 
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Raleway', sans-serif;
+/*h1, h2, h3, h4, h5, h6{
     font-weight: 600;
+}*/
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+	font-family: Roboto, sans-serif !important;
 }
 button{
 	border-radius: 0px !important
@@ -76,6 +78,22 @@ button{
 	top: -26px;
 	left: 15px;
 }
+
+.missing-text{
+	display: table;
+	text-align: center;
+	width: 100%
+}
+.missing-text b{
+	color: black;
+}
+.missing-header{
+	margin: auto;
+	display: table-caption;
+	text-align: center;
+	font-size: 46px;
+}
+
 /*.form-group label{
 	float: left !important;
 }*/
@@ -263,7 +281,6 @@ HEADER
 }
 .navbar-default .navbar-brand {
     color: #fff;
-    font-family: 'Raleway', sans-serif;
     font-weight: 700;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus
@@ -304,10 +321,6 @@ HEADER
     padding-top: 135px;
     padding-bottom: 85px;
     color: #fff;
-}
-.bnr-title, .bnr-sub-title
-{
-    font-family: 'Fira Sans', sans-serif;
 }
 h1.bnr-title
 {
@@ -382,7 +395,6 @@ features
 ***********************************/
 .title, .service-title
 {
-    font-family: 'Fira Sans', sans-serif;
     font-size: 35px;
     text-transform: uppercase;
 }
@@ -529,7 +541,6 @@ ul.service-list li i
     box-sizing:border-box
 }
 .portfolio-item figure h2 {
-    font-family: 'Fira Sans', sans-serif;
     color:#fff;
     font-size:20px;
     text-align:left;
@@ -631,7 +642,6 @@ TESTIMONIAL
     position: absolute;
     font-weight: 300;
     font-size: 3em;
-    font-family: Georgia, serif;
     color: #ccc;
     top: 62%;
 }
@@ -815,7 +825,6 @@ contact
     border-radius: 0px;
     color: #fff!important;
     border-color: #fff;
-	font-family: 'Fira Sans', sans-serif;
 }
 #viz-drop-ul{
 	width: 290px

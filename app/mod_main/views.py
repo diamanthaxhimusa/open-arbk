@@ -254,7 +254,7 @@ def mapi_all(current_lang):
 def gender_owners():
     if request.method == 'GET':
         docs = gender_owners_func("any","any")
-        total = mongo_utils.get_gender_owners_data_count("any","any", g.current_lang)
+        total = get_gender_owners_data_count("any","any", g.current_lang)
         api = {
             'total': total['result'][0]['all'],
             'doc': docs
@@ -263,7 +263,7 @@ def gender_owners():
     if request.method == 'POST':
         city = request.form['biz_city_id']
         status = request.form['biz_status']
-        docs_count = mongo_utils.get_gender_owners_data_count(status, city, g.current_lang)
+        docs_count = get_gender_owners_data_count(status, city, g.current_lang)
         doc = gender_owners_func(status, city)
         api = {
             'total': docs_count['result'][0]['all'],
@@ -271,6 +271,10 @@ def gender_owners():
         }
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
+@cache.memoize(timeout=86400)
+def get_gender_owners_data_count(status, city, lang_code):
+    result = mongo_utils.get_gender_owners_data_count(status, city, lang_code)
+    return result
 @cache.memoize(timeout=86400)
 def gender_owners_func(status, city):
     result = mongo_utils.get_gender_owners_data(status, city, g.current_lang)

@@ -169,8 +169,12 @@ def make_csv_en(download_dir, range_download_year, type_of_date):
                             authorized += '%s,\n'%auth['name'].encode('utf-8')
                         else:
                             authorized += '%s\n'%auth['name'].encode('utf-8')
+                    try:
+                        estDate = doc['establishmentDate'].date()
+                    except Exception as e:
+                        estDate = ""
                     row = {'Name of Business': doc['name'], 'Status': status, 'Fiscal number':doc['fiscalNum'],'Business type':doc['type']['en'] , 'Capital':doc['capital'],'Owners':owners,
-                           'Authorized Persons': authorized, 'Date of establishment': doc['establishmentDate'].date(),'Date of application': doc['applicationDate'].date(), 'Link of ARBK': doc['arbkUrl'], 'Registration number': doc['registrationNum'], 'Municipality':doc['municipality']['municipality']['en'], 'Activities':acts, 'Date of data retrievement': doc['dataRetrieved'].date()}
+                           'Authorized Persons': authorized, 'Date of establishment': estDate,'Date of application': doc['applicationDate'].date(), 'Link of ARBK': doc['arbkUrl'], 'Registration number': doc['registrationNum'], 'Municipality':doc['municipality']['municipality']['en'], 'Activities':acts, 'Date of data retrievement': doc['dataRetrieved'].date()}
                     writer.writerow(DictUnicodeProxy(row))
 
 def make_all_data_zip_csv_sq(download_dir):

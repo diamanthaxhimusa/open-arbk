@@ -19,7 +19,8 @@
     <meta property="twitter:card" content="summary_medium_image">
     <meta name="twitter:creator" content="@OpenDataKosovo">
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+    <link href=“//fonts.googleapis.com/css?family=Roboto:400,900” rel=“stylesheet”>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom_style.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/font-awesome.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
@@ -254,14 +255,35 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">{{_('T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset')}}</h4>
+                <h3 class="modal-title" style="color: black;font-weight: bold;" id="myModalLabel">{{_('T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset')}}</h3>
               </div>
               <div class="modal-body">
-                <br>
-                <p><h4><b>4</b> {{_('Biznese pa status')}}.</h4></p>
-                <p><h4><b>523</b> {{_('Biznese pa pronar&euml;')}}, <b>464</b> {{_('jan&euml; aktive')}}.</h4></p>
-                <p><h4><b>7643</b> {{_('Biznese pa aktivitet')}}, <b>759</b> {{_('jan&euml; aktive')}}.</h4></p>
-                <p><h4><b>2269</b> {{_('Biznese pa dat&euml; t&euml; konstituimit')}}, <b>543</b> {{_('jan&euml; aktive')}}.</h4></p>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+                        <br>
+                        <h4 class="missing-text"><b class="missing-header">62022</b> {{_('biznese nuk kane të paraqitur numrin fiskal prej të cilave')}} <b>52022</b> {{_('janë ende aktive')}}.</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+                        <br>
+                        <h4 class="missing-text"><b class="missing-header">2269</b> {{_('biznese nuk kanë datë të konstituimit prej të cilave')}} <b>543</b> {{_('janë ende aktive')}}.</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+                        <br>
+                        <h4 class="missing-text"><b class="missing-header">523</b> {{_('biznese nuk kanë të paraqitur emrin e pronarit/es/eve prej të cilave')}} <b>464</b> {{_('prej tyre janë ende aktive')}}.</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+                        <br>
+                        <h4 class="missing-text"><b class="missing-header">7643</b> {{_('biznese nuk kanë të paraqitur aktivitetet e tyre prej të cilave')}} <b>759</b> {{_('janë ende aktive')}}.</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                        <br>
+                        <h4 class="missing-text"><b class="missing-header">4</b> {{_('biznese nuk kanë status të paraqitur')}}.</h4>
+                    </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Mbyll</button>
