@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-01 11:23+0200\n"
+"POT-Creation-Date: 2017-08-17 09:48+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -27,8 +27,8 @@ msgstr "Categorization based on business activities:"
 msgid "Aktiviteti:"
 msgstr "Activity:"
 
-#: app/templates/activity-map.html:28 app/templates/activity-map.html:49
-#: app/templates/layout.html:111 app/templates/layout.html:125
+#: app/templates/activity-map.html:31 app/templates/activity-map.html:52
+#: app/templates/layout.html:120 app/templates/layout.html:134
 #: app/templates/visualizations/bizTypes.html:7
 #: app/templates/visualizations/bizTypes.html:18
 #: app/templates/visualizations/gender.html:6
@@ -41,11 +41,11 @@ msgstr "Activity:"
 msgid "T&euml; gjitha"
 msgstr "All"
 
-#: app/templates/activity-map.html:41
+#: app/templates/activity-map.html:44
 msgid "Statusi i bizneseve:"
 msgstr "Businesses status:"
 
-#: app/templates/activity-map.html:47 app/templates/layout.html:126
+#: app/templates/activity-map.html:50 app/templates/layout.html:135
 #: app/templates/visualizations/bizTypes.html:8
 #: app/templates/visualizations/gender.html:7
 #: app/templates/visualizations/top10.html:8
@@ -53,7 +53,7 @@ msgstr "Businesses status:"
 msgid "Aktiv"
 msgstr "Active"
 
-#: app/templates/activity-map.html:48 app/templates/layout.html:127
+#: app/templates/activity-map.html:51 app/templates/layout.html:136
 #: app/templates/visualizations/bizTypes.html:9
 #: app/templates/visualizations/gender.html:8
 #: app/templates/visualizations/top10.html:9
@@ -61,7 +61,7 @@ msgstr "Active"
 msgid "I shuar"
 msgstr "Dissolved"
 
-#: app/templates/activity-map.html:66
+#: app/templates/activity-map.html:69
 msgid ""
 "Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna "
 "gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; "
@@ -74,7 +74,7 @@ msgstr ""
 "been updated in the state geo-portal. The missing municipalities are "
 "shown as part of the municipality they belonged to."
 
-#: app/templates/activity-map.html:72
+#: app/templates/activity-map.html:75
 msgid ""
 "T&euml; dh&euml;nat e regjistrimeve t&euml; bizneseve q&euml; jan&euml; "
 "t&euml; disponueshme n&euml; platform&euml; jan&euml; marr&euml; nga ARBK"
@@ -108,7 +108,7 @@ msgstr "Date of establishment"
 msgid "Data e aplikimit"
 msgstr "Date of application"
 
-#: app/templates/downloads.html:28 app/templates/layout.html:60
+#: app/templates/downloads.html:28 app/templates/layout.html:62
 msgid "Shkarko"
 msgstr "Download"
 
@@ -183,27 +183,31 @@ msgstr "Next"
 msgid "E fundit"
 msgstr "Last"
 
-#: app/templates/layout.html:4 app/templates/layout.html:52
+#: app/templates/layout.html:4 app/templates/layout.html:53
 msgid "Bizneset e Hapura"
 msgstr "Open Businesses"
 
-#: app/templates/layout.html:56 app/templates/layout.html:184
+#: app/templates/layout.html:57 app/templates/layout.html:193
 msgid "Pse Bizneset e Hapura?"
 msgstr "Why Open Businesses?"
 
-#: app/templates/layout.html:57
+#: app/templates/layout.html:58
 msgid "K&euml;rkimi"
 msgstr "Search"
 
-#: app/templates/layout.html:58
+#: app/templates/layout.html:59
 msgid "Zhvillimi i Bizneseve"
 msgstr "Business Development"
 
-#: app/templates/layout.html:59 app/templates/layout.html:173
+#: app/templates/layout.html:60 app/templates/layout.html:182
 msgid "Harta"
 msgstr "Map"
 
-#: app/templates/layout.html:79
+#: app/templates/layout.html:61
+msgid "T&euml; Dh&euml;nat Gjysmake"
+msgstr "Missing Data"
+
+#: app/templates/layout.html:88
 msgid ""
 "K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar p&euml;r"
 " kompanit&euml; e regjistruara n&euml; Kosov&euml;"
@@ -211,73 +215,73 @@ msgstr ""
 "Search for businesses, owners, or authorized persons for companies "
 "registered in Kosovo"
 
-#: app/templates/layout.html:84
+#: app/templates/layout.html:93
 msgid "Biznese ne databasen tone"
 msgstr "Businesses in our database"
 
-#: app/templates/layout.html:88
+#: app/templates/layout.html:97
 msgid "Biznese aktive"
 msgstr "Active businesses"
 
-#: app/templates/layout.html:92
+#: app/templates/layout.html:101
 msgid "Biznese joaktive"
 msgstr "Inactive businesses"
 
-#: app/templates/layout.html:97
+#: app/templates/layout.html:106
 msgid ""
 "K&euml;rko p&euml;rmes nj&euml; apo m&euml; shum&euml; kritereve t&euml; "
 "m&euml;poshtme:"
 msgstr "Search through one or more of the following criteria"
 
-#: app/templates/layout.html:105
+#: app/templates/layout.html:114
 msgid "K&euml;rko personin:"
 msgstr "Search the person:"
 
-#: app/templates/layout.html:106
+#: app/templates/layout.html:115
 msgid "Sh&euml;no emrin e personit"
 msgstr "Enter the name of the person"
 
-#: app/templates/layout.html:109
+#: app/templates/layout.html:118
 msgid "Statusi i personit:"
 msgstr "The status of the person:"
 
-#: app/templates/layout.html:112
+#: app/templates/layout.html:121
 msgid "Pronar"
 msgstr "Owner"
 
-#: app/templates/layout.html:113
+#: app/templates/layout.html:122
 msgid "Person i Autorizuar"
 msgstr "Authorized Person"
 
-#: app/templates/layout.html:119
+#: app/templates/layout.html:128
 msgid "K&euml;rko biznesin:"
 msgstr "Search the business:"
 
-#: app/templates/layout.html:120
+#: app/templates/layout.html:129
 msgid "Sh&euml;no emrin e biznesit"
 msgstr "Enter the business name"
 
-#: app/templates/layout.html:123
+#: app/templates/layout.html:132
 msgid "Statusi i biznesit:"
 msgstr "Business status"
 
-#: app/templates/layout.html:133
+#: app/templates/layout.html:142
 msgid "Zgjedh komun&euml;n:"
 msgstr "Business status:"
 
-#: app/templates/layout.html:135
+#: app/templates/layout.html:144
 msgid "Gjith&euml; Kosova"
 msgstr "All of Kosovo"
 
-#: app/templates/layout.html:142
+#: app/templates/layout.html:151
 msgid "K&euml;rko"
 msgstr "Search"
 
-#: app/templates/layout.html:151
+#: app/templates/layout.html:160
 msgid "Zbuloni Gjendjen e Bizneseve n&euml; Kosov&euml;"
 msgstr "Find out the Business Status in Kosovo"
 
-#: app/templates/layout.html:152
+#: app/templates/layout.html:161
 msgid ""
 "K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve"
 " q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;."
@@ -285,7 +289,7 @@ msgstr ""
 "Here you can find different forms of visualizations showing the status of"
 " businesses in Kosovo."
 
-#: app/templates/layout.html:153
+#: app/templates/layout.html:162
 msgid ""
 "Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital "
 "m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industri apo "
@@ -294,55 +298,55 @@ msgid ""
 msgstr ""
 "Find out who are the top ten biggest capital businesses. Learn what "
 "industry or business activities operate the most in your city. Divide by "
-"sex, age, or type of business."
+"gender, age, or type of business."
 
-#: app/templates/layout.html:156
+#: app/templates/layout.html:165
 msgid "Shiko"
 msgstr "View"
 
-#: app/templates/layout.html:159 app/templates/visualizations.html:6
+#: app/templates/layout.html:168 app/templates/visualizations.html:6
 msgid "Llojet e Bizneseve"
 msgstr "Business Type"
 
-#: app/templates/layout.html:160 app/templates/visualizations.html:15
+#: app/templates/layout.html:169 app/templates/visualizations.html:15
 msgid "Bizneset sipas Numrit t&euml; Pun&euml;tor&euml;ve"
 msgstr "Businesses by Number of Employees"
 
-#: app/templates/layout.html:161 app/templates/visualizations.html:27
+#: app/templates/layout.html:170 app/templates/visualizations.html:27
 msgid "Bizneset e Shuara dhe Aktive"
 msgstr "Dissolved and Active Businesses"
 
-#: app/templates/layout.html:162 app/templates/visualizations.html:41
+#: app/templates/layout.html:171 app/templates/visualizations.html:41
 msgid "Bizneset Sipas Viteve"
 msgstr "Businesses By Years"
 
-#: app/templates/layout.html:163 app/templates/visualizations.html:62
+#: app/templates/layout.html:172 app/templates/visualizations.html:62
 msgid "Top 10 Bizneset Sipas Kapitalit"
 msgstr "Top 10 Businesses By Capital"
 
-#: app/templates/layout.html:164 app/templates/visualizations.html:71
+#: app/templates/layout.html:173 app/templates/visualizations.html:71
 msgid "Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset"
 msgstr "Top 10 Activities Sponsored by Businesses"
 
-#: app/templates/layout.html:165
+#: app/templates/layout.html:174
 msgid "Aktivitetet Gjat&euml; Viteve"
 msgstr "Activities over the Years"
 
-#: app/templates/layout.html:166 app/templates/visualizations.html:93
+#: app/templates/layout.html:175 app/templates/visualizations.html:93
 msgid "Gjinia e Pronar&euml;ve"
-msgstr "Owner’s Sex"
+msgstr "Owner’s Gender"
 
-#: app/templates/layout.html:167 app/templates/visualizations.html:104
+#: app/templates/layout.html:176 app/templates/visualizations.html:104
 msgid ""
 "Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; "
 "Pronar&euml;ve"
-msgstr "Top 10 Business Activities Separated by Owner Sex"
+msgstr "Top 10 Business Activities Separated by Owner Gender"
 
-#: app/templates/layout.html:177
+#: app/templates/layout.html:186
 msgid "Shkarkoni Dokumentet"
 msgstr "Download documents"
 
-#: app/templates/layout.html:179
+#: app/templates/layout.html:188
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
@@ -351,7 +355,7 @@ msgstr ""
 "Submitted business data have been extracted from the KBRA’s official site"
 " using the method called"
 
-#: app/templates/layout.html:179
+#: app/templates/layout.html:188
 msgid ""
 "Kjo teknologji e p&euml;rdorur sh&euml;rben p&euml;r nxjerrjen automatike"
 " dhe n&euml; t&euml;r&euml;si t&euml; sasive t&euml; m&euml;dha t&euml; "
@@ -361,23 +365,23 @@ msgstr ""
 "This technology is used to automatically extract large amounts of data "
 "from websites. These data have been extracted between the dates"
 
-#: app/templates/layout.html:179
+#: app/templates/layout.html:188
 msgid "dhe"
 msgstr "and"
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:197
 msgid "Kthehu tek k&euml;rkimi"
 msgstr "Back to search"
 
-#: app/templates/layout.html:200
+#: app/templates/layout.html:209
 msgid "Rezultatet:"
 msgstr "Results:"
 
-#: app/templates/layout.html:214
+#: app/templates/layout.html:223
 msgid "Misioni yn&euml;:"
 msgstr "Our mission:"
 
-#: app/templates/layout.html:215
+#: app/templates/layout.html:224
 msgid ""
 "Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave "
 "&euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; "
@@ -389,11 +393,40 @@ msgstr ""
 "Therefore, data provided by government institutions should be public, "
 "easily accessible, as well as in open formats."
 
-#: app/templates/layout.html:218
+#: app/templates/layout.html:227
 msgid "Na ndiqni n&euml;:"
 msgstr "Follow us:"
 
-#: app/templates/layout.html:246
+#: app/templates/layout.html:258
+msgid "T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset"
+msgstr ""
+
+#: app/templates/layout.html:264
+msgid "biznese nuk kan&euml; t&euml; paraqitur numrin fiskal"
+msgstr ""
+
+#: app/templates/layout.html:264 app/templates/layout.html:268
+#: app/templates/layout.html:274 app/templates/layout.html:278
+msgid "prej tyre jan&euml; ende aktive"
+msgstr ""
+
+#: app/templates/layout.html:268
+msgid "biznese nuk kan&euml; dat&euml; t&euml; konstituimit"
+msgstr ""
+
+#: app/templates/layout.html:274
+msgid "biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve"
+msgstr ""
+
+#: app/templates/layout.html:278
+msgid "biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre"
+msgstr ""
+
+#: app/templates/layout.html:284
+msgid "biznese nuk kan&euml; status t&euml; paraqitur"
+msgstr ""
+
+#: app/templates/layout.html:297
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
@@ -408,7 +441,7 @@ msgstr ""
 "automatically extract large amounts of data from websites. These data "
 "have been extracted between the dates 18-03-2017 and 18-05-2017."
 
-#: app/templates/layout.html:251
+#: app/templates/layout.html:302
 msgid "Zhvilluar nga"
 msgstr "Developed by"
 
@@ -655,8 +688,8 @@ msgid ""
 "p&euml;r t&euml; promovuar barazin&euml; gjinore n&euml; sektorin e "
 "zhvillimit t&euml; biznesit dhe sip&euml;rmarrjes."
 msgstr ""
-"The data should enable the sex of the people who have businesses. This "
-"will allow policymakers to intervene to promote gender equality in the "
+"The data should enable the gender of the people who have businesses. This"
+" will allow policymakers to intervene to promote gender equality in the "
 "business and entrepreneurship development sector."
 
 #: app/templates/recommendationPage.html:51
@@ -811,11 +844,11 @@ msgid ""
 "&euml;sht&euml; si rezultat i mosp&euml;rputhjes s&euml; emrit t&euml; "
 "personave me algoritmin ton&euml; q&euml; p&euml;rcakton gjinin&euml;."
 msgstr ""
-"Note! According to the database imported by KBRA, the sex of business "
-"owners has not been determined, however, we have made the division by sex"
-" based on the name of the business owners. Undetermined sex comes as a "
-"result of the discrepancy of the name of the person with our sex-specific"
-" algorithm."
+"Note! According to the database imported by KBRA, the gender of business "
+"owners has not been determined, however, we have made the division by "
+"gender based on the name of the business owners. Undetermined gender "
+"comes as a result of the discrepancy of the name of the person with our "
+"gender-specific algorithm."
 
 #: app/templates/visualizations/bizTypes.html:4
 #: app/templates/visualizations/gender.html:3

@@ -194,7 +194,6 @@ def make_all_data_zip_csv_sq(download_dir):
             csvwriter.writeheader()
             try:
                 for doc in cursor:
-                    print 'printing doc: [%s]'%doc['name']
                     acts = ''
                     owners = ''
                     authorized = ''
@@ -240,7 +239,6 @@ def make_all_data_zip_csv_en(download_dir):
             csvwriter.writeheader()
             try:
                 for doc in cursor:
-                    print 'printing doc: [%s]'%doc['name']
                     acts = ''
                     owners = ''
                     authorized = ''
