@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-17 09:48+0200\n"
+"POT-Creation-Date: 2017-08-17 12:13+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -204,15 +204,15 @@ msgid ""
 msgstr ""
 
 #: app/templates/layout.html:93
-msgid "Biznese ne databasen tone"
+msgid "biznese ne databasen tone"
 msgstr ""
 
 #: app/templates/layout.html:97
-msgid "Biznese aktive"
+msgid "biznese aktive"
 msgstr ""
 
 #: app/templates/layout.html:101
-msgid "Biznese joaktive"
+msgid "biznese joaktive"
 msgstr ""
 
 #: app/templates/layout.html:106
@@ -385,15 +385,15 @@ msgid "prej tyre jan&euml; ende aktive"
 msgstr ""
 
 #: app/templates/layout.html:268
-msgid "biznese nuk kan&euml; dat&euml; t&euml; konstituimit"
+msgid "biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre"
 msgstr ""
 
 #: app/templates/layout.html:274
-msgid "biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve"
+msgid "biznese nuk kan&euml; dat&euml; t&euml; konstituimit"
 msgstr ""
 
 #: app/templates/layout.html:278
-msgid "biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre"
+msgid "biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve"
 msgstr ""
 
 #: app/templates/layout.html:284
@@ -763,5 +763,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Biznese ne databasen tone."
+#~ msgstr ""
+
+#~ msgid "Biznese ne databasen tone"
+#~ msgstr ""
+
+#~ msgid "Biznese aktive"
+#~ msgstr ""
+
+#~ msgid "Biznese joaktive"
 #~ msgstr ""
 

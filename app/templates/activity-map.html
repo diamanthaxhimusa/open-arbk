@@ -75,6 +75,7 @@
             <span>{{_('T&euml; dh&euml;nat e regjistrimeve t&euml; bizneseve q&euml; jan&euml; t&euml; disponueshme n&euml; platform&euml; jan&euml; marr&euml; nga ARBK n&euml; datat 18-03-2017 dhe 18-05-2017. Çdo p&euml;rdit&euml;sim mbi t&euml; dh&euml;nat e b&euml;ra nga ARBK pas k&euml;saj periudhe nuk &euml;sht&euml; e  pasqyruar n&euml; k&euml;to t&euml; dh&euml;na.')}}</span>
         </div>
     </div>
+    <script src="{{url_for('static', filename='js/charReplace.js')}}"></script>
     <script>
     function searchActivity() {
         // Declare variables
@@ -87,11 +88,9 @@
         // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("a")[0];
-            aa = $(a).data('filter');
             if (filter.length > 1) {
-                if (aa.indexOf(filter) > -1) {
-                }
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                var charA = replaceChars(a.innerHTML.toUpperCase());
+                if (charA.indexOf(filter) > -1) {
                     li[i].style.display = "";
                 } else {
                     li[i].style.display = "none";
