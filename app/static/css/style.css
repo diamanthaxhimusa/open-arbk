@@ -48,6 +48,9 @@ button{
 	font-weight: bold;
 }
 
+#missing-data-title{
+	text-transform: uppercase;
+}
 .section-padding
 {
     padding: 10px 0px;
@@ -913,9 +916,19 @@ Responsive media queries
 }
 @media (min-width: 451px) and (max-width: 767px) {
     .service-item, .blog-sec, .wrap-item, .loction-info{
-    margin-bottom: 15px;
+	    margin-bottom: 15px;
+	}
 }
+button.btn-filter-data {
+	width: 100% !important;
 }
+
+@media(max-width: 767px) {
+	button.btn-filter-data {
+	    width: 290px !important;
+	}
+}
+
 @media (min-width: 20px) and (max-width: 450px) {
 .navbar-default .navbar-brand {
     padding-left: 16px;
