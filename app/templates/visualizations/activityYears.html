@@ -6,10 +6,10 @@
     </button>
     <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
         <li>
-            <input type="text" id="searchActivityInput" class="search-activities-dropdown" onkeyup="searchActivity()" placeholder="{{_('K&euml;rko aktivitetin...')}}">
+            <input type="text" id="searchActivityInput" class="search-activities-dropdown-input" onkeyup="searchActivity()" placeholder="{{_('K&euml;rko aktivitetin...')}}">
         </li>
         {% for i in activities%}
-        <li class="acts"><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
+        <li class="acts-li"><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
             {% if i['code']|length == 3 %}
                 0{{ i['code'] }}
             {% else %}
@@ -31,7 +31,7 @@ function searchActivity() {
     input = document.getElementById('searchActivityInput');
     filter = input.value.toUpperCase();
     ul = document.getElementById("activity_val");
-    li = ul.getElementsByClassName('acts');
+    li = ul.getElementsByClassName('acts-li');
 
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {

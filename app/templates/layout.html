@@ -249,48 +249,6 @@
             </div>
         </div>
       </div>
-        <!-- Missing Data Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" style="color: black;font-weight: bold;" id="myModalLabel">{{_('T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset')}}</h3>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-                        <br>
-                        <h4 class="missing-text"><b class="missing-header">62 022</b> {{_('biznese nuk kan&euml; t&euml; paraqitur numrin fiskal')}}, <b>52 022</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-                        <br>
-                        <h4 class="missing-text"><b class="missing-header">7 643</b> {{_('biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre')}}, <b>759</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-                        <br>
-                        <h4 class="missing-text"><b class="missing-header">2 269</b> {{_('biznese nuk kan&euml; dat&euml; t&euml; konstituimit')}}, <b>543</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-                        <br>
-                        <h4 class="missing-text"><b class="missing-header">523</b> {{_('biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve')}}, <b>464</b> {{_('prej tyre jan&euml; ende aktive')}}.</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                        <br>
-                        <h4 class="missing-text"><b class="missing-header">4</b> {{_('biznese nuk kan&euml; status t&euml; paraqitur')}}.</h4>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Mbyll</button>
-              </div>
-            </div>
-          </div>
-        </div>
       <div class="container-fluid" style="background-color: #d8d8d8;color: #4f4f4f;">
           <div class="row" style="padding: 9px 0px;font-size: 12px;">
               <div class="col-xs-12 text-center">
@@ -302,6 +260,48 @@
           {{_('Zhvilluar nga')}} <a target="_blank" href="https://opendatakosovo.org/">Open Data Kosovo</a>
       </div>
     </footer>
+    <!-- Missing Data Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" style="color: black;font-weight: bold;" id="myModalLabel">{{_('T&euml; Dh&euml;nat Gjysmake')}}</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+                            <br>
+                            <h4 class="missing-text">{{_('<b class="missing-header">62 022</b> biznese nuk kan&euml; t&euml; paraqitur numrin fiskal, <b>52 022</b> prej tyre jan&euml; ende aktive')}}.</h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+                            <br>
+                            <h4 class="missing-text">{{_('<b class="missing-header">7 643</b> biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre, <b>759</b> prej tyre jan&euml; ende aktive')}}.</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+                            <br>
+                            <h4 class="missing-text">{{_('<b class="missing-header">2 269</b> biznese nuk kan&euml; dat&euml; t&euml; konstituimit, <b>543</b> prej tyre jan&euml; ende aktive')}}.</h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+                            <br>
+                            <h4 class="missing-text">{{_('<b class="missing-header">523</b> biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve, <b>464</b> prej tyre jan&euml; ende aktive')}}.</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                            <br>
+                            <h4 class="missing-text">{{_('<b class="missing-header">4</b> biznese nuk kan&euml; status t&euml; paraqitur')}}.</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Mbyll')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{ url_for('static', filename='js/jquery.easing.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/wow.js')}}"></script>

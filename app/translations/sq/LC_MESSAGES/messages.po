@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-17 13:24+0200\n"
+"POT-Creation-Date: 2017-08-17 15:03+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Harta"
 msgstr ""
 
-#: app/templates/layout.html:61
+#: app/templates/layout.html:61 app/templates/layout.html:269
 msgid "T&euml; Dh&euml;nat Gjysmake"
 msgstr ""
 
@@ -376,36 +376,7 @@ msgstr ""
 msgid "Na ndiqni n&euml;:"
 msgstr ""
 
-#: app/templates/layout.html:258
-msgid "T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset"
-msgstr ""
-
-#: app/templates/layout.html:264
-msgid "biznese nuk kan&euml; t&euml; paraqitur numrin fiskal"
-msgstr ""
-
-#: app/templates/layout.html:264 app/templates/layout.html:268
-#: app/templates/layout.html:274 app/templates/layout.html:278
-msgid "prej tyre jan&euml; ende aktive"
-msgstr ""
-
-#: app/templates/layout.html:268
-msgid "biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre"
-msgstr ""
-
-#: app/templates/layout.html:274
-msgid "biznese nuk kan&euml; dat&euml; t&euml; konstituimit"
-msgstr ""
-
-#: app/templates/layout.html:278
-msgid "biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve"
-msgstr ""
-
-#: app/templates/layout.html:284
-msgid "biznese nuk kan&euml; status t&euml; paraqitur"
-msgstr ""
-
-#: app/templates/layout.html:297
+#: app/templates/layout.html:255
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
@@ -416,8 +387,43 @@ msgid ""
 "18-03-2017 dhe 18-05-2017."
 msgstr ""
 
-#: app/templates/layout.html:302
+#: app/templates/layout.html:260
 msgid "Zhvilluar nga"
+msgstr ""
+
+#: app/templates/layout.html:275
+msgid ""
+"<b class=\"missing-header\">62 022</b> biznese nuk kan&euml; t&euml; "
+"paraqitur numrin fiskal, <b>52 022</b> prej tyre jan&euml; ende aktive"
+msgstr ""
+
+#: app/templates/layout.html:279
+msgid ""
+"<b class=\"missing-header\">7 643</b> biznese nuk kan&euml; t&euml; "
+"paraqitur aktivitetet e tyre, <b>759</b> prej tyre jan&euml; ende aktive"
+msgstr ""
+
+#: app/templates/layout.html:285
+msgid ""
+"<b class=\"missing-header\">2 269</b> biznese nuk kan&euml; dat&euml; "
+"t&euml; konstituimit, <b>543</b> prej tyre jan&euml; ende aktive"
+msgstr ""
+
+#: app/templates/layout.html:289
+msgid ""
+"<b class=\"missing-header\">523</b> biznese nuk kan&euml; t&euml; "
+"paraqitur emrin e pronar&euml;ve, <b>464</b> prej tyre jan&euml; ende "
+"aktive"
+msgstr ""
+
+#: app/templates/layout.html:295
+msgid ""
+"<b class=\"missing-header\">4</b> biznese nuk kan&euml; status t&euml; "
+"paraqitur"
+msgstr ""
+
+#: app/templates/layout.html:300
+msgid "Mbyll"
 msgstr ""
 
 #: app/templates/profile.html:16
@@ -777,5 +783,26 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Biznese joaktive"
+#~ msgstr ""
+
+#~ msgid "T&euml; dh&euml;nat q&euml; mungojn&euml; tek bizneset"
+#~ msgstr ""
+
+#~ msgid "biznese nuk kan&euml; t&euml; paraqitur numrin fiskal"
+#~ msgstr ""
+
+#~ msgid "prej tyre jan&euml; ende aktive"
+#~ msgstr ""
+
+#~ msgid "biznese nuk kan&euml; t&euml; paraqitur aktivitetet e tyre"
+#~ msgstr ""
+
+#~ msgid "biznese nuk kan&euml; dat&euml; t&euml; konstituimit"
+#~ msgstr ""
+
+#~ msgid "biznese nuk kan&euml; t&euml; paraqitur emrin e pronar&euml;ve"
+#~ msgstr ""
+
+#~ msgid "biznese nuk kan&euml; status t&euml; paraqitur"
 #~ msgstr ""
 
