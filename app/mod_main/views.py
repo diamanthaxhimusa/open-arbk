@@ -306,10 +306,11 @@ def download_page():
 @mod_main.route('/<lang_code>/shkarko/<string:doc_type>/<string:doc_date_type>/<string:year>', methods=['GET'])
 def download_doc_year(doc_type, doc_date_type, year):
     if year == "2017":
-        if doc_date_type == "dataFillimit":
-            doc_date_type = "establishmentDate"
-        else:
-            doc_date_type = "applicationDate"
+        if g.current_lang == "en":
+            if doc_date_type == "dataFillimit":
+                doc_date_type = "establishmentDate"
+            else:
+                doc_date_type = "applicationDate"
         if g.current_lang == "sq":
             return send_from_directory(download_folder, "arbk-%s(%s)(sq)(pakompletuar).%s"%(year,doc_date_type, doc_type), as_attachment=True)
         else:
