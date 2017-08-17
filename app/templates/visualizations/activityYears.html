@@ -6,7 +6,7 @@
     </button>
     <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
         <li>
-            <input type="text" id="searchActivityInput" class="search-activities-dropdown" onkeyup="searchActivity()" placeholder="K&euml;rko aktivitetin..">
+            <input type="text" id="searchActivityInput" class="search-activities-dropdown" onkeyup="searchActivity()" placeholder="{{_('K&euml;rko aktivitetin...')}}">
         </li>
         {% for i in activities%}
         <li class="acts"><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">

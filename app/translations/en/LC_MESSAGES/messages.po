@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-17 12:13+0200\n"
+"POT-Creation-Date: 2017-08-17 13:24+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,6 +26,11 @@ msgstr "Categorization based on business activities:"
 #: app/templates/visualizations/activityYears.html:2
 msgid "Aktiviteti:"
 msgstr "Activity:"
+
+#: app/templates/activity-map.html:29
+#: app/templates/visualizations/activityYears.html:9
+msgid "K&euml;rko aktivitetin..."
+msgstr "Search for activity..."
 
 #: app/templates/activity-map.html:31 app/templates/activity-map.html:52
 #: app/templates/layout.html:120 app/templates/layout.html:134
