@@ -100,7 +100,7 @@ def main():
         try:
             city = set_muni(doc['formatted']['municipality'])
         except Exception as e:
-            pass
+            city = None
         try:
             establishmentDate = doc['formatted']['establishmentDate']
         except Exception as e:
@@ -155,9 +155,9 @@ def main():
             fiscal_num = ''
         slug_company = slugify(slugified_company_string.lower())
         try:
-            slug_city = {"en":slug_city_en, "sq":slug_city_sq}
+            slug_city = {"en":slugify(city['municipality']['en'].lower()), "sq":slugify(city['municipality']['sq'].lower())}
         except Exception as e:
-            slug_city = city['municipality']
+            slug_city = slugify(city['municipality'].lower())
 
         db.reg_businesses.insert({
             "registrationNum": reg_num,

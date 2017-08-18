@@ -27,6 +27,7 @@ def index():
         page = request.args.get('page', default=1, type=int)
         business = slugify(business_keyword.lower())
         person = slugify(search_keyword.lower())
+        municipality = slugify(city.lower())
         person_status = ""
         if status == "auth":
             person_status = "slugifiedAuthorized"
@@ -36,7 +37,7 @@ def index():
             person_status = "any"
         municipalities = mongo_utils.get_municipalities()
         # Call the search_engine function from mongo_utils
-        result = mongo_utils.search_engine(page, items_per_page, business, biz_status, person, person_status, city, g.current_lang)
+        result = mongo_utils.search_engine(page, items_per_page, business, biz_status, person, person_status, municipality, g.current_lang)
         # docs_count is the number of the documents that are found without limits, for pagination.
         docs_count = result['count']
         return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)

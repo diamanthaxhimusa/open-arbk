@@ -20,5 +20,5 @@ with open("data-importer/komunat.json","r") as data:
         place = []
         for muni_place in municipalities[municipality]:
             place.append(muni_place)
-        db.municipalities.insert({"municipality":{"en":municipality_types_en[municipality], "sq":municipality}, "districts":place, 'slug':{"en":slugify(municipality_types_en[municipality]),"sq":slugify(municipality)} })
+        db.municipalities.insert({"municipality":{"en":municipality_types_en[municipality], "sq":municipality}, "districts":place, 'slug':{"en":slugify(municipality_types_en[municipality].lower()),"sq":slugify(municipality.lower())} })
 municipality_types_en_file.close()
