@@ -1,10 +1,11 @@
 # Open Businesses
 
-#
-# Project description
 >
+## Project description
 
-# Technical Instructions
+Open Businesses is a business registration search engine with data from over 170,000 businesses in Kosovo. The data was scraped from the Kosovo Business Registration Agency (ARBK). Opening business data allows economic analysis of sectors as well as various economic activities. It creates space for analyzing economic trends in different periods and regions. It creates space for market analysis by local and international investors. Opening these business data enables data linking with other sectors such as public procurement or property declaration, which would strengthen anti-corruption mechanisms.
+
+## Technical Instructions
 ### 1. Server Installation
 #### Environment
 - Ubuntu 16.04 LTS 64 bit
@@ -454,8 +455,11 @@ After running all importers a the document will look like this:
 }
 ```
 
-When creating the new collection is finished, run scripts to create CSV and JSON files for download:
+When all importers are done, run this to create CSV and JSON files for download, this will create a folder in app/static/ called 'downloads' and will create files in both formats seperatet by year range from 2000 to 2017 and complete files:
 ```
 sudo bash document-prepare.sh
+```
+In order to reduce the complete data files (JSON/CSV), we run this script which compresses the files.
+```
 sudo bash zip-json-csv.sh
 ```
