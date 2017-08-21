@@ -103,22 +103,308 @@ bash run-debug.sh
 ```
 
 ### 3. Database and Documents Preparation
-First after importing the database in mongo you need to start the scripts that fix the database:
+The data have been extracted from the KBRA’s official site using our open source web scraper [ARBK Scraper](https://github.com/opendatakosovo/arbk-scraper/).
+
+After ARBK scraper is done, each document will look like this for example:
 ```
-ruby fix_activities.rb
+{
+    "_id" : ObjectId("58cc8dbc70ff0e9ff2de8807"),
+    "raw" : {
+        "info" : [
+            {
+                "key" : "Emri",
+                "value" : "N.T.SH. \"Kosova - Tex\""
+            },
+            {
+                "key" : "Lloji Biznesit",
+                "value" : "Biznes individual"
+            },
+            {
+                "key" : "Nr Regjistrimit",
+                "value" : "70000015"
+            },
+            {
+                "key" : "Nr Fiskal",
+                "value" : "600538063"
+            },
+            {
+                "key" : "Nr Cerfitikues KTA",
+                "value" : ""
+            },
+            {
+                "key" : "Nr Punëtorëve",
+                "value" : "2"
+            },
+            {
+                "key" : "Data e konstituimit",
+                "value" : "2011.08.16"
+            },
+            {
+                "key" : "Data e Aplikimit",
+                "value" : "2003.03.13"
+            },
+            {
+                "key" : "Komuna",
+                "value" : "Ferizaj"
+            },
+            {
+                "key" : "Adresa",
+                "value" : "Ismet Ramadani"
+            },
+            {
+                "key" : "Telefoni",
+                "value" : ""
+            },
+            {
+                "key" : "E-mail",
+                "value" : ""
+            },
+            {
+                "key" : "Kapitali",
+                "value" : "0.00"
+            },
+            {
+                "key" : "Statusi në ATK",
+                "value" : "//"
+            },
+            {
+                "key" : "Emri",
+                "value" : "N.T.SH. \"Kosova - Tex\""
+            },
+            {
+                "key" : "Lloji Biznesit",
+                "value" : "Biznes individual"
+            },
+            {
+                "key" : "Nr Regjistrimit",
+                "value" : "70000015"
+            },
+            {
+                "key" : "Nr Fiskal",
+                "value" : "600538063"
+            },
+            {
+                "key" : "Nr Cerfitikues KTA",
+                "value" : ""
+            },
+            {
+                "key" : "Nr Punëtorëve",
+                "value" : "2"
+            },
+            {
+                "key" : "Data e konstituimit",
+                "value" : "2011.08.16"
+            },
+            {
+                "key" : "Data e Aplikimit",
+                "value" : "2003.03.13"
+            },
+            {
+                "key" : "Komuna",
+                "value" : "Ferizaj"
+            },
+            {
+                "key" : "Adresa",
+                "value" : "Ismet Ramadani"
+            },
+            {
+                "key" : "Telefoni",
+                "value" : ""
+            },
+            {
+                "key" : "E-mail",
+                "value" : ""
+            },
+            {
+                "key" : "Kapitali",
+                "value" : "0.00"
+            },
+            {
+                "key" : "Statusi në ATK",
+                "value" : "//"
+            }
+        ],
+        "authorized" : [
+            {
+                "key" : "Mezafer Aliu",
+                "value" : "Agjent i regjistruar"
+            }
+        ],
+        "owners" : [
+            {
+                "key" : "1",
+                "value" : "Mezafer Aliu"
+            }
+        ],
+        "activities" : [
+            {
+                "key" : "4645",
+                "value" : "Tregtia me shumicë e artikujve të parfumerisë dhe kozmetikës"
+            },
+            {
+                "key" : "4621",
+                "value" : "Tregtia me shumicë e drithërave, duhanit të papërpunuar, farërave dhe ushqimit të kafshëve"
+            },
+            {
+                "key" : "5020",
+                "value" : "Transporti detar dhe bregdetar i mallrave"
+            },
+            {
+                "key" : "9609",
+                "value" : "Aktivitetet e tjera p.k.t."
+            },
+            {
+                "key" : "4636",
+                "value" : "Tregtia me shumicë e sheqerit, e çokollatës dhe e ëmbëlsirave"
+            },
+            {
+                "key" : "4638",
+                "value" : "Tregtia me shumicë e artikujve të tjerë ushqimorë, përfshirë peshkun, krustacet dhe molusqet (frutat e detit)"
+            },
+            {
+                "key" : "4690",
+                "value" : "Tregtia me shumicë jo e specializuar"
+            },
+            {
+                "key" : "4637",
+                "value" : "Tregtia me shumicë e kafes, çajit, kakaos dhe erëzave"
+            },
+            {
+                "key" : "9329",
+                "value" : "Aktivitetet e tjera të argëtimit dhe rekreacionit"
+            },
+            {
+                "key" : "4642",
+                "value" : "Tregtia me shumicë e veshjeve dhe këpucëve"
+            },
+            {
+                "key" : "4799",
+                "value" : "Tregtia tjetër me pakicë, jo në dyqane, tezga ose tregje"
+            },
+            {
+                "key" : "4941",
+                "value" : "Transporti rrugor i mallrave"
+            }
+        ]
+    },
+    "formatted" : {
+        "owners" : [
+            "Mezafer Aliu"
+        ],
+        "authorized" : [
+            "Mezafer Aliu"
+        ],
+        "activities" : [
+            4645,
+            4621,
+            5020,
+            9609,
+            4636,
+            4638,
+            4690,
+            4637,
+            9329,
+            4642,
+            4799,
+            4941
+        ],
+        "type" : "Biznes individual",
+        "registrationNum" : 70000015,
+        "fiscalNum" : 600538063,
+        "employeeCount" : 2,
+        "establishmentDate" : ISODate("2011-08-16T00:00:00.000Z"),
+        "applicationDate" : ISODate("2003-03-13T00:00:00.000Z"),
+        "municipality" : "Ferizaj",
+        "capital" : 0.0,
+        "atkStatus" : "//",
+        "timestamp" : ISODate("2017-03-18T01:30:36.316Z"),
+        "name" : "N.T.SH. \"Kosova - Tex\"",
+        "status" : "Aktiv",
+        "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125000011"
+    }
+}
 ```
 
+Then we need to run importers to format data:
 ```
 bash activity-importer.sh
 bash muni-importer.sh
 ```
-
-Then start the script that formattes the old collection of the database to a new improved one:
+These two importers prepare municipalities and acitivities in two seperate collections.
+After importing municipalities and activities we are ready to import the businesses collection, which will create a collection called "reg_businesses".
 ```
 bash data-importer.sh
 ```
+After this importer is done a document will lok like this for example:
+```
+{
+    "_id" : ObjectId("5996b0b3bacaea16286ef2be"),
+    "status" : {
+        "sq" : "Aktiv",
+        "en" : "Active"
+    },
+    "activities" : [
+        4645,
+        4621,
+        5020,
+        9609,
+        4636,
+        4638,
+        4690,
+        4637,
+        9329,
+        4642,
+        4799,
+        4941
+    ],
+    "owners" : [
+        {
+            "gender" : "male",
+            "name" : "Mezafer Aliu"
+        }
+    ],
+    "slugifiedMunicipality" : {
+        "sq" : "ferizaj",
+        "en" : "ferizaj"
+    },
+    "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125000011",
+    "atkStatus" : "//",
+    "fiscalNum" : 600538063,
+    "establishmentDate" : ISODate("2011-08-16T00:00:00.000Z"),
+    "slugifiedOwners" : [
+        "mezafer-aliu"
+    ],
+    "municipality" : {
+        "place" : "Ferizaj",
+        "municipality" : {
+            "sq" : "Ferizaj",
+            "en" : "Ferizaj"
+        }
+    },
+    "applicationDate" : ISODate("2003-03-13T00:00:00.000Z"),
+    "slugifiedAuthorized" : [
+        "mezafer-aliu"
+    ],
+    "slugifiedBusiness" : "n-t-sh-kosova-tex",
+    "authorized" : [
+        {
+            "gender" : "male",
+            "name" : "Mezafer Aliu"
+        }
+    ],
+    "capital" : 0,
+    "employeeCount" : 2,
+    "registrationNum" : 70000015,
+    "type" : {
+        "sq" : "Biznes individual",
+        "en" : "Individual Business"
+    },
+    "dataRetrieved" : ISODate("2017-03-18T01:30:36.316Z"),
+    "name" : "N.T.SH. Kosova - Tex"
+}
+```
 
-When creating the new collection is finished , run scripts to prepare data for download:
+When creating the new collection is finished, run scripts to prepare data for download:
 ```
 sudo bash document-prepare.sh
 sudo bash zip-json-csv.sh
