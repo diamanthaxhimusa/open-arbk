@@ -20,7 +20,7 @@ mongo_utils = MongoUtils(mongo)
 babel = Babel()
 
 #Initialize cache
-cache = Cache(config={'CACHE_TYPE': 'simple'})
+cache = Cache(config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 86400, 'CACHE_THRESHOLD': 922337203685477580})
 
 #Downloads folder
 download_folder = join(dirname(realpath(__file__)),'static/downloads/')

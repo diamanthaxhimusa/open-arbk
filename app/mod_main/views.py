@@ -43,7 +43,7 @@ def index():
         return render_template('index.html',search_result=result['result'], count=docs_count, items_per_page=items_per_page, municipalities = municipalities)
 
 @mod_main.route('/<lang_code>/kerko/<string:status>/<string:person>', methods=['GET', 'POST'])
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def profile(status, person):
     items_per_page = 10
     page = request.args.get('page', default=1, type=int)
@@ -73,7 +73,7 @@ def visualization():
         status = request.form['status']
         top = top_ten(status, city)
         return Response(response=json_util.dumps(top), status=200, mimetype='application/json')
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def top_ten(status, city):
     top_result = mongo_utils.get_top_ten_businesses(status, city, g.current_lang)
     return top_result
@@ -83,7 +83,7 @@ def start_date():
     date_type = request.form['date_type']
     api = through_years(date_type, g.current_lang)
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def through_years(date_type,current_lang):
     api = {}
     y = 0
@@ -106,7 +106,7 @@ def activity_years():
         activity = request.form['activity']
         api = activity_years_func(activity)
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def activity_years_func(activity):
     api = {}
     y = 0
@@ -141,12 +141,12 @@ def businesses_type():
         api = {'total': docs_count['result'][0]['all'], 'doc': doc}
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def businesses_type_func(status, city):
     result = mongo_utils.get_business_types(city, status, g.current_lang)
     return result
 
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def set_name_to_activities(given_code):
     activities_collection = mongo_utils.get_all_activities()
     docs = {}
@@ -160,7 +160,7 @@ def set_name_to_activities(given_code):
             continue
     return docs
 
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def prepare_activity_api(activities_collection):
     activity_items = []
     for activity in activities_collection['result']:
@@ -186,13 +186,13 @@ def activities():
         result = prepare_activity_api(business_activities)
         return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
     return "Error"
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def activities_func(status, city):
     result = mongo_utils.get_most_used_activities(status, city, g.current_lang)
     return result
 
 @mod_main.route('/<lang_code>/active-inactive', methods=['GET', 'POST'])
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def active_inactive():
     docs = mongo_utils.get_total_by_status()
     api = {
@@ -201,7 +201,7 @@ def active_inactive():
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
 @mod_main.route('/<lang_code>/page-stats', methods=['GET', 'POST'])
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def page_stats():
     docs = mongo_utils.get_stats_by_status()
     api = {
@@ -234,19 +234,19 @@ def mapi():
                 agg = mapi_all(g.current_lang)
         return Response(response=json_util.dumps(agg), status=200, mimetype='application/json')
     return Response(response='Error', status=404, mimetype='application/json')
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def mapi_all_status(status, current_lang):
     result = mongo_utils.mapi_all_status(status, current_lang)
     return result
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def mapi_status(activity, status, current_lang):
     result = mongo_utils.mapi_status(activity, status, current_lang)
     return result
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def mapi_activity(activity, current_lang):
     result = mongo_utils.mapi(activity, current_lang)
     return result
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def mapi_all(current_lang):
     result = mongo_utils.mapi_all(current_lang)
     return result
@@ -272,17 +272,17 @@ def gender_owners():
         }
         return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
     return 'error'
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def get_gender_owners_data_count(status, city, lang_code):
     result = mongo_utils.get_gender_owners_data_count(status, city, lang_code)
     return result
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def gender_owners_func(status, city):
     result = mongo_utils.get_gender_owners_data(status, city, g.current_lang)
     return result
 
 @mod_main.route('/<lang_code>/top-10-gender-activities', methods=['GET', 'POST'])
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def top_gender_acts():
     if request.method == 'GET':
         docs_females = mongo_utils.get_top_ten_activities_by_gender("female")
@@ -294,7 +294,7 @@ def top_gender_acts():
     return 'error'
 
 @mod_main.route('/<lang_code>/employees', methods=['GET'])
-@cache.memoize(timeout=86400)
+@cache.memoize()
 def employee():
     result = mongo_utils.get_employees(g.current_lang)
     return Response(response=json_util.dumps(result), status=200, mimetype='application/json')
