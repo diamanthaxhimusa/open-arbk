@@ -103,7 +103,7 @@ bash run-debug.sh
 ```
 
 ### 3. Database and Documents Preparation
-The data have been extracted from the KBRA’s official site using our open source web scraper [ARBK Scraper](https://github.com/opendatakosovo/arbk-scraper/).
+The data have been extracted from the [ARBK](http://arbk.rks-gov.net/) official site using our open source web scraper [ARBK Scraper](https://github.com/opendatakosovo/arbk-scraper/).
 
 After ARBK scraper is done, each document will look like this for example:
 ```

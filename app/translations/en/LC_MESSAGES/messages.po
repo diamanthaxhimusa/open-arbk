@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-17 15:03+0200\n"
+"POT-Creation-Date: 2017-08-21 14:06+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -351,7 +351,7 @@ msgstr "Top 10 Business Activities Separated by Owner Gender"
 msgid "Shkarkoni Dokumentet"
 msgstr "Download documents"
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
@@ -360,7 +360,7 @@ msgstr ""
 "Submitted business data have been extracted from the KBRA’s official site"
 " using the method called"
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid ""
 "Kjo teknologji e p&euml;rdorur sh&euml;rben p&euml;r nxjerrjen automatike"
 " dhe n&euml; t&euml;r&euml;si t&euml; sasive t&euml; m&euml;dha t&euml; "
@@ -370,7 +370,7 @@ msgstr ""
 "This technology is used to automatically extract large amounts of data "
 "from websites. These data have been extracted between the dates"
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid "dhe"
 msgstr "and"
 
@@ -402,21 +402,6 @@ msgstr ""
 msgid "Na ndiqni n&euml;:"
 msgstr "Follow us:"
 
-#: app/templates/layout.html:255
-msgid ""
-"T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
-" nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
-"quajtur Web Scraping. Kjo teknologji e p&euml;rdorur sh&euml;rben "
-"p&euml;r nxjerrjen automatike dhe n&euml; t&euml;r&euml;si t&euml; sasive"
-" t&euml; m&euml;dha t&euml; t&euml; dh&euml;nave nga faqet e internetit. "
-"K&euml;to t&euml; dh&euml;na jan&euml; nxjerr&euml; mes dat&euml;s "
-"18-03-2017 dhe 18-05-2017."
-msgstr ""
-"Submitted business data have been extracted from the KBRA’s official site"
-" using the method called Web Scraping. This technology is used to "
-"automatically extract large amounts of data from websites. These data "
-"have been extracted between the dates 18-03-2017 and 18-05-2017."
-
 #: app/templates/layout.html:260
 msgid "Zhvilluar nga"
 msgstr "Developed by"
@@ -425,32 +410,42 @@ msgstr "Developed by"
 msgid ""
 "<b class=\"missing-header\">62 022</b> biznese nuk kan&euml; t&euml; "
 "paraqitur numrin fiskal, <b>52 022</b> prej tyre jan&euml; ende aktive"
-msgstr "<b class=\"missing-header\">62 022</b> businesses do not have a fiscal number, out of which <b>52 022</b> are active"
+msgstr ""
+"<b class=\"missing-header\">62 022</b> businesses do not have a fiscal "
+"number, out of which <b>52 022</b> are active"
 
 #: app/templates/layout.html:279
 msgid ""
 "<b class=\"missing-header\">7 643</b> biznese nuk kan&euml; t&euml; "
 "paraqitur aktivitetet e tyre, <b>759</b> prej tyre jan&euml; ende aktive"
-msgstr "<b class=\"missing-header\">7 643</b> of businesses have undetermined area of activity, out of which <b>759</b> are active"
+msgstr ""
+"<b class=\"missing-header\">7 643</b> of businesses have undetermined "
+"area of activity, out of which <b>759</b> are active"
 
 #: app/templates/layout.html:285
 msgid ""
 "<b class=\"missing-header\">2 269</b> biznese nuk kan&euml; dat&euml; "
 "t&euml; konstituimit, <b>543</b> prej tyre jan&euml; ende aktive"
-msgstr "<b class=\"missing-header\">2 269</b> businesses have unknown date of establishment, out of which <b>543</b> of them are active"
+msgstr ""
+"<b class=\"missing-header\">2 269</b> businesses have unknown date of "
+"establishment, out of which <b>543</b> of them are active"
 
 #: app/templates/layout.html:289
 msgid ""
 "<b class=\"missing-header\">523</b> biznese nuk kan&euml; t&euml; "
 "paraqitur emrin e pronar&euml;ve, <b>464</b> prej tyre jan&euml; ende "
 "aktive"
-msgstr "<b class=\"missing-header\">523</b> businesses have unknown owners, of which <b>464</b> of them are active"
+msgstr ""
+"<b class=\"missing-header\">523</b> businesses have unknown owners, of "
+"which <b>464</b> of them are active"
 
 #: app/templates/layout.html:295
 msgid ""
 "<b class=\"missing-header\">4</b> biznese nuk kan&euml; status t&euml; "
 "paraqitur"
-msgstr "<b class=\"missing-header\">4</b> businesses could not be determined as either active or inactive"
+msgstr ""
+"<b class=\"missing-header\">4</b> businesses could not be determined as "
+"either active or inactive"
 
 #: app/templates/layout.html:300
 msgid "Mbyll"

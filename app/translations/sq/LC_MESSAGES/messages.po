@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-17 15:03+0200\n"
+"POT-Creation-Date: 2017-08-21 14:06+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -334,14 +334,14 @@ msgstr ""
 msgid "Shkarkoni Dokumentet"
 msgstr ""
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
 "quajtur"
 msgstr ""
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid ""
 "Kjo teknologji e p&euml;rdorur sh&euml;rben p&euml;r nxjerrjen automatike"
 " dhe n&euml; t&euml;r&euml;si t&euml; sasive t&euml; m&euml;dha t&euml; "
@@ -349,7 +349,7 @@ msgid ""
 " jan&euml; nxjerr&euml; mes dat&euml;s"
 msgstr ""
 
-#: app/templates/layout.html:188
+#: app/templates/layout.html:188 app/templates/layout.html:255
 msgid "dhe"
 msgstr ""
 
@@ -374,17 +374,6 @@ msgstr ""
 
 #: app/templates/layout.html:227
 msgid "Na ndiqni n&euml;:"
-msgstr ""
-
-#: app/templates/layout.html:255
-msgid ""
-"T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
-" nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
-"quajtur Web Scraping. Kjo teknologji e p&euml;rdorur sh&euml;rben "
-"p&euml;r nxjerrjen automatike dhe n&euml; t&euml;r&euml;si t&euml; sasive"
-" t&euml; m&euml;dha t&euml; t&euml; dh&euml;nave nga faqet e internetit. "
-"K&euml;to t&euml; dh&euml;na jan&euml; nxjerr&euml; mes dat&euml;s "
-"18-03-2017 dhe 18-05-2017."
 msgstr ""
 
 #: app/templates/layout.html:260
@@ -804,5 +793,19 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "biznese nuk kan&euml; status t&euml; paraqitur"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "T&euml; dh&euml;nat e paraqitura t&euml; "
+#~ "bizneseve jan&euml; nxjerr&euml; nga faqja "
+#~ "zyrtare e ARBK’s&euml; duke p&euml;rdorur "
+#~ "metod&euml;n e quajtur Web Scraping. Kjo"
+#~ " teknologji e p&euml;rdorur sh&euml;rben "
+#~ "p&euml;r nxjerrjen automatike dhe n&euml; "
+#~ "t&euml;r&euml;si t&euml; sasive t&euml; "
+#~ "m&euml;dha t&euml; t&euml; dh&euml;nave nga"
+#~ " faqet e internetit. K&euml;to t&euml; "
+#~ "dh&euml;na jan&euml; nxjerr&euml; mes "
+#~ "dat&euml;s 18-03-2017 dhe 18-05-2017."
 #~ msgstr ""
 
