@@ -108,24 +108,24 @@ The data have been extracted from the KBRA’s official site using our open sour
 After ARBK scraper is done, each document will look like this for example:
 ```
 {
-    "_id" : ObjectId("58cc8dbc70ff0e9ff2de8807"),
+    "_id" : ObjectId("58ceb46cffd93a027eae32ef"),
     "raw" : {
         "info" : [
             {
                 "key" : "Emri",
-                "value" : "N.T.SH. \"Kosova - Tex\""
+                "value" : "\" Lirita\" Sh.p.k."
             },
             {
                 "key" : "Lloji Biznesit",
-                "value" : "Biznes individual"
+                "value" : "Shoqëri me përgjegjësi të kufizuara"
             },
             {
                 "key" : "Nr Regjistrimit",
-                "value" : "70000015"
+                "value" : "70318754"
             },
             {
                 "key" : "Nr Fiskal",
-                "value" : "600538063"
+                "value" : ""
             },
             {
                 "key" : "Nr Cerfitikues KTA",
@@ -133,27 +133,27 @@ After ARBK scraper is done, each document will look like this for example:
             },
             {
                 "key" : "Nr Punëtorëve",
-                "value" : "2"
+                "value" : "5"
             },
             {
                 "key" : "Data e konstituimit",
-                "value" : "2011.08.16"
+                "value" : "2006.02.10"
             },
             {
                 "key" : "Data e Aplikimit",
-                "value" : "2003.03.13"
+                "value" : "2005.11.23"
             },
             {
                 "key" : "Komuna",
-                "value" : "Ferizaj"
+                "value" : "Bibaj"
             },
             {
                 "key" : "Adresa",
-                "value" : "Ismet Ramadani"
+                "value" : ","
             },
             {
                 "key" : "Telefoni",
-                "value" : ""
+                "value" : "044-343-875"
             },
             {
                 "key" : "E-mail",
@@ -161,7 +161,7 @@ After ARBK scraper is done, each document will look like this for example:
             },
             {
                 "key" : "Kapitali",
-                "value" : "0.00"
+                "value" : "2501.00"
             },
             {
                 "key" : "Statusi në ATK",
@@ -169,19 +169,19 @@ After ARBK scraper is done, each document will look like this for example:
             },
             {
                 "key" : "Emri",
-                "value" : "N.T.SH. \"Kosova - Tex\""
+                "value" : "\" Lirita\" Sh.p.k."
             },
             {
                 "key" : "Lloji Biznesit",
-                "value" : "Biznes individual"
+                "value" : "Shoqëri me përgjegjësi të kufizuara"
             },
             {
                 "key" : "Nr Regjistrimit",
-                "value" : "70000015"
+                "value" : "70318754"
             },
             {
                 "key" : "Nr Fiskal",
-                "value" : "600538063"
+                "value" : ""
             },
             {
                 "key" : "Nr Cerfitikues KTA",
@@ -189,27 +189,27 @@ After ARBK scraper is done, each document will look like this for example:
             },
             {
                 "key" : "Nr Punëtorëve",
-                "value" : "2"
+                "value" : "5"
             },
             {
                 "key" : "Data e konstituimit",
-                "value" : "2011.08.16"
+                "value" : "2006.02.10"
             },
             {
                 "key" : "Data e Aplikimit",
-                "value" : "2003.03.13"
+                "value" : "2005.11.23"
             },
             {
                 "key" : "Komuna",
-                "value" : "Ferizaj"
+                "value" : "Bibaj"
             },
             {
                 "key" : "Adresa",
-                "value" : "Ismet Ramadani"
+                "value" : ","
             },
             {
                 "key" : "Telefoni",
-                "value" : ""
+                "value" : "044-343-875"
             },
             {
                 "key" : "E-mail",
@@ -217,7 +217,7 @@ After ARBK scraper is done, each document will look like this for example:
             },
             {
                 "key" : "Kapitali",
-                "value" : "0.00"
+                "value" : "2501.00"
             },
             {
                 "key" : "Statusi në ATK",
@@ -226,185 +226,235 @@ After ARBK scraper is done, each document will look like this for example:
         ],
         "authorized" : [
             {
-                "key" : "Mezafer Aliu",
-                "value" : "Agjent i regjistruar"
+                "key" : "Lyirim Zefi",
+                "value" : "Drejtor."
             }
         ],
         "owners" : [
             {
                 "key" : "1",
-                "value" : "Mezafer Aliu"
+                "value" : "N.T.P. \"Zefi S\""
+            },
+            {
+                "key" : "2",
+                "value" : "\"Q.K.I. \" Sh.p.k."
             }
         ],
         "activities" : [
             {
-                "key" : "4645",
-                "value" : "Tregtia me shumicë e artikujve të parfumerisë dhe kozmetikës"
+                "key" : "4671",
+                "value" : "Tregtia me shumicë e lëndëve djegëse të ngurta, të lëngëta ose të gazta dhe produkteve të lidhur me to"
             },
             {
-                "key" : "4621",
-                "value" : "Tregtia me shumicë e drithërave, duhanit të papërpunuar, farërave dhe ushqimit të kafshëve"
+                "key" : "4711",
+                "value" : "Tregtia me pakicë në dyqane jo të specializuar, ku mbizotëron ushqimi, pijet dhe duhani"
             },
             {
-                "key" : "5020",
-                "value" : "Transporti detar dhe bregdetar i mallrave"
+                "key" : "5610",
+                "value" : "Restorantet dhe aktivitetet shërbyese lëvizëse të ushqimit"
             },
             {
-                "key" : "9609",
-                "value" : "Aktivitetet e tjera p.k.t."
+                "key" : "4752",
+                "value" : "Tregtia me pakicë e artikujve elektronikë, ngjyrave dhe xhamit, në dyqane të specializuara"
             },
             {
-                "key" : "4636",
-                "value" : "Tregtia me shumicë e sheqerit, e çokollatës dhe e ëmbëlsirave"
-            },
-            {
-                "key" : "4638",
-                "value" : "Tregtia me shumicë e artikujve të tjerë ushqimorë, përfshirë peshkun, krustacet dhe molusqet (frutat e detit)"
-            },
-            {
-                "key" : "4690",
-                "value" : "Tregtia me shumicë jo e specializuar"
-            },
-            {
-                "key" : "4637",
-                "value" : "Tregtia me shumicë e kafes, çajit, kakaos dhe erëzave"
-            },
-            {
-                "key" : "9329",
-                "value" : "Aktivitetet e tjera të argëtimit dhe rekreacionit"
-            },
-            {
-                "key" : "4642",
-                "value" : "Tregtia me shumicë e veshjeve dhe këpucëve"
-            },
-            {
-                "key" : "4799",
-                "value" : "Tregtia tjetër me pakicë, jo në dyqane, tezga ose tregje"
-            },
-            {
-                "key" : "4941",
-                "value" : "Transporti rrugor i mallrave"
+                "key" : "4730",
+                "value" : "Tregtia me pakicë e karburantit për automjete në dyqane të specializuar"
             }
         ]
     },
     "formatted" : {
         "owners" : [
-            "Mezafer Aliu"
+            "N.T.P. \"Zefi S\"",
+            "\"Q.K.I. \" Sh.p.k."
         ],
         "authorized" : [
-            "Mezafer Aliu"
+            "Lyirim Zefi"
         ],
         "activities" : [
-            4645,
-            4621,
-            5020,
-            9609,
-            4636,
-            4638,
-            4690,
-            4637,
-            9329,
-            4642,
-            4799,
-            4941
+            4671,
+            4711,
+            5610,
+            4752,
+            4730
         ],
-        "type" : "Biznes individual",
-        "registrationNum" : 70000015,
-        "fiscalNum" : 600538063,
-        "employeeCount" : 2,
-        "establishmentDate" : ISODate("2011-08-16T00:00:00.000Z"),
-        "applicationDate" : ISODate("2003-03-13T00:00:00.000Z"),
-        "municipality" : "Ferizaj",
-        "capital" : 0.0,
+        "type" : "Shoqëri me përgjegjësi të kufizuara",
+        "registrationNum" : 70318754,
+        "employeeCount" : 5,
+        "establishmentDate" : ISODate("2006-02-10T00:00:00.000Z"),
+        "applicationDate" : ISODate("2005-11-23T00:00:00.000Z"),
+        "municipality" : "Bibaj",
+        "capital" : 2501.0,
         "atkStatus" : "//",
-        "timestamp" : ISODate("2017-03-18T01:30:36.316Z"),
-        "name" : "N.T.SH. \"Kosova - Tex\"",
+        "timestamp" : ISODate("2017-03-19T16:40:12.776Z"),
+        "name" : "\" Lirita\" Sh.p.k.",
         "status" : "Aktiv",
-        "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125000011"
+        "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125018763"
     }
 }
 ```
 
-Then we need to run importers to format data:
+Then we need to run importers to format data.
 ```
 bash activity-importer.sh
+```
+The activity importer creates a collection with codes and description of all 615 activities.
+Example:
+```
+{
+    "_id" : ObjectId("597b4612bacaea17c7e68618"),
+    "code" : "111",
+    "activity" : {
+        "sq" : "Kultivimi i drithërave (përveç orizit), i bimëve bishtajore dhe i farërave vajore",
+        "en" : "Growing of cereals (except rice), leguminous crops and oil seeds"
+    }
+}
+```
+
+The municipality importer creates a collection with municipalities and places that belongs to them. This is used to correct the data we got from ARBK where in some cases they showed places instead of actual municipalities. In this example is 'Bibaj' which belongs to 'Ferizaj'.
+```
 bash muni-importer.sh
+```
+A municipality in the municipality collection will look like this:
+```
+{
+    "_id" : ObjectId("5996ae27bacaea119874a6fb"),
+    "districts" : [
+        "Bablak",
+        "Babush",
+        "Balaj",
+        "Bibaj",
+        "Burrnik",
+        "Bajicë",
+        "Baincë",
+        "Cërnillë",
+        "Doganaje",
+        "Dremjak",
+        "Babush",
+        "Dardani",
+        "Ferizaj",
+        "Gaçkë",
+        "Gurëz",
+        "Jazhincë",
+        "Biçec",
+        "Greme",
+        "Jezercë",
+        "Komogllavë",
+        "Nekodim",
+        "Koshare",
+        "Kosinë",
+        "Lloshkobare",
+        "Nikadin",
+        "Nerodime e Epërme",
+        "Nerodime e Ulët",
+        "Mirash",
+        "Muhovc",
+        "Manastircë",
+        "Mirosalë",
+        "Papaz",
+        "Pleshinë",
+        "Pleshinë e Epërme",
+        "Pleshinë e ulët",
+        "Pojatë",
+        "Prelez i Jerlive",
+        "Prelez i Muhaxherëve",
+        "Rahavicë",
+        "Rakaj",
+        "Sazli",
+        "Slivove",
+        "Softaj",
+        "Sojevë",
+        "Surqinë",
+        "Fshati i Vjetër",
+        "Talinovc i Jerlive",
+        "Talinovc i Muhaxherëve",
+        "Tërn",
+        "Varosh",
+        "Zaskoc"
+    ],
+    "municipality" : {
+        "sq" : "Ferizaj",
+        "en" : "Ferizaj"
+    },
+    "slug" : {
+        "sq" : "ferizaj",
+        "en" : "ferizaj"
+    }
+}
 ```
 These two importers prepare municipalities and acitivities in two seperate collections.
 After importing municipalities and activities we are ready to import the businesses collection, which will create a collection called "reg_businesses".
 ```
 bash data-importer.sh
 ```
-After this importer is done a document will lok like this for example:
+After running all importers a the document will look like this:
 ```
 {
-    "_id" : ObjectId("5996b0b3bacaea16286ef2be"),
+    "_id" : ObjectId("5996b0d4bacaea16286f107e"),
     "status" : {
         "sq" : "Aktiv",
         "en" : "Active"
     },
     "activities" : [
-        4645,
-        4621,
-        5020,
-        9609,
-        4636,
-        4638,
-        4690,
-        4637,
-        9329,
-        4642,
-        4799,
-        4941
+        4671,
+        4711,
+        5610,
+        4752,
+        4730
     ],
     "owners" : [
         {
-            "gender" : "male",
-            "name" : "Mezafer Aliu"
+            "gender" : "unknown",
+            "name" : "N.T.P. \"Zefi S\""
+        },
+        {
+            "gender" : "unknown",
+            "name" : "\"Q.K.I. \" Sh.p.k."
         }
     ],
     "slugifiedMunicipality" : {
         "sq" : "ferizaj",
         "en" : "ferizaj"
     },
-    "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125000011",
+    "arbkUrl" : "http://arbk.rks-gov.net/page.aspx?id=1,38,125018763",
     "atkStatus" : "//",
-    "fiscalNum" : 600538063,
-    "establishmentDate" : ISODate("2011-08-16T00:00:00.000Z"),
+    "fiscalNum" : "",
+    "establishmentDate" : ISODate("2006-02-10T00:00:00.000Z"),
     "slugifiedOwners" : [
-        "mezafer-aliu"
+        "n-t-p-zefi-s",
+        "q-k-i-sh-p-k"
     ],
     "municipality" : {
-        "place" : "Ferizaj",
+        "place" : "Bibaj",
         "municipality" : {
             "sq" : "Ferizaj",
             "en" : "Ferizaj"
         }
     },
-    "applicationDate" : ISODate("2003-03-13T00:00:00.000Z"),
+    "applicationDate" : ISODate("2005-11-23T00:00:00.000Z"),
     "slugifiedAuthorized" : [
-        "mezafer-aliu"
+        "lyirim-zefi"
     ],
-    "slugifiedBusiness" : "n-t-sh-kosova-tex",
+    "slugifiedBusiness" : "lirita-sh-p-k",
     "authorized" : [
         {
             "gender" : "male",
-            "name" : "Mezafer Aliu"
+            "name" : "Lyirim Zefi"
         }
     ],
-    "capital" : 0,
-    "employeeCount" : 2,
-    "registrationNum" : 70000015,
+    "capital" : 2501,
+    "employeeCount" : 5,
+    "registrationNum" : 70318754,
     "type" : {
-        "sq" : "Biznes individual",
-        "en" : "Individual Business"
+        "sq" : "Shoqëri me përgjegjësi të kufizuara",
+        "en" : "Limited Liability Company"
     },
-    "dataRetrieved" : ISODate("2017-03-18T01:30:36.316Z"),
-    "name" : "N.T.SH. Kosova - Tex"
+    "dataRetrieved" : ISODate("2017-03-19T16:40:12.776Z"),
+    "name" : " Lirita Sh.p.k."
 }
 ```
 
-When creating the new collection is finished, run scripts to prepare data for download:
+When creating the new collection is finished, run scripts to create CSV and JSON files for download:
 ```
 sudo bash document-prepare.sh
 sudo bash zip-json-csv.sh
