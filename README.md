@@ -106,7 +106,7 @@ bash run-debug.sh
 ### 3. Database and Documents Preparation
 The data have been extracted from the [ARBK](http://arbk.rks-gov.net/) official site using our open source web scraper [ARBK Scraper](https://github.com/opendatakosovo/arbk-scraper/).
 
-After ARBK scraper is done, each document will look like this for example:
+After running ARBK scraper, we will have a database called "arbk" with a collection called "businesses". Every document will look like this for example:
 ```
 {
     "_id" : ObjectId("58ceb46cffd93a027eae32ef"),
@@ -296,6 +296,7 @@ After ARBK scraper is done, each document will look like this for example:
 ```
 
 Then we need to run importers to format data.
+First we need to run the ativity importer.
 ```
 bash activity-importer.sh
 ```
@@ -312,7 +313,7 @@ Example:
 }
 ```
 
-The municipality importer creates a collection with municipalities and places that belongs to them. This is used to correct the data we got from ARBK where in some cases they showed places instead of actual municipalities. In this example is 'Bibaj' which belongs to 'Ferizaj'.
+Then we run the municipality importer, which creates a collection with municipalities and places that belongs to them. This is used to correct the data we got from ARBK where in some cases they showed places instead of actual municipalities. In this example is 'Bibaj' which belongs to 'Ferizaj'.
 ```
 bash muni-importer.sh
 ```
@@ -455,11 +456,11 @@ After running all importers a the document will look like this:
 }
 ```
 
-When all importers are done, run this to create CSV and JSON files for download, this will create a folder in app/static/ called 'downloads' and will create files in both formats seperatet by year range from 2000 to 2017 and complete files:
+When all importers are done, we run this script to create CSV and JSON files for downloadable data. This script will create a folder in app/static/ called 'downloads' and will create files in both formats seperatet by year range from 2000 to 2017 and also a document with all the years:
 ```
 sudo bash document-prepare.sh
 ```
-In order to reduce the complete data files (JSON/CSV), we run this script which compresses the files.
+In order to reduce the size of documents with all data files (JSON/CSV), we run this script which compresses the files.
 ```
 sudo bash zip-json-csv.sh
 ```
