@@ -503,7 +503,7 @@ mkdir logs
 ```
 Create a tmp folder:
 ```
-mkdir logs
+mkdir tmp
 ```
 
 Change ownership of these folders so apache can write on it:
