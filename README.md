@@ -314,7 +314,7 @@ First we need to run the ativity importer.
 ```
 bash activity-importer.sh
 ```
-The activity importer creates a collection with codes and description of all 615 activities.
+The activity importer creates a collection with codes and description of all 615 activities - ( check here )[http://arbk.rks-gov.net/desk/inc/media/9D182190-E92E-420A-AE70-B61FAC7FB3AD.pdf].
 Example:
 ```
 {
