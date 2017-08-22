@@ -478,3 +478,42 @@ In order to reduce the size of documents with all data files (JSON/CSV), we run 
 ```
 sudo bash zip-json-csv.sh
 ```
+
+### 5. Getting an error? How do I debug?
+
+First thing you should do is to try having a look at error logs.
+
+The most common error log if you are running this app on a server is to have a look at apache2 error logs.
+
+Issue the following command in terminal to get the error logs:
+
+```
+sudo tail -f /var/log/apache2/error.log
+```
+
+There is also a logs folder in the flask app itself where you can find traces of errors.
+
+If the first thing you see is Internal Server Error when you run the app in an ubuntu server, and you are looking at the /var/log/apache2/error.log you will see that the app needs a logs folder and tmp folder which it's not authorized to create.
+
+How to solve this?
+
+Create a logs folder:
+```
+mkdir logs
+```
+Create a tmp folder:
+```
+mkdir logs
+```
+
+Change ownership of these folders so apache can write on it:
+```
+chown -R www-data:www-data /var/www/open-arbk/logs
+chown -R www-data:www-data /var/www/open-arbk/tmp
+```
+
+Restart apache2
+```
+sudo service apache2 restart
+```
+
