@@ -10,6 +10,17 @@ from os.path import join, dirname, realpath
 from flask.ext.cache import Cache
 from flask.ext.babel import Babel
 import ast
+
+# Get the path to the application directory, that's where the config file resides.
+par_dir = os.path.join(__file__, os.pardir)
+par_dir_abs_path = os.path.abspath(par_dir)
+app_dir = os.path.dirname(par_dir_abs_path)
+
+# Read config file
+config = ConfigParser.RawConfigParser()
+config_filepath = app_dir + '/config.cfg'
+config.read(config_filepath)
+
 # Create MongoDB database object.
 mongo = PyMongo()
 
@@ -20,7 +31,14 @@ mongo_utils = MongoUtils(mongo)
 babel = Babel()
 
 #Initialize cache
-cache = Cache(config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 86400, 'CACHE_THRESHOLD': 922337203685477580})
+cache = Cache(
+                config={
+                        'CACHE_TYPE': 'filesystem',
+                        'CACHE_DIR': config.get('Caching', 'CACHE_DIR'),
+                        'CACHE_DEFAULT_TIMEOUT': int(config.get('Caching', 'CACHE_DEFAULT_TIMEOUT')),
+                        'CACHE_THRESHOLD': int(config.get('Caching', 'CACHE_THRESHOLD'))
+                        }
+              )
 
 #Downloads folder
 download_folder = join(dirname(realpath(__file__)),'static/downloads/')
@@ -69,16 +87,6 @@ def load_config(app):
     ''' Reads the config file and loads configuration properties into the Flask app.
     :param app: The Flask app object.
     '''
-    # Get the path to the application directory, that's where the config file resides.
-    par_dir = os.path.join(__file__, os.pardir)
-    par_dir_abs_path = os.path.abspath(par_dir)
-    app_dir = os.path.dirname(par_dir_abs_path)
-
-    # Read config file
-    config = ConfigParser.RawConfigParser()
-    config_filepath = app_dir + '/config.cfg'
-    config.read(config_filepath)
-
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
 
