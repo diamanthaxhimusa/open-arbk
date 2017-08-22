@@ -103,7 +103,21 @@ bash install.sh
 bash run-debug.sh
 ```
 
-### 3. Database and Documents Preparation
+### 3. Caching
+In order to load the data in website faster, we implemented 'FileSystemCache' caching. 'FileSystemCache' is a flask caching option to store cache in a folder. In order to make it run we need to edit the config.cfg file:
+```
+[Caching]
+CACHE_DIR=tmp
+CACHE_DEFAULT_TIMEOUT=
+CACHE_THRESHOLD=
+```
+CACHE_DIR - Directory to store cache.
+CACHE_DEFAULT_TIMEOUT - The default timeout that is used if no timeout is specified. Unit of time is seconds.
+!!! Warning - Cache doesn't delete automatically when the timeout is over, by so it adds new cached files without deleting the old ones which may take space on disc. So remember that you need to delete cached data manually or set CACHE_DEFAULT_TIMEOUT to a large number.
+
+CACHE_THRESHOLD - The maximum number of items the cache will store before it starts deleting some.
+
+### 4. Database and Documents Preparation
 The data have been extracted from the [ARBK](http://arbk.rks-gov.net/) official site using our open source web scraper [ARBK Scraper](https://github.com/opendatakosovo/arbk-scraper/).
 
 After running ARBK scraper, we will have a database called "arbk" with a collection called "businesses". Every document will look like this for example:
