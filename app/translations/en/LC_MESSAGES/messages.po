@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 14:06+0200\n"
+"POT-Creation-Date: 2017-08-24 15:39+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -27,12 +27,12 @@ msgstr "Categorization based on business activities:"
 msgid "Aktiviteti:"
 msgstr "Activity:"
 
-#: app/templates/activity-map.html:29
-#: app/templates/visualizations/activityYears.html:9
+#: app/templates/activity-map.html:27
+#: app/templates/visualizations/activityYears.html:7
 msgid "K&euml;rko aktivitetin..."
 msgstr "Search for activity..."
 
-#: app/templates/activity-map.html:31 app/templates/activity-map.html:52
+#: app/templates/activity-map.html:29 app/templates/activity-map.html:50
 #: app/templates/layout.html:120 app/templates/layout.html:134
 #: app/templates/visualizations/bizTypes.html:7
 #: app/templates/visualizations/bizTypes.html:18
@@ -46,11 +46,11 @@ msgstr "Search for activity..."
 msgid "T&euml; gjitha"
 msgstr "All"
 
-#: app/templates/activity-map.html:44
+#: app/templates/activity-map.html:42
 msgid "Statusi i bizneseve:"
 msgstr "Businesses status:"
 
-#: app/templates/activity-map.html:50 app/templates/layout.html:135
+#: app/templates/activity-map.html:48 app/templates/layout.html:135
 #: app/templates/visualizations/bizTypes.html:8
 #: app/templates/visualizations/gender.html:7
 #: app/templates/visualizations/top10.html:8
@@ -58,7 +58,7 @@ msgstr "Businesses status:"
 msgid "Aktiv"
 msgstr "Active"
 
-#: app/templates/activity-map.html:51 app/templates/layout.html:136
+#: app/templates/activity-map.html:49 app/templates/layout.html:136
 #: app/templates/visualizations/bizTypes.html:9
 #: app/templates/visualizations/gender.html:8
 #: app/templates/visualizations/top10.html:9
@@ -66,7 +66,7 @@ msgstr "Active"
 msgid "I shuar"
 msgstr "Dissolved"
 
-#: app/templates/activity-map.html:69
+#: app/templates/activity-map.html:67
 msgid ""
 "Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna "
 "gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; "
@@ -79,7 +79,7 @@ msgstr ""
 "been updated in the state geo-portal. The missing municipalities are "
 "shown as part of the municipality they belonged to."
 
-#: app/templates/activity-map.html:75
+#: app/templates/activity-map.html:73
 msgid ""
 "T&euml; dh&euml;nat e regjistrimeve t&euml; bizneseve q&euml; jan&euml; "
 "t&euml; disponueshme n&euml; platform&euml; jan&euml; marr&euml; nga ARBK"
@@ -221,7 +221,7 @@ msgstr ""
 "registered in Kosovo"
 
 #: app/templates/layout.html:93
-msgid "biznese ne databasen tone"
+msgid "biznese n&euml; databas&euml;n ton&euml;"
 msgstr "businesses in our database"
 
 #: app/templates/layout.html:97
@@ -333,7 +333,7 @@ msgstr "Top 10 Businesses By Capital"
 msgid "Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset"
 msgstr "Top 10 Activities Sponsored by Businesses"
 
-#: app/templates/layout.html:174
+#: app/templates/layout.html:174 app/templates/visualizations.html:80
 msgid "Aktivitetet Gjat&euml; Viteve"
 msgstr "Activities over the Years"
 
@@ -836,10 +836,6 @@ msgstr "Date type:"
 #: app/templates/visualizations.html:47
 msgid "Data e konstituimit"
 msgstr "Date of establishment"
-
-#: app/templates/visualizations.html:80
-msgid "Aktivitet Gjat&euml; Viteve"
-msgstr "Activities over the Years"
 
 #: app/templates/visualizations.html:91
 msgid ""

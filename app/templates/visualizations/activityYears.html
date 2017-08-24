@@ -4,10 +4,8 @@
         <span class="selected-value"></span>
         &nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
     </button>
-    <ul class="dropdown-menu acts" name="activity" id="activity_val" style="max-width:290px;" aria-labelledby="dropdown-menu-first">
-        <li>
-            <input type="text" id="searchActivityInput" class="search-activities-dropdown-input" onkeyup="searchActivity()" placeholder="{{_('K&euml;rko aktivitetin...')}}">
-        </li>
+    <input type="text" id="searchActivityInput" class="search-activities-dropdown-input" onkeyup="searchActivity()" placeholder="{{_('K&euml;rko aktivitetin...')}}" autocomplete="off" autofocus>
+    <ul class="dropdown-menu acts activity-ul-dropdown" name="activity" id="activity_val" aria-labelledby="dropdown-menu-first">
         {% for i in activities%}
         <li class="acts-li"><a href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
             {% if i['code']|length == 3 %}

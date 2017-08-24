@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 14:06+0200\n"
+"POT-Creation-Date: 2017-08-24 15:39+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -27,12 +27,12 @@ msgstr ""
 msgid "Aktiviteti:"
 msgstr ""
 
-#: app/templates/activity-map.html:29
-#: app/templates/visualizations/activityYears.html:9
+#: app/templates/activity-map.html:27
+#: app/templates/visualizations/activityYears.html:7
 msgid "K&euml;rko aktivitetin..."
 msgstr ""
 
-#: app/templates/activity-map.html:31 app/templates/activity-map.html:52
+#: app/templates/activity-map.html:29 app/templates/activity-map.html:50
 #: app/templates/layout.html:120 app/templates/layout.html:134
 #: app/templates/visualizations/bizTypes.html:7
 #: app/templates/visualizations/bizTypes.html:18
@@ -46,11 +46,11 @@ msgstr ""
 msgid "T&euml; gjitha"
 msgstr ""
 
-#: app/templates/activity-map.html:44
+#: app/templates/activity-map.html:42
 msgid "Statusi i bizneseve:"
 msgstr ""
 
-#: app/templates/activity-map.html:50 app/templates/layout.html:135
+#: app/templates/activity-map.html:48 app/templates/layout.html:135
 #: app/templates/visualizations/bizTypes.html:8
 #: app/templates/visualizations/gender.html:7
 #: app/templates/visualizations/top10.html:8
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Aktiv"
 msgstr ""
 
-#: app/templates/activity-map.html:51 app/templates/layout.html:136
+#: app/templates/activity-map.html:49 app/templates/layout.html:136
 #: app/templates/visualizations/bizTypes.html:9
 #: app/templates/visualizations/gender.html:8
 #: app/templates/visualizations/top10.html:9
@@ -66,7 +66,7 @@ msgstr ""
 msgid "I shuar"
 msgstr ""
 
-#: app/templates/activity-map.html:69
+#: app/templates/activity-map.html:67
 msgid ""
 "Njoftim! N&euml; hart&euml; shfaqen vet&euml;m 30 komuna nga 38 komuna "
 "gjithsejt. Kjo ndodh&euml; p&euml;r shkak se ende nuk jan&euml; "
@@ -75,7 +75,7 @@ msgid ""
 " me komun&euml;n t&euml; cil&euml;s i kan&euml; takuar m&euml; par&euml;."
 msgstr ""
 
-#: app/templates/activity-map.html:75
+#: app/templates/activity-map.html:73
 msgid ""
 "T&euml; dh&euml;nat e regjistrimeve t&euml; bizneseve q&euml; jan&euml; "
 "t&euml; disponueshme n&euml; platform&euml; jan&euml; marr&euml; nga ARBK"
@@ -209,7 +209,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/layout.html:93
-msgid "biznese ne databasen tone"
+msgid "biznese n&euml; databas&euml;n ton&euml;"
 msgstr ""
 
 #: app/templates/layout.html:97
@@ -316,7 +316,7 @@ msgstr ""
 msgid "Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset"
 msgstr ""
 
-#: app/templates/layout.html:174
+#: app/templates/layout.html:174 app/templates/visualizations.html:80
 msgid "Aktivitetet Gjat&euml; Viteve"
 msgstr ""
 
@@ -710,10 +710,6 @@ msgstr ""
 msgid "Data e konstituimit"
 msgstr ""
 
-#: app/templates/visualizations.html:80
-msgid "Aktivitet Gjat&euml; Viteve"
-msgstr ""
-
 #: app/templates/visualizations.html:91
 msgid ""
 "Njoftim! Sipas databaz&euml;s t&euml; importuar nga ARBK gjinia e "
@@ -796,16 +792,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ""
-#~ "T&euml; dh&euml;nat e paraqitura t&euml; "
-#~ "bizneseve jan&euml; nxjerr&euml; nga faqja "
-#~ "zyrtare e ARBK’s&euml; duke p&euml;rdorur "
-#~ "metod&euml;n e quajtur Web Scraping. Kjo"
-#~ " teknologji e p&euml;rdorur sh&euml;rben "
-#~ "p&euml;r nxjerrjen automatike dhe n&euml; "
-#~ "t&euml;r&euml;si t&euml; sasive t&euml; "
-#~ "m&euml;dha t&euml; t&euml; dh&euml;nave nga"
-#~ " faqet e internetit. K&euml;to t&euml; "
-#~ "dh&euml;na jan&euml; nxjerr&euml; mes "
-#~ "dat&euml;s 18-03-2017 dhe 18-05-2017."
+#~ msgstr ""
+
+#~ msgid "Aktivitet Gjat&euml; Viteve"
+#~ msgstr ""
+
+#~ msgid "biznese ne databasen tone"
 #~ msgstr ""
 

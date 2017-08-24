@@ -76,12 +76,28 @@ button{
 	padding: 3px 20px;
 	border: none;
     border-bottom: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    list-style: none;
+	display: none
 }
 .dropdown-menu.acts{
 	z-index: 1001;
 	border-radius: 0px;
 	padding: 0;
 }
+.activity-ul-dropdown{
+	max-width: 290px;
+	margin-top: 28px;
+	min-width: 290px;
+}
+
+.dropdown.open > input.search-activities-dropdown-input{
+	display: block;
+}
+
 #pick-muni-lbl{
 	position: absolute;
 	white-space: nowrap;
@@ -109,7 +125,7 @@ button{
 }*/
 #dropdown-menu-first,#dropdown-menu-second{
 	min-width: 290px;
-	max-width: 400px;
+	max-width: 290px;
 	white-space: normal;
     border: 1px solid #ddd;
 }
