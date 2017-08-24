@@ -347,10 +347,13 @@ function mapActs(data) {
                     from: 1000
                 }]
             },
-            series: [{
+            series: [
+                {
+                    nullColor: '#f7f7f7'
+                },{
                 data: data,
                 name: 'Biznese',
-                nullColor: 'white',
+                nullColor: '#f7f7f7',
                 states: {
                     hover: {
                         color: '#2bb9ae'
@@ -432,10 +435,12 @@ function mapActs(data) {
                     from: 1000
                 }]
             },
-            series: [{
+            series: [
+                {
+                    nullColor: '#f7f7f7'
+                },{
                 data: data,
                 name: 'Businesses',
-                nullColor: 'white',
                 states: {
                     hover: {
                         color: '#2bb9ae'
