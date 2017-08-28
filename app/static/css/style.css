@@ -61,7 +61,7 @@ button{
 }
 
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
-    max-height: 450px;
+    max-height: 465px;
 }
 
 #dropdown-menu-first .glyphicon, #dropdown-menu-second .glyphicon{
@@ -298,7 +298,7 @@ HEADER
 
 .top-nav-collapse {
     padding: 0;
-    background: rgba(31, 31, 31, 0.9)
+    background: rgba(31, 31, 31, 0.9);
 }
 
 .logo-dec
@@ -319,8 +319,8 @@ HEADER
     margin-top: 6px;
 }
 
-.nav > li.active{
-    background-color: #403e3b;
+.nav > li.active, .nav > li:hover, .nav > li:focus{
+    background-color: #181818;
 }
 .navbar-default .navbar-nav > li > a
 {
@@ -879,7 +879,7 @@ contact
 }
 #footer a{
     /*color: #fff;*/
-    font-weight: 400;
+    font-weight: bold;
 }
 /***********************************
 ************************************
@@ -1072,9 +1072,9 @@ a .fb, a .tw, a .eM, a .inst{
 	-o-transition-duration: 0.5s;
 }
 .social:hover{
-	-webkit-transform: scale(1.4);
-	-moz-transform: scale(1.4);
-	-o-transform: scale(1.4);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-o-transform: scale(1.2);
 	background-color: #343434;
     color: #ededed;
 }

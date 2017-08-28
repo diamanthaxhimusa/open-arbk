@@ -20,9 +20,9 @@
           <div class="col-xs-12 text-left">
               <span>
                   {%if count < 10%}
-                     {{_('T&euml; shfaqura')}} {{count}} {{_('dokumente')}}
+                     {{_('T&euml; shfaqura')}} <b>{{count}}</b> {{_('dokumente')}}
                   {%else%}
-                     {{_('T&euml; shfaqura')}} <span id="tableLength"></span> {{_('nga')}} {{count}} {{_('dokumente')}}
+                     {{_('T&euml; shfaqura')}} <b><span id="tableLength"></span></b> {{_('nga')}} <b>{{"{:,.0f}".format(count).replace(',',' ')}}</b> {{_('dokumente')}}
                   {%endif%}
               </span>
           </div>
@@ -68,7 +68,7 @@
           </div>
           <div class="col-xs-12 text-center">
               <div class="text-center">
-                  <span>{{_('Faqe')}} <span id="pageStart"></span> {{_('nga')}} <span id="pageEnd"></span></span>
+                  <span>{{_('Faqe')}} <b><span id="pageStart"></span></b> {{_('nga')}} <b><span id="pageEnd"></span></b></span>
               </div>
               <ul id="pagination-demo" class="pagination-sm"></ul>
           </div>

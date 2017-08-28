@@ -24,7 +24,7 @@
                         <span class="selected-value"></span>
                         &nbsp;<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                     </button>
-                    <input type="text" id="searchActivityInput" class="search-activities-dropdown-input" placeholder="{{_('K&euml;rko aktivitetin...')}}" autocomplete="off" autofocus>
+                    <input type="text" id="searchActivityInput" onkeyup="searchActivity()" class="search-activities-dropdown-input" placeholder="{{_('K&euml;rko aktivitetin...')}}" autocomplete="off" autofocus>
                     <ul class="dropdown-menu acts activity-ul-dropdown" name="activity" id="activity_val" aria-labelledby="dropdown-menu-first">
                         <li><a href="javascript:onActivitySelection('all')">{{_('T&euml; gjitha')}}</a></li>
                         {% for i in activities%}
