@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="{{g.current_lang}}">
   <head>
-    <title>{{_('Bizneset e Hapura')}}</title>
+    <title>
+        {% if request.path == url_for('main.recommendation', lang_code=g.current_lang) %}
+            {{_('Rekomandimet - Bizneset e Hapura')}}
+        {% elif request.path == url_for('main.index', lang_code=g.current_lang) %}
+            {{_('Bizneset e Hapura')}}
+        {% elif request.path == url_for('main.visualization', lang_code=g.current_lang) %}
+            {{_('Zhvillimi i Bizneseve - Bizneset e Hapura')}}
+        {% elif request.path == url_for('main.activity_map', lang_code=g.current_lang) %}
+            {{_('Harta - Bizneset e Hapura')}}
+        {% elif request.path == url_for('main.download_page', lang_code=g.current_lang) %}
+            {{_('Shkarko - Bizneset e Hapura')}}
+        {% else %}
+            {{_('Bizneset e Hapura')}}
+        {% endif %}
+    </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" type="image/png" href="{{url_for('static',filename='img/faviconARBK.png')}}"/>
     <!-- Facebook meta tags -->
-    <meta property="og:title" content="Bizneset e Hapura">
+    <meta property="og:title" content="{{_('Bizneset e Hapura')}}">
     <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="Bizneset e Hapura"/>
-    <meta property="og:description" content="K&euml;tu mund t&euml; gjeni t&euml; dh&euml;na t&euml; hapura p&euml;r t&euml; gjith&euml; bizneset e regjistruara ne Kosov&euml; n&euml; periudh&euml;n 2002 - 2017.">
+    <meta property="og:site_name" content="{{_('Bizneset e Hapura')}}"/>
+    <meta property="og:description" content="{{_('K&euml;tu mund t&euml; gjeni t&euml; dh&euml;na t&euml; hapura p&euml;r t&euml; gjith&euml; bizneset e regjistruara ne Kosov&euml; n&euml; periudh&euml;n 2000 - 2017.')}}">
     <meta property="og:image:url" content="{{ url_for('static', filename='img/share.png') }}">
     <meta property="og:url" content="{{request.path}}">
     <!-- Twitter meta tags -->
-    <meta property="twitter:title" content="Bizneset e Hapura">
-    <meta property="twitter:description" content="K&euml;tu mund t&euml; gjeni t&euml; dh&euml;na t&euml; hapura p&euml;r t&euml; gjith&euml; bizneset e regjistruara ne Kosov&euml; n&euml; periudh&euml;n 2002 - 2017.">
+    <meta property="twitter:title" content="{{_('Bizneset e Hapura')}}">
+    <meta property="twitter:description" content="{{_('K&euml;tu mund t&euml; gjeni t&euml; dh&euml;na t&euml; hapura p&euml;r t&euml; gjith&euml; bizneset e regjistruara ne Kosov&euml; n&euml; periudh&euml;n 2000 - 2017.')}}">
     <meta property="twitter:image" content="{{ url_for('static', filename='img/share.png') }}">
     <meta property="twitter:card" content="summary_medium_image">
     <meta name="twitter:creator" content="@OpenDataKosovo">
@@ -162,7 +176,7 @@
                 <span class="lead">{{_('Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industri apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.')}}</span><br><br>
                 <div class="btn-group">
                     <button type="button" id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{_('Shiko')}} <span class="caret"></span>
+                        {{_('Shiko')}}
                     </button>
                     <ul class="dropdown-menu" id="viz-drop-ul">
                         <li><a class="page-scroll" href="#business-types">{{_('Llojet e Bizneseve')}}</a></li>
