@@ -865,7 +865,7 @@ contact
 	margin: auto;
 }
 
-#dropSect{
+#dropSect, #dropSect:focus, #dropSect:active{
 	width: 290px;
 	background:transparent url('../img/white-arrow.png') no-repeat scroll 95% center;
     background-size: 8px;
