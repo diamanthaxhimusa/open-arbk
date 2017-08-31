@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-28 15:35+0200\n"
+"POT-Creation-Date: 2017-08-31 12:27+0200\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -466,7 +466,7 @@ msgstr ""
 
 #: app/templates/recommendationPage.html:6
 msgid ""
-"Me dat&euml; 13.05.2016 Qeveria e Kosov&euml;s miratoi Kart&euml;n "
+"Me dat&euml; 05-13-2016 Qeveria e Kosov&euml;s miratoi Kart&euml;n "
 "p&euml;r Hapjen e t&euml; Dh&euml;nave n&euml; Republik&euml;n e "
 "Kosov&euml;s. Sipas k&euml;tij dokumenti Republika e Kosov&euml;s ka "
 "marr&euml; zotim t’i p&euml;rshtatet principit t&euml; hapjes s&euml; "
@@ -629,13 +629,19 @@ msgid ""
 msgstr ""
 
 #: app/templates/recommendationPage.html:51
-#: app/templates/recommendationPage.html:54
 msgid ""
 "T&euml; dh&euml;nat e publikuara p&euml;r biznese duhet t&euml; jen&euml;"
 " t&euml; p&euml;rdit&euml;suara duke p&euml;rfshir&euml; dat&euml;n e "
 "shuarjes s&euml; bizneseve, n&euml; m&euml;nyr&euml; q&euml; t&euml; kemi"
 " nj&euml; analiz&euml; se n&euml; cfar&euml; periudhe shuhen k&euml;to "
 "biznese."
+msgstr ""
+
+#: app/templates/recommendationPage.html:54
+msgid ""
+"Për të qenë të përdorueshme nga publiku të dhënat duhet të jenë të "
+"publikuara në format të hapur, që lexohen lehtë nga programet softuerike "
+"p.sh. CSV dhe JSON."
 msgstr ""
 
 #: app/templates/recommendationPage.html:57
@@ -826,10 +832,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ""
-#~ "K&euml;tu mund t&euml; gjeni t&euml; "
-#~ "dh&euml;na t&euml; hapura p&euml;r t&euml; "
-#~ "gjith&euml; bizneset e regjistruara ne "
-#~ "Kosov&euml; n&euml; periudh&euml;n 2002 - "
-#~ "2017."
+#~ "Me dat&euml; 13.05.2016 Qeveria e "
+#~ "Kosov&euml;s miratoi Kart&euml;n p&euml;r "
+#~ "Hapjen e t&euml; Dh&euml;nave n&euml; "
+#~ "Republik&euml;n e Kosov&euml;s. Sipas "
+#~ "k&euml;tij dokumenti Republika e Kosov&euml;s"
+#~ " ka marr&euml; zotim t’i p&euml;rshtatet"
+#~ " principit t&euml; hapjes s&euml; "
+#~ "dh&euml;nave p&euml;r t&euml; mir&euml;n "
+#~ "publike."
 #~ msgstr ""
 

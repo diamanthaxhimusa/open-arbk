@@ -78,6 +78,12 @@ button{
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
     max-height: 465px;
 }
+.navbar-default .navbar-toggle:hover{
+	background-color: #ddd !important;
+}
+.navbar-default .navbar-toggle.collapsed{
+	background-color: transparent;
+}
 
 #dropdown-menu-first .glyphicon, #dropdown-menu-second .glyphicon{
     float: right;
@@ -865,7 +871,7 @@ contact
 	margin: auto;
 }
 
-#dropSect, #dropSect:focus, #dropSect:active{
+#dropSect{
 	width: 290px;
 	background:transparent url('../img/white-arrow.png') no-repeat scroll 95% center;
     background-size: 8px;
@@ -873,12 +879,13 @@ contact
     color: #fff;
     border-color: #fff;
 }
-button#dropSect:hover {
+/*#dropSect:hover {
 	background:#fff url('../img/black-arrow.png') no-repeat scroll 95% center;
-    background-size: 8px;
-    color: #343434;
+	background-size: 8px;
+	color: #343434;
 	box-shadow: none;
-}
+}*/
+
 #viz-drop-ul{
 	width: 290px
 }

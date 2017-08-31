@@ -175,9 +175,9 @@
                 <span class="lead">{{_('K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;.')}}</span><br>
                 <span class="lead">{{_('Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industri apo aktivitete biznesore operojn&euml; m&euml; s&euml; shumti n&euml; qytetin tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit.')}}</span><br><br>
                 <div class="btn-group">
-                    <button type="button" id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a id="dropSect" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{_('Shiko')}}
-                    </button>
+                    </a>
                     <ul class="dropdown-menu" id="viz-drop-ul">
                         <li><a class="page-scroll" href="#business-types">{{_('Llojet e Bizneseve')}}</a></li>
                         <li><a class="page-scroll" href="#employees">{{_('Bizneset sipas Numrit t&euml; Pun&euml;tor&euml;ve')}}</a></li>
@@ -324,6 +324,26 @@
     <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#dropSect').mouseenter(function() {
+                    $(this).css(
+                        {
+                            "background":"#fff url('{{ url_for('static', filename='img/black-arrow.png')}}') no-repeat scroll 95% center",
+                            "background-size": "8px",
+                            "color": "#343434",
+                            "box-shadow": "none"
+                        }
+                    )
+            });
+            $('#dropSect').mouseleave(function() {
+                    $(this).css(
+                        {
+                            "background":"transparent url('{{ url_for('static', filename='img/white-arrow.png')}}') no-repeat scroll 95% center",
+                            "background-size": "8px",
+                            "color": "#fff",
+                            "box-shadow": "none"
+                        }
+                    )
+            });
             var currentlang = "{{ g.current_lang }}";
             $('.language-switch').removeClass('active');
             $('.' + currentlang).addClass('active');
@@ -339,6 +359,25 @@
             $('body').on('touchstart click',function(e) {
                 if (!$(e.target).is('a')) {
                     $('.collapse').collapse('hide');
+                }
+                if ($(e.target).is('#dropSect')) {
+                    $('#dropSect').css(
+                        {
+                            "background":"#fff url('{{ url_for('static', filename='img/black-arrow.png')}}') no-repeat scroll 95% center",
+                            "background-size": "8px",
+                            "color": "#343434",
+                            "box-shadow": "none"
+                        }
+                    )
+                }else {
+                    $('#dropSect').css(
+                        {
+                            "background":"transparent url('{{ url_for('static', filename='img/white-arrow.png')}}') no-repeat scroll 95% center",
+                            "background-size": "8px",
+                            "color": "#fff",
+                            "box-shadow": "none"
+                        }
+                    )
                 }
             });
         });
