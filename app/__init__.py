@@ -86,6 +86,7 @@ def load_config(app):
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
 
+    # Make Web Application private.
     app.config['BASIC_AUTH_USERNAME'] = config.get('Application', 'username')
     app.config['BASIC_AUTH_PASSWORD'] = config.get('Application', 'password')
     app.config['BASIC_AUTH_FORCE'] = True
