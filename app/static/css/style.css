@@ -79,9 +79,9 @@ button{
     max-height: 465px;
 }
 .navbar-default .navbar-toggle:hover{
-	background-color: #ddd !important;
+	background-color: #ddd ;
 }
-.navbar-default .navbar-toggle.collapsed{
+.navbar-default .navbar-toggle.collapsed, .navbar-default .navbar-toggle.collapsed:hover{
 	background-color: transparent;
 }
 
