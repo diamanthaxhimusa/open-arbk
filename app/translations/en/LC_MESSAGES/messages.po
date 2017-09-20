@@ -516,7 +516,7 @@ msgid ""
 "Kosov&euml;s. Sipas k&euml;tij dokumenti Republika e Kosov&euml;s ka "
 "marr&euml; zotim t’i p&euml;rshtatet principit t&euml; hapjes s&euml; "
 "dh&euml;nave p&euml;r t&euml; mir&euml;n publike."
-msgstr ""
+msgstr "On 13.05.2016, the Government of Kosovo approved the Open Data Charter in the Republic of Kosovo."
 
 #: app/templates/recommendationPage.html:6
 msgid "Ligji p&euml;r qasje n&euml; dokumente publike"
