@@ -295,11 +295,11 @@ msgstr "Enter the business name"
 
 #: app/templates/layout.html:146
 msgid "Statusi i biznesit:"
-msgstr "Business status"
+msgstr "Business status:"
 
 #: app/templates/layout.html:156
 msgid "Zgjedh komun&euml;n:"
-msgstr "Business status:"
+msgstr "Select municipality:"
 
 #: app/templates/layout.html:158
 msgid "Gjith&euml; Kosova"
