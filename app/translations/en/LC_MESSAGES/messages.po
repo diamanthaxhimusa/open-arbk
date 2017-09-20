@@ -216,8 +216,7 @@ msgid ""
 "t&euml; gjith&euml; bizneset e regjistruara ne Kosov&euml; n&euml; "
 "periudh&euml;n 2000 - 2017."
 msgstr ""
-"Here you can find data of all registered businesses in Kosovo from 2000 -"
-" 2017."
+"Search for and inspect business registration data from 2000 to 2017."
 
 #: app/templates/layout.html:71 app/templates/layout.html:207
 msgid "Pse Bizneset e Hapura?"
