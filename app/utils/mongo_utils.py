@@ -187,6 +187,9 @@ class MongoUtils(object):
         result = self.mongo.db[self.reg_businesses_collection].aggregate(query)
         return result
 
+
+
+
     # MAP Activities
     def mapi(self, activity, current_lang):
         act = self.mongo.db[self.activities].find({"activity.%s"%current_lang:activity})
@@ -194,15 +197,16 @@ class MongoUtils(object):
         code = 0
         for doc in act:
             code = doc['code']
+        print code
         muni = []
         for i in munis:
-            muni.append(i['municipality']['sq'])
+            muni.append(i['municipality'][current_lang])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gt": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
                 {'$unwind': "$activities"},
-                {'$match': {"activities":int(code), "municipality.municipality.%s"%current_lang:i}},
+                {'$match': {"activities":int(code), "municipality.municipality.%s"%current_lang: i}},
                 {'$count':"all"}
             ])
             try:
@@ -210,16 +214,19 @@ class MongoUtils(object):
             except Exception as e:
                 result.update({i:0})
         return result
+
+
+
     def mapi_all(self, current_lang):
         munis = self.mongo.db[self.municipalities].find()
         muni = []
         for i in munis:
-            muni.append(i['municipality']['sq'])
+            muni.append(i['municipality'][current_lang])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
-                            "municipality.municipality.sq":i}},
+                            "municipality.municipality.%s"%current_lang: i}},
                 {'$count':"all"}
             ])
             try:
@@ -227,16 +234,17 @@ class MongoUtils(object):
             except Exception as e:
                 result.update({i:0})
         return result
+
     def mapi_all_status(self, status, current_lang):
         munis = self.mongo.db[self.municipalities].find()
         muni = []
         for i in munis:
-            muni.append(i['municipality']['sq'])
+            muni.append(i['municipality'][current_lang])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)},
-                            "municipality.municipality.sq":i, "status.sq":status}},
+                            "municipality.municipality.%s"%current_lang: i, "status.sq": status}},
                 {'$count':"all"}
             ])
             try:
@@ -252,13 +260,13 @@ class MongoUtils(object):
             code = doc['code']
         muni = []
         for i in munis:
-            muni.append(i['municipality']['sq'])
+            muni.append(i['municipality'][current_lang])
         result = {}
         for i in muni:
             res = self.mongo.db[self.reg_businesses_collection].aggregate([
                 {'$match': {"applicationDate": {"$gte": datetime.datetime(2000, 1, 1),"$lt": datetime.datetime(2017, 1, 1)}}},
                 {'$unwind': "$activities"},
-                {'$match': {"activities":int(code), "municipality.municipality.sq":i, "status.sq":status}},
+                {'$match': {"activities":int(code), "municipality.municipality.%s"%current_lang: i, "status.sq":status}},
                 {'$count':"all"}
             ])
             try:

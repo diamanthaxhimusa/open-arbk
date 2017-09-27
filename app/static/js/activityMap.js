@@ -3,7 +3,7 @@ $(document).ready(function() {
         $('.selected-value').html("T\xeb gjitha");
         $('.selected-value-status').html("T\xeb gjitha");
     }
-    else{
+    else {
         $('.selected-value').html("All");
         $('.selected-value-status').html("All");
     }
@@ -18,33 +18,36 @@ $(document).ready(function() {
         }
     });
 });
+
 function onStatusSelection(name) {
     if (name == "Shuar") {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value-status').html("I shuar");
         }
-        else{
+        else {
             $('.selected-value-status').html("Dissolved");
         }
-    }else if(name == "Aktiv") {
+    } else if (name == "Aktiv") {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value-status').html("Aktiv");
         }
         else{
             $('.selected-value-status').html("Active");
         }
-    }else {
+    } else {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value-status').html("T\xeb gjitha");
         }
-        else{
+        else {
             $('.selected-value-status').html("All");
         }
     }
+
     var actDrop = $('.selected-value').html();
     if (actDrop == "T\xeb gjitha" || actDrop == "All") {
-        actDrop = "all"
+          actDrop = "all";
     }
+
     $.ajax({
         data : {
             activity_name : actDrop,
@@ -63,7 +66,9 @@ function onStatusSelection(name) {
         }
     });
 }
+
 function onActivitySelection(name) {
+  console.log(name);
     if (name == "all") {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value').html("T\xeb gjitha");
@@ -75,12 +80,14 @@ function onActivitySelection(name) {
     else {
         $('.selected-value').html(name);
     }
+
     if (document.documentElement.lang == 'sq') {
         $('.selected-value-status').html("T\xeb gjitha");
     }
-    else{
+    else {
         $('.selected-value-status').html("All");
     }
+
     $.ajax({
         data : {
             activity_name : name,
@@ -99,188 +106,375 @@ function onActivitySelection(name) {
         }
     });
 }
-var data2 = [
-    {//Prishtina
-        "name": "Prishtin\xeb",
-        "value": 0,
-        "hc-key": "kv-7310",
-        "id": 0
-    },
-    {//Gjilani
-        "name": "Gjilan",
-        "value": 0,
-        "hc-key": "kv-842"
-    },
-    {//Prizereni
-        "name": "Prizren",
-        "value": 0,
-        "hc-key": "kv-843"
-    },
-    {
-        "name": "Ferizaj",
-        "value": 0,
-        "hc-key": "kv-7324"
-    },
-    {
-        "name": "Lipjan",
-        "value": 0,
-        "hc-key": "kv-7311"
-    },
-    {
-        "name": "Podujev\xeb",
-        "value": 0,
-        "hc-key": "kv-7309"
-    },
-    {
-        "name": "Obiliq",
-        "value": 0,
-        "hc-key": "kv-7308"
-    },
-    {
-        "name": "Gllogoc",
-        "value": 0,
-        "hc-key": "kv-7307"
-    },
-    {
-        "name": "Malishev\xeb",
-        "value": 0,
-        "hc-key": "kv-7317"
-    },
-    {
-        "name": "Gjakov\xeb",
-        "value": 0,
-        "hc-key": "kv-7321"
-    },
-    {
-        "name": "Rahovec",
-        "value": 0,
-        "hc-key": "kv-7322"
-    },
-    {
-        "name": "Klin\xeb",
-        "value": 0,
-        "hc-key": "kv-7319"
-    },
-    {
-        "name": "Deçan",
-        "value": 0,
-        "hc-key": "kv-7320"
-    },
-    {
-        "name": "Istog",
-        "value": 0,
-        "hc-key": "kv-7318"
-    },
-    {//Skenderaj
-        "name": "Sk\xebnderaj",
-        "value": 0,
-        "hc-key": "kv-7305"
-    },
-    {//Vushtrri
-        "name": "Vushtrri",
-        "value": 0,
-        "hc-key": "kv-7304"
-    },
-    {//Artan\xeb
-        "name": "Novob\xebrd\xeb",
-        "value": 0,
-        "hc-key": "kv-7313"
-    },
-    {//kamenice
-        "name": "Kamenic\xeb",
-        "value": 0,
-        "hc-key": "kv-7314"
-    },
-    {//Mitrovice
-        "name": "Mitrovic\xeb",
-        "value": 0,
-        "hc-key": "kv-7303"
-    },
-    {//Suharek
-        "name": "Suhareka",
-        "value": 0,
-        "hc-key": "kv-7316"
-    },
-    { //shtime
-        "name": "Shtime",
-        "value": 0,
-        "hc-key": "kv-7323"
-    },
-    { //Vitia
-        "name": "Viti",
-        "value":0,
-        "hc-key": "kv-7312"
-    },
-    { // Shterpce
-        "name": "Sht\xebrpc\xeb",
-        "value": 0,
-        "hc-key": "kv-7325"
-    },
-    { // Kaqanik
-        "name": "Kaçanik",
-        "value": 0,
-        "hc-key": "kv-7326"
-    },
-    {
-        "name": "Zveçan",
-        "value": 0,
-        "hc-key": "kv-844"
-    },
-    {
-        "name": "Leposaviq",
-        "value": 0,
-        "hc-key": "kv-7302"
-    },
-    {
-        "name": "Zubin Potok",
-        "value": 0,
-        "hc-key": "kv-7306"
-    },
-    {
-        "name": "Fush\xeb Kosov\xeb",
-        "value": 0,
-        "hc-key": "kv-845"
-    },
-    {
-        "name": "Dragash",
-        "value": 0,
-        "hc-key": "kv-7315"
-    },
-    {
-        "name": "Pej\xeb",
-        "value": 0,
-        "hc-key": "kv-841"
-    }
-];
+
+var cities = [];
+if(document.documentElement.lang == 'sq') {
+  cities = [
+      {//Prishtina
+          "name": "Prishtin\xeb",
+          "value": 0,
+          "hc-key": "kv-7310",
+          "id": 0
+      },
+      {//Gjilani
+          "name": "Gjilan",
+          "value": 0,
+          "hc-key": "kv-842"
+      },
+      {//Prizereni
+          "name": "Prizren",
+          "value": 0,
+          "hc-key": "kv-843"
+      },
+      {
+          "name": "Ferizaj",
+          "value": 0,
+          "hc-key": "kv-7324"
+      },
+      {
+          "name": "Lipjan",
+          "value": 0,
+          "hc-key": "kv-7311"
+      },
+      {
+          "name": "Podujev\xeb",
+          "value": 0,
+          "hc-key": "kv-7309"
+      },
+      {
+          "name": "Obiliq",
+          "value": 0,
+          "hc-key": "kv-7308"
+      },
+      {
+          "name": "Gllogoc",
+          "value": 0,
+          "hc-key": "kv-7307"
+      },
+      {
+          "name": "Malishev\xeb",
+          "value": 0,
+          "hc-key": "kv-7317"
+      },
+      {
+          "name": "Gjakov\xeb",
+          "value": 0,
+          "hc-key": "kv-7321"
+      },
+      {
+          "name": "Rahovec",
+          "value": 0,
+          "hc-key": "kv-7322"
+      },
+      {
+          "name": "Klin\xeb",
+          "value": 0,
+          "hc-key": "kv-7319"
+      },
+      {
+          "name": "Deçan",
+          "value": 0,
+          "hc-key": "kv-7320"
+      },
+      {
+          "name": "Istog",
+          "value": 0,
+          "hc-key": "kv-7318"
+      },
+      {//Skenderaj
+          "name": "Sk\xebnderaj",
+          "value": 0,
+          "hc-key": "kv-7305"
+      },
+      {//Vushtrri
+          "name": "Vushtrri",
+          "value": 0,
+          "hc-key": "kv-7304"
+      },
+      {//Artan\xeb
+          "name": "Novob\xebrd\xeb",
+          "value": 0,
+          "hc-key": "kv-7313"
+      },
+      {//kamenice
+          "name": "Kamenic\xeb",
+          "value": 0,
+          "hc-key": "kv-7314"
+      },
+      {//Mitrovice
+          "name": "Mitrovic\xeb",
+          "value": 0,
+          "hc-key": "kv-7303"
+      },
+      {//Suharek
+          "name": "Suhareka",
+          "value": 0,
+          "hc-key": "kv-7316"
+      },
+      { //shtime
+          "name": "Shtime",
+          "value": 0,
+          "hc-key": "kv-7323"
+      },
+      { //Vitia
+          "name": "Viti",
+          "value":0,
+          "hc-key": "kv-7312"
+      },
+      { // Shterpce
+          "name": "Sht\xebrpc\xeb",
+          "value": 0,
+          "hc-key": "kv-7325"
+      },
+      { // Kaqanik
+          "name": "Kaçanik",
+          "value": 0,
+          "hc-key": "kv-7326"
+      },
+      {
+          "name": "Zveçan",
+          "value": 0,
+          "hc-key": "kv-844"
+      },
+      {
+          "name": "Leposaviq",
+          "value": 0,
+          "hc-key": "kv-7302"
+      },
+      {
+          "name": "Zubin Potok",
+          "value": 0,
+          "hc-key": "kv-7306"
+      },
+      {
+          "name": "Fush\xeb Kosov\xeb",
+          "value": 0,
+          "hc-key": "kv-845"
+      },
+      {
+          "name": "Dragash",
+          "value": 0,
+          "hc-key": "kv-7315"
+      },
+      {
+          "name": "Pej\xeb",
+          "value": 0,
+          "hc-key": "kv-841"
+      }
+  ];
+} else {
+  cities = [
+      {//Prishtina
+          "name": "Pristina",
+          "value": 0,
+          "hc-key": "kv-7310",
+          "id": 0
+      },
+      {//Gjilani
+          "name": "Gjilan",
+          "value": 0,
+          "hc-key": "kv-842"
+      },
+      {//Prizereni
+          "name": "Prizren",
+          "value": 0,
+          "hc-key": "kv-843"
+      },
+      {
+          "name": "Ferizaj",
+          "value": 0,
+          "hc-key": "kv-7324"
+      },
+      {
+          "name": "Lipjan",
+          "value": 0,
+          "hc-key": "kv-7311"
+      },
+      {
+          "name": "Podujevo",
+          "value": 0,
+          "hc-key": "kv-7309"
+      },
+      {
+          "name": "Obilic",
+          "value": 0,
+          "hc-key": "kv-7308"
+      },
+      {
+          "name": "Glogovac",
+          "value": 0,
+          "hc-key": "kv-7307"
+      },
+      {
+          "name": "Malisheve",
+          "value": 0,
+          "hc-key": "kv-7317"
+      },
+      {
+          "name": "Gjakova",
+          "value": 0,
+          "hc-key": "kv-7321"
+      },
+      {
+          "name": "Rahovec",
+          "value": 0,
+          "hc-key": "kv-7322"
+      },
+      {
+          "name": "Klina",
+          "value": 0,
+          "hc-key": "kv-7319"
+      },
+      {
+          "name": "Decan",
+          "value": 0,
+          "hc-key": "kv-7320"
+      },
+      {
+          "name": "Istog",
+          "value": 0,
+          "hc-key": "kv-7318"
+      },
+      {//Skenderaj
+          "name": "Skenderaj",
+          "value": 0,
+          "hc-key": "kv-7305"
+      },
+      {//Vushtrri
+          "name": "Vushtrri",
+          "value": 0,
+          "hc-key": "kv-7304"
+      },
+      {//Artan\xeb
+          "name": "Novo Brdo",
+          "value": 0,
+          "hc-key": "kv-7313"
+      },
+      {//kamenice
+          "name": "Kamenica",
+          "value": 0,
+          "hc-key": "kv-7314"
+      },
+      {//Mitrovice
+          "name": "Mitrovica",
+          "value": 0,
+          "hc-key": "kv-7303"
+      },
+      {//Suharek
+          "name": "Suhareka",
+          "value": 0,
+          "hc-key": "kv-7316"
+      },
+      { //shtime
+          "name": "Shtime",
+          "value": 0,
+          "hc-key": "kv-7323"
+      },
+      { //Vitia
+          "name": "Viti",
+          "value":0,
+          "hc-key": "kv-7312"
+      },
+      { // Shterpce
+          "name": "Shtrpce",
+          "value": 0,
+          "hc-key": "kv-7325"
+      },
+      { // Kaqanik
+          "name": "Kacanik",
+          "value": 0,
+          "hc-key": "kv-7326"
+      },
+      {
+          "name": "Zvecan",
+          "value": 0,
+          "hc-key": "kv-844"
+      },
+      {
+          "name": "Leposaviq",
+          "value": 0,
+          "hc-key": "kv-7302"
+      },
+      {
+          "name": "Zubin Potok",
+          "value": 0,
+          "hc-key": "kv-7306"
+      },
+      {
+          "name": "Fushe Kosove",
+          "value": 0,
+          "hc-key": "kv-845"
+      },
+      {
+          "name": "Dragash",
+          "value": 0,
+          "hc-key": "kv-7315"
+      },
+      {
+          "name": "Peja",
+          "value": 0,
+          "hc-key": "kv-841"
+      }
+  ];
+}
+
+console.log(cities);
+
 function proccesAPI(data) {
     var dupli = []
     $.each(data, function(key, val) {
-        $.each(data2, function(key2, val2) {
+        $.each(cities, function(key2, val2) {
             if (key == val2.name) {
                 val2.value = val;
             }
         });
-        if (key == "Hani i Elezit")dupli.push({"muni":key,"val":val});
-        else if (key == "Mamush\xeb")dupli.push({"muni":key,"val":val});
-        else if (key == "Ranillug\xeb")dupli.push({"muni":key,"val":val});
-        else if (key == "Partesh")dupli.push({"muni":key,"val":val});
-        else if (key == "Kllokot")dupli.push({"muni":key,"val":val});
-        else if (key == "Junik")dupli.push({"muni":key,"val":val});
-        else if (key == "Graçanic\xeb")dupli.push({"muni":key,"val":val});
+        if(document.documentElement.lang == 'sq') {
+            if (key == "Hani i Elezit")dupli.push({"muni":key,"val":val});
+            else if (key == "Mamush\xeb")dupli.push({"muni":key,"val":val});
+            else if (key == "Ranillug\xeb")dupli.push({"muni":key,"val":val});
+            else if (key == "Partesh")dupli.push({"muni":key,"val":val});
+            else if (key == "Kllokot")dupli.push({"muni":key,"val":val});
+            else if (key == "Junik")dupli.push({"muni":key,"val":val});
+            else if (key == "Graçanic\xeb")dupli.push({"muni":key,"val":val});
+        } else {
+            if (key == "Hani i Elezit")dupli.push({"muni":key,"val":val});
+            else if (key == "Mamush")dupli.push({"muni":key,"val":val});
+            else if (key == "Ranilug")dupli.push({"muni":key,"val":val});
+            else if (key == "Partesh")dupli.push({"muni":key,"val":val});
+            else if (key == "Klokot")dupli.push({"muni":key,"val":val});
+            else if (key == "Junik")dupli.push({"muni":key,"val":val});
+            else if (key == "Gracanice")dupli.push({"muni":key,"val":val});
+        }
     });
-    $.each(data2, function(key2, val2) {
-        $.each(dupli, function(key, val) {
-            if (val.muni == "Hani i Elezit" && val2.name == "Ferizaj")val2.value += val.val;
-            else if (val.muni == "Mamush\xeb" && val2.name == "Prizren")val2.value += val.val;
-            else if (val.muni == "Ranillug\xeb" && val2.name == "Gjilan")val2.value += val.val;
-            else if (val.muni == "Partesh" && val2.name == "Gjilan")val2.value += val.val;
-            else if (val.muni == "Kllokot" && val2.name == "Gjilan")val2.value += val.val;
-            else if (val.muni == "Junik" && val2.name == "Gjakov\xeb")val2.value += val.val;
-            else if (val.muni == "Graçanic\xeb" && val2.name == "Prishtin\xeb")val2.value += val.val;
-        });
+    console.log(dupli);
+
+    $.each(cities, function(key2, val2) {
+        if(document.documentElement.lang == 'sq') {
+            $.each(dupli, function(key, val) {
+                if (val.muni == "Hani i Elezit" && val2.name == "Ferizaj")val2.value += val.val;
+                else if (val.muni == "Mamush\xeb" && val2.name == "Prizren")val2.value += val.val;
+                else if (val.muni == "Ranillug\xeb" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Partesh" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Kllokot" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Junik" && val2.name == "Gjakov\xeb")val2.value += val.val;
+                else if (val.muni == "Graçanic\xeb" && val2.name == "Prishtin\xeb")val2.value += val.val;
+            });
+          } else {
+            $.each(dupli, function(key, val) {
+                if (val.muni == "Hani i Elezit" && val2.name == "Ferizaj")val2.value += val.val;
+                else if (val.muni == "Mamush" && val2.name == "Prizren")val2.value += val.val;
+                else if (val.muni == "Ranilug" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Partesh" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Klokot" && val2.name == "Gjilan")val2.value += val.val;
+                else if (val.muni == "Junik" && val2.name == "Gjakova")val2.value += val.val;
+                else if (val.muni == "Gracanice" && val2.name == "Pristina")val2.value += val.val;
+            });
+          }
     });
-    mapActs(data2)
+
+    mapActs(cities)
 }
+
 function mapActs(data) {
     if (document.documentElement.lang == 'sq') {
         Highcharts.setOptions({
@@ -370,7 +564,7 @@ function mapActs(data) {
             }]
         });
     }
-    else{
+    else {
         Highcharts.setOptions({
             lang:{
                 downloadJPEG: "Download JPG",
