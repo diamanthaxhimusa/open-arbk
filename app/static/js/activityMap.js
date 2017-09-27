@@ -68,7 +68,6 @@ function onStatusSelection(name) {
 }
 
 function onActivitySelection(name) {
-  console.log(name);
     if (name == "all") {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value').html("T\xeb gjitha");
@@ -418,8 +417,6 @@ if(document.documentElement.lang == 'sq') {
   ];
 }
 
-console.log(cities);
-
 function proccesAPI(data) {
     var dupli = []
     $.each(data, function(key, val) {
@@ -446,7 +443,6 @@ function proccesAPI(data) {
             else if (key == "Gracanice")dupli.push({"muni":key,"val":val});
         }
     });
-    console.log(dupli);
 
     $.each(cities, function(key2, val2) {
         if(document.documentElement.lang == 'sq') {
