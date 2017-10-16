@@ -35,18 +35,18 @@ $(document).ready(function(){
           var name = '';
           if (document.documentElement.lang == 'sq') {
               if (data.doc.result[i]['_id'] == 'male') {
-                  gen_data.males = {"name":"Meshkuj", "result":data.doc.result[i]['all']}
+                  gen_data.males = {"name":"Burra", "result":data.doc.result[i]['all']}
               }else if (data.doc.result[i]['_id'] == 'female') {
-                  gen_data.females = {"name":"Femra", "result":data.doc.result[i]['all']}
+                  gen_data.females = {"name":"Gra", "result":data.doc.result[i]['all']}
               }else {
                   gen_data.unknown = {"name":"E Panjohur", "result":data.doc.result[i]['all']}
               }
           }
           else{
               if (data.doc.result[i]['_id'] == 'male') {
-                  gen_data.males = {"name":"Males", "result":data.doc.result[i]['all']}
+                  gen_data.males = {"name":"Men", "result":data.doc.result[i]['all']}
               }else if (data.doc.result[i]['_id'] == 'female') {
-                  gen_data.females = {"name":"Females", "result":data.doc.result[i]['all']}
+                  gen_data.females = {"name":"Women", "result":data.doc.result[i]['all']}
               }else {
                   gen_data.unknown = {"name":"Unknown", "result":data.doc.result[i]['all']}
               }

@@ -37,7 +37,7 @@ function topGenderActivitiesFemra(data, categories) {
                 type: 'bar'
             },
             title: {
-                text: 'Femra'
+                text: 'Gra'
             },
             xAxis: {
                 categories: categories,
@@ -85,7 +85,7 @@ function topGenderActivitiesFemra(data, categories) {
                 type: 'bar'
             },
             title: {
-                text: 'Females'
+                text: 'Women'
             },
             xAxis: {
                 categories: categories,
@@ -136,7 +136,7 @@ function topGenderActivitiesMeshkuj(data, categories) {
             type: 'bar'
         },
         title: {
-            text: 'Meshkuj'
+            text: 'Burra'
         },
         xAxis: {
             categories: categories,
@@ -184,7 +184,7 @@ function topGenderActivitiesMeshkuj(data, categories) {
                 type: 'bar'
             },
             title: {
-                text: 'Males'
+                text: 'Men'
             },
             xAxis: {
                 categories: categories,
