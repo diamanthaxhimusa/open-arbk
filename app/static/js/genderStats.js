@@ -75,10 +75,11 @@ $(document).ready(function(){
                   }
               },
               tooltip: {
-                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b> <br/> N\xeb num\xebr: <b> {point.x}</b>'
               },
               series: [{
-                  name: 'Pronar\xeb n\xeb p\xebrqindje',
+                  name: 'N\xeb p\xebrqindje',
+
                   // colors: ['#E0777D','#4C86A8', '#E1DD8F'],
                   colors: [{
                       radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
@@ -103,14 +104,18 @@ $(document).ready(function(){
                   colorByPoint: true,
                   data: [{
                       name: data.males.name,
-                      y: Math.round((data.males.result / data.total * 100)*100)/100
+                      y: Math.round((data.males.result / data.total * 100)*100)/100,
+                      x: data.males.result
                   }, {
                       name: data.females.name,
-                      y: Math.round((data.females.result / data.total * 100)*100)/100
+                      y: Math.round((data.females.result / data.total * 100)*100)/100,
+                      x: data.females.result
                   },
                   {
                       name: data.unknown.name,
-                      y: Math.round((data.unknown.result / data.total * 100)*100)/100
+                      y: Math.round((data.unknown.result / data.total * 100)*100)/100,
+                      x: data.unknown.result
+
                   }]
               }]
           });
@@ -135,10 +140,10 @@ $(document).ready(function(){
                   }
               },
               tooltip: {
-                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/> By number: <b> {point.x}</b>'
               },
               series: [{
-                  name: 'Owners by percentage',
+                  name: 'By percentage',
                   // colors: ['#E0777D','#4C86A8', '#E1DD8F'],
                   colors: [{
                       radialGradient: { cx: 0.5, cy: 0.5, r: 0.5 },
@@ -163,14 +168,17 @@ $(document).ready(function(){
                   colorByPoint: true,
                   data: [{
                       name: data.males.name,
-                      y: Math.round((data.males.result / data.total * 100)*100)/100
+                      y: Math.round((data.males.result / data.total * 100)*100)/100,
+                      x: data.males.result
                   }, {
                       name: data.females.name,
-                      y: Math.round((data.females.result / data.total * 100)*100)/100
+                      y: Math.round((data.females.result / data.total * 100)*100)/100,
+                      x: data.females.result
                   },
                   {
                       name: data.unknown.name,
-                      y: Math.round((data.unknown.result / data.total * 100)*100)/100
+                      y: Math.round((data.unknown.result / data.total * 100)*100)/100,
+                      x: data.unknown.result
                   }]
               }]
           });
