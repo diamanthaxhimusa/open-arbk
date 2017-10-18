@@ -62,7 +62,7 @@ $(document).ready(function(){
                 tooltip: {
                     formatter: function () {
                         return ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.tot, 0)+'<b><br>'+
-                        ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> nga total <b>'+Highcharts.numberFormat(this.point.y, 3,' ', ' ')+'</b><br/>';
+                        ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b><br/>';
                     }
                 },
                 series: [{
@@ -137,7 +137,7 @@ $(document).ready(function(){
                 tooltip: {
                     formatter: function () {
                         return ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.tot, 0)+'<b><br>'+
-                        ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b> of total <b>'+Highcharts.numberFormat(this.point.y, 3,' ', ' ')+'</b><br/>';
+                        ''+this.point.name[document.documentElement.lang]+': <b>'+Highcharts.numberFormat(this.point.y, 3, '.')+' %</b><br/>';
                     }
                 },
                 series: [{
