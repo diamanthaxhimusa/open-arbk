@@ -200,6 +200,7 @@ def active_inactive():
             'docs': docs
     }
     return Response(response=json_util.dumps(api), status=200, mimetype='application/json')
+
 @mod_main.route('/<lang_code>/page-stats', methods=['GET', 'POST'])
 @cache.memoize()
 def page_stats():
@@ -326,3 +327,45 @@ def download_doc_year(doc_type, doc_date_type, year):
 @mod_main.route('/<lang_code>/shkarko/<string:doc_type>/all-zip', methods=['GET'])
 def download_doc_all(doc_type):
     return send_from_directory(download_folder, "arbk-data-%s(%s).zip"%(doc_type, g.current_lang), as_attachment=True)
+
+def prepare_api_to_show_businesses(json_docs):
+    final_json = {'code': 200, 'status': 'OK', 'data': []}
+    for json_doc in json_docs:
+        final_json['data'].append({
+            'name': json_doc['name'],
+            'municipality': json_doc['municipality'],
+            'status': json_doc['status'],
+            'activities': json_doc['activities'],
+            'owners': json_doc['owners'],
+            'authorized': json_doc['authorized'],
+        })
+    if final_json['data'] == []:
+        final_json = {'code': 404, 'status': 'Not Found', 'data': []}
+    return final_json
+
+# Endpoint for showing businesses based on municipality, status and activities
+@mod_main.route('/<lang_code>/show-businesses', methods=['GET'])
+def show_businesses():
+    municipality = request.args.get('municipality')
+    status = request.args.get('status')
+    if request.args.get('activity'):
+        activity = int(request.args.get('activity'))
+        if status:
+            # Get businesses by activity and status
+            json_docs = mongo_utils.get_businesses(municipality, activity, status, g.current_lang)
+            final_json = prepare_api_to_show_businesses(json_docs)
+        else:
+            # Get busineses only by activity
+            json_docs = mongo_utils.get_businesses(municipality, activity, '', g.current_lang)
+            final_json = prepare_api_to_show_businesses(json_docs)
+    else:
+        activity = ''
+        if status:
+            # Get only businesses only by status
+            json_docs = mongo_utils.get_businesses(municipality, '', status, g.current_lang)
+            final_json = prepare_api_to_show_businesses(json_docs)
+        else:
+            json_docs = mongo_utils.get_businesses(municipality, '', '', g.current_lang)
+            final_json = prepare_api_to_show_businesses(json_docs)
+
+    return Response(response=json_util.dumps(final_json), status=200, mimetype='application/json')

@@ -1,6 +1,5 @@
 import datetime
 
-
 class MongoUtils(object):
 
     def __init__(self, mongo):
@@ -104,6 +103,20 @@ class MongoUtils(object):
 
     def get_limit_businesses(self, num):
         result = self.mongo.db[self.reg_businesses_collection].find().limit(num)
+        return result
+
+    def get_businesses(self, municipality, activity, status, current_lang):
+        if activity != '':
+            if status != '':
+
+                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "status.%s"%current_lang: status, "activities":{"$in":[activity]}})
+            else:
+                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "activities": [activity]})
+        else:
+            if status != '':
+                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "status.%s"%current_lang: status})
+            else:
+                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality})
         return result
 
     def get_municipalities(self):
