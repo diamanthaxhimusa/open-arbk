@@ -60,7 +60,7 @@ function onStatusSelection(name) {
         },
         success: function(data){
             proccesAPI(data);
-            $(".overllay").hide();
+            $(".overllay, #businessbyMunicipality").hide();
         },
         error: function(error) {
         }
