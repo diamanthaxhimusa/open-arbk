@@ -21,14 +21,14 @@
                 <div class="dropdown" id="dropdown-first">
                     <label for="activity" class="lbl-filter">{{_('Aktiviteti:')}}</label><br>
                     <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdown-menu-first" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="selected-value"></span>
+                        <span data-code="" class="selected-value"></span>
                         &nbsp;
                     </button>
                     <input type="text" id="searchActivityInput" onkeyup="searchActivity()" class="search-activities-dropdown-input" placeholder="{{_('K&euml;rko aktivitetin...')}}" autocomplete="off" autofocus>
                     <ul class="dropdown-menu acts activity-ul-dropdown" name="activity" id="activity_val" aria-labelledby="dropdown-menu-first">
                         <li><a href="javascript:onActivitySelection('all')">{{_('T&euml; gjitha')}}</a></li>
                         {% for i in activities%}
-                        <li class="acts-li"><a data-filter="{% if i['code']|length == 3 %}0{{ i['code'] }}{% else %}{{i['code']}}{% endif %}" href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}')">
+                        <li class="acts-li"><a data-filter="{% if i['code']|length == 3 %}0{{ i['code'] }}{% else %}{{i['code']}}{% endif %}" href="javascript:onActivitySelection('{{ i['activity'][g.current_lang] }}', '{% if i['code']|length == 3 %}0{{ i['code'] }}{% else %}{{i['code']}}{% endif %}')">
                             {% if i['code']|length == 3 %}
                                 0{{ i['code'] }}
                             {% else %}
@@ -60,6 +60,30 @@
             </div>
             <div id="mapContainer" style="min-width: 100%; margin-top:30px !important; height: 620px; margin: 0 auto"></div>
         </div>
+    </div>
+    <div style="margin: 20px auto; display: none" id="businessbyMunicipality" class="col-xs-12">
+        <h3 style="display: inline;">Komuna e zgjedhur: </h3><h3  style="display: inline;" id="searchedMuni"></h3>
+        <h4 style="margin-bottom: 15px">Bizneset e shfaqura sipas komunës së zgjedhur</h4>
+        <table  class="table table-striped table-bordered" id="businessesTable">
+          <thead>
+              <tr>
+                  <th>{{_('Emri i Biznesit')}}</th>
+                  <th>{{_('Statusi i Biznesit')}}</th>
+                  <th>{{_('Vendi')}}</th>
+                  <th>{{_('Pronar&euml;t')}}</th>
+                  <th>{{_('Personat e autorizuar')}}</th>
+              </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>{{_('Emri i Biznesit')}}</th>
+              <th>{{_('Statusi i Biznesit')}}</th>
+              <th>{{_('Vendi')}}</th>
+              <th>{{_('Pronar&euml;t')}}</th>
+              <th>{{_('Personat e autorizuar')}}</th>
+            </tr>
+          </tfoot>
+        </table>
     </div>
     <div class="col-xs-12">
         <div class="alert alert-danger alert-dismissible" role="alert">

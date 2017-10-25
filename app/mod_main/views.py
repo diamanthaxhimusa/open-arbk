@@ -328,8 +328,8 @@ def download_doc_year(doc_type, doc_date_type, year):
 def download_doc_all(doc_type):
     return send_from_directory(download_folder, "arbk-data-%s(%s).zip"%(doc_type, g.current_lang), as_attachment=True)
 
-def prepare_api_to_show_businesses(json_docs):
-    final_json = {'code': 200, 'status': 'OK', 'data': []}
+def prepare_api_to_show_businesses(json_docs, searchedMunicipality):
+    final_json = {'code': 200, 'status': 'OK', 'municipality': searchedMunicipality, 'data': []}
     for json_doc in json_docs:
         final_json['data'].append({
             'name': json_doc['name'],
@@ -353,19 +353,19 @@ def show_businesses():
         if status:
             # Get businesses by activity and status
             json_docs = mongo_utils.get_businesses(municipality, activity, status, g.current_lang)
-            final_json = prepare_api_to_show_businesses(json_docs)
+            final_json = prepare_api_to_show_businesses(json_docs, municipality)
         else:
             # Get busineses only by activity
             json_docs = mongo_utils.get_businesses(municipality, activity, '', g.current_lang)
-            final_json = prepare_api_to_show_businesses(json_docs)
+            final_json = prepare_api_to_show_businesses(json_docs, municipality)
     else:
         activity = ''
         if status:
             # Get only businesses only by status
             json_docs = mongo_utils.get_businesses(municipality, '', status, g.current_lang)
-            final_json = prepare_api_to_show_businesses(json_docs)
+            final_json = prepare_api_to_show_businesses(json_docs, municipality)
         else:
             json_docs = mongo_utils.get_businesses(municipality, '', '', g.current_lang)
-            final_json = prepare_api_to_show_businesses(json_docs)
+            final_json = prepare_api_to_show_businesses(json_docs, municipality)
 
     return Response(response=json_util.dumps(final_json), status=200, mimetype='application/json')

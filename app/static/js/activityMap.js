@@ -67,7 +67,7 @@ function onStatusSelection(name) {
     });
 }
 
-function onActivitySelection(name) {
+function onActivitySelection(name, code) {
     if (name == "all") {
         if (document.documentElement.lang == 'sq') {
             $('.selected-value').html("T\xeb gjitha");
@@ -78,6 +78,7 @@ function onActivitySelection(name) {
     }
     else {
         $('.selected-value').html(name);
+        $('.selected-value').attr('data-code', code);
     }
 
     if (document.documentElement.lang == 'sq') {
@@ -99,7 +100,7 @@ function onActivitySelection(name) {
         },
         success: function(data){
             proccesAPI(data);
-            $(".overllay").hide();
+            $(".overllay, #businessbyMunicipality").hide();
         },
         error: function(error) {
         }
@@ -537,12 +538,72 @@ function mapActs(data) {
                     from: 1000
                 }]
             },
+            plotOptions: {
+              series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(e) {
+                      // Clearing data of datatable
+                      $('#businessesTable').DataTable().clear();
+                      // Showing datatable section if hidden
+                      $('#businessbyMunicipality').show();
+
+                      // Scrolling to table with animation
+                      $('html, body').stop().animate({
+                          scrollTop: ($('#businessbyMunicipality').offset().top - 150)
+                      }, 600, 'easeInOutExpo');
+
+                      // Properties and building the URL
+                      let clickedMunicipality = e.point.options.name
+
+                      // If activity is selected
+                      if($('.selected-value').html() != "Të gjitha") {
+                        var selectedActivity = $('.selected-value').attr('data-code');
+                      } else {
+                        selectedActivity = '';
+                      }
+
+                      // If status is selected
+                      if($('.selected-value-status').html() != "Të gjitha") {
+                        if ($('.selected-value-status').html() == "I shuar"){
+                          var selectedStatus = "Shuar";
+                        } else {
+                          selectedStatus = $('.selected-value-status').html();
+                        }
+                      } else {
+                        selectedStatus = '';
+                      }
+
+                      // Showing the municipality in DOM
+                      $('#searchedMuni').text(clickedMunicipality);
+                      $('#businessesTable').DataTable({
+                        destroy: true,
+                        "bInfo" : false,
+                        "language": {
+                          "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Albanian.json"
+                        },
+                        'ajax': {
+                          url: `/sq/show-businesses?municipality=${clickedMunicipality}&activity=${selectedActivity}&status=${selectedStatus}`,
+                          type: 'GET'
+                        },
+                        "columns": [
+                          { "data": "name" },
+                          { "data": "status.sq" },
+                          { "data": "municipality.place" },
+                          { "data": "owners[, ].name" },
+                          { "data": "authorized[, ].name" }
+                        ]
+                      });
+                  }
+                }
+              }
+            },
             series: [
                 {
                     nullColor: '#f7f7f7'
                 },{
                 data: data,
-                name: 'Biznese',
+                name: 'Bizneset',
                 nullColor: '#f7f7f7',
                 states: {
                     hover: {
@@ -625,10 +686,64 @@ function mapActs(data) {
                     from: 1000
                 }]
             },
-            series: [
-                {
-                    nullColor: '#f7f7f7'
-                },{
+            plotOptions: {
+              series: {
+                cursor: 'pointer',
+                events: {
+                  click: function(e) {
+                      // Clearing data of datatable
+                      $('#businessesTable').DataTable().clear();
+                      // Showing datatable section if hidden
+                      $('#businessbyMunicipality').show();
+
+                      // Scrolling to table with animation
+                      $('html, body').stop().animate({
+                          scrollTop: ($('#businessbyMunicipality').offset().top - 150)
+                      }, 600, 'easeInOutExpo');
+
+                      // Properties and building the URL
+                      let clickedMunicipality = e.point.options.name
+
+                      // If activity is selected
+                      if($('.selected-value').html() != "All") {
+                        var selectedActivity = $('.selected-value').attr('data-code');
+                      } else {
+                        selectedActivity = '';
+                      }
+
+                      // If status is selected
+                      if($('.selected-value-status').html() != "All") {
+                        if ($('.selected-value-status').html() == "Dissolved"){
+                          var selectedStatus = "Dissolved";
+                        } else {
+                          selectedStatus = "Active"
+                        }
+                      } else {
+                        selectedStatus = '';
+                      }
+
+                      // Showing the municipality in DOM
+                      $('#searchedMuni').text(clickedMunicipality);
+                      $('#businessesTable').DataTable({
+                        destroy: true,
+                        "bInfo" : false,
+                        'ajax': {
+                          url: `/en/show-businesses?municipality=${clickedMunicipality}&activity=${selectedActivity}&status=${selectedStatus}`,
+                          type: 'GET'
+                        },
+                        "columns": [
+                          { "data": "name" },
+                          { "data": "status.sq" },
+                          { "data": "municipality.place" },
+                          { "data": "owners[, ].name" },
+                          { "data": "authorized[, ].name" }
+                        ]
+                      });
+                  }
+                }
+              }
+            },
+            series: [{
                 data: data,
                 name: 'Businesses',
                 states: {

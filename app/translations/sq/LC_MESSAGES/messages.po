@@ -227,6 +227,9 @@ msgstr ""
 msgid "T&euml; Dh&euml;nat Gjysmake"
 msgstr ""
 
+msgid "Komuna e zgjedhur"
+msgstr ""
+
 #: app/templates/layout.html:102
 msgid ""
 "K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar p&euml;r"
@@ -833,4 +836,3 @@ msgstr ""
 
 #~ msgid "Zhvillimi i Bizneseve"
 #~ msgstr ""
-

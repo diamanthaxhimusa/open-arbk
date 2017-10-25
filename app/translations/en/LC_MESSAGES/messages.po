@@ -105,6 +105,9 @@ msgstr ""
 msgid "Shkarkoni dokumentet sipas viteve"
 msgstr "Download documents by years"
 
+msgid "Komuna e zgjedhur"
+msgstr "Selected municipality"
+
 #: app/templates/downloads.html:19
 msgid "Data e fillimit"
 msgstr "Date of establishment"
@@ -917,4 +920,3 @@ msgstr "Show activities from:"
 
 #~ msgid "Zhvillimi i Bizneseve"
 #~ msgstr "Business Development"
-

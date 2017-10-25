@@ -22,31 +22,31 @@
                 </tr>
             </thead>
             <tbody>
-                {%if count != 0%}
-                {% for doc in search_result %}
-                <tr>
-                    <td><a href="{{doc['arbkUrl']}}">{{doc['name']}}</a></td>
-                    <td>{{doc['status'][g.current_lang]}}</td>
-                    <td>{{doc['municipality']['municipality'][g.current_lang]}}</td>
-                    <td>
-                        {% for owner in doc['owners'] %}
-                        <a href="{{url_for('main.profile', status="owner", person=owner['name'], lang_code=g.current_lang)}}">{{owner['name']}}</a><br/>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for auth in doc['authorized'] %}
-                        <a href="{{url_for('main.profile', status="authorized", person=auth['name'], lang_code=g.current_lang)}}">{{auth['name']}}</a><br/>
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endfor %}
-                {%else%}
-                <tr>
-                    <td colspan="5" class="text-center">
-                        {{_('Nuk u gjet ansj&euml; dokument!')}}
-                    </td>
-                </tr>
-                {%endif%}
+                {% if count != 0 %}
+                  {% for doc in search_result %}
+                  <tr>
+                      <td><a href="{{doc['arbkUrl']}}">{{doc['name']}}</a></td>
+                      <td>{{doc['status'][g.current_lang]}}</td>
+                      <td>{{doc['municipality']['municipality'][g.current_lang]}}</td>
+                      <td>
+                          {% for owner in doc['owners'] %}
+                          <a href="{{url_for('main.profile', status="owner", person=owner['name'], lang_code=g.current_lang)}}">{{owner['name']}}</a><br/>
+                          {% endfor %}
+                      </td>
+                      <td>
+                          {% for auth in doc['authorized'] %}
+                          <a href="{{url_for('main.profile', status="authorized", person=auth['name'], lang_code=g.current_lang)}}">{{auth['name']}}</a><br/>
+                          {% endfor %}
+                      </td>
+                  </tr>
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                      <td colspan="5" class="text-center">
+                          {{_('Nuk u gjet ansj&euml; dokument!')}}
+                      </td>
+                  </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
@@ -98,10 +98,10 @@
         $('#tableLength').html($('#searchTable tbody tr').length);
         if (isNaN(parseFloat(urlParam))) {
             urlParam = 1;
-        }else {
-            $('html, body').stop().animate({
-                scrollTop: ($('#searchTable').offset().top - 150)
-            }, 600, 'easeInOutExpo');
+        } else {
+          $('html, body').stop().animate({
+              scrollTop: ($('#searchTable').offset().top - 150)
+          }, 600, 'easeInOutExpo');
         }
         if (person_status == null || person_status == undefined){
             person_status = "any";

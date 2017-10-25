@@ -108,10 +108,9 @@ class MongoUtils(object):
     def get_businesses(self, municipality, activity, status, current_lang):
         if activity != '':
             if status != '':
-
                 result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "status.%s"%current_lang: status, "activities":{"$in":[activity]}})
             else:
-                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "activities": [activity]})
+                result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "activities":{"$in":[activity]}})
         else:
             if status != '':
                 result = self.mongo.db[self.reg_businesses_collection].find({"municipality.municipality.%s"%current_lang: municipality, "status.%s"%current_lang: status})
@@ -265,6 +264,7 @@ class MongoUtils(object):
             except Exception as e:
                 result.update({i:0})
         return result
+
     def mapi_status(self, activity, status, current_lang):
         act = self.mongo.db[self.activities].find({"activity.%s"%current_lang:activity})
         munis = self.mongo.db[self.municipalities].find()
