@@ -71,6 +71,10 @@ button{
     padding: 10px 0px;
 }
 
+.table-responsive {
+	border: none!important;
+}
+
 .date-text{
 	white-space: nowrap;
 }
@@ -174,9 +178,10 @@ button{
 .page-item{
 	display: inline-block !important;
 }
-li.first a.page-link,li.next a.page-link,li.prev a.page-link,li.last a.page-link{
+li.first a.page-link,li.next a.page-link, li.prev a.page-link, li.previous a.page-link, li.last a.page-link{
 	background-color: #eee;
 }
+
 li.disabled a.page-link{
 	background-color: #fff;
 }
@@ -294,7 +299,7 @@ HEADER
     position: relative;
 }
 .map-header{
-	background: url('../img/people_bcg_blurred.jpg') no-repeat fixed;
+		/*background: url('../img/people_bcg_blurred.jpg') no-repeat fixed;*/
     background-size: cover;
     min-height: 520px;
     position: relative;
@@ -977,6 +982,9 @@ button.btn-filter-data {
 	button.btn-filter-data {
 	    width: 290px !important;
 	}
+	#businessesTable td th {
+		width: 200px;
+	}
 }
 
 @media (min-width: 20px) and (max-width: 450px) {
@@ -1111,4 +1119,19 @@ a .fb, a .tw, a .eM, a .inst{
 	-o-transform: scale(1.2);
 	background-color: #343434;
     color: #ededed;
+}
+.dataTables_paginate {
+  text-align: center !important;
+}
+
+table.dataTable thead .sorting_asc:after {
+	content: none!important;
+}
+
+#businessesTable_info {
+	padding-bottom: 8px;
+}
+
+.sorting_disabled:focus, li.paginate_button a:focus {
+	outline: none!important;
 }

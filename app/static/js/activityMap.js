@@ -19,6 +19,8 @@ $(document).ready(function() {
     });
 });
 
+$.fn.dataTableExt.errMode = 'ignore';
+
 function onStatusSelection(name) {
     if (name == "Shuar") {
         if (document.documentElement.lang == 'sq') {
@@ -472,6 +474,25 @@ function proccesAPI(data) {
     mapActs(cities)
 }
 
+function addLinksToOwnersAuthorized(data, lang){
+  var finalData = '';
+  // Making array of many owners and checking settings for each its link
+  if(data.indexOf(',') > -1) {
+    var ownerArray = data.split(',');
+    ownerArray.map((item, index) => {
+      var trimmedItem = item.trim();
+      if (index != ownerArray.length - 1) {
+        finalData += '<a href="' + `/${lang}/kerko/owner/` + trimmedItem + '">' + trimmedItem + '</a>' + ', ';
+      } else {
+        finalData += '<a href="' + `/${lang}/kerko/owner/` + trimmedItem + '">' + trimmedItem + '</a>';
+      }
+    });
+  } else {
+    finalData = '<a href="' + `/${lang}/kerko/owner/` + data + '">' + data + '</a>';
+  }
+  return finalData;
+}
+
 function mapActs(data) {
     if (document.documentElement.lang == 'sq') {
         Highcharts.setOptions({
@@ -578,21 +599,77 @@ function mapActs(data) {
                       $('#searchedMuni').text(clickedMunicipality);
                       $('#businessesTable').DataTable({
                         destroy: true,
-                        "bInfo" : false,
+                        'pagingType': 'full_numbers_no_ellipses',
+                        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
+                        "ordering": false,
+                        "bLengthChange": false,
+                        "bFilter": false,
                         "language": {
-                          "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Albanian.json"
+                          "sEmptyTable":     "Nuk ka asnjë të dhënë në tabele",
+                          "sInfo":           "Të shfaqura <b>10</b> nga <b>_TOTAL_</b> dokumente",
+                          "sInfoEmpty":      "Të shfaqura 10 nga 0 dokumente",
+                          "sInfoFiltered":   "(të filtruara nga gjithësej _MAX_  reshtave)",
+                          "sInfoPostFix":    "",
+                          "sInfoThousands":  ",",
+                          "sLengthMenu":     "Shiko _MENU_ reshta",
+                          "sLoadingRecords": "Duke punuar  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>",
+                          "sProcessing":     "Duke procesuar...",
+                          "sSearch":         "Kërkoni:",
+                          "sZeroRecords":    "Asnjë e dhënë nuk u gjet",
+                          "oPaginate": {
+                            "sFirst":    "E para",
+                            "sLast":     "E Fundit",
+                            "sNext":     "Përpara",
+                            "sPrevious": "Prapa"
+                          },
+                          "oAria": {
+                            "sSortAscending":  ": aktivizo për të sortuar kolumnin me vlera në ngritje",
+                            "sSortDescending": ": aktivizo për të sortuar kolumnin me vlera në zbritje"
+                          }
                         },
                         'ajax': {
                           url: `/sq/show-businesses?municipality=${clickedMunicipality}&activity=${selectedActivity}&status=${selectedStatus}`,
                           type: 'GET'
                         },
                         "columns": [
-                          { "data": "name" },
+                          {
+                            "data": "info",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                data = '<a target="_blank" href="' + data.link + '">' + data.name + '</a>';
+                              }
+                              return data;
+                            }
+                          },
                           { "data": "status.sq" },
                           { "data": "municipality.place" },
-                          { "data": "owners[, ].name" },
-                          { "data": "authorized[, ].name" }
-                        ]
+                          {
+                            "data": "owners[, ].name",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                var finalData = addLinksToOwnersAuthorized(data, 'sq');
+                              }
+                              return finalData;
+                            }
+                          },
+                          {
+                            "data": "authorized[, ].name",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                var finalData = addLinksToOwnersAuthorized(data, 'sq');
+                              }
+                              return finalData;
+                            }
+                          }
+                        ],
+                        "drawCallback": function() {
+                          $('.dataTables_paginate > .pagination').addClass('pagination-sm');
+                          var dataTableButtonsRef = ['first', 'previous', 'next', 'last']
+                          dataTableButtonsRef.map(classRef => {
+                            $('.'+classRef).find('a').addClass('page-link');
+                          });
+                          $('#businessesTable').wrap('<div class="table-responsive"></div>');
+                        }
                       });
                   }
                 }
@@ -726,18 +803,58 @@ function mapActs(data) {
                       $('#searchedMuni').text(clickedMunicipality);
                       $('#businessesTable').DataTable({
                         destroy: true,
-                        "bInfo" : false,
+                        'pagingType': 'full_numbers_no_ellipses',
+                        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
+                        "ordering": false,
+                        "bLengthChange": false,
+                        "bFilter": false,
+                        "language": {
+                          "sLoadingRecords": "Loading  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>",
+                          "sInfo": "Showing <b>10</b> of <b>_TOTAL_</b> documents"
+                        },
                         'ajax': {
                           url: `/en/show-businesses?municipality=${clickedMunicipality}&activity=${selectedActivity}&status=${selectedStatus}`,
                           type: 'GET'
                         },
                         "columns": [
-                          { "data": "name" },
+                          {
+                            "data": "info",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                data = '<a target="_blank" href="' + data.link + '">' + data.name + '</a>';
+                              }
+                              return data;
+                            }
+                          },
                           { "data": "status.sq" },
                           { "data": "municipality.place" },
-                          { "data": "owners[, ].name" },
-                          { "data": "authorized[, ].name" }
-                        ]
+                          {
+                            "data": "owners[, ].name",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                var finalDate = addLinksToOwnersAuthorized(data, 'en');
+                              }
+                              return finalDate;
+                            }
+                          },
+                          {
+                            "data": "authorized[, ].name",
+                            "render": function(data, type, row, meta) {
+                              if(type == 'display') {
+                                var finalDate = addLinksToOwnersAuthorized(data, 'en');
+                              }
+                              return finalDate;
+                            }
+                          }
+                        ],
+                        "drawCallback": function() {
+                          $('.dataTables_paginate > .pagination').addClass('pagination-sm');
+                          var dataTableButtonsRef = ['first', 'previous', 'next', 'last']
+                          dataTableButtonsRef.map(classRef => {
+                            $('.'+classRef).find('a').addClass('page-link');
+                          });
+                          $('#businessesTable').wrap('<div class="table-responsive"></div>');
+                        }
                       });
                   }
                 }

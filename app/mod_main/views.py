@@ -332,7 +332,10 @@ def prepare_api_to_show_businesses(json_docs, searchedMunicipality):
     final_json = {'code': 200, 'status': 'OK', 'municipality': searchedMunicipality, 'data': []}
     for json_doc in json_docs:
         final_json['data'].append({
-            'name': json_doc['name'],
+            'info': {
+                'name': json_doc['name'],
+                'link': json_doc['arbkUrl']
+            },
             'municipality': json_doc['municipality'],
             'status': json_doc['status'],
             'activities': json_doc['activities'],
@@ -348,6 +351,7 @@ def prepare_api_to_show_businesses(json_docs, searchedMunicipality):
 def show_businesses():
     municipality = request.args.get('municipality')
     status = request.args.get('status')
+
     if request.args.get('activity'):
         activity = int(request.args.get('activity'))
         if status:

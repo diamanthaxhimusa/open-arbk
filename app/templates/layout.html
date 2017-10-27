@@ -52,9 +52,13 @@
       ga('create', 'UA-59188119-7', 'auto');
       ga('send', 'pageview');
     </script>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <!-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.16/i18n/Albanian.json"></script> -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+    <script src="{{url_for('static', filename='js/full_numbers_no_ellipses.js')}}"></script>
+    <script type="text/javascript">
+      console.log("%cDeveloped by Diamant Haxhimusa and Arianit Hetemi. © Open Data Kosovo 2017", "background-color: #111; color: white; font-size:15px; font-weight: normal;");
+    </script>
   </head>
   <body>
     <!-- Navbar -->

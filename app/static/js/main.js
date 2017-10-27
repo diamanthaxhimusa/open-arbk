@@ -1,32 +1,33 @@
 $(document).ready(function(){
+  $.ajax({
+    url: "businesses-type",
+    type: 'GET',
+    success: function(data){
+      proccesAPI(data);
+      $('#bizTypesLoader').hide();
+    }
+  });
+  $('#getBizTypes').on('click', function() {
     $.ajax({
-      url: "businesses-type",
-      type: 'GET',
-      success: function(data){
-        proccesAPI(data);
-        $('#bizTypesLoader').hide();
-      }
-    });
-    $('#getBizTypes').on('click', function() {
-      $.ajax({
-          data : {
-              biz_city_id : $('#biz_city_id').val(),
-              biz_status : $('#biz_status').val()
-          },
-          url: "businesses-type",
-          type: 'POST',
-          beforeSend: function() {
-            $('#bizTypesLoader').show();
-          },
-          success: function(data){
-              proccesAPI(data);
-              $('#bizTypesLoader').hide();
-          },
-          error: function(error) {
-          }
+        data : {
+            biz_city_id : $('#biz_city_id').val(),
+            biz_status : $('#biz_status').val()
+        },
+        url: "businesses-type",
+        type: 'POST',
+        beforeSend: function() {
+          $('#bizTypesLoader').show();
+        },
+        success: function(data){
+            proccesAPI(data);
+            $('#bizTypesLoader').hide();
+        },
+        error: function(error) {
+        }
 
-      });
     });
+  });
+
     function proccesAPI(data) {
       resultData = [];
       for(var i=0; i<data.doc.result.length;i++){
@@ -34,6 +35,7 @@ $(document).ready(function(){
       }
       business_type(resultData, data.total);
     }
+
     function business_type(data, total) {
         if (document.documentElement.lang == 'sq') {
             Highcharts.chart('container', {
