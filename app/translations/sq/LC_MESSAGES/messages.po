@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-27 12:22+0200\n"
+"POT-Creation-Date: 2017-11-01 16:19+0100\n"
 "PO-Revision-Date: 2017-07-27 14:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -20,6 +20,10 @@ msgstr ""
 
 #: app/templates/activity-map.html:17
 msgid "Ndarja n&euml; baz&euml; t&euml; aktiviteteve biznesore:"
+msgstr ""
+
+#: app/templates/activity-map.html:20
+msgid "Njoftim"
 msgstr ""
 
 #: app/templates/activity-map.html:20
@@ -39,7 +43,7 @@ msgid "K&euml;rko aktivitetin..."
 msgstr ""
 
 #: app/templates/activity-map.html:33 app/templates/activity-map.html:54
-#: app/templates/layout.html:139 app/templates/layout.html:153
+#: app/templates/layout.html:138 app/templates/layout.html:152
 #: app/templates/visualizations/bizTypes.html:7
 #: app/templates/visualizations/bizTypes.html:18
 #: app/templates/visualizations/gender.html:6
@@ -56,7 +60,7 @@ msgstr ""
 msgid "Statusi i bizneseve:"
 msgstr ""
 
-#: app/templates/activity-map.html:52 app/templates/layout.html:154
+#: app/templates/activity-map.html:52 app/templates/layout.html:153
 #: app/templates/visualizations/bizTypes.html:8
 #: app/templates/visualizations/gender.html:7
 #: app/templates/visualizations/top10.html:8
@@ -64,7 +68,7 @@ msgstr ""
 msgid "Aktiv"
 msgstr ""
 
-#: app/templates/activity-map.html:53 app/templates/layout.html:155
+#: app/templates/activity-map.html:53 app/templates/layout.html:154
 #: app/templates/visualizations/bizTypes.html:9
 #: app/templates/visualizations/gender.html:8
 #: app/templates/visualizations/top10.html:9
@@ -76,7 +80,7 @@ msgstr ""
 msgid "Komuna e zgjedhur"
 msgstr ""
 
-#: app/templates/activity-map.html:70 app/templates/layout.html:228
+#: app/templates/activity-map.html:70 app/templates/layout.html:227
 msgid "Rezultatet:"
 msgstr ""
 
@@ -141,7 +145,7 @@ msgstr ""
 msgid "Data e aplikimit"
 msgstr ""
 
-#: app/templates/downloads.html:28 app/templates/layout.html:81
+#: app/templates/downloads.html:28 app/templates/layout.html:80
 msgid "Shkarko"
 msgstr ""
 
@@ -204,7 +208,7 @@ msgstr ""
 
 #: app/templates/layout.html:8 app/templates/layout.html:16
 #: app/templates/layout.html:23 app/templates/layout.html:25
-#: app/templates/layout.html:30 app/templates/layout.html:72
+#: app/templates/layout.html:30 app/templates/layout.html:71
 msgid "Bizneset e Hapura"
 msgstr ""
 
@@ -227,105 +231,105 @@ msgid ""
 "periudh&euml;n 2000 - 2017."
 msgstr ""
 
-#: app/templates/layout.html:76 app/templates/layout.html:212
+#: app/templates/layout.html:75 app/templates/layout.html:211
 msgid "Pse Bizneset e Hapura?"
 msgstr ""
 
-#: app/templates/layout.html:77
+#: app/templates/layout.html:76
 msgid "K&euml;rkimi"
 msgstr ""
 
-#: app/templates/layout.html:78
+#: app/templates/layout.html:77
 msgid "Analiza e t&euml; dh&euml;nave "
 msgstr ""
 
-#: app/templates/layout.html:79 app/templates/layout.html:201
+#: app/templates/layout.html:78 app/templates/layout.html:200
 msgid "Harta"
 msgstr ""
 
-#: app/templates/layout.html:80 app/templates/layout.html:290
+#: app/templates/layout.html:79 app/templates/layout.html:289
 msgid "T&euml; Dh&euml;nat Gjysmake"
 msgstr ""
 
-#: app/templates/layout.html:107
+#: app/templates/layout.html:106
 msgid ""
 "K&euml;rko biznese, pronar&euml;, apo persona t&euml; autorizuar p&euml;r"
 " kompanit&euml; e regjistruara n&euml; Kosov&euml;"
 msgstr ""
 
-#: app/templates/layout.html:112
+#: app/templates/layout.html:111
 msgid "biznese n&euml; databas&euml;n ton&euml;"
 msgstr ""
 
-#: app/templates/layout.html:116
+#: app/templates/layout.html:115
 msgid "biznese aktive"
 msgstr ""
 
-#: app/templates/layout.html:120
+#: app/templates/layout.html:119
 msgid "biznese joaktive"
 msgstr ""
 
-#: app/templates/layout.html:125
+#: app/templates/layout.html:124
 msgid ""
 "K&euml;rko p&euml;rmes nj&euml; apo m&euml; shum&euml; kritereve t&euml; "
 "m&euml;poshtme:"
 msgstr ""
 
-#: app/templates/layout.html:133
+#: app/templates/layout.html:132
 msgid "K&euml;rko personin:"
 msgstr ""
 
-#: app/templates/layout.html:134
+#: app/templates/layout.html:133
 msgid "Sh&euml;no emrin e personit"
 msgstr ""
 
-#: app/templates/layout.html:137
+#: app/templates/layout.html:136
 msgid "Statusi i personit:"
 msgstr ""
 
-#: app/templates/layout.html:140
+#: app/templates/layout.html:139
 msgid "Pronar"
 msgstr ""
 
-#: app/templates/layout.html:141
+#: app/templates/layout.html:140
 msgid "Person i Autorizuar"
 msgstr ""
 
-#: app/templates/layout.html:147
+#: app/templates/layout.html:146
 msgid "K&euml;rko biznesin:"
 msgstr ""
 
-#: app/templates/layout.html:148
+#: app/templates/layout.html:147
 msgid "Sh&euml;no emrin e biznesit"
 msgstr ""
 
-#: app/templates/layout.html:151
+#: app/templates/layout.html:150
 msgid "Statusi i biznesit:"
 msgstr ""
 
-#: app/templates/layout.html:161
+#: app/templates/layout.html:160
 msgid "Zgjedh komun&euml;n:"
 msgstr ""
 
-#: app/templates/layout.html:163
+#: app/templates/layout.html:162
 msgid "Gjith&euml; Kosova"
 msgstr ""
 
-#: app/templates/layout.html:170
+#: app/templates/layout.html:169
 msgid "K&euml;rko"
 msgstr ""
 
-#: app/templates/layout.html:179
+#: app/templates/layout.html:178
 msgid "Zbuloni Gjendjen e Bizneseve n&euml; Kosov&euml;"
 msgstr ""
 
-#: app/templates/layout.html:180
+#: app/templates/layout.html:179
 msgid ""
 "K&euml;tu mund t&euml; gjeni forma t&euml; ndryshme t&euml; visualizimeve"
 " q&euml; tregojn&euml; gjendjen e bizneseve n&euml; Kosov&euml;."
 msgstr ""
 
-#: app/templates/layout.html:181
+#: app/templates/layout.html:180
 msgid ""
 "Zbuloni se cil&euml;t jan&euml; top dhjet&euml; bizneset me kapital "
 "m&euml; t&euml; madh. M&euml;soni &ccedil;far&euml; industri apo "
@@ -333,60 +337,60 @@ msgid ""
 " tuaj. Ndani sipas gjinis&euml;, viteve, apo llojit t&euml; biznesit."
 msgstr ""
 
-#: app/templates/layout.html:184
+#: app/templates/layout.html:183
 msgid "Shiko"
 msgstr ""
 
-#: app/templates/layout.html:187 app/templates/visualizations.html:6
+#: app/templates/layout.html:186 app/templates/visualizations.html:6
 msgid "Llojet e Bizneseve"
 msgstr ""
 
-#: app/templates/layout.html:188 app/templates/visualizations.html:15
+#: app/templates/layout.html:187 app/templates/visualizations.html:15
 msgid "Bizneset sipas Numrit t&euml; Pun&euml;tor&euml;ve"
 msgstr ""
 
-#: app/templates/layout.html:189 app/templates/visualizations.html:27
+#: app/templates/layout.html:188 app/templates/visualizations.html:27
 msgid "Bizneset e Shuara dhe Aktive"
 msgstr ""
 
-#: app/templates/layout.html:190 app/templates/visualizations.html:41
+#: app/templates/layout.html:189 app/templates/visualizations.html:41
 msgid "Bizneset Sipas Viteve"
 msgstr ""
 
-#: app/templates/layout.html:191 app/templates/visualizations.html:62
+#: app/templates/layout.html:190 app/templates/visualizations.html:62
 msgid "Top 10 Bizneset Sipas Kapitalit"
 msgstr ""
 
-#: app/templates/layout.html:192 app/templates/visualizations.html:71
+#: app/templates/layout.html:191 app/templates/visualizations.html:71
 msgid "Top 10 Aktivitetet q&euml; Sh&euml;rbehen nga Bizneset"
 msgstr ""
 
-#: app/templates/layout.html:193 app/templates/visualizations.html:80
+#: app/templates/layout.html:192 app/templates/visualizations.html:80
 msgid "Aktivitetet Gjat&euml; Viteve"
 msgstr ""
 
-#: app/templates/layout.html:194 app/templates/visualizations.html:93
+#: app/templates/layout.html:193 app/templates/visualizations.html:93
 msgid "Gjinia e Pronar&euml;ve"
 msgstr ""
 
-#: app/templates/layout.html:195 app/templates/visualizations.html:104
+#: app/templates/layout.html:194 app/templates/visualizations.html:104
 msgid ""
 "Top 10 Aktivitetet Biznesore t&euml; Ndara sipas Gjinis&euml; s&euml; "
 "Pronar&euml;ve"
 msgstr ""
 
-#: app/templates/layout.html:205
+#: app/templates/layout.html:204
 msgid "Shkarkoni Dokumentet"
 msgstr ""
 
-#: app/templates/layout.html:207 app/templates/layout.html:276
+#: app/templates/layout.html:206 app/templates/layout.html:275
 msgid ""
 "T&euml; dh&euml;nat e paraqitura t&euml; bizneseve jan&euml; nxjerr&euml;"
 " nga faqja zyrtare e ARBK’s&euml; duke p&euml;rdorur metod&euml;n e "
 "quajtur"
 msgstr ""
 
-#: app/templates/layout.html:207 app/templates/layout.html:276
+#: app/templates/layout.html:206 app/templates/layout.html:275
 msgid ""
 "Kjo teknologji e p&euml;rdorur sh&euml;rben p&euml;r nxjerrjen automatike"
 " dhe n&euml; t&euml;r&euml;si t&euml; sasive t&euml; m&euml;dha t&euml; "
@@ -394,65 +398,65 @@ msgid ""
 " jan&euml; nxjerr&euml; mes dat&euml;s"
 msgstr ""
 
-#: app/templates/layout.html:207 app/templates/layout.html:276
+#: app/templates/layout.html:206 app/templates/layout.html:275
 msgid "dhe"
 msgstr ""
 
-#: app/templates/layout.html:216
+#: app/templates/layout.html:215
 msgid "Kthehu tek k&euml;rkimi"
 msgstr ""
 
-#: app/templates/layout.html:244
+#: app/templates/layout.html:243
 msgid "Misioni yn&euml;:"
 msgstr ""
 
-#: app/templates/layout.html:245
+#: app/templates/layout.html:244
 msgid ""
 "Open Data Kosovo beson q&euml; hapja e t&euml; dh&euml;nave "
 "&euml;sht&euml; esenciale n&euml; vendosjen e qeverisjes s&euml; "
 "mir&euml;, qeverisjes transparente dhe llogaridh&euml;n&euml;se."
 msgstr ""
 
-#: app/templates/layout.html:248
+#: app/templates/layout.html:247
 msgid "Na ndiqni n&euml;:"
 msgstr ""
 
-#: app/templates/layout.html:281
+#: app/templates/layout.html:280
 msgid "Zhvilluar nga"
 msgstr ""
 
-#: app/templates/layout.html:296
+#: app/templates/layout.html:295
 msgid ""
 "<b class=\"missing-header\">62 022</b> biznese nuk kan&euml; t&euml; "
 "paraqitur numrin fiskal, <b>52 022</b> prej tyre jan&euml; ende aktive"
 msgstr ""
 
-#: app/templates/layout.html:300
+#: app/templates/layout.html:299
 msgid ""
 "<b class=\"missing-header\">7 643</b> biznese nuk kan&euml; t&euml; "
 "paraqitur aktivitetet e tyre, <b>759</b> prej tyre jan&euml; ende aktive"
 msgstr ""
 
-#: app/templates/layout.html:306
+#: app/templates/layout.html:305
 msgid ""
 "<b class=\"missing-header\">2 269</b> biznese nuk kan&euml; dat&euml; "
 "t&euml; konstituimit, <b>543</b> prej tyre jan&euml; ende aktive"
 msgstr ""
 
-#: app/templates/layout.html:310
+#: app/templates/layout.html:309
 msgid ""
 "<b class=\"missing-header\">523</b> biznese nuk kan&euml; t&euml; "
 "paraqitur emrin e pronar&euml;ve, <b>464</b> prej tyre jan&euml; ende "
 "aktive"
 msgstr ""
 
-#: app/templates/layout.html:316
+#: app/templates/layout.html:315
 msgid ""
 "<b class=\"missing-header\">4</b> biznese nuk kan&euml; status t&euml; "
 "paraqitur"
 msgstr ""
 
-#: app/templates/layout.html:321
+#: app/templates/layout.html:320
 msgid "Mbyll"
 msgstr ""
 
