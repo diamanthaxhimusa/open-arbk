@@ -493,6 +493,8 @@ function addLinksToOwnersAuthorized(data, lang){
   return finalData;
 }
 
+
+
 function mapActs(data) {
     if (document.documentElement.lang == 'sq') {
         Highcharts.setOptions({
@@ -595,6 +597,10 @@ function mapActs(data) {
                         selectedStatus = '';
                       }
 
+                      // Number of documents shown from total
+
+
+
                       // Showing the municipality in DOM
                       $('#searchedMuni').text(clickedMunicipality);
                       $('#businessesTable').DataTable({
@@ -606,8 +612,8 @@ function mapActs(data) {
                         "bFilter": false,
                         "language": {
                           "sEmptyTable":     "Nuk ka asnjë të dhënë në tabele",
-                          "sInfo":           "Të shfaqura <b>10</b> nga <b>_TOTAL_</b> dokumente",
-                          "sInfoEmpty":      "Të shfaqura 10 nga 0 dokumente",
+                          "sInfo":           "Të shfaqura <b class='shown-rows'>10</b> nga <b class='total'>_TOTAL_</b> dokumente",
+                          "sInfoEmpty":      "Të shfaqura 0 nga 0 dokumente",
                           "sInfoFiltered":   "(të filtruara nga gjithësej _MAX_  reshtave)",
                           "sInfoPostFix":    "",
                           "sInfoThousands":  ",",
@@ -669,6 +675,30 @@ function mapActs(data) {
                             $('.'+classRef).find('a').addClass('page-link');
                           });
                           $('#businessesTable').wrap('<div class="table-responsive"></div>');
+
+                          var table = $('#businessesTable').DataTable();
+                          let totalDocs = table.data().count();
+
+                          if(totalDocs < 10) {
+                            $('#businessesTable_info, .dataTables_paginate').show();
+                            $('.shown-rows').text(totalDocs);
+                          } else {
+                            $('#businessesTable_info, .dataTables_paginate').show();
+                          }
+
+                          if(!table.data().any()) {
+                            $('#businessesTable_info, .dataTables_paginate').hide();
+                          }
+
+                          $(".paginate_button a").unbind("click").on("click", () => {
+                            setTimeout(function() {
+                              var rowCount = $('#businessesTable tr').length - 1;
+                              if (rowCount < 10) {
+                                $('.shown-rows').text(rowCount);
+                              }
+                            }, 100);
+                          });
+
                         }
                       });
                   }
@@ -810,7 +840,7 @@ function mapActs(data) {
                         "bFilter": false,
                         "language": {
                           "sLoadingRecords": "Loading  <i class='fa fa-spinner fa-spin' style='font-size:24px'></i>",
-                          "sInfo": "Showing <b>10</b> of <b>_TOTAL_</b> documents"
+                          "sInfo": "Showing <b class='shown-rows'>10</b> of <b class='total'>_TOTAL_</b> documents"
                         },
                         'ajax': {
                           url: `/en/show-businesses?municipality=${clickedMunicipality}&activity=${selectedActivity}&status=${selectedStatus}`,
@@ -826,7 +856,7 @@ function mapActs(data) {
                               return data;
                             }
                           },
-                          { "data": "status.sq" },
+                          { "data": "status.en" },
                           { "data": "municipality.place" },
                           {
                             "data": "owners[, ].name",
@@ -854,6 +884,29 @@ function mapActs(data) {
                             $('.'+classRef).find('a').addClass('page-link');
                           });
                           $('#businessesTable').wrap('<div class="table-responsive"></div>');
+
+                          var table = $('#businessesTable').DataTable();
+                          let totalDocs = table.data().count();
+                          if(totalDocs < 10) {
+                            $('#businessesTable_info, .dataTables_paginate').show();
+                            $('.shown-rows').text(totalDocs);
+                          } else {
+                            $('#businessesTable_info, .dataTables_paginate').show();
+                          }
+
+                          if(!table.data().any()) {
+                            $('#businessesTable_info, .dataTables_paginate').hide();
+                          }
+
+                          $(".paginate_button a").unbind("click").on("click", () => {
+                            setTimeout(function() {
+                              var rowCount = $('#businessesTable tr').length - 1;
+                              if (rowCount < 10) {
+                                $('.shown-rows').text(rowCount);
+                              }
+                            }, 100);
+                          });
+
                         }
                       });
                   }

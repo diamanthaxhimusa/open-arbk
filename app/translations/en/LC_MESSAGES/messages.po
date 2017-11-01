@@ -26,7 +26,7 @@ msgstr "Categorization based on business activities:"
 msgid ""
 "Klikoni mbi çdo qytet që t'i shihni të gjitha bizneset sipas kritereve të"
 " zgjedhura më poshtë"
-msgstr "Click on each city to see all businesses according to selected criteria as below"
+msgstr "Note! Click on each city to see businesses according to criteria listed below"
 
 #: app/templates/activity-map.html:26
 #: app/templates/visualizations/activityYears.html:2
